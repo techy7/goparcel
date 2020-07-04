@@ -1,2 +1,2 @@
-# goparcel
+# GoParcel
 Official GoParcel Repository
