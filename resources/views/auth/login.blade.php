@@ -54,12 +54,13 @@
           <h2 class="p-t-25">Get Started <br/> with your Dashboard</h2>
           <p class="mw-80 m-t-5">Sign in to your account</p>
           <!-- START Login Form -->
-          <form id="form-login" class="p-t-15" role="form" action="index.html">
+          <form id="form-login" class="p-t-15" role="form" method="POST" action="{{ route('login') }}">
+            @csrf
             <!-- START Form Control-->
             <div class="form-group form-group-default">
-              <label>Login</label>
+              <label>Username</label>
               <div class="controls">
-                <input type="text" name="username" placeholder="User Name" class="form-control" required>
+                <input type="text" name="username" placeholder="Enter username" class="form-control" required>
               </div>
             </div>
             <!-- END Form Control-->
@@ -67,7 +68,7 @@
             <div class="form-group form-group-default">
               <label>Password</label>
               <div class="controls">
-                <input type="password" class="form-control" name="password" placeholder="Credentials" required>
+                <input type="password" class="form-control" name="password" placeholder="Enter password" required>
               </div>
             </div>
             <!-- START Form Control-->
