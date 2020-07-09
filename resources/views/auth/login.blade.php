@@ -32,8 +32,8 @@
     }
     </script>
   </head>
-  <body class="fixed-header ">
-    <div class="login-wrapper ">
+  <body class="fixed-header">
+    <div class="login-wrapper">
       <!-- START Login Background Pic Wrapper-->
       <div class="bg-pic">
         <!-- START Background Caption-->
@@ -247,13 +247,14 @@
     <script src="{{ asset('pages/assets/plugins/jquery/jquery-easy.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/plugins/jquery-unveil/jquery.unveil.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/plugins/jquery-ios-list/jquery.ioslist.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('pages/assets/plugins/jquery-actual/jquery.actual.min.js') }}"></script>
-    <script src="{{ asset('pages/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('pages/assets/plugins/select2/js/select2.full.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('pages/assets/plugins/classie/classie.js') }}"></script>
+    <script src="{{ asset('pages/assets/plugins/jquery-actual/jquery.actual.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/plugins/classie/classie.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
+
     <!-- END VENDOR JS -->
-    <script src="pages/js/pages.min.js') }}"></script>
+    <script src="{{ asset('pages/js/pages.min.js') }}"></script>
     <script>
     $(function()
     {
