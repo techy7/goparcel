@@ -75,8 +75,8 @@
             <div class="row">
               <div class="col-md-6 no-padding sm-p-l-10">
                 <div class="form-check">
-                  <input type="checkbox" value="1" id="checkbox1">
-                  <label for="checkbox1">Remember me</label>
+                  <input type="checkbox" {{ old('remember') ? 'checked' : '' }} name="remember" id="remember">
+                  <label for="remember">Remember Me</label>
                 </div>
               </div>
               <div class="col-md-6 d-flex align-items-center justify-content-end">
