@@ -23,7 +23,7 @@
           <span class="icon-thumbnail"><i class="pg-icon">home</i></span>
         </li>
         <li class="">
-          <a href="{{ route('customer.account.index', auth()->user()->username) }}" class="detailed">
+          <a href="{{ route('customer.account.index', auth()->user()->id) }}" class="detailed">
             <span class="title">Account</span>
           </a>
           <span class="icon-thumbnail"><i class="pg-icon">inbox</i></span>

@@ -29,7 +29,22 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo()
+    {
+        return route('customer.dashboard');
+        // if (auth()->user()->hasRole('Super Admin')) 
+        // {
+        //     return route('admin.dashboard.index');
+        // } 
+        // elseif (auth()->user()->hasRole('User')) 
+        // {
+        //     return route('admin.users.index');
+        // } 
+        // elseif (auth()->user()->hasRole('Student')) 
+        // {
+        //     return route('students-profile.index', auth()->user()->id);
+    }
 
     /**
      * Create a new controller instance.
@@ -62,8 +77,8 @@ class RegisterController extends Controller
             // 'last_name.required' => 'This field is required.',
             // 'last_name.regex' => 'The last name field can only contain letters.',
             // 'email.required' => 'This field is required.',
-            // 'phone.required' => 'This field is required.',
-            'phone' => 'The mobile nummber field contains an invalid number.',
+            'm_number.required' => 'This field is required.',
+            'm_number' => 'The mobile number field contains an invalid number.',
             // 'age.min' => 'The age must be at least 3 years old.',
             // 'age.max' => 'The age may not be greater than 30 years old.',
             // 'gender.not_in' => 'The gender field is required.',

@@ -1,4 +1,6 @@
-@extends('layouts.admin.app')
+@extends('layouts.auth.app')
+
+@section('title', 'Register')
 
 @section('content')
 <div class="register-container full-height sm-p-t-30">
@@ -38,6 +40,11 @@
                     </span>
                 @enderror
                 </div>
+                {{-- @error('password')
+                    <p style="color: red;">
+                        <small>{{ $message }}</small>
+                    </p>
+                @enderror --}}
             </div>
             <div class="col-md-6">
                 <div class="form-group form-group-default">

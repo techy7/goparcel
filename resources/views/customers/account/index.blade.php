@@ -53,7 +53,7 @@
                       <div class="row">
                         <div class="col-md-6"></div>
                         <div class="col-md-6">
-                          <button aria-label="" class="btn btn-secondary pull-right" type="submit">Edit Profile</button>
+                          <a href="{{ route('customer.account.edit', auth()->user()->id) }}" class="btn btn-secondary pull-right">Edit Profile</a>
                         </div>
                       </div>
                     </form>
