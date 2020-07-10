@@ -16,8 +16,17 @@ class HomepageMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check()) {
-            return redirect('/dashboard');
+        if (auth()->user()->hasRole('Super Admin')) 
+        {
+            return redirect()->route('admin.dashboard');
+        } 
+        elseif (auth()->user()->hasRole('User')) 
+        {
+            return redirect()->route('admin.dashboard');
+        } 
+        elseif (auth()->user()->hasRole('Customer')) 
+        {
+            return redirect()->route('customer.dashboard');
         }
     }
 }

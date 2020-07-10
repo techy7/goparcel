@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  @include('layouts.customer.links.upper')
+  @include('layouts.pages.links.upper')
   <body class="fixed-header dashboard">
     <!-- BEGIN SIDEBPANEL-->
-        @include('layouts.customer.sidebar')
+        @include('layouts.pages.sidebar')
     <!-- END SIDEBPANEL-->
 
     <!-- START PAGE-CONTAINER -->
     <div class="page-container ">
       <!-- START HEADER -->
-        @include('layouts.customer.header')
+        @include('layouts.pages.header')
       <!-- END HEADER -->
       <!-- START PAGE CONTENT WRAPPER -->
       <div class="page-content-wrapper ">
           @yield('content')
           
-          @include('layouts.customer.footer')
+          @include('layouts.pages.footer')
       </div>
       <!-- END PAGE CONTENT WRAPPER -->
     </div>
     <!-- END PAGE CONTAINER -->
 
-    @include('layouts.customer.links.lower')
+    @include('layouts.pages.links.lower')
   </body>
 </html>

@@ -1,28 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class CustomerController extends Controller
+class AccountController extends Controller
 {
-    public function dashboard()
-    {
-        return view('customers.dashboard');
-    }
-
-    public function accountIndex()
+    public function index()
     {
         return view('customers.account.index');
     }
 
-    public function accountEdit(User $user)
+    public function edit(User $user)
     {
         return view('customers.account.edit', compact('user'));
     }
 
-    public function accountUpdate(User $user)
+    public function update(User $user)
     {
         $data = request()->validate([
             'name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',

@@ -1,4 +1,6 @@
-@extends('layouts.customer.app')
+@extends('layouts.pages.app')
+
+@section('title', 'Account')
 
 @section('content')
 <div class="content sm-gutter">
@@ -22,31 +24,31 @@
                       <div class="form-group row">
                         <label for="position" class="col-md-5 control-label"><strong>Username</strong></label>
                         <div class="col-md-7">
-                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->username }}</p>
+                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->username ?? 'N/A' }}</p>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="position" class="col-md-5 control-label"><strong>Email</strong></label>
                         <div class="col-md-7">
-                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->email }}</p>
+                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->email ?? 'N/A' }}</p>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="position" class="col-md-5 control-label"><strong>Name</strong></label>
                         <div class="col-md-7">
-                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->name }}</p>
+                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->name ?? 'N/A' }}</p>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="position" class="col-md-5 control-label"><strong>Mobile Number</strong></label>
                         <div class="col-md-7">
-                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->m_number }}</p>
+                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->m_number ?? 'N/A' }}</p>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="position" class="col-md-5 control-label"><strong>Address</strong></label>
                         <div class="col-md-7">
-                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->address }}</p>
+                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->address ?? 'N/A' }}</p>
                         </div>
                       </div>
                       <br>

@@ -16,18 +16,44 @@
     <div class="sidebar-menu">
       <!-- BEGIN SIDEBAR MENU ITEMS-->
       <ul class="menu-items">
+        @hasanyrole('Super Admin|User|Customer')
         <li class="m-t-20 ">
           <a href="{{ route('customer.dashboard') }}" class="detailed">
             <span class="title">Dashboard</span>
           </a>
           <span class="icon-thumbnail"><i class="pg-icon">home</i></span>
         </li>
+        @endhasanyrole
+        @hasanyrole('Super Admin|User')
+        <li>
+          <a href="javascript:;"><span class="title">ACL</span>
+          <span class=" arrow"></span></a>
+          <span class="icon-thumbnail"><i class="pg-icon">calendar</i></span>
+          <ul class="sub-menu">
+            <li class="">
+              <a href="calendar.html">Manage Users</a>
+              <span class="icon-thumbnail"><i class="pg-icon">c</i></span>
+            </li>
+            <li class="">
+              <a href="calendar_lang.html">Manage Access Roles</a>
+              <span class="icon-thumbnail"><i class="pg-icon">l</i></span>
+            </li>
+            <li class="">
+              <a href="calendar_month.html">Manage Permissions</a>
+              <span class="icon-thumbnail"><i class="pg-icon">m</i></span>
+            </li>
+          </ul>
+        </li>
+        @endhasanyrole
+        @hasanyrole('Super Admin|Customer')
         <li class="">
           <a href="{{ route('customer.account.index', auth()->user()->id) }}" class="detailed">
             <span class="title">Account</span>
           </a>
           <span class="icon-thumbnail"><i class="pg-icon">inbox</i></span>
         </li>
+        @endhasanyrole
+        @hasanyrole('Super Admin|Customer')
         <li>
           <a href="javascript:;"><span class="title">Pickup</span>
           <span class=" arrow"></span></a>
@@ -55,6 +81,8 @@
             </li>
           </ul>
         </li>
+        @endhasanyrole
+        @hasanyrole('Super Admin|Customer')
         <li>
           <a href="javascript:;"><span class="title">Bookings</span>
           <span class=" arrow"></span></a>
@@ -82,6 +110,7 @@
             </li>
           </ul>
         </li>
+        @endhasanyrole
       </ul>
       <div class="clearfix"></div>
     </div>

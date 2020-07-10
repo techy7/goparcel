@@ -1,4 +1,6 @@
-@extends('layouts.customer.app')
+@extends('layouts.pages.app')
+
+@section('title', 'Account Profile')
 
 @section('content')
 <div class="content sm-gutter">
