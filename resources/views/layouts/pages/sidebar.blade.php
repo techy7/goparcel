@@ -47,39 +47,18 @@
         @endhasanyrole
         @hasanyrole('Super Admin|Customer')
         <li class="">
-          <a href="{{ route('customer.account.index', auth()->user()->id) }}" class="detailed">
+          <a href="{{ route('customer.account', auth()->user()->id) }}" class="detailed">
             <span class="title">Account</span>
           </a>
           <span class="icon-thumbnail"><i class="pg-icon">inbox</i></span>
         </li>
         @endhasanyrole
         @hasanyrole('Super Admin|Customer')
-        <li>
-          <a href="javascript:;"><span class="title">Pickup</span>
-          <span class=" arrow"></span></a>
+        <li class="">
+          <a href="{{ route('customer.pickup') }}" class="detailed">
+            <span class="title">Pickup</span>
+          </a>
           <span class="icon-thumbnail"><i class="pg-icon">calendar</i></span>
-          <ul class="sub-menu">
-            <li class="">
-              <a href="calendar.html">Basic</a>
-              <span class="icon-thumbnail"><i class="pg-icon">c</i></span>
-            </li>
-            <li class="">
-              <a href="calendar_lang.html">Languages</a>
-              <span class="icon-thumbnail"><i class="pg-icon">l</i></span>
-            </li>
-            <li class="">
-              <a href="calendar_month.html">Month</a>
-              <span class="icon-thumbnail"><i class="pg-icon">m</i></span>
-            </li>
-            <li class="">
-              <a href="calendar_lazy.html">Lazy load</a>
-              <span class="icon-thumbnail"><i class="pg-icon">la</i></span>
-            </li>
-            <li class="">
-              <a href="https://docs.pages.revox.io/apps/calendar" rel="noreferrer" target="_blank">Documentation</a>
-              <span class="icon-thumbnail"><i class="pg-icon">d</i></span>
-            </li>
-          </ul>
         </li>
         @endhasanyrole
         @hasanyrole('Super Admin|Customer')
@@ -109,7 +88,7 @@
               <span class="icon-thumbnail"><i class="pg-icon">d</i></span>
             </li>
           </ul>
-        </li>
+        </>
         @endhasanyrole
       </ul>
       <div class="clearfix"></div>

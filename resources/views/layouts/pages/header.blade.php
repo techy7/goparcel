@@ -20,8 +20,8 @@
         <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
           <span class="dropdown-item">Signed in as <br /><b>{{ auth()->user()->username }}</b></span>
           <div class="dropdown-divider"></div>
-          <a href="{{ route('customer.account.index', auth()->user()->id) }}" class="dropdown-item">Account</a>
-          <a href="#" class="dropdown-item">Schedule a Pickup</a>
+          <a href="{{ route('customer.account', auth()->user()->id) }}" class="dropdown-item">Account</a>
+          <a href="{{ route('customer.pickup') }}" class="dropdown-item">Schedule a Pickup</a>
           <a href="#" class="dropdown-item">My Pickup Bookings</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{{ route('logout') }}"

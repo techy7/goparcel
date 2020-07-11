@@ -32,14 +32,10 @@
 <script src="{{ asset('pages/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
 <!-- END VENDOR JS -->
 <!-- BEGIN CORE TEMPLATE JS -->
-<!-- BEGIN CORE TEMPLATE JS -->
 <script src="{{ asset('pages/pages/js/pages.js') }}"></script>
-<!-- END CORE TEMPLATE JS -->
-<!-- BEGIN PAGE LEVEL JS -->
-<script src="{{ asset('pages/assets/js/scripts.js') }}" type="text/javascript"></script>
-<!-- END PAGE LEVEL JS -->
 <!-- END CORE TEMPLATE JS -->
 <!-- BEGIN PAGE LEVEL JS -->
 <script src="{{ asset('pages/assets/js/dashboard.js') }}" type="text/javascript"></script>
 <script src="{{ asset('pages/assets/js/scripts.js') }}" type="text/javascript"></script>
 <!-- END PAGE LEVEL JS -->
+@yield('lower-links-extends')

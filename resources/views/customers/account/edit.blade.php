@@ -81,7 +81,7 @@
                             </div>
                         </div>
                         </div>
-                        <a href="{{ route('customer.account.index', $user->id) }}" class="btn btn-default btn-cons m-t-10" type="submit">Back</a>
+                        <a href="{{ route('customer.account', $user->id) }}" class="btn btn-default btn-cons m-t-10" type="submit">Back</a>
                         <button class="btn btn-primary btn-cons m-t-10 pull-right" type="submit">Update Profile</button>
                 </div>
                 <div class="col-md-2"></div>
