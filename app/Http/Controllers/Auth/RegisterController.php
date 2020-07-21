@@ -66,27 +66,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'username' => ['required', 'string', 'max:255', 'unique:users'],
-            'm_number' => ['required', 'phone:PH'],
-            'address' => ['required', 'string', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'm_number' => ['required', 'phone:PH'],
+            'address' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ], [
-            // 'first_name.required' => 'This field is required.',
-            // 'first_name.regex' => 'The first name field can only contain letters.',
-            // 'last_name.required' => 'This field is required.',
-            // 'last_name.regex' => 'The last name field can only contain letters.',
-            // 'email.required' => 'This field is required.',
-            'm_number.required' => 'This field is required.',
-            'm_number' => 'The mobile number field contains an invalid number.',
-            // 'age.min' => 'The age must be at least 3 years old.',
-            // 'age.max' => 'The age may not be greater than 30 years old.',
-            // 'gender.not_in' => 'The gender field is required.',
-            // 'dob.required' => 'The birthday field is required.',
-            // 'dob.before' => 'The date of birth must be at least 3 years old.',
-            // 'guardian_name.regex' => 'The guardian name field can only contain letters.',
-            // 'educational_level_id.not_in' => 'The educational level field is required.',
-            // 'password.same' => 'The password field and confirm password field must match.'
         ]);
     }
 
@@ -98,13 +82,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
-            'm_number' => $data['m_number'],
-            'address' => $data['address'],
             'name' => $data['name'],
             'email' => $data['email'],
+            'm_number' => $data['m_number'],
+            'address' => $data['address'],
+            'roles' => $data['roles'],
             'password' => Hash::make($data['password']),
         ]);
+
+        return $user->assignRole(request('roles'));
+
     }
 }

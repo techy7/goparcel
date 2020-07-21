@@ -30,20 +30,15 @@
             <div class="form-group form-group-default">
               <label>Username</label>
               <div class="controls">
-                <input type="text" name="username" placeholder="Enter username" class="form-control @error('username') is-invalid @enderror" required>
+                <input type="text" name="username" value="{{ old('username') }}" placeholder="Enter username" class="form-control" required>
               </div>
             </div>
-            @error('username')
-              <p style="color: red;">
-                  <small>{{ $message }}</small>
-              </p>
-              @enderror
             <!-- END Form Control-->
             <!-- START Form Control-->
             <div class="form-group form-group-default">
               <label>Password</label>
               <div class="controls">
-                <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Enter password" required>
+                <input type="password" class="form-control" name="password" placeholder="Enter password" required>
                 @error('password')
                   <p style="color: red;">
                       <small>{{ $message }}</small>
@@ -51,6 +46,11 @@
                   @enderror
               </div>
             </div>
+            @error('username')
+              <p style="color: red;">
+                  <small>{{ $message }}</small>
+              </p>
+            @enderror
             <!-- START Form Control-->
             <div class="row">
               <div class="col-md-6 no-padding sm-p-l-10">
@@ -76,7 +76,7 @@
             <div class="m-b-30 p-r-80 sm-m-t-20 sm-p-r-15 sm-p-b-20 clearfix">
               <div class="col-sm-9 no-padding m-t-10">
                 <p class="small-text normal hint-text">
-                  ©2019-2020 All Rights Reserved. Pages® is a registered trademark of Revox Ltd. <a href="">Cookie Policy</a>, <a href=""> Privacy and Terms</a>.
+                  <p>Copyright {{ date('Y') }} © {{ config('app.name') }} | All Rights Reserved.</p>
                 </p>
               </div>
             </div>

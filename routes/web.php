@@ -17,6 +17,7 @@ Route::group(['namespace' => 'Customer'], function () {
             Route::patch('/{user}/account/profile', 'AccountController@update')->name('customer.account.update');
         });
     Route::get('/pickup', 'PickupController@index')->name('customer.pickup');
+    Route::post('/pickup', 'PickupController@store')->name('customer.pickup.store');
 });
 
 // Admin

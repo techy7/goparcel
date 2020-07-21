@@ -10,41 +10,41 @@
             @csrf
             <div class="row">
             <div class="col-md-12">
-                <div class="form-group form-group-default">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="Enter username" value="{{ old('username') }}" class="form-control @error('username') is-invalid @enderror" required>
-                @error('username')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                <div class="form-group form-group-default @error('username') has-error @enderror">
+                    <label>Username</label>
+                    <input type="text" name="username" placeholder="Enter username" value="{{ old('username') }}" class="form-control" required>
                 </div>
+                @error('username')
+                    <label class="error" for="username">
+                        {{ $message }}
+                    </label>
+                @enderror
             </div>
             </div>
             <div class="row">
             <div class="col-md-12">
-                <div class="form-group form-group-default">
-                <label>Email</label>
-                <input type="email" name="email" placeholder="Enter email" value="{{ old('email') }}" class="form-control" required>
+                <div class="form-group form-group-default @error('email') has-error @enderror">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="Enter email" value="{{ old('email') }}" class="form-control" required>
                 </div>
+                @error('email')
+                    <label class="error" for="email">
+                        {{ $message }}
+                    </label>
+                @enderror
             </div>
             </div>
             <div class="row">
             <div class="col-md-6">
-                <div class="form-group form-group-default">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Enter password" class="form-control @error('password') is-invalid @enderror" required>
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                <div class="form-group form-group-default @error('password') has-error @enderror">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter password" class="form-control" required>
                 </div>
-                {{-- @error('password')
-                    <p style="color: red;">
-                        <small>{{ $message }}</small>
-                    </p>
-                @enderror --}}
+                @error('password')
+                    <label class="error" for="password">
+                        {{ $message }}
+                    </label>
+                @enderror
             </div>
             <div class="col-md-6">
                 <div class="form-group form-group-default">
@@ -55,33 +55,44 @@
             </div>
             <div class="row">
             <div class="col-md-12">
-                <div class="form-group form-group-default">
-                <label>Name</label>
-                <input type="text" name="name" placeholder="Enter name" value="{{ old('name') }}" class="form-control" required>
+                <div class="form-group form-group-default @error('name') has-error @enderror">
+                    <label>Name</label>
+                    <input type="text" name="name" placeholder="Enter name" value="{{ old('name') }}" class="form-control" required>
                 </div>
-            </div>
-            </div>
-            <div class="row">
-            <div class="col-md-12">
-                <div class="form-group form-group-default">
-                <label>Mobile Number</label>
-                <input type="text" name="m_number" placeholder="Enter mobile number" value="{{ old('m_number') }}" class="form-control @error('m_number') is-invalid @enderror" required>
-                @error('m_number')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                @error('name')
+                    <label class="error" for="name">
+                        {{ $message }}
+                    </label>
                 @enderror
-                </div>
             </div>
             </div>
             <div class="row">
             <div class="col-md-12">
-                <div class="form-group form-group-default">
-                <label>Address</label>
-                <input type="text" name="address" placeholder="Enter Address" value="{{ old('address') }}" class="form-control" required>
+                <div class="form-group form-group-default @error('m_number') has-error @enderror">
+                    <label>Mobile Number</label>
+                    <input type="text" name="m_number" placeholder="Enter mobile number" value="{{ old('m_number') }}" class="form-control" required>
                 </div>
+                @error('m_number')
+                    <label class="error" for="m_number">
+                        {{ $message }}
+                    </label>
+                @enderror
             </div>
             </div>
+            <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-default @error('address') has-error @enderror">
+                    <label>Address</label>
+                    <input type="text" name="address" placeholder="Enter Address" value="{{ old('address') }}" class="form-control" required>
+                </div>
+                @error('address')
+                    <label class="error" for="address">
+                        {{ $message }}
+                    </label>
+                @enderror
+            </div>
+            </div>
+                    <input type="hidden" name="roles" value="3">
             <div class="row m-t-10">
                 <p>Sign in with <a href="#" class="text-info">Facebook</a></p>
             </div>

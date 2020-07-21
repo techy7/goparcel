@@ -1932,6 +1932,407 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PackageItem.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PackageItem.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  },
+  data: function data() {
+    return {
+      products: [],
+      product: {
+        type: '',
+        description: '',
+        quantity: 0,
+        weight: 0,
+        height: 0,
+        length: 0,
+        width: 0
+      },
+      tax: ".00"
+    };
+  },
+  computed: {
+    subTotal: function subTotal() {
+      return this.products.reduce(function (total, item) {
+        return total + item.quantity * item.weight;
+      }, 0);
+    },
+    taxTotal: function taxTotal() {
+      return this.subTotal * this.tax;
+    },
+    grandTotal: function grandTotal() {
+      return this.subTotal + this.taxTotal;
+    }
+  },
+  methods: {
+    addToCart: function addToCart() {
+      var type = this.product.type;
+      var description = this.product.description;
+      var quantity = this.product.quantity;
+      var weight = this.product.weight;
+      var height = this.product.height;
+      var length = this.product.length;
+      var width = this.product.width;
+      this.products.push({
+        type: type,
+        description: description,
+        quantity: quantity,
+        weight: weight,
+        height: height,
+        length: length,
+        width: width
+      });
+      this.clearCart();
+    },
+    removeCart: function removeCart(item) {
+      var del = this.products.indexOf(item);
+      this.products.splice(del, 1);
+    },
+    addQty: function addQty(item) {
+      Object.assign(item, {
+        quantity: parseInt(item.quantity) + 1
+      });
+    },
+    removeQty: function removeQty(item) {
+      Object.assign(item, {
+        quantity: parseInt(item.quantity) - 1
+      });
+    },
+    clearCart: function clearCart() {
+      this.product.type = '';
+      this.product.description = '';
+      this.product.quantity = 0;
+      this.product.weight = 0;
+      this.product.height = 0;
+      this.product.length = 0;
+      this.product.width = 0;
+    },
+    itemTotal: function itemTotal(item) {
+      return item.quantity * item.weight;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -17267,7 +17668,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.19';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -20974,8 +21375,21 @@ return jQuery;
      * @returns {Array} Returns the new sorted array.
      */
     function baseOrderBy(collection, iteratees, orders) {
+      if (iteratees.length) {
+        iteratees = arrayMap(iteratees, function(iteratee) {
+          if (isArray(iteratee)) {
+            return function(value) {
+              return baseGet(value, iteratee.length === 1 ? iteratee[0] : iteratee);
+            }
+          }
+          return iteratee;
+        });
+      } else {
+        iteratees = [identity];
+      }
+
       var index = -1;
-      iteratees = arrayMap(iteratees.length ? iteratees : [identity], baseUnary(getIteratee()));
+      iteratees = arrayMap(iteratees, baseUnary(getIteratee()));
 
       var result = baseMap(collection, function(value, key, collection) {
         var criteria = arrayMap(iteratees, function(iteratee) {
@@ -21232,6 +21646,10 @@ return jQuery;
         var key = toKey(path[index]),
             newValue = value;
 
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+          return object;
+        }
+
         if (index != lastIndex) {
           var objValue = nested[key];
           newValue = customizer ? customizer(objValue, key, nested) : undefined;
@@ -21384,11 +21802,14 @@ return jQuery;
      *  into `array`.
      */
     function baseSortedIndexBy(array, value, iteratee, retHighest) {
-      value = iteratee(value);
-
       var low = 0,
-          high = array == null ? 0 : array.length,
-          valIsNaN = value !== value,
+          high = array == null ? 0 : array.length;
+      if (high === 0) {
+        return 0;
+      }
+
+      value = iteratee(value);
+      var valIsNaN = value !== value,
           valIsNull = value === null,
           valIsSymbol = isSymbol(value),
           valIsUndefined = value === undefined;
@@ -22873,10 +23294,11 @@ return jQuery;
       if (arrLength != othLength && !(isPartial && othLength > arrLength)) {
         return false;
       }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(array);
-      if (stacked && stack.get(other)) {
-        return stacked == other;
+      // Check that cyclic values are equal.
+      var arrStacked = stack.get(array);
+      var othStacked = stack.get(other);
+      if (arrStacked && othStacked) {
+        return arrStacked == other && othStacked == array;
       }
       var index = -1,
           result = true,
@@ -23038,10 +23460,11 @@ return jQuery;
           return false;
         }
       }
-      // Assume cyclic values are equal.
-      var stacked = stack.get(object);
-      if (stacked && stack.get(other)) {
-        return stacked == other;
+      // Check that cyclic values are equal.
+      var objStacked = stack.get(object);
+      var othStacked = stack.get(other);
+      if (objStacked && othStacked) {
+        return objStacked == other && othStacked == object;
       }
       var result = true;
       stack.set(object, other);
@@ -26422,6 +26845,10 @@ return jQuery;
      * // The `_.property` iteratee shorthand.
      * _.filter(users, 'active');
      * // => objects for ['barney']
+     *
+     * // Combining several predicates using `_.overEvery` or `_.overSome`.
+     * _.filter(users, _.overSome([{ 'age': 36 }, ['age', 40]]));
+     * // => objects for ['fred', 'barney']
      */
     function filter(collection, predicate) {
       var func = isArray(collection) ? arrayFilter : baseFilter;
@@ -27171,15 +27598,15 @@ return jQuery;
      * var users = [
      *   { 'user': 'fred',   'age': 48 },
      *   { 'user': 'barney', 'age': 36 },
-     *   { 'user': 'fred',   'age': 40 },
+     *   { 'user': 'fred',   'age': 30 },
      *   { 'user': 'barney', 'age': 34 }
      * ];
      *
      * _.sortBy(users, [function(o) { return o.user; }]);
-     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
+     * // => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 30]]
      *
      * _.sortBy(users, ['user', 'age']);
-     * // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
+     * // => objects for [['barney', 34], ['barney', 36], ['fred', 30], ['fred', 48]]
      */
     var sortBy = baseRest(function(collection, iteratees) {
       if (collection == null) {
@@ -32054,11 +32481,11 @@ return jQuery;
 
       // Use a sourceURL for easier debugging.
       // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
-      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
+      // to normalize all kinds of whitespace, so e.g. newlines (and unicode versions of it) can't sneak in
+      // and escape the comment, thus injecting code that gets evaled.
       var sourceURL = '//# sourceURL=' +
         (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
+          ? (options.sourceURL + '').replace(/\s/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -32091,8 +32518,6 @@ return jQuery;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      // Like with sourceURL, we take care to not check the option's prototype,
-      // as this configuration is a code injection vector.
       var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
@@ -32799,6 +33224,9 @@ return jQuery;
      * values against any array or object value, respectively. See `_.isEqual`
      * for a list of supported value comparisons.
      *
+     * **Note:** Multiple values can be checked by combining several matchers
+     * using `_.overSome`
+     *
      * @static
      * @memberOf _
      * @since 3.0.0
@@ -32814,6 +33242,10 @@ return jQuery;
      *
      * _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
      * // => [{ 'a': 4, 'b': 5, 'c': 6 }]
+     *
+     * // Checking for several possible values
+     * _.filter(users, _.overSome([_.matches({ 'a': 1 }), _.matches({ 'a': 4 })]));
+     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matches(source) {
       return baseMatches(baseClone(source, CLONE_DEEP_FLAG));
@@ -32827,6 +33259,9 @@ return jQuery;
      * **Note:** Partial comparisons will match empty array and empty object
      * `srcValue` values against any array or object value, respectively. See
      * `_.isEqual` for a list of supported value comparisons.
+     *
+     * **Note:** Multiple values can be checked by combining several matchers
+     * using `_.overSome`
      *
      * @static
      * @memberOf _
@@ -32844,6 +33279,10 @@ return jQuery;
      *
      * _.find(objects, _.matchesProperty('a', 4));
      * // => { 'a': 4, 'b': 5, 'c': 6 }
+     *
+     * // Checking for several possible values
+     * _.filter(users, _.overSome([_.matchesProperty('a', 1), _.matchesProperty('a', 4)]));
+     * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
     function matchesProperty(path, srcValue) {
       return baseMatchesProperty(path, baseClone(srcValue, CLONE_DEEP_FLAG));
@@ -33067,6 +33506,10 @@ return jQuery;
      * Creates a function that checks if **all** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
+     * Following shorthands are possible for providing predicates.
+     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
+     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -33093,6 +33536,10 @@ return jQuery;
      * Creates a function that checks if **any** of the `predicates` return
      * truthy when invoked with the arguments it receives.
      *
+     * Following shorthands are possible for providing predicates.
+     * Pass an `Object` and it will be used as an parameter for `_.matches` to create the predicate.
+     * Pass an `Array` of parameters for `_.matchesProperty` and the predicate will be created using them.
+     *
      * @static
      * @memberOf _
      * @since 4.0.0
@@ -33112,6 +33559,9 @@ return jQuery;
      *
      * func(NaN);
      * // => false
+     *
+     * var matchesFunc = _.overSome([{ 'a': 1 }, { 'a': 2 }])
+     * var matchesPropertyFunc = _.overSome([['a', 1], ['a', 2]])
      */
     var overSome = createOver(arraySome);
 
@@ -37497,6 +37947,507 @@ var staticRenderFns = [
             ])
           ])
         ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PackageItem.vue?vue&type=template&id=7e66b244&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PackageItem.vue?vue&type=template&id=7e66b244& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c("h3", { staticClass: "mw-80" }, [_vm._v("Package Items")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row clearfix" }, [
+        _c("div", { staticClass: "col-xl-2" }, [
+          _c("div", { staticClass: "form-group form-group-default" }, [
+            _c("label", [_vm._v("Types")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.product.type,
+                    expression: "product.type"
+                  }
+                ],
+                staticClass: "full-width",
+                attrs: { "data-init-plugin": "select2" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.product,
+                      "type",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-xl-2" }, [
+          _c("div", { staticClass: "form-group form-group-default" }, [
+            _c("label", [_vm._v("Description")]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.description,
+                  expression: "product.description"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                rows: "2",
+                id: "name",
+                placeholder: "Briefly Describe your reports"
+              },
+              domProps: { value: _vm.product.description },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "description", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-xl-1" }, [
+          _c("div", { staticClass: "form-group form-group-default" }, [
+            _c("label", [_vm._v("Quantity")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.quantity,
+                  expression: "product.quantity"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", name: "" },
+              domProps: { value: _vm.product.quantity },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "quantity", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-xl-2" }, [
+          _c("div", { staticClass: "form-group form-group-default" }, [
+            _c("label", [_vm._v("Weight(kg)")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.weight,
+                  expression: "product.weight"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", name: "" },
+              domProps: { value: _vm.product.weight },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "weight", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-xl-2" }, [
+          _c("div", { staticClass: "form-group form-group-default" }, [
+            _c("label", [_vm._v("Height(cm)")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.height,
+                  expression: "product.height"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", name: "" },
+              domProps: { value: _vm.product.height },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "height", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-xl-2" }, [
+          _c("div", { staticClass: "form-group form-group-default" }, [
+            _c("label", [_vm._v("Length(cm)")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.length,
+                  expression: "product.length"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", name: "" },
+              domProps: { value: _vm.product.length },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "length", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-xl-1" }, [
+          _c("div", { staticClass: "form-group form-group-default" }, [
+            _c("label", [_vm._v("Width(cm)")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.product.width,
+                  expression: "product.width"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number", name: "" },
+              domProps: { value: _vm.product.width },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.product, "width", $event.target.value)
+                }
+              }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-xl-12" }, [
+          _c(
+            "button",
+            {
+              staticClass:
+                "btn btn-block btn-success btn-icon-left m-b-10 m-t-10",
+              attrs: { "aria-label": "", type: "button" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.addToCart($event)
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "pg-icon" }, [_vm._v("add")]),
+              _vm._v("Add Package")
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "table-responsive" }, [
+        _c(
+          "table",
+          { staticClass: "table table-hover", attrs: { id: "detailedTable" } },
+          [
+            _vm._m(3),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.products, function(pro, index) {
+                return _c("tr", { key: pro.id }, [
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        on: {
+                          click: function($event) {
+                            return _vm.removeCart(pro)
+                          }
+                        }
+                      },
+                      [_vm._v("×")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "v-align-middle semi-bold" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(index + 1) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "v-align-middle semi-bold" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(pro.type) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "v-align-middle" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(pro.description) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "v-align-middle semi-bold" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(pro.quantity) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success btn-sm",
+                        on: {
+                          click: function($event) {
+                            return _vm.addQty(pro)
+                          }
+                        }
+                      },
+                      [_vm._v("+")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm",
+                        on: {
+                          click: function($event) {
+                            return _vm.removeQty(pro)
+                          }
+                        }
+                      },
+                      [_vm._v("-")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "v-align-middle" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(pro.weight) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "v-align-middle" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(pro.height) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "v-align-middle" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(pro.length) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "v-align-middle" }, [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(pro.width) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("$" + _vm._s(_vm.itemTotal(pro)))])
+                ])
+              }),
+              0
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-12 d-flex align-items-center" }, [
+          _c(
+            "div",
+            {
+              staticClass: "form-check form-check-inline success m-t-30 m-l-20"
+            },
+            [
+              _c("h4", [
+                _c("strong", [_vm._v("Total Actual Weight:")]),
+                _vm._v(" "),
+                _c("small", [_vm._v(_vm._s(_vm.grandTotal) + "kg.")])
+              ])
+            ]
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("optgroup", { attrs: { label: "Alaskan/Hawaiian Time Zone" } }, [
+      _c("option", { attrs: { value: "AK" } }, [_vm._v("Alaska")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "HI" } }, [_vm._v("Hawaii")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("optgroup", { attrs: { label: "Pacific Time Zone" } }, [
+      _c("option", { attrs: { value: "CA" } }, [_vm._v("California")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "NV" } }, [_vm._v("Nevada")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "OR" } }, [_vm._v("Oregon")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "WA" } }, [_vm._v("Washington")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("optgroup", { attrs: { label: "Central Time Zone" } }, [
+      _c("option", { attrs: { value: "AL" } }, [_vm._v("Alabama")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "AR" } }, [_vm._v("Arkansas")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "IL" } }, [_vm._v("Illinois")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "IA" } }, [_vm._v("Iowa")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "KS" } }, [_vm._v("Kansas")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "KY" } }, [_vm._v("Kentucky")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "LA" } }, [_vm._v("Louisiana")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "MN" } }, [_vm._v("Minnesota")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "MS" } }, [_vm._v("Mississippi")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "MO" } }, [_vm._v("Missouri")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "OK" } }, [_vm._v("Oklahoma")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "SD" } }, [_vm._v("South Dakota")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "TX" } }, [_vm._v("Texas")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "TN" } }, [_vm._v("Tennessee")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "WI" } }, [_vm._v("Wisconsin")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticStyle: { width: "10%" }, attrs: { colspan: "2" } }, [
+          _vm._v("No.")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "25%" } }, [_vm._v("Types")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "25%" } }, [_vm._v("Description")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "10%" }, attrs: { colspan: "2" } }, [
+          _vm._v("Quantity")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Weight(kg)")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Height(cm)")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Length(cm)")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Width(cm)")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Total Weight")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "25%" } })
       ])
     ])
   }
@@ -49695,6 +50646,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
+Vue.component('package-item', __webpack_require__(/*! ./components/PackageItem.vue */ "./resources/js/components/PackageItem.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -49779,7 +50731,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-
+  
 )
 
 /* hot reload */
@@ -49799,7 +50751,7 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -49816,6 +50768,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PackageItem.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/components/PackageItem.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PackageItem_vue_vue_type_template_id_7e66b244___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PackageItem.vue?vue&type=template&id=7e66b244& */ "./resources/js/components/PackageItem.vue?vue&type=template&id=7e66b244&");
+/* harmony import */ var _PackageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PackageItem.vue?vue&type=script&lang=js& */ "./resources/js/components/PackageItem.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PackageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PackageItem_vue_vue_type_template_id_7e66b244___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PackageItem_vue_vue_type_template_id_7e66b244___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PackageItem.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PackageItem.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/PackageItem.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PackageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PackageItem.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PackageItem.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PackageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PackageItem.vue?vue&type=template&id=7e66b244&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/PackageItem.vue?vue&type=template&id=7e66b244& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PackageItem_vue_vue_type_template_id_7e66b244___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PackageItem.vue?vue&type=template&id=7e66b244& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PackageItem.vue?vue&type=template&id=7e66b244&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PackageItem_vue_vue_type_template_id_7e66b244___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PackageItem_vue_vue_type_template_id_7e66b244___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -49839,8 +50860,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\David\Laravel Project\goparcel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\David\Laravel Project\goparcel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
