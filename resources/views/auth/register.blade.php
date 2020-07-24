@@ -5,7 +5,7 @@
 @section('content')
 <div class="register-container full-height sm-p-t-30">
     <div class="d-flex justify-content-center flex-column full-height ">
-      <img src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" alt="logo" data-src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" data-src-retina="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" class="margin-center" width="150" height="66">
+      <img src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" alt="logo" data-src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" data-src-retina="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" class="margin-center" width="200" height="89">
         <form id="form-register" class="p-t-15" role="form" method="POST" action="{{ route('register') }}">
             @csrf
             <div class="row">
@@ -48,8 +48,8 @@
               </div>
               <div class="col-md-6">
                   <div class="form-group form-group-default">
-                  <label>{{ __('auth.confirm_password') }}</label>
-                  <input type="password" name="password_confirmation" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.confirm_password'))]) }}" class="form-control" required>
+                      <label>{{ __('auth.confirm_password') }}</label>
+                      <input type="password" name="password_confirmation" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.confirm_password'))]) }}" class="form-control" required>
                   </div>
               </div>
             </div>
@@ -92,16 +92,16 @@
                   @enderror
               </div>
             </div>
-            <div class="row m-t-10">
+            <div class="row m-t-10 align-items-end">
               <div class="col-lg-6">
                 <p><small>{{ __('auth.i_agree_to_the') }} <a href="https://weparcelbear.com/terms-of-use/" class="text-info"><strong>{{ __('auth.terms_of_use') }}</strong></a> & <a href="https://weparcelbear.com/privacy-policy/" class="text-info"><strong>{{ __('auth.privacy_policy') }}</strong></a>.</small></p>
+                <input type="hidden" name="roles" value="3">
+                <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">{{ __('auth.create_an_account') }}</button>
               </div>
-              <div class="col-lg-6 text-right">
-                <a href="https://weparcelbear.com/#contact-us" class="text-info small"><strong>{{ __('auth.help_contact_support') }}</strong></a>
+              <div class="col-lg-6 text-right justify-content-end">
+                <a href="{{ route('login') }}" class="text-info small"><strong>{{ __('auth.back_to_login') }}</strong></a>
               </div>
             </div>
-            <input type="hidden" name="roles" value="3">
-            <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">{{ __('auth.create_an_account') }}</button>
       </form>
     </div>
   </div>
@@ -112,7 +112,7 @@
 <script>
 $(function(){
   $("#m_number").mask("(9999) 999-9999");
-  $('#form-register').validate()
+  $('#form-register').validate();
 })
 </script>
 @endsection

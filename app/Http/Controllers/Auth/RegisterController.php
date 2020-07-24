@@ -32,15 +32,15 @@ class RegisterController extends Controller
     // protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo()
     {
-        if (auth()->user()->hasRole('Super Admin')) 
+        if (auth()->user()->hasRole('Super Admin'))
         {
             return route('admin.dashboard.index');
-        } 
-        elseif (auth()->user()->hasRole('User')) 
+        }
+        elseif (auth()->user()->hasRole('User'))
         {
             return route('admin.users.index');
-        } 
-        elseif (auth()->user()->hasRole('Customer')) 
+        }
+        elseif (auth()->user()->hasRole('Customer'))
         {
             return route('customer.dashboard');
         }
@@ -71,6 +71,18 @@ class RegisterController extends Controller
             'm_number' => ['required', 'phone:PH'],
             'address' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ],[
+            'username.required' => __('auth.error_required'),
+            'username.unique' => __('auth.error_username_already_taken'),
+            'name.required' => __('auth.error_required'),
+            'email.required' => __('auth.error_required'),
+            'email.email' => __('auth.error_invalid_email'),
+            'email.unique' => __('auth.error_email_already_taken'),
+            'm_number.required' => __('auth.error_required'),
+            'm_number.phone' => __('auth.error_invalid_phone'),
+            'address.required' => __('auth.error_required'),
+            'password.required' => __('auth.error_required'),
+            'password.confirmed' => __('auth.error_password_not_match'),
         ]);
     }
 
@@ -86,7 +98,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'name' => $data['name'],
             'email' => $data['email'],
-            'm_number' => $data['m_number'],
+            'm_number' => preg_replace('~\D~', '', $data['m_number']),
             'address' => $data['address'],
             'roles' => $data['roles'],
             'password' => Hash::make($data['password']),
