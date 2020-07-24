@@ -2169,99 +2169,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
   },
+  props: ['productTypes'],
   data: function data() {
     return {
       products: [],
       product: {
-        type: '',
-        description: '',
-        quantity: 0,
-        weight: 0,
         height: 0,
         length: 0,
         width: 0
@@ -2269,10 +2185,20 @@ __webpack_require__.r(__webpack_exports__);
       tax: ".00"
     };
   },
+  // watch: {
+  //     'products': {
+  //     handler (newValue, oldValue) {
+  //         newValue.forEach((pro) => {
+  //         pro.total = pro.quantity * pro.weight
+  //         })
+  //     },
+  //     deep: true
+  //     }
+  // },
   computed: {
     subTotal: function subTotal() {
       return this.products.reduce(function (total, item) {
-        return total + item.quantity * item.weight;
+        return total + parseInt(item.height) * parseInt(item.length) * parseInt(item.width);
       }, 0);
     },
     taxTotal: function taxTotal() {
@@ -2284,25 +2210,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addToCart: function addToCart() {
-      var type = this.product.type;
-      var description = this.product.description;
-      var quantity = this.product.quantity;
-      var weight = this.product.weight;
-      var height = this.product.height;
-      var length = this.product.length;
-      var width = this.product.width;
-      this.products.push({
-        type: type,
-        description: description,
-        quantity: quantity,
-        weight: weight,
-        height: height,
-        length: length,
-        width: width
-      });
-      this.clearCart();
+      var line_limit = 1;
+
+      if (this.products.length < line_limit) {
+        var height = this.product.height;
+        var length = this.product.length;
+        var width = this.product.width;
+        this.products.push({
+          height: height,
+          length: length,
+          width: width
+        });
+        this.clearCart();
+      }
     },
-    removeCart: function removeCart(item) {
+    removeDimension: function removeDimension(item) {
       var del = this.products.indexOf(item);
       this.products.splice(del, 1);
     },
@@ -2317,10 +2239,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     clearCart: function clearCart() {
-      this.product.type = '';
-      this.product.description = '';
-      this.product.quantity = 0;
-      this.product.weight = 0;
       this.product.height = 0;
       this.product.length = 0;
       this.product.width = 0;
@@ -37973,389 +37891,215 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-body" }, [
-      _c("h3", { staticClass: "mw-80" }, [_vm._v("Package Items")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row clearfix" }, [
-        _c("div", { staticClass: "col-xl-2" }, [
-          _c("div", { staticClass: "form-group form-group-default" }, [
-            _c("label", [_vm._v("Types")]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.product.type,
-                    expression: "product.type"
-                  }
-                ],
-                staticClass: "full-width",
-                attrs: { "data-init-plugin": "select2" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.product,
-                      "type",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)]
-            )
-          ])
-        ]),
+    _c(
+      "div",
+      { staticClass: "card-body" },
+      [
+        _c("h3", { staticClass: "mw-80" }, [_vm._v("Package Items")]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-xl-2" }, [
-          _c("div", { staticClass: "form-group form-group-default" }, [
-            _c("label", [_vm._v("Description")]),
-            _vm._v(" "),
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.product.description,
-                  expression: "product.description"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                rows: "2",
-                id: "name",
-                placeholder: "Briefly Describe your reports"
-              },
-              domProps: { value: _vm.product.description },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.product, "description", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-1" }, [
-          _c("div", { staticClass: "form-group form-group-default" }, [
-            _c("label", [_vm._v("Quantity")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.product.quantity,
-                  expression: "product.quantity"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number", name: "" },
-              domProps: { value: _vm.product.quantity },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.product, "quantity", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-2" }, [
-          _c("div", { staticClass: "form-group form-group-default" }, [
-            _c("label", [_vm._v("Weight(kg)")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.product.weight,
-                  expression: "product.weight"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number", name: "" },
-              domProps: { value: _vm.product.weight },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.product, "weight", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-2" }, [
-          _c("div", { staticClass: "form-group form-group-default" }, [
-            _c("label", [_vm._v("Height(cm)")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.product.height,
-                  expression: "product.height"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number", name: "" },
-              domProps: { value: _vm.product.height },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.product, "height", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-2" }, [
-          _c("div", { staticClass: "form-group form-group-default" }, [
-            _c("label", [_vm._v("Length(cm)")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.product.length,
-                  expression: "product.length"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number", name: "" },
-              domProps: { value: _vm.product.length },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.product, "length", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xl-1" }, [
-          _c("div", { staticClass: "form-group form-group-default" }, [
-            _c("label", [_vm._v("Width(cm)")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.product.width,
-                  expression: "product.width"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number", name: "" },
-              domProps: { value: _vm.product.width },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.product, "width", $event.target.value)
-                }
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-xl-12" }, [
-          _c(
-            "button",
-            {
-              staticClass:
-                "btn btn-block btn-success btn-icon-left m-b-10 m-t-10",
-              attrs: { "aria-label": "", type: "button" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.addToCart($event)
-                }
-              }
-            },
-            [
-              _c("i", { staticClass: "pg-icon" }, [_vm._v("add")]),
-              _vm._v("Add Package")
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "table-responsive" }, [
         _c(
-          "table",
-          { staticClass: "table table-hover", attrs: { id: "detailedTable" } },
+          "div",
+          {
+            staticClass: "btn-group btn-group-toggle",
+            attrs: { "data-toggle": "buttons" }
+          },
           [
-            _vm._m(3),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.products, function(pro, index) {
-                return _c("tr", { key: pro.id }, [
-                  _c("td", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-sm",
-                        on: {
-                          click: function($event) {
-                            return _vm.removeCart(pro)
-                          }
-                        }
-                      },
-                      [_vm._v("×")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "v-align-middle semi-bold" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(index + 1) +
-                        "\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "v-align-middle semi-bold" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(pro.type) +
-                        "\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "v-align-middle" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(pro.description) +
-                        "\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "v-align-middle semi-bold" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(pro.quantity) +
-                        "\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success btn-sm",
-                        on: {
-                          click: function($event) {
-                            return _vm.addQty(pro)
-                          }
-                        }
-                      },
-                      [_vm._v("+")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-sm",
-                        on: {
-                          click: function($event) {
-                            return _vm.removeQty(pro)
-                          }
-                        }
-                      },
-                      [_vm._v("-")]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "v-align-middle" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(pro.weight) +
-                        "\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "v-align-middle" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(pro.height) +
-                        "\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "v-align-middle" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(pro.length) +
-                        "\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "v-align-middle" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(pro.width) +
-                        "\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("$" + _vm._s(_vm.itemTotal(pro)))])
-                ])
+            _c("label", { staticClass: "btn btn-default active" }, [
+              _c("input", {
+                attrs: { type: "radio", name: "options" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.removeDimension($event)
+                  }
+                }
               }),
-              0
-            )
+              _vm._v(" Medium\n            ")
+            ]),
+            _vm._v(" "),
+            _c("label", { staticClass: "btn btn-default" }, [
+              _c("input", {
+                attrs: { type: "radio", name: "options" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.removeDimension($event)
+                  }
+                }
+              }),
+              _vm._v(" Large\n            ")
+            ]),
+            _vm._v(" "),
+            _c("label", { staticClass: "btn btn-default" }, [
+              _c("input", {
+                attrs: { type: "radio", name: "options" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.addToCart($event)
+                  }
+                }
+              }),
+              _vm._v(" Own Packaging\n            ")
+            ])
           ]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-12 d-flex align-items-center" }, [
-          _c(
-            "div",
-            {
-              staticClass: "form-check form-check-inline success m-t-30 m-l-20"
-            },
-            [
+        _vm._l(_vm.products, function(pro) {
+          return _c("div", { key: pro.id, staticClass: "row" }, [
+            _c("h5", { staticClass: "btn-block m-l-10" }, [
+              _vm._v("Item Dimension:")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("div", { staticClass: "form-group form-group-default" }, [
+                _c("label", [_vm._v("Height")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: pro.height,
+                      expression: "pro.height"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    id: "height",
+                    name: "",
+                    min: "0",
+                    oninput: "this.value = Math.abs(this.value)"
+                  },
+                  domProps: { value: pro.height },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(pro, "height", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(0, true),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "form-group form-group-default" }, [
+                _c("label", [_vm._v("Width")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: pro.width,
+                      expression: "pro.width"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    id: "width",
+                    name: "",
+                    min: "0",
+                    oninput: "this.value = Math.abs(this.value)"
+                  },
+                  domProps: { value: pro.width },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(pro, "width", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1, true),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("div", { staticClass: "form-group form-group-default" }, [
+                _c("label", [_vm._v("Length")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: pro.length,
+                      expression: "pro.length"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    id: "length",
+                    name: "",
+                    min: "0",
+                    oninput: "this.value = Math.abs(this.value)"
+                  },
+                  domProps: { value: pro.length },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(pro, "length", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          ])
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("div", { staticClass: "m-t-15" }, [
               _c("h4", [
-                _c("strong", [_vm._v("Total Actual Weight:")]),
+                _c("strong", [_vm._v("Total Weight:")]),
                 _vm._v(" "),
                 _c("small", [_vm._v(_vm._s(_vm.grandTotal) + "kg.")])
               ])
-            ]
-          )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c(
+              "div",
+              {
+                staticClass: "m-t-15",
+                staticStyle: { "margin-left": "-20px" }
+              },
+              [
+                _c("h4", [
+                  _c("strong", [_vm._v("Additional Weight Fee:")]),
+                  _vm._v(" "),
+                  _c("small", [_vm._v("₱" + _vm._s(_vm.grandTotal) + "pesos.")])
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("div", { staticClass: "m-t-15" }, [
+              _c("h4", [
+                _c("strong", [_vm._v("Total Amount:")]),
+                _vm._v(" "),
+                _c("small", [_vm._v("₱" + _vm._s(_vm.grandTotal) + "pesos.")])
+              ])
+            ])
+          ])
         ])
-      ])
-    ])
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = [
@@ -38363,93 +38107,25 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("optgroup", { attrs: { label: "Alaskan/Hawaiian Time Zone" } }, [
-      _c("option", { attrs: { value: "AK" } }, [_vm._v("Alaska")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "HI" } }, [_vm._v("Hawaii")])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "col-md-1 d-flex justify-content-center align-items-center"
+      },
+      [_c("h4", [_vm._v("X")])]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("optgroup", { attrs: { label: "Pacific Time Zone" } }, [
-      _c("option", { attrs: { value: "CA" } }, [_vm._v("California")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "NV" } }, [_vm._v("Nevada")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "OR" } }, [_vm._v("Oregon")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "WA" } }, [_vm._v("Washington")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("optgroup", { attrs: { label: "Central Time Zone" } }, [
-      _c("option", { attrs: { value: "AL" } }, [_vm._v("Alabama")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "AR" } }, [_vm._v("Arkansas")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "IL" } }, [_vm._v("Illinois")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "IA" } }, [_vm._v("Iowa")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "KS" } }, [_vm._v("Kansas")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "KY" } }, [_vm._v("Kentucky")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "LA" } }, [_vm._v("Louisiana")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "MN" } }, [_vm._v("Minnesota")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "MS" } }, [_vm._v("Mississippi")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "MO" } }, [_vm._v("Missouri")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "OK" } }, [_vm._v("Oklahoma")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "SD" } }, [_vm._v("South Dakota")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "TX" } }, [_vm._v("Texas")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "TN" } }, [_vm._v("Tennessee")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "WI" } }, [_vm._v("Wisconsin")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticStyle: { width: "10%" }, attrs: { colspan: "2" } }, [
-          _vm._v("No.")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "25%" } }, [_vm._v("Types")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "25%" } }, [_vm._v("Description")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "10%" }, attrs: { colspan: "2" } }, [
-          _vm._v("Quantity")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Weight(kg)")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Height(cm)")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Length(cm)")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Width(cm)")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Total Weight")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "25%" } })
-      ])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "col-md-1 d-flex justify-content-center align-items-center"
+      },
+      [_c("h4", [_vm._v("X")])]
+    )
   }
 ]
 render._withStripped = true

@@ -15,17 +15,10 @@ class CreatePackagesTable extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('package_id');
-            $table->unsignedBigInteger('type_id');
-            $table->text('description');
-            $table->unsignedSmallInteger('quantity');
+            $table->unsignedBigInteger('pickup_id');
             $table->unsignedSmallInteger('weight');
-            $table->unsignedSmallInteger('length');
-            $table->unsignedSmallInteger('width');
-            $table->unsignedSmallInteger('height');
-            $table->float('total_rate');
             $table->timestamps();
-            $table->index(['package_id', 'type_id'], 'FK');
+            $table->index(['pickup_id'], 'FK');
         });
     }
 

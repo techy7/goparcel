@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers\Customer;
 
-use App\Pickup;
+use App\Type;
 use App\User;
+use App\Pickup;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Package;
 
 class PickupController extends Controller
 {
     public function index()
     {
-        return view('customers.pickup.index');
+        $productTypes = Type::all();
+        
+        return view('customers.pickup.index', compact('productTypes'));
     }
 
     public function store()
     {
+        // dd(request()->all());
         $data = request()->validate([
             'pickup_date' => 'required',
             'pickup_location' => 'required|string|max:255',
@@ -28,7 +33,7 @@ class PickupController extends Controller
             'receiver_phone.phone' => 'The receiver contact number field contains an invalid number.',
         ]);
 
-        auth()->user()->pickups()->create($data);
+        $pickup = auth()->user()->pickups()->create($data);
 
         return redirect()->route('customer.pickup.store')->with('success', 'Pickup has been successfully added.');
     }

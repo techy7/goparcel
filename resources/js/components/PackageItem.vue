@@ -2,140 +2,59 @@
     <div class="card">
         <div class="card-body">
         <h3 class="mw-80">Package Items</h3>
-            <div class="row clearfix">
-                <div class="col-xl-2">
-                <div class="form-group form-group-default">
-                    <label>Types</label>
-                    <select v-model="product.type" class="full-width" data-init-plugin="select2">
-                        <optgroup label="Alaskan/Hawaiian Time Zone">
-                            <option value="AK">Alaska</option>
-                            <option value="HI">Hawaii</option>
-                        </optgroup>
-                        <optgroup label="Pacific Time Zone">
-                            <option value="CA">California</option>
-                            <option value="NV">Nevada</option>
-                            <option value="OR">Oregon</option>
-                            <option value="WA">Washington</option>
-                        </optgroup>
-                        <optgroup label="Central Time Zone">
-                            <option value="AL">Alabama</option>
-                            <option value="AR">Arkansas</option>
-                            <option value="IL">Illinois</option>
-                            <option value="IA">Iowa</option>
-                            <option value="KS">Kansas</option>
-                            <option value="KY">Kentucky</option>
-                            <option value="LA">Louisiana</option>
-                            <option value="MN">Minnesota</option>
-                            <option value="MS">Mississippi</option>
-                            <option value="MO">Missouri</option>
-                            <option value="OK">Oklahoma</option>
-                            <option value="SD">South Dakota</option>
-                            <option value="TX">Texas</option>
-                            <option value="TN">Tennessee</option>
-                            <option value="WI">Wisconsin</option>
-                        </optgroup>
-                    </select>
-                </div>
-                </div>
-                <div class="col-xl-2">
-                <div class="form-group form-group-default">
-                    <label>Description</label>
-                    <textarea v-model="product.description" class="form-control" rows="2" id="name" placeholder="Briefly Describe your reports"></textarea>
-                </div>
-                </div>
-                <div class="col-xl-1">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-default active">
+                    <input @click.prevent="removeDimension" type="radio" name="options"> Medium
+                </label>
+                <label class="btn btn-default">
+                    <input @click.prevent="removeDimension" type="radio" name="options"> Large
+                </label>
+                <label class="btn btn-default">
+                    <input @click.prevent="addToCart" type="radio" name="options"> Own Packaging
+                </label>
+            </div>
+            <div class="row" v-for="pro in products" :key="pro.id">
+            <h5 class="btn-block m-l-10">Item Dimension:</h5>
+                <div class="col-md-3">
                     <div class="form-group form-group-default">
-                        <label>Quantity</label>
-                        <input v-model="product.quantity" type="number" name="" class="form-control">
+                        <label>Height</label>
+                        <input type="number" v-model="pro.height" id="height" class="form-control" name="" min="0" oninput="this.value = Math.abs(this.value)">
                     </div>
                 </div>
-                <div class="col-xl-2">
+                <div class="col-md-1 d-flex justify-content-center align-items-center">
+                    <h4>X</h4>
+                </div>
+                <div class="col-md-4">
                     <div class="form-group form-group-default">
-                        <label>Weight(kg)</label>
-                        <input v-model="product.weight" type="number" name="" class="form-control">
+                        <label>Width</label>
+                        <input type="number" v-model="pro.width" id="width" class="form-control" name="" min="0" oninput="this.value = Math.abs(this.value)">
                     </div>
                 </div>
-                <div class="col-xl-2">
-                    <div class="form-group form-group-default">
-                        <label>Height(cm)</label>
-                        <input v-model="product.height" type="number" name="" class="form-control">
-                    </div>
+                <div class="col-md-1 d-flex justify-content-center align-items-center">
+                    <h4>X</h4>
                 </div>
-                <div class="col-xl-2">
+                <div class="col-md-3">
                     <div class="form-group form-group-default">
-                        <label>Length(cm)</label>
-                        <input v-model="product.length" type="number" name="" class="form-control">
-                    </div>
-                </div>
-                <div class="col-xl-1">
-                    <div class="form-group form-group-default">
-                        <label>Width(cm)</label>
-                        <input v-model="product.width" type="number" name="" class="form-control">
+                        <label>Length</label>
+                        <input type="number" v-model="pro.length" id="length" class="form-control" name="" min="0" oninput="this.value = Math.abs(this.value)">
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-12">
-                        <button @click.prevent="addToCart" aria-label="" class="btn btn-block btn-success btn-icon-left m-b-10 m-t-10" type="button"><i class="pg-icon">add</i>Add Package</button>
+                <div class="col-md-4">
+                    <div class="m-t-15">
+                        <h4><strong>Total Weight:</strong> <small>{{ grandTotal }}kg.</small></h4>
+                    </div>
                 </div>
-            </div>
-            <div class="table-responsive">
-            <table class="table table-hover" id="detailedTable">
-                <thead>
-                <tr>
-                    <th colspan="2" style="width:10%">No.</th>
-                    <th style="width:25%">Types</th>
-                    <th style="width:25%">Description</th>
-                    <th colspan="2" style="width:10%">Quantity</th>
-                    <th style="width:10%">Weight(kg)</th>
-                    <th style="width:10%">Height(cm)</th>
-                    <th style="width:10%">Length(cm)</th>
-                    <th style="width:10%">Width(cm)</th>
-                    <th style="width:10%">Total Weight</th>
-                    <th style="width:25%"> </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr v-for="(pro, index) in products" :key="pro.id">
-                    <td>
-                        <button @click="removeCart(pro)" class="btn btn-danger btn-sm">&times;</button>
-                    </td>
-                    <td class="v-align-middle semi-bold">
-                        {{index + 1}}
-                    </td>
-                    <td class="v-align-middle semi-bold">
-                        {{ pro.type }}
-                    </td>
-                    <td class="v-align-middle">
-                        {{ pro.description }}
-                    </td>
-                    <td class="v-align-middle semi-bold">
-                        {{ pro.quantity }}
-                    </td>
-                    <td>
-                        <button @click="addQty(pro)" class="btn btn-success btn-sm">+</button>
-                        <button @click="removeQty(pro)" class="btn btn-danger btn-sm">-</button>
-                    </td>
-                    <td class="v-align-middle">
-                        {{ pro.weight }}
-                    </td>
-                    <td class="v-align-middle">
-                        {{ pro.height }}
-                    </td>
-                    <td class="v-align-middle">
-                        {{ pro.length }}
-                    </td>
-                    <td class="v-align-middle">
-                        {{ pro.width }}
-                    </td>
-                    <td>${{ itemTotal(pro) }}</td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="col-md-12 d-flex align-items-center">
-                <div class="form-check form-check-inline success m-t-30 m-l-20">
-                    <h4><strong>Total Actual Weight:</strong> <small>{{ grandTotal }}kg.</small></h4>
+                <div class="col-md-4">
+                    <div class="m-t-15" style="margin-left: -20px">
+                        <h4><strong>Additional Weight Fee:</strong> <small>₱{{ grandTotal }}pesos.</small></h4>
+                    </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="m-t-15">
+                        <h4><strong>Total Amount:</strong> <small>₱{{ grandTotal }}pesos.</small></h4>
+                    </div>
                 </div>
             </div>
             <!-- <div class="table-responsive">
@@ -312,14 +231,11 @@
         mounted() {
             console.log('Component mounted.')
         },
+        props: ['productTypes'],
         data() {
             return {
                 products: [],
                 product: {
-                    type: '',
-                    description: '',
-                    quantity: 0,
-                    weight: 0,
                     height: 0,
                     length: 0,
                     width: 0,
@@ -327,10 +243,20 @@
                 tax: ".00"
             }
         },
+        // watch: {
+        //     'products': {
+        //     handler (newValue, oldValue) {
+        //         newValue.forEach((pro) => {
+        //         pro.total = pro.quantity * pro.weight
+        //         })
+        //     },
+        //     deep: true
+        //     }
+        // },
         computed: {
             subTotal: function () {
                 return this.products.reduce((total, item) => {
-                    return total + item.quantity * item.weight
+                    return total + parseInt(item.height) * parseInt(item.length) * parseInt(item.width)
                 }, 0)
             },
             taxTotal: function () {
@@ -342,18 +268,17 @@
         },
         methods: {
             addToCart: function () {
-                var type = this.product.type
-                var description = this.product.description
-                var quantity = this.product.quantity
-                var weight = this.product.weight
-                var height = this.product.height
-                var length = this.product.length
-                var width = this.product.width
+                let line_limit = 1;
+                if (this.products.length < line_limit) {
+                    var height = this.product.height
+                    var length = this.product.length
+                    var width = this.product.width
 
-                this.products.push({ type: type, description: description, quantity: quantity, weight: weight, height: height, length: length, width: width })
-                this.clearCart()
+                    this.products.push({ height: height, length: length, width: width })
+                    this.clearCart()
+                }
             },
-            removeCart: function (item) {
+            removeDimension: function (item) {
                 var del = this.products.indexOf(item)
                 this.products.splice(del, 1)
             },
@@ -368,10 +293,6 @@
                 })
             },
             clearCart: function () {
-                this.product.type = ''
-                this.product.description = ''
-                this.product.quantity = 0
-                this.product.weight = 0
                 this.product.height = 0
                 this.product.length = 0
                 this.product.width = 0

@@ -119,12 +119,13 @@
               <!-- END card -->
         </div>
     </div>
+    {{-- @dump($productTypes) --}}
     <div class="row">
         <div class="col-md-12">
           <!-- START card -->
           <div id="app">
-              <package-item></package-item>
-            </div>
+            <package-item :product-types="{{ $productTypes }}"></package-item>
+          </div>
           <!-- END card -->
         </div>
     </div>
