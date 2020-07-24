@@ -37,5 +37,6 @@
 <!-- BEGIN PAGE LEVEL JS -->
 <script src="{{ asset('pages/assets/js/dashboard.js') }}" type="text/javascript"></script>
 <script src="{{ asset('pages/assets/js/scripts.js') }}" type="text/javascript"></script>
+<script src="{{ asset('pages/assets/js/image-preview.js') }}"></script>
 <!-- END PAGE LEVEL JS -->
 @yield('lower-links-extends')

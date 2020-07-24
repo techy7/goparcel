@@ -51,6 +51,12 @@
                           <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->address ?? 'N/A' }}</p>
                         </div>
                       </div>
+                      <div class="form-group row">
+                        <label for="position" class="col-md-5 control-label"><strong>Profile Picture</strong></label>
+                        <div class="col-md-7">
+                          <img src="/storage/{{ auth()->user()->profile_picture }}" alt="Profile Picture">
+                        </div>
+                      </div>
                       <br>
                       <div class="row">
                         <div class="col-md-6"></div>

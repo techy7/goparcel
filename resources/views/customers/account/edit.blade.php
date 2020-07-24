@@ -6,7 +6,7 @@
 <div class="content sm-gutter">
     <div class="container-fluid padding-25 sm-padding-10">
         <h4 class="text-center">Profile Details</h4>
-        <form id="form-register" class="p-t-15" role="form" method="POST" action="{{ route('customer.account.update', $user->id) }}">
+        <form id="form-register" class="p-t-15" role="form" enctype="multipart/form-data" method="POST" action="{{ route('customer.account.update', $user->id) }}">
             @csrf
             @method('PATCH')
             <div class="row">
@@ -78,6 +78,37 @@
                             <div class="form-group form-group-default">
                             <label>Address</label>
                             <input type="text" name="address" placeholder="Enter Address" value="{{ old('address', $user->address) }}" class="form-control" required>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group form-group-default">
+                                <label>Profile Picture</label>
+                                <div class="card-body">
+
+                                    <label class="custom-file">
+                                    <input
+                                        id="imageFile"
+                                        type="file"
+                                        class="custom-file-input form-control @error('address') has-error @enderror"
+                                        name="profile_picture"
+                                    >
+                                    <span class="custom-file-label"></span>
+                                    </label>
+  
+                                    <div class="image-preview" id="imagePreview">
+                                        <img src="" alt="Image Preview" class="image-preview__image">
+                                        <span class="image-preview__default-text">Image Preview</span>
+                                    </div>
+                                    @error('profile_picture')
+                                        <label class="error" for="profile_picture">
+                                            {{ $message }}
+                                        </label>
+                                    @enderror
+                                    <div class="clearfix"></div>
+                                </div>
+
                             </div>
                         </div>
                         </div>

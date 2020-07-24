@@ -23,8 +23,9 @@
     <link href="{{ asset('pages/assets/plugins/rickshaw/rickshaw.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('pages/assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css" media="screen">
     <link href="{{ asset('pages/assets/plugins/jquery-metrojs/MetroJs.css') }}" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('pages/assets/css/image-preview.css') }}">
     <link class="main-stylesheet" href="{{ asset('pages/pages/css/pages.css') }}" rel="stylesheet" type="text/css" />
     <!-- Please remove the file below for production: Contains demo classes -->
     <link class="main-stylesheet" href="{{ asset('pages/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
     @yield('upper-links-extends')
-  </head>
+</head>
