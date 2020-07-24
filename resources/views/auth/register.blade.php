@@ -1,6 +1,6 @@
 @extends('layouts.auth.app')
 
-@section('title', 'Register')
+@section('title', __('auth.register'))
 
 @section('content')
 <div class="register-container full-height sm-p-t-30">
