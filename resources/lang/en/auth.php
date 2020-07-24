@@ -18,4 +18,18 @@ return [
 
     //Register
     'register' => 'Register',
+    'enter_field' => 'Enter :field',
+    'username' => 'Username',
+    'email' => 'Email',
+    'password' => 'Password',
+    'confirm_password' => 'Confirm Password',
+    'name' => 'Name',
+    'mobile_number' => 'Mobile Number',
+    'address' => 'Complete Address',
+    'create_an_account' => 'Create an Account',
+
+    'i_agree_to_the' => 'I agree to the',
+    'terms_of_use' => 'Terms of Use',
+    'privacy_policy' => 'Privacy Policy',
+    'help_contact_support' => 'Help? Contact Support',
 ];

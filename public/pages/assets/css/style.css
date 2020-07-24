@@ -1,16 +1,8 @@
 /*
-
 * Override Pages default styles or create your own styles here
-
 */
 @import url("https://fonts.googleapis.com/css?family=Archivo+Black:regular,regular|Archivo:regular,regular,700|Montserrat:regular,regular&display=swap&ver=3.9");
-
-html, body { width: 100%; overflow-x: hidden; }
-body, h1, h2, h3, h4, h5, h6, ins, cite, var, q, address, kbd, label,
-.btn, .badge,
-.form-control, .form-control::-moz-placeholder, .form-control:-ms-input-placeholder, .form-control::-webkit-input-placeholder, .form-control::placeholder,
-.form-control:focus, .form-control:focus::-moz-placeholder, .form-control:focus:-ms-input-placeholder, .form-control:focus::-webkit-input-placeholder, .form-control:focus::placeholder,
-.form-group-default .form-group-default.required:after, .form-group-default .form-control:focus::-moz-placeholder, .form-group-default .form-control:focus:-ms-input-placeholder, .form-group-default .form-control:focus::-webkit-input-placeholder, .form-group-default .form-control:focus::placeholder,
+body, h1, h2, h3, h4, h5, h6, ins, cite, var, q, address, kbd, label, .btn, .badge, .form-control,
 .datepicker thead tr .dow, .datepicker table tr td.day,
 div.cs-skin-slide, .line-chart .nvd3 .nv-axis .nv-axisMaxMin text,
 .social-card.share .card-header h5,
@@ -31,20 +23,25 @@ div.cs-skin-slide, .line-chart .nvd3 .nv-axis .nv-axisMaxMin text,
 .icon-thumbnail {
   color: #333;
   font-family: "Montserrat", "Archivo",  "Inter UI", -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: 1em;
+  font-size: .9em;
   font-weight: normal;
 }
+.form-control::-moz-placeholder { font-family: "Montserrat", "Archivo",  "Inter UI", -apple-system, BlinkMacSystemFont, sans-serif !important; }
+.form-control::-ms-input-placeholder { font-family: "Montserrat", "Archivo",  "Inter UI", -apple-system, BlinkMacSystemFont, sans-serif !important; }
+.form-control::-webkit-input-placeholder { font-family: "Montserrat", "Archivo",  "Inter UI", -apple-system, BlinkMacSystemFont, sans-serif !important; }
+.form-control::placeholder { font-family: "Montserrat", "Archivo",  "Inter UI", -apple-system, BlinkMacSystemFont, sans-serif !important; }
 
 a:focus,
 a:hover,
-a:active {
-  color: #196a87;
+a:active,
+.text-info {
+  color: #196a87 !important;
 }
-.bg-primary {
+.btn-primary, .btn-primary:focus, .btn-primary:hover {
   background-color: #196a87 !important;
-}
-.btn-primary, .btn-primary:focus {
-  background-color: #196a87;
+  border: none !important;
+  color: #fff;
+  font-weight: bold;
 }
 .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary[disabled].active,
 fieldset[disabled] .btn-primary,
@@ -133,17 +130,25 @@ fieldset[disabled] .btn-primary.active {
   background-image: -moz-linear-gradient(to right, #196a87 0%, #845ae0 44%, rgba(0, 0, 0, 0.14) 62%, rgba(0, 0, 0, 0.04) 97%);
   background-image: linear-gradient(to right, #196a87 0%, #845ae0 44%, rgba(0, 0, 0, 0.14) 62%, rgba(0, 0, 0, 0.04) 97%);
 }
-.form-control:focus {
-  border: 1px solid #196a87;
-}
 .input-group-text.primary {
   background-color: #196a87;
 }
+
 .form-group-default.disabled.focused {
   border: 1px solid #196a87;
 }
 .form-group-default.focused {
   border: 1px solid #196a87 !important;
+}
+.form-group-default label {
+  font-weight: bold;
+  color: #196a87 !important;
+}
+.form-group-default label.fade {
+  opacity: 1;
+}
+.form-group-default.focused label {
+  font-size: 10px;
 }
 .datepicker thead tr .next,
 .datepicker thead tr .prev {
@@ -194,6 +199,9 @@ fieldset[disabled] .btn-primary.active {
 .b-primary {
   border-color: #196a87;
 }
+.margin-center {
+  margin: 0 auto;
+}
 
 @media only screen and (max-width: 1095px) {
 /*************** ADD TABLE ONLY CSS HERE  ***************/
@@ -202,5 +210,5 @@ fieldset[disabled] .btn-primary.active {
 
 @media only screen and (max-width: 48em) {
 /*************** ADD MOBILE ONLY CSS HERE  ***************/
-  
+
 }

@@ -9118,7 +9118,7 @@ textarea {
 }
 
 label {
-  font-family: -apple-system, BlinkMacSystemFont, "Inter UI", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif, sans-serif;
+  font-family: "Montserrat", "Archivo",  "Inter UI", -apple-system, BlinkMacSystemFont, sans-serif !important;
   letter-spacing: -0.006em;
 }
 
