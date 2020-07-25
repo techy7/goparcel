@@ -39,7 +39,7 @@ class LoginController extends Controller
         }
         elseif (auth()->user()->hasRole('Customer'))
         {
-            return route('customer.dashboard');
+            return route('customer.dashboard', auth()->user()->username);
         }
     }
 

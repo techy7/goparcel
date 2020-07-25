@@ -26,7 +26,7 @@ class HomepageMiddleware
         } 
         elseif (auth()->user()->hasRole('Customer')) 
         {
-            return redirect()->route('customer.dashboard');
+            return redirect()->route('customer.dashboard', auth()->user()->username);
         }
     }
 }
