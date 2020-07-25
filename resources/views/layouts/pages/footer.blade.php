@@ -1,6 +1,6 @@
-<div class=" container-fluid  container-fixed-lg footer">
-    <div class="copyright sm-text-center">
-      <p>Copyright {{ date('Y') }} © {{ config('app.name') }} | All Rights Reserved.</p>
+<div class=" container-fluid container-fixed-lg footer">
+    <div class="copyright text-right sm-text-center">
+      <p class="small">{{ __('general.copyright') }} {{ date('Y') }} &copy; <strong>{{ config('app.name') }}</strong>. {{ __('general.all_right_reserved') }}.</p>
       <div class="clearfix"></div>
     </div>
 </div>

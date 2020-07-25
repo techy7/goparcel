@@ -10,11 +10,21 @@ class Pickup extends Model
 
     protected $fillable = [
         'pickup_date',
-        'pickup_location',
+
+        'pickup_address',
+        'pickup_city',
+        'pickup_state',
+        'pickup_postal_code',
+        'pickup_country',
+
         'receiver_name',
         'receiver_email',
         'receiver_phone',
-        'receiver_location',
+        'receiver_address',
+        'receiver_city',
+        'receiver_state',
+        'receiver_postal_code',
+        'receiver_country',
     ];
 
     public function user()
