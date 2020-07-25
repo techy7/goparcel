@@ -232,6 +232,10 @@ fieldset[disabled] .btn-primary.active {
   border-left-color: #196a87;
 }
 
+.copyright {
+  padding: 15px 0;
+}
+
 
 @media only screen and (max-width: 1095px) {
 /*************** ADD TABLE ONLY CSS HERE  ***************/
