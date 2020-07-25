@@ -21,4 +21,9 @@ class Pickup extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function package()
+    {
+        return $this->hasOne(Package::class);
+    }
 }

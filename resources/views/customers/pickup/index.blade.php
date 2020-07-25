@@ -1,8 +1,9 @@
 @extends('layouts.pages.app')
 
-@section('upper-links-extends')
+@section('upper-links-extend')
     {{-- NAGLOLOKO YUNG AVATAR ACCOUNT KAPAG INUNCOMMENT KO TO --}}
     <script src="{{ asset('js/app.js') }}" defer></script>
+
     {{-- NAGLOLOKO YUNG AVATAR ACCOUNT KAPAG INUNCOMMENT KO TO --}}
 @endsection
 

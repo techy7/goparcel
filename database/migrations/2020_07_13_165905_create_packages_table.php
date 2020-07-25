@@ -17,6 +17,7 @@ class CreatePackagesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('pickup_id');
             $table->integer('weight')->nullable();
+            $table->integer('amount')->nullable();
             $table->timestamps();
             $table->index(['pickup_id'], 'FK');
         });

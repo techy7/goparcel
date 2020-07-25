@@ -8,7 +8,7 @@ class Package extends Model
 {
     protected $fillable = ['weight'];
 
-    public function pickups()
+    public function pickup()
     {
         return $this->belongsTo(Pickup::class);
     }
