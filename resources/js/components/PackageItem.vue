@@ -75,7 +75,8 @@
                                     <tr>
                                         <td class="v-align-middle ">
                                         <h4>
-                                            <strong>Weight:</strong><small> {{ packageType.pricing[currentFrequency].weight }}</small>
+                                            <strong>Weight:</strong><small> {{ packageType.pricing[currentFrequency].label }}{{ packageType.pricing[currentFrequency].weight }}kg</small>
+                                            <input v-model="packageType.pricing[currentFrequency].weight" type="hidden" name="weight">
                                         </h4>
                                         </td>
                                         <td class="v-align-middle">
@@ -134,9 +135,9 @@
                 packageTypes: [
                     {
                         pricing: {
-                            medium: { price: 28, weight: 'Up to 2kg' },
-                            large: { price: 48, weight: 'More than 2 to 3kg' },
-                            ownPackaging: { price: 68, weight: 'More than 3 to 4kg' }
+                            medium: { price: 28, weight: '2', label: 'Up to ' },
+                            large: { price: 48, weight: '3', label: 'More than 2 to ' },
+                            ownPackaging: { price: 68, weight: '4', label: 'More than 3 to ' }
                         }
                     },
                 ],

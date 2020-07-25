@@ -2058,6 +2058,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2074,15 +2075,18 @@ __webpack_require__.r(__webpack_exports__);
         pricing: {
           medium: {
             price: 28,
-            weight: 'Up to 2kg'
+            weight: '2',
+            label: 'Up to '
           },
           large: {
             price: 48,
-            weight: 'More than 2 to 3kg'
+            weight: '3',
+            label: 'More than 2 to '
           },
           ownPackaging: {
             price: 68,
-            weight: 'More than 3 to 4kg'
+            weight: '4',
+            label: 'More than 3 to '
           }
         }
       }],
@@ -38637,10 +38641,52 @@ var render = function() {
                                         _vm._s(
                                           packageType.pricing[
                                             _vm.currentFrequency
+                                          ].label
+                                        ) +
+                                        _vm._s(
+                                          packageType.pricing[
+                                            _vm.currentFrequency
                                           ].weight
-                                        )
+                                        ) +
+                                        "kg"
                                     )
-                                  ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value:
+                                          packageType.pricing[
+                                            _vm.currentFrequency
+                                          ].weight,
+                                        expression:
+                                          "packageType.pricing[currentFrequency].weight"
+                                      }
+                                    ],
+                                    attrs: { type: "hidden", name: "weight" },
+                                    domProps: {
+                                      value:
+                                        packageType.pricing[
+                                          _vm.currentFrequency
+                                        ].weight
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          packageType.pricing[
+                                            _vm.currentFrequency
+                                          ],
+                                          "weight",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
                                 ])
                               ]),
                               _vm._v(" "),

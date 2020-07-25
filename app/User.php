@@ -43,6 +43,20 @@ class User extends Authenticatable
         return $this->hasMany(Pickup::class);
     }
 
+    public function imageOriginalSize()
+    {
+        $profilePath = str_replace('avatar', 'original', $this->profile_picture);
+
+        $imagePath = ($profilePath) ? '/storage/' . $profilePath : 'N/A';
+        return $imagePath;
+    }
+
+    public function imageAvatarSize()
+    {
+        $imagePath = ($this->profile_picture) ? '/storage/' . $this->profile_picture : 'N/A';
+        return $imagePath;
+    }
+
     // public function getRouteKeyName()
     // {
     //     return 'username';

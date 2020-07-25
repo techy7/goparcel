@@ -24,37 +24,37 @@
                       <div class="form-group row">
                         <label for="position" class="col-md-5 control-label"><strong>Username</strong></label>
                         <div class="col-md-7">
-                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->username ?? 'N/A' }}</p>
+                          <p aria-label="" class="m-b-10 m-t-5">{{ $user->username ?? 'N/A' }}</p>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="position" class="col-md-5 control-label"><strong>Email</strong></label>
                         <div class="col-md-7">
-                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->email ?? 'N/A' }}</p>
+                          <p aria-label="" class="m-b-10 m-t-5">{{ $user->email ?? 'N/A' }}</p>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="position" class="col-md-5 control-label"><strong>Name</strong></label>
                         <div class="col-md-7">
-                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->name ?? 'N/A' }}</p>
+                          <p aria-label="" class="m-b-10 m-t-5">{{ $user->name ?? 'N/A' }}</p>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="position" class="col-md-5 control-label"><strong>Mobile Number</strong></label>
                         <div class="col-md-7">
-                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->m_number ?? 'N/A' }}</p>
+                          <p aria-label="" class="m-b-10 m-t-5">{{ $user->m_number ?? 'N/A' }}</p>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="position" class="col-md-5 control-label"><strong>Address</strong></label>
                         <div class="col-md-7">
-                          <p aria-label="" class="m-b-10 m-t-5">{{ auth()->user()->address ?? 'N/A' }}</p>
+                          <p aria-label="" class="m-b-10 m-t-5">{{ $user->address ?? 'N/A' }}</p>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="position" class="col-md-5 control-label"><strong>Profile Picture</strong></label>
                         <div class="col-md-7">
-                          <img src="/storage/{{ auth()->user()->profile_picture }}" alt="Profile Picture">
+                          <img src="{{ $user->imageAvatarSize() }}" alt="Profile Picture">
                         </div>
                       </div>
                       <br>

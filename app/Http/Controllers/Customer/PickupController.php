@@ -20,8 +20,7 @@ class PickupController extends Controller
 
     public function store()
     {
-        // dd(request()->all());
-        $data = request()->validate([
+        $pickupData = request()->validate([
             'pickup_date' => 'required',
             'pickup_location' => 'required|string|max:255',
             'receiver_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
@@ -32,8 +31,21 @@ class PickupController extends Controller
             'receiver_name.regex' => 'The :attribute field can only contain letters.',
             'receiver_phone.phone' => 'The receiver contact number field contains an invalid number.',
         ]);
+        
+        $pickup = auth()->user()->pickups()->create($pickupData);
 
-        $pickup = auth()->user()->pickups()->create($data);
+        $packageData = request()->validate([
+            'pickup_id' => '',
+            'weight' => '',
+        ]);
+
+        $pickupId = $pickup->id;
+
+        Package::create([
+            'pickup_id' => $pickupId,
+            'weight' => request('weight')
+        ]); 
+        // $pickupId->packages()->create($data2);
 
         return redirect()->route('customer.pickup.store')->with('success', 'Pickup has been successfully added.');
     }

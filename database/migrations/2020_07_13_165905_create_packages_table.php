@@ -16,7 +16,7 @@ class CreatePackagesTable extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pickup_id');
-            $table->unsignedSmallInteger('weight');
+            $table->integer('weight')->nullable();
             $table->timestamps();
             $table->index(['pickup_id'], 'FK');
         });

@@ -11,7 +11,9 @@ class AccountController extends Controller
 {
     public function index()
     {
-        return view('customers.account.index');
+        $user = auth()->user();
+
+        return view('customers.account.index', compact('user'));
     }
 
     public function edit(User $user)
