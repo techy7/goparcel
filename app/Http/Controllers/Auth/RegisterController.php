@@ -72,7 +72,7 @@ class RegisterController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'postal_code' => ['required', 'numeric', 'max:4'],
             'city' => ['required', 'string', 'max:100'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'max:16', 'confirmed'],
         ],[
             'username.required' => __('auth.error_required'),
             'username.unique' => __('auth.error_username_already_taken'),
