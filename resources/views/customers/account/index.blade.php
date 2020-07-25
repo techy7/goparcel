@@ -74,5 +74,6 @@
         <div class="col-md-2 col-xlg-2"></div>
     </div>
     </div>
+  </div>
 </div>
 @endsection

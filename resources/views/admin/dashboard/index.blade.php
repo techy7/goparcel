@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Dashboard')
+@section('title', __('auth.dashboard'))
 
 @section('content')
 <div class="content sm-gutter">
@@ -72,7 +72,7 @@
                   </div>
                   <div class="p-l-20">
                     <h3 class="no-margin p-b-5">$23,000</h3>
-                    <span class="d-flex align-items-center"> 
+                    <span class="d-flex align-items-center">
               <i class="pg-icon m-r-5">arrow_down</i>
               <span class="small hint-text">65% lower than last month</span>
                     </span>
@@ -451,4 +451,8 @@
     </div>
     <!-- END CONTAINER FLUID -->
   </div>
+@endsection
+
+@section('lower-links-extend')
+<script src="{{ asset('pages/assets/js/dashboard.js') }}" type="text/javascript"></script>
 @endsection
