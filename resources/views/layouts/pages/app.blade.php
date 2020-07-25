@@ -12,9 +12,9 @@
         @include('layouts.pages.header')
       <!-- END HEADER -->
       <!-- START PAGE CONTENT WRAPPER -->
-      <div class="page-content-wrapper ">
+      <div class="page-content-wrapper full-height">
           @yield('content')
-          
+
           @include('layouts.pages.footer')
       </div>
       <!-- END PAGE CONTENT WRAPPER -->
