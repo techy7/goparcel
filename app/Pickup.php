@@ -25,6 +25,11 @@ class Pickup extends Model
         'receiver_state',
         'receiver_postal_code',
         'receiver_country',
+
+        'package_length' => '',
+        'package_width' => '',
+        'package_height' => '',
+        'package_amount' => '',
     ];
 
     public function user()

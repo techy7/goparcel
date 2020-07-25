@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Package extends Model
 {
-    protected $fillable = ['weight'];
+    protected $fillable = ['name', 'description', 'amount'];
 
-    public function pickups()
+    public function pickup()
     {
         return $this->belongsTo(Pickup::class);
     }

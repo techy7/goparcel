@@ -48,6 +48,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getRouteKeyName()
+{
+    return 'username';
+} 
+
     public function pickups()
     {
         return $this->hasMany(Pickup::class);

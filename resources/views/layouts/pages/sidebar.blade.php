@@ -18,7 +18,7 @@
       <ul class="menu-items">
         @hasanyrole('Super Admin|User|Customer')
         <li class="m-t-20 ">
-          <a href="{{ route('customer.dashboard') }}" class="detailed">
+          <a href="{{ route('customer.dashboard', auth()->user()->username) }}" class="detailed">
             <span class="title">Dashboard</span>
           </a>
           <span class="icon-thumbnail"><i class="pg-icon">home</i></span>
@@ -47,7 +47,7 @@
         @endhasanyrole
         @hasanyrole('Super Admin|Customer')
         <li class="">
-          <a href="{{ route('customer.account', auth()->user()->id) }}" class="detailed">
+          <a href="{{ route('customer.account', auth()->user()->username) }}" class="detailed">
             <span class="title">Account</span>
           </a>
           <span class="icon-thumbnail"><i class="pg-icon">inbox</i></span>

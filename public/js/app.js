@@ -2059,6 +2059,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -2142,6 +2144,15 @@ __webpack_require__.r(__webpack_exports__);
     totalAmount: function totalAmount() {
       var ownPackagingPrice = 68;
       return this.additionalCost + ownPackagingPrice;
+    },
+    initialTotalAmount: function initialTotalAmount() {
+      var _this = this;
+
+      var getPriceMethod = this.getPrice(this.totalAmount);
+      var additionalCostComputationMethod = this.additionalCostComputation(this.totalAmount);
+      this.packageTypes.forEach(function (packageType) {
+        console.log(packageType.pricing[_this.currentFrequency].price);
+      }); // return getPriceMethod(additionalCostComputation&totalAmount)
     }
   }
 });
@@ -38746,18 +38757,13 @@ var render = function() {
                                     _c("strong", [_vm._v("Total:")]),
                                     _c("small", [
                                       _vm._v(
-                                        " " +
-                                          _vm._s(
-                                            _vm.getPrice(
-                                              _vm.additionalCostComputation(
-                                                packageType.pricing[
-                                                  _vm.currentFrequency
-                                                ].price
-                                              )
-                                            )
-                                          )
+                                        " " + _vm._s(_vm.initialTotalAmount)
                                       )
-                                    ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: { type: "hidden", name: "weight" }
+                                    })
                                   ])
                                 ]
                               )

@@ -31,21 +31,17 @@ class PickupController extends Controller
             'receiver_name.regex' => 'The :attribute field can only contain letters.',
             'receiver_phone.phone' => 'The receiver contact number field contains an invalid number.',
         ]);
-        
+
         $pickup = auth()->user()->pickups()->create($pickupData);
 
+        $pickupForeign = Pickup::find($pickup->id);
+
         $packageData = request()->validate([
-            'pickup_id' => '',
             'weight' => '',
+            'amount' => '',
         ]);
 
-        $pickupId = $pickup->id;
-
-        Package::create([
-            'pickup_id' => $pickupId,
-            'weight' => request('weight')
-        ]); 
-        // $pickupId->packages()->create($data2);
+        $pickupForeign->package()->create($packageData);
 
         return redirect()->route('customer.pickup.store')->with('success', 'Pickup has been successfully added.');
     }

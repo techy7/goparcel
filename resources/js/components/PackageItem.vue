@@ -100,7 +100,9 @@
                                     <tr>
                                         <td colspan="2" class="v-align-middle">
                                         <h4>
-                                            <strong>Total:</strong><small> {{ getPrice(additionalCostComputation(packageType.pricing[currentFrequency].price)) }}</small>
+                                            <!-- getPrice(additionalCostComputation(packageType.pricing[currentFrequency].price)) -->
+                                            <strong>Total:</strong><small> {{ initialTotalAmount }}</small>
+                                            <input type="hidden" name="weight">
                                         </h4>
                                         </td>
                                     </tr>
@@ -198,6 +200,16 @@
             totalAmount: function () {
                 let ownPackagingPrice = 68;
                 return this.additionalCost + ownPackagingPrice;
+            },
+            initialTotalAmount: function () {
+                let getPriceMethod = this.getPrice(this.totalAmount)
+                let additionalCostComputationMethod = this.additionalCostComputation(this.totalAmount)
+                
+                this.packageTypes.forEach(packageType => {
+                    console.log(packageType.pricing[this.currentFrequency].price)
+                });
+
+                // return getPriceMethod(additionalCostComputation&totalAmount)
             }
         },
     }
