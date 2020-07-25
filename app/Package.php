@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Package extends Model
 {
-    protected $fillable = ['weight'];
+    protected $fillable = ['name', 'description', 'amount'];
 
     public function pickup()
     {
