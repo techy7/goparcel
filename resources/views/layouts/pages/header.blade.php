@@ -13,7 +13,7 @@
       <div class="dropdown pull-right d-lg-block d-none">
         <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="profile dropdown">
           <span class="thumbnail-wrapper d32 circular inline">
-                      <img src="{{ asset('pages/assets/img/profiles/avatar.jpg') }}" alt="" data-src="{{ asset('pages/assets/img/profiles/avatar.jpg') }}"
+                      <img src="/storage/{{ auth()->user()->profile_picture }}" alt="" data-src="/storage/{{ auth()->user()->profile_picture }}"
                           data-src-retina="{{ asset('pages/assets/img/profiles/avatar_small2x.jpg') }}" width="32" height="32">
                   </span>
         </button>
