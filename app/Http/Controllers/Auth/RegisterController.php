@@ -70,6 +70,8 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'm_number' => ['required', 'phone:PH'],
             'address' => ['required', 'string', 'max:255'],
+            'postal_code' => ['required', 'numeric', 'max:4'],
+            'city' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ],[
             'username.required' => __('auth.error_required'),
@@ -81,6 +83,8 @@ class RegisterController extends Controller
             'm_number.required' => __('auth.error_required'),
             'm_number.phone' => __('auth.error_invalid_phone'),
             'address.required' => __('auth.error_required'),
+            'postal_code.required' => __('auth.error_required'),
+            'city.required' => __('auth.error_required'),
             'password.required' => __('auth.error_required'),
             'password.confirmed' => __('auth.error_password_not_match'),
         ]);
@@ -100,6 +104,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'm_number' => preg_replace('~\D~', '', $data['m_number']),
             'address' => $data['address'],
+            'postal_code' => $data['postal_code'],
+            'city' => $data['city'],
+            'state' => config('location.PH_cities_states')[$data['city']],
+            'country' => 'Philippines',
             'roles' => $data['roles'],
             'password' => Hash::make($data['password']),
         ]);
