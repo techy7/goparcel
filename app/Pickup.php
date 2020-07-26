@@ -26,14 +26,20 @@ class Pickup extends Model
         'receiver_postal_code',
         'receiver_country',
 
-        'package_length' => '',
-        'package_width' => '',
-        'package_height' => '',
-        'package_amount' => '',
+        'package_id',
+        'package_length',
+        'package_width',
+        'package_height',
+        'package_amount',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
     }
 }

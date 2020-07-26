@@ -8,8 +8,8 @@ class Package extends Model
 {
     protected $fillable = ['name', 'description', 'amount'];
 
-    public function pickup()
+    public function pickups()
     {
-        return $this->belongsTo(Pickup::class);
+        return $this->hasMany(Pickup::class);
     }
 }

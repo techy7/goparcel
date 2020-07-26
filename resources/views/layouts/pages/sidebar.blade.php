@@ -16,7 +16,7 @@
             @endhasanyrole
             @hasanyrole('Super Admin|Customer')
             <li>
-                <a href="social.html"><span class="title">{{ __('general.my_pickup_booking') }}</span></a>
+                <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.my_pickup_booking') }}</span></a>
             </li>
             @endhasanyrole
             <li>

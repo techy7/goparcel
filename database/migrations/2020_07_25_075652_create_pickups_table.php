@@ -31,10 +31,10 @@ class CreatePickupsTable extends Migration
             $table->string('receiver_postal_code')->nullable();
             $table->string('receiver_country')->nullable();
             $table->unsignedBigInteger('package_id')->nullable();
-            $table->float('package_length');
-            $table->float('package_width');
-            $table->float('package_height');
-            $table->float('package_amount');
+            $table->float('package_length')->default(0);
+            $table->float('package_width')->default(0);
+            $table->float('package_height')->default(0);
+            $table->float('package_amount')->default(0);
             $table->timestamps();
             $table->index(['user_id'], 'FK');
         });

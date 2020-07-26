@@ -21,8 +21,8 @@
                 </span>
                 <div class="dropdown-divider"></div>
                 <a href="{{ route('customer.account', auth()->user()->username) }}" class="dropdown-item">{{ __('general.account') }}</a>
-                <a href="{{ route('customer.pickup') }}" class="dropdown-item">{{ __('general.schedule_a_pickup') }}</a>
-                <a href="#" class="dropdown-item">{{ __('general.my_pickup_bookings') }}</a>
+                <a href="{{ route('customer.pickup', auth()->user()->username) }}" class="dropdown-item">{{ __('general.schedule_a_pickup') }}</a>
+                <a href="{{ route('customer.bookings', auth()->user()->username) }}" class="dropdown-item">{{ __('general.my_pickup_bookings') }}</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('general.logout') }}</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>

@@ -1,3 +1,4 @@
+@yield('appJs-link')
 <script src="{{ asset('pages/assets/plugins/pace/pace.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('pages/assets/plugins/liga.js') }}" type="text/javascript"></script>
 <script src="{{ asset('pages/assets/plugins/jquery/jquery-3.2.1.min.js') }}" type="text/javascript"></script>

@@ -101,7 +101,7 @@
                                         <td colspan="2" class="v-align-middle">
                                         <h4>
                                             <!-- getPrice(additionalCostComputation(packageType.pricing[currentFrequency].price)) -->
-                                            <strong>Total:</strong><small> {{ initialTotalAmount }}</small>
+                                            <strong>Total:</strong><small> {{ getPrice(additionalCostComputation(packageType.pricing[currentFrequency].price)) }}</small>
                                             <input type="hidden" name="weight">
                                         </h4>
                                         </td>
@@ -190,7 +190,7 @@
         computed: {
             additionalWeight: function () {
                 return this.products.reduce((total, item) => {
-                    return total + parseInt(item.height) * parseInt(item.length) * parseInt(item.width)
+                    return total + parseInt(item.height) * parseInt(item.length) * parseInt(item.width) / 4000
                 }, 0)
             },
             additionalCost: function () {

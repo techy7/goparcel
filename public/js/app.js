@@ -2134,7 +2134,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     additionalWeight: function additionalWeight() {
       return this.products.reduce(function (total, item) {
-        return total + parseInt(item.height) * parseInt(item.length) * parseInt(item.width);
+        return total + parseInt(item.height) * parseInt(item.length) * parseInt(item.width) / 4000;
       }, 0);
     },
     additionalCost: function additionalCost() {
@@ -38757,7 +38757,16 @@ var render = function() {
                                     _c("strong", [_vm._v("Total:")]),
                                     _c("small", [
                                       _vm._v(
-                                        " " + _vm._s(_vm.initialTotalAmount)
+                                        " " +
+                                          _vm._s(
+                                            _vm.getPrice(
+                                              _vm.additionalCostComputation(
+                                                packageType.pricing[
+                                                  _vm.currentFrequency
+                                                ].price
+                                              )
+                                            )
+                                          )
                                       )
                                     ]),
                                     _vm._v(" "),
