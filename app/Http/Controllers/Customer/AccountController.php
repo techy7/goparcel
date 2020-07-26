@@ -16,16 +16,17 @@ class AccountController extends Controller
         return view('customers.account.index', compact('user'));
     }
 
-    public function edit(Username $user)
+    public function edit(User $user)
     {
+        $user = auth()->user();
+        
         return view('customers.account.edit', compact('user'));
     }
 
     public function update(User $user)
     {
         $data = request()->validate([
-            'name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
-            // 'password' => 'required|same:confirm-password|min:8',
+            'name' => 'required|string|max:100|regex:/^[a-zA-Z ]+$/',
             'm_number' => 'required|phone:PH',
             'address' => 'max:255',
             'profile_picture' => 'image',
@@ -37,6 +38,12 @@ class AccountController extends Controller
             'm_number' => 'The mobile number field contains an invalid number.',
             'profile_picture.image' => 'The profile picture should be an image.'
         ]);
+
+
+
+
+
+
 
         if (request('profile_picture')) {
             $imagePath = request('profile_picture')->store('uploads/images/customers/original', 'public');

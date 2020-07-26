@@ -14,9 +14,8 @@
         </div>
 
         @include('layouts.pages.links.lower')
-        <!-- BEGIN VENDOR JS -->
-        {{-- nasa lower na to --}}
-    {{-- <script src="{{ asset('pages/assets/plugins/pace/pace.min.js') }}" type="text/javascript"></script>
+
+        <script src="{{ asset('pages/assets/plugins/pace/pace.min.js') }}" type="text/javascript"></script>
     <!--  A polyfill for browsers that don't support ligatures: remove liga.js if not needed-->
     <script src="{{ asset('pages/assets/plugins/liga.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/plugins/jquery/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
@@ -31,7 +30,7 @@
     <script src="{{ asset('pages/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script> --}}
         {{-- nasa lower na to --}}
 
-    
+
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     {{-- <!-- BEGIN CORE TEMPLATE JS -->

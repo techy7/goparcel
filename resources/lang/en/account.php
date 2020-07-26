@@ -16,6 +16,11 @@ return [
     'state' => 'State',
     'postal_code' => 'Postal Code',
     'country' => 'Country',
-    'create_an_account' => 'Create an Account',
-    'back_to_login' => 'Back to Login',
+
+    'back' => 'Back',
+    'edit_profile' => 'Edit Profile',
+    'update_profile' => 'Update Profile',
+
+    'select_field' => 'Select :field',
+    'enter_field' => 'Enter :field',
 ];
