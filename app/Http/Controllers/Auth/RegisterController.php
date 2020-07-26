@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -70,7 +71,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:30', 'unique:users'],
             'm_number' => ['required', 'phone:PH'],
             'address' => ['required', 'string', 'max:255'],
-            'postal_code' => ['required', 'numeric', 'max:4'],
+            'postal_code' => ['required', 'numeric', 'min:999', 'max:9999'],
             'city' => ['required', 'string', 'max:100'],
             'password' => ['required', 'string', 'min:8', 'max:16', 'confirmed'],
         ],[
@@ -99,13 +100,13 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = User::create([
-            'username' => $data['username'],
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'username' => Str::lower($data['username']),
+            'name' => Str::title($data['name']),
+            'email' => Str::lower($data['email']),
             'm_number' => preg_replace('~\D~', '', $data['m_number']),
-            'address' => $data['address'],
+            'address' => Str::title($data['address']),
             'postal_code' => $data['postal_code'],
-            'city' => $data['city'],
+            'city' => Str::title($data['city']),
             'state' => config('location.PH_cities_states')[$data['city']],
             'country' => 'Philippines',
             'roles' => $data['roles'],

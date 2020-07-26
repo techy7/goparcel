@@ -48,11 +48,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getRouteKeyName()
-{
-    return 'username';
-} 
-
     public function pickups()
     {
         return $this->hasMany(Pickup::class);
@@ -72,8 +67,19 @@ class User extends Authenticatable
         return $imagePath;
     }
 
-    // public function getRouteKeyName()
-    // {
-    //     return 'username';
-    // }
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
+    public function initials()
+    {
+      $words = explode(" ", $this->name);
+      $initials = null;
+      foreach ($words as $w)
+      {
+          $initials .= $w[0];
+      }
+      return strtoupper($initials);
+   }
 }

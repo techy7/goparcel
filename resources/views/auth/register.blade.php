@@ -12,7 +12,7 @@
                 <div class="col-md-12">
                     <div class="form-group form-group-default required @error('username') has-error @enderror">
                         <label>{{ __('auth.username') }}</label>
-                        <input type="text" name="username" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.username'))]) }}" value="{{ old('username') }}" class="form-control" required>
+                        <input type="text" name="username" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.username'))]) }}" value="{{ old('username') }}" class="form-control" >
                     </div>
                     @error('username')
                         <label class="error" for="username">
@@ -25,7 +25,7 @@
                 <div class="col-md-12">
                     <div class="form-group form-group-default required @error('email') has-error @enderror">
                         <label>{{ __('auth.email') }}</label>
-                        <input type="email" name="email" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.email'))]) }}" value="{{ old('email') }}" class="form-control" required>
+                        <input type="email" name="email" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.email'))]) }}" value="{{ old('email') }}" class="form-control" >
                     </div>
                     @error('email')
                         <label class="error" for="email">
@@ -38,7 +38,7 @@
                 <div class="col-md-6">
                     <div class="form-group form-group-default required @error('password') has-error @enderror">
                         <label>{{ __('auth.password') }}</label>
-                        <input type="password" name="password" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.password'))]) }}" class="form-control" required>
+                        <input type="password" name="password" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.password'))]) }}" class="form-control" >
                     </div>
                     @error('password')
                         <label class="error" for="password">
@@ -49,7 +49,7 @@
                 <div class="col-md-6">
                     <div class="form-group form-group-default required">
                         <label>{{ __('auth.confirm_password') }}</label>
-                        <input type="password" name="password_confirmation" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.confirm_password'))]) }}" class="form-control" required>
+                        <input type="password" name="password_confirmation" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.confirm_password'))]) }}" class="form-control" >
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                 <div class="col-md-12">
                     <div class="form-group form-group-default required @error('name') has-error @enderror">
                         <label>{{ __('auth.name') }}</label>
-                        <input type="text" name="name" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.name'))]) }}" value="{{ old('name') }}" class="form-control" required>
+                        <input type="text" name="name" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.name'))]) }}" value="{{ old('name') }}" class="form-control" >
                     </div>
                     @error('name')
                         <label class="error" for="name">
@@ -70,7 +70,7 @@
                 <div class="col-md-12">
                     <div class="form-group form-group-default required @error('m_number') has-error @enderror">
                         <label>{{ __('auth.mobile_number') }}</label>
-                        <input type="text" id="m_number" name="m_number" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.mobile_number'))]) }}" value="{{ old('m_number') }}" class="form-control" required>
+                        <input type="text" id="m_number" name="m_number" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.mobile_number'))]) }}" value="{{ old('m_number') }}" class="form-control" >
                     </div>
                     @error('m_number')
                         <label class="error" for="m_number">
@@ -83,7 +83,7 @@
                 <div class="col-md-12">
                     <div class="form-group form-group-default required @error('address') has-error @enderror">
                         <label>{{ __('auth.address') }}</label>
-                        <input type="text" name="address" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.address'))]) }}" value="{{ old('address') }}" class="form-control" required>
+                        <input type="text" name="address" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.address'))]) }}" value="{{ old('address') }}" class="form-control" >
                     </div>
                     @error('address')
                         <label class="error" for="address">
@@ -96,7 +96,7 @@
                 <div class="col-md-6">
                     <div class="form-group form-group-default @error('postal_code') has-error @enderror">
                         <label>{{ __('auth.postal_code') }}</label>
-                        <input type="text" id="postal_code" name="postal_code" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.postal_code'))]) }}" value="{{ old('postal_code') }}" class="form-control" required>
+                        <input type="text" id="postal_code" name="postal_code" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.postal_code'))]) }}" value="{{ old('postal_code') }}" class="form-control" >
                     </div>
                     @error('postal_code')
                         <label class="error" for="postal_code">
@@ -107,16 +107,16 @@
                 <div class="col-md-6">
                     <div class="form-group form-group-default form-group-default-select2 required @error('city') has-error @enderror">
                         <label>{{ __('auth.city') }}</label>
-                        <select class="full-width" data-placeholder="{{ __('auth.select_field', ['field' => strtolower(__('auth.city'))]) }}" data-init-plugin="select2" required>
+                        <select name="city" class="full-width" data-placeholder="{{ __('auth.select_field', ['field' => strtolower(__('auth.city'))]) }}" data-init-plugin="select2" >
                             <option value=""></option>
                             @foreach (config('location.PH_states_cities') as $state => $cities)
                             <optgroup label="{{ $state }}">
-                                @foreach ($cities as $city)<option value="{{ $city }}">{{ $city }}</option>@endforeach
+                                @foreach ($cities as $city)<option value="{{ $city }}" {{ old('city') == $city ? 'selected' : null }}>{{ $city }}</option>@endforeach
                             </optgroup>
                             @endforeach
                         </select>
                     </div>
-                    @error('address')
+                    @error('city')
                         <label class="error" for="city">
                             {{ $message }}
                         </label>
