@@ -11,5 +11,10 @@
 <script src="{{ asset('pages/assets/plugins/jquery-ios-list/jquery.ioslist.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('pages/assets/plugins/jquery-actual/jquery.actual.min.js') }}"></script>
 <script src="{{ asset('pages/assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
-<script src="{{ asset('pages/pages/js/pages.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('pages/assets/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('pages/assets/plugins/classie/classie.js') }}" type="text/javascript"></script>
 @yield('lower-links-extends')
+<script src="{{ asset('pages/pages/js/pages.js') }}"></script>
+<script src="{{ asset('pages/assets/js/scripts.js') }}" type="text/javascript"></script>
+@yield('lower-links-extends-page')
+<script src="{{ asset('pages/assets/js/scripts.js') }}" type="text/javascript"></script>

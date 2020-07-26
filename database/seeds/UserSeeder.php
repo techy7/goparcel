@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
         $admin = User::create([
             'id' => 1,
             'username' => 'daviddeleon',
+            'name' => 'David De Leon',
             'email' => 'david@techy7.com',
             'password' => bcrypt('123456789'),
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -27,6 +28,7 @@ class UserSeeder extends Seeder
         $admin = User::create([
                 'id' => 2,
                 'username' => 'arwinabatayo',
+                'name' => 'Arwin Abatayo',
                 'email' => 'arwin.abatayo@techy7.com',
                 'password' => bcrypt('123456789'),
                 'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -37,6 +39,7 @@ class UserSeeder extends Seeder
         $admin = User::create([
                 'id' => 3,
                 'username' => 'superadmin',
+                'name' => 'Super Admin',
                 'email' => 'superadmin@gmail.com',
                 'password' => bcrypt('123456789'),
                 'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
@@ -47,6 +50,7 @@ class UserSeeder extends Seeder
         $user = User::create([
                 'id' => 4,
                 'username' => 'admin',
+                'name' => 'Admin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('123456789'),
                 'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')

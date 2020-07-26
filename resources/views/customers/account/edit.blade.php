@@ -6,7 +6,7 @@
 <div class="content sm-gutter">
     <div class="container-fluid padding-25 sm-padding-10">
         <h4 class="text-center">Profile Details</h4>
-        <form id="form-register" class="p-t-15" role="form" enctype="multipart/form-data" method="POST" action="{{ route('customer.account.update', $user->id) }}">
+        <form id="form-register" class="p-t-15" role="form" enctype="multipart/form-data" method="POST" action="{{ route('customer.account.update', auth()->user()->username) }}">
             @csrf
             @method('PATCH')
             <div class="row">
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                         </div>
-                        <a href="{{ route('customer.account', $user->id) }}" class="btn btn-default btn-cons m-t-10" type="submit">Back</a>
+                        <a href="{{ route('customer.account', auth()->user()->username) }}" class="btn btn-default btn-cons m-t-10" type="submit">Back</a>
                         <button class="btn btn-primary btn-cons m-t-10 pull-right" type="submit">Update Profile</button>
                 </div>
                 <div class="col-md-2"></div>

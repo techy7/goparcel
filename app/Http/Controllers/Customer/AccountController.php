@@ -16,7 +16,7 @@ class AccountController extends Controller
         return view('customers.account.index', compact('user'));
     }
 
-    public function edit(User $user)
+    public function edit(Username $user)
     {
         return view('customers.account.edit', compact('user'));
     }

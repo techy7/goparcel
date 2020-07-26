@@ -9,6 +9,25 @@
                 <a href="{{ route('customer.dashboard', auth()->user()->username) }}"><span class="title">{{ __('general.dashboard') }}</span></a>
             </li>
             @endhasanyrole
+            @hasanyrole('Super Admin|User|Customer')
+            <li class="m-t-10">
+                <a href="javascript:;">
+                    <span class="title">Users & Access Roles</span>
+                    <span class=" arrow"></span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="">
+                        <a href="{{ route('admin.users') }}">Manage Users</a>
+                    </li>
+                    <li class="">
+                        <a href="{{ route('admin.roles') }}">Manage Access Roles</a>
+                    </li>
+                    <li class="">
+                        <a href="{{ route('admin.permissions') }}">Manage Permissions</a>
+                    </li>
+                </ul>
+            </li>
+            @endhasanyrole
             @hasanyrole('Super Admin|Customer')
             <li>
                 <a href="{{ route('customer.pickup', auth()->user()->username) }}"><span class="title">{{ __('general.schedule_a_pickup') }}</span></a>

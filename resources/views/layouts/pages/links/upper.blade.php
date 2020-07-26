@@ -15,10 +15,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css" />
     <link href="{{ asset('pages/assets/plugins/jquery-scrollbar/jquery.scrollbar.css') }}" rel="stylesheet" type="text/css" media="screen" />
     <link href="{{ asset('pages/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" media="screen" />
+    @yield('upper-links-extend')
     <link href="{{ asset('pages/pages/css/pages.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('pages/assets/css/style.css') }}" rel="stylesheet" type="text/css" />
 
-    @yield('upper-links-extend')
     <script type="text/javascript">
     window.onload = function() {
       // fix for windows 8
