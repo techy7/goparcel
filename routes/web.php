@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->middleware('homepage');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', 'HomeController@index')->middleware('homepage')->name('index');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['namespace' => 'Customer'], function () {
