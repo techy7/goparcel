@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="login-container bg-white">
-        <div class="p-l-50 p-r-50 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
+        <div class="p-l-30 p-r-30 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
           <img src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" alt="logo" data-src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" data-src-retina="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" class="margin-center mb-4" width="200" height="89">
 
           <form id="form-login" class="p-t-15" role="form" method="POST" action="{{ route('login') }}">

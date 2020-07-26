@@ -73,7 +73,7 @@ class RegisterController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'postal_code' => ['required', 'numeric', 'min:999', 'max:9999'],
             'city' => ['required', 'string', 'max:100'],
-            'password' => ['required', 'string', 'min:8', 'max:16', 'confirmed'],
+            'password' => ['required', 'min:6', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/', 'confirmed'],
         ],[
             'username.required' => __('auth.error_required'),
             'username.unique' => __('auth.error_username_already_taken'),
@@ -87,6 +87,7 @@ class RegisterController extends Controller
             'postal_code.required' => __('auth.error_required'),
             'city.required' => __('auth.error_required'),
             'password.required' => __('auth.error_required'),
+            'password.regex' => __('auth.error_password_invalid'),
             'password.confirmed' => __('auth.error_password_not_match'),
         ]);
     }

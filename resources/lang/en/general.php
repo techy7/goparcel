@@ -3,6 +3,13 @@
 return [
     'dashboard' => 'Dashboard',
 
+    //Errors
+    '404' => '404',
+    '404_page_not_found' => 'Page not Found',
+    '404_sorry_but_we_couldnt_find_this_page' => 'Sorry but we couldnt find this page',
+    '404_this_page_you_are_looking_for_does_not_exsist' => 'This page you are looking for does not exsist',
+    '404_go_back_to_home' => 'Go back to Home?',
+
     //Customer
     'schedule_a_pickup' => 'Schedule a Pickup',
     'my_pickup_booking' => 'My Pickup Bookings',

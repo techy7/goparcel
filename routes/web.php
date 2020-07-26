@@ -4,10 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home'); // For bug purposes
+Route::get('/home', 'HomeController@index')->name('home');
 
-
-Route::get('/', 'HomeController@index')->middleware('homepage');
+Route::get('/', 'HomeController@index')->middleware('homepage')->name('index');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['namespace' => 'Customer'], function () {
@@ -47,5 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/permissions/{permission}/edit', 'PermissionController@edit')->name('admin.permissions.edit');
         Route::patch('/permissions/{permission}', 'PermissionController@update')->name('admin.permissions.update');
         Route::delete('/permissions/{permission}', 'PermissionController@destroy')->name('admin.permissions.destroy');
+
+        Route::get('/admin/dashboard', 'DashboardController@index')->name('admin.dashboard');
     });
 });
