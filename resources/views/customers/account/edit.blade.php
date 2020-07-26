@@ -96,7 +96,7 @@
                                     >
                                     <span class="custom-file-label"></span>
                                     </label>
-  
+
                                     <div class="image-preview" id="imagePreview">
                                         <img src="" alt="Image Preview" class="image-preview__image">
                                         <span class="image-preview__default-text">Image Preview</span>
