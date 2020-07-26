@@ -20,6 +20,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['namespace' => 'Admin'], function () {
-        Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
+        Route::get('/admin/dashboard', 'DashboardController@index')->name('admin.dashboard');
     });
 });

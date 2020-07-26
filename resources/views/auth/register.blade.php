@@ -15,9 +15,9 @@
                         <input type="text" name="username" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.username'))]) }}" value="{{ old('username') }}" class="form-control" >
                     </div>
                     @error('username')
-                        <label class="error" for="username">
-                            {{ $message }}
-                        </label>
+                    <label class="error" for="username">
+                        {{ $message }}
+                    </label>
                     @enderror
                 </div>
             </div>
@@ -28,9 +28,9 @@
                         <input type="email" name="email" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.email'))]) }}" value="{{ old('email') }}" class="form-control" >
                     </div>
                     @error('email')
-                        <label class="error" for="email">
-                            {{ $message }}
-                        </label>
+                    <label class="error" for="email">
+                        {{ $message }}
+                    </label>
                     @enderror
                 </div>
             </div>
@@ -38,12 +38,12 @@
                 <div class="col-md-6">
                     <div class="form-group form-group-default required @error('password') has-error @enderror">
                         <label>{{ __('auth.password') }}</label>
-                        <input type="password" name="password" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.password'))]) }}" class="form-control" >
+                        <input type="password" name="password" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.password'))]) }}" class="form-control" required>
                     </div>
                     @error('password')
-                        <label class="error" for="password">
-                            {{ $message }}
-                        </label>
+                    <label class="error" for="password">
+                        {{ $message }}
+                    </label>
                     @enderror
                 </div>
                 <div class="col-md-6">
@@ -60,9 +60,9 @@
                         <input type="text" name="name" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.name'))]) }}" value="{{ old('name') }}" class="form-control" >
                     </div>
                     @error('name')
-                        <label class="error" for="name">
-                            {{ $message }}
-                        </label>
+                    <label class="error" for="name">
+                        {{ $message }}
+                    </label>
                     @enderror
                 </div>
             </div>
@@ -73,9 +73,9 @@
                         <input type="text" id="m_number" name="m_number" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.mobile_number'))]) }}" value="{{ old('m_number') }}" class="form-control" >
                     </div>
                     @error('m_number')
-                        <label class="error" for="m_number">
-                            {{ $message }}
-                        </label>
+                    <label class="error" for="m_number">
+                        {{ $message }}
+                    </label>
                     @enderror
                 </div>
             </div>
@@ -86,9 +86,9 @@
                         <input type="text" name="address" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.address'))]) }}" value="{{ old('address') }}" class="form-control" >
                     </div>
                     @error('address')
-                        <label class="error" for="address">
-                            {{ $message }}
-                        </label>
+                    <label class="error" for="address">
+                        {{ $message }}
+                    </label>
                     @enderror
                 </div>
             </div>
@@ -99,9 +99,9 @@
                         <input type="text" id="postal_code" name="postal_code" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.postal_code'))]) }}" value="{{ old('postal_code') }}" class="form-control" >
                     </div>
                     @error('postal_code')
-                        <label class="error" for="postal_code">
-                            {{ $message }}
-                        </label>
+                    <label class="error" for="postal_code">
+                        {{ $message }}
+                    </label>
                     @enderror
                 </div>
                 <div class="col-md-6">
@@ -117,9 +117,9 @@
                         </select>
                     </div>
                     @error('city')
-                        <label class="error" for="city">
-                            {{ $message }}
-                        </label>
+                    <label class="error" for="city">
+                        {{ $message }}
+                    </label>
                     @enderror
                 </div>
             </div>

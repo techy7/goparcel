@@ -19,7 +19,7 @@
                                     <div class="row-xs-height">
                                         <div class="social-user-profile col-xs-height text-center col-top">
                                             <div class="thumbnail-wrapper d48 circular bordered b-white">
-                                                @if (auth()->user()->profile_picture)
+                                                @if (auth()->user() && auth()->user()->profile_picture)
                                                 <img src="{{ $user->imageAvatarSize() }}" alt="{{ auth()->user()->username }}" data-src="{{ $user->imageAvatarSize() }}" data-src-retina="{{ $user->imageAvatarSize() }}" width="32" height="32">
                                                 @else
                                                 <span>{{ auth()->user()->initials() }}</span>
