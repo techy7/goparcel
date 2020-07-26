@@ -249,6 +249,24 @@ fieldset[disabled] .btn-primary.active {
   border: 1px #ccc solid;
 }
 
+.page-sidebar {
+  background-color: #0b6181;
+}
+.page-sidebar a {
+  color: #fff !important;
+}
+.page-sidebar .sidebar-header {
+  background-color: #0b6181;
+  border-bottom: 1px solid #0b6181;
+  height: 100px;
+}
+.page-sidebar .sidebar-menu .menu-items li > a {
+  width: 100%;
+}
+.page-sidebar .sidebar-menu .menu-items > li > a > .title {
+  width: 80%;
+}
+
 @media only screen and (max-width: 1095px) {
 /*************** ADD TABLE ONLY CSS HERE  ***************/
 

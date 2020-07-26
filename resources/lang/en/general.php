@@ -3,6 +3,10 @@
 return [
     'dashboard' => 'Dashboard',
 
+    //Customer
+    'schedule_a_pickup' => 'Schedule a Pickup',
+    'my_pickup_booking' => 'My Pickup Bookings',
+
     //Header
     'signed_in_as' => 'Signed in as',
     'account' => 'Account',

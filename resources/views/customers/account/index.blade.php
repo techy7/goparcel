@@ -20,7 +20,7 @@
                                         <div class="social-user-profile col-xs-height text-center col-top">
                                             <div class="thumbnail-wrapper d48 circular bordered b-white">
                                                 @if (auth()->user()->profile_picture)
-                                                <img src="{{ asset('pages/assets/img/profiles/avatar_small2x.jpg') }}" alt="" data-src="{{ asset('pages/assets/img/profiles/avatar_small2x.jpg') }}" data-src-retina="{{ asset('pages/assets/img/profiles/avatar_small2x.jpg') }}" width="32" height="32">
+                                                <img src="{{ $user->imageAvatarSize() }}" alt="{{ auth()->user()->username }}" data-src="{{ $user->imageAvatarSize() }}" data-src-retina="{{ $user->imageAvatarSize() }}" width="32" height="32">
                                                 @else
                                                 <span>{{ auth()->user()->initials() }}</span>
                                                 @endif
