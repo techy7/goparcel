@@ -18,13 +18,13 @@
                 <div class="col-md-4">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label 
-                            @click="currentFrequency = frequency" v-for="(price, frequency) in packageTypes[0].pricing" 
+                            @click="currentFrequency = packageItem.name" v-for="packageItem in packages" 
                             class="btn btn-default"
-                            :class="currentFrequency == frequency ? 'clicked focus' : ''"
+                            :class="currentFrequency == packageItem.name ? 'clicked focus' : ''"
                             >
-                            <input v-on="frequency == 'ownPackaging' ? { click: () => addDimension() } : { click: () => removeDimension() }" 
+                            <input v-on="packageItem.name == 'Own Packaging' ? { click: () => addDimension() } : { click: () => removeDimension() }" 
                                 type="radio" 
-                                :name="frequency"> {{ frequency == 'ownPackaging' ? 'OWN PACKAGING' : frequency.toUpperCase() }}
+                                :name="packageItem.id"> {{ packageItem.name }}
                         </label>
                     </div>
                 </div>
@@ -123,6 +123,8 @@
         mounted() {
             console.log('Component mounted.')
         },
+
+        props: ['packages'],
         
         data: function () {
             return {

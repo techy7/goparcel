@@ -1,5 +1,9 @@
 @extends('layouts.pages.app')
 
+@section('upper-links-extend')
+  <link href="{{ asset('pages/assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css" media="screen">
+@endsection
+
 @section('title', 'Schedule a Pickup')
 
 @section('content')
@@ -50,7 +54,7 @@
                     </div>
                     <div class="row clearfix">
                       <div class="col-xl-4">
-                        <div class="form-group form-group-default @error('pickup_city') has-error @enderror">
+                        <div class="form-group form-group-default form-group-default-select2 @error('pickup_city') has-error @enderror">
                           <label>{{ __('auth.city') }}</label>
                               <select name="pickup_city" class="full-width" data-placeholder="{{ __('auth.select_field', ['field' => strtolower(__('auth.city'))]) }}" data-init-plugin="select2" >
                                   <option value="">Select City</option>
@@ -79,7 +83,7 @@
                         @enderror
                       </div>
                       <div class="col-xl-4">
-                        <div class="form-group form-group-default @error('pickup_country') has-error @enderror">
+                        <div class="form-group form-group-default form-group-default-select2 @error('pickup_country') has-error @enderror">
                           <label>{{ __('auth.country') }}</label>
                               <select name="pickup_country" class="full-width" data-placeholder="{{ __('auth.select_field', ['field' => strtolower(__('auth.country'))]) }}" data-init-plugin="select2" >
                                   <option value="">Select Country</option>
@@ -155,7 +159,7 @@
                     </div>
                     <div class="row">
                       <div class="col-xl-4">
-                        <div class="form-group form-group-default @error('receiver_city') has-error @enderror">
+                        <div class="form-group form-group-default form-group-default-select2 @error('receiver_city') has-error @enderror">
                           <label>{{ __('auth.city') }}</label>
                               <select name="receiver_city" class="full-width" data-placeholder="{{ __('auth.select_field', ['field' => strtolower(__('auth.city'))]) }}" data-init-plugin="select2" >
                                   <option value="">Select City</option>
@@ -184,7 +188,7 @@
                         @enderror
                       </div>
                       <div class="col-xl-4">
-                        <div class="form-group form-group-default @error('receiver_country') has-error @enderror">
+                        <div class="form-group form-group-default form-group-default-select2 @error('receiver_country') has-error @enderror">
                           <label>{{ __('auth.country') }}</label>
                               <select name="receiver_country" class="full-width" data-placeholder="{{ __('auth.select_field', ['field' => strtolower(__('auth.country'))]) }}" data-init-plugin="select2" >
                                   <option value="">Select Country</option>
@@ -230,7 +234,8 @@
         <div class="col-md-12">
           <!-- START card -->
           <div id="app">
-            <package-item :product-types="{{ $productTypes }}"></package-item>
+            {{-- {{-- <package-item :product-types="{{ $productTypes }}"></package-item> --}}
+            <package-type :packages="{{ $packages }}"></package-type>
           </div>
           <!-- END card -->
         </div>
@@ -274,10 +279,16 @@
 @endsection
 
 @section('lower-links-extends')
-    <script src="{{ asset('pages/assets/js/form_elements.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/js/form_layouts.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/js/form_elements.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/pages/js/pages.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/js/notifications.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/plugins/jquery-inputmask/jquery.inputmask.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/plugins/jquery-autonumeric/autoNumeric.js') }}" type="text/javascript"></script>
+    
+
     <script>
       $(function(){
         $("#pickup_postal_code").mask("9999");
