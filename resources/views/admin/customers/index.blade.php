@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Manage Users')
+@section('title', 'Customers')
 
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -13,11 +13,7 @@
     <div class="container-fluid padding-25 sm-padding-10">
         <div class="container-fixed-lg">
             <ul class="breadcrumb p-l-0">
-              <li class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a>
-              </li>
-              <li class="breadcrumb-item active">Users and Access Roles
-              <li class="breadcrumb-item active">Manage Users
-              </li>
+              <li class="breadcrumb-item active"><a href="{{ route('admin.customers') }}">Customers</a></li>
             </ul>
             <div class="row">
                 <div class="col-md-6">
@@ -58,48 +54,48 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($nonCustomers as $nonCustomer)
+                        @foreach ($customers as $customer)
                         <tr>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->username }}</p>
+                                <p>{{ $customer->username }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->name ?? 'N/A' }}</p>
+                                <p>{{ $customer->name ?? 'N/A' }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->email ?? 'N/A' }}</p>
+                                <p>{{ $customer->email ?? 'N/A' }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->m_number ?? 'N/A' }}</p>
+                                <p>{{ $customer->m_number ?? 'N/A' }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->address ?? 'N/A' }}</p>
+                                <p>{{ $customer->address ?? 'N/A' }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->city ?? 'N/A' }}</p>
+                                <p>{{ $customer->city ?? 'N/A' }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->state ?? 'N/A' }}</p>
+                                <p>{{ $customer->state ?? 'N/A' }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->postal_code ?? 'N/A' }}</p>
+                                <p>{{ $customer->postal_code ?? 'N/A' }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->country ?? 'N/A' }}</p>
+                                <p>{{ $customer->country ?? 'N/A' }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->imageAvatarSize() }}</p>
+                                <p>{{ $customer->imageAvatarSize() }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->created_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
+                                <p>{{ $customer->created_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->updated_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
+                                <p>{{ $customer->updated_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <div class="btn-group">
-                                    <a href="{{ route('admin.users.edit', $nonCustomer->id) }}" class="btn btn-outline-primary m-1">Edit</a>
-                                    <a href="{{ route('admin.users.destroy-confirmation', $nonCustomer->id) }}" class="btn btn-outline-danger m-1">Delete</a>
+                                    <a href="{{ route('admin.customers.edit', $customer->id) }}" class="btn btn-outline-primary m-1">Edit</a>
+                                    <a href="{{ route('admin.customers.destroy-confirmation', $customer->id) }}" class="btn btn-outline-danger m-1">Delete</a>
                                 </div>
                             </td>
                         </tr>

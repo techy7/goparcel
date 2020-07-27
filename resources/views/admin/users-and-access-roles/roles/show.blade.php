@@ -11,7 +11,6 @@
     <div class="container-fluid padding-25 sm-padding-10">
         <div class="container-fixed-lg">
             <ul class="breadcrumb p-l-0">
-                <li class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                 <li class="breadcrumb-item active">Users and Access Roles</li>
                 <li class="breadcrumb-item active"><a href="{{ route('admin.roles') }}">Manage Access Roles</a></li>
                 <li class="breadcrumb-item active">Role's Permissions</li>

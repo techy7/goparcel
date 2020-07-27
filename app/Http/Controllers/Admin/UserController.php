@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\User;
 use App\Rules\same_email;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -65,20 +66,30 @@ class UserController extends Controller
             'password.confirmed' => __('auth.error_password_not_match'),
         ]);
 
-        $data['password'] = Hash::make(request('password'));
-
-        $user = User::create($data);
+        $user = User::create([
+            'username' => Str::of($data['username'])->trim()->lower(),
+            'name' => Str::of($data['name'])->trim()->title(),
+            'email' => Str::of($data['email'])->trim()->lower(),
+            'm_number' => preg_replace('~\D~', '', $data['m_number']),
+            'address' => Str::of($data['address'])->trim()->title(),
+            'postal_code' => $data['postal_code'],
+            'city' => Str::of($data['city'])->trim()->title(),
+            'state' => config('location.PH_cities_states')[$data['city']],
+            'country' => 'Philippines',
+            'roles' => $data['roles'],
+            'password' => Hash::make($data['password']),
+        ]);
 
         DB::table('model_has_roles')->where('model_id', $user->id)->delete();
 
         $user->assignRole(request('roles'));
 
-        return redirect()->route('admin.users')->with('success', $user->name . ' User has been successfully added.');
+        return redirect()->route('admin.users')->with('success', $user->username . ' User has been successfully added.');
     }
 
     public function edit(User $user)
     {
-        $userDatas = $user->first();
+        $userData = $user->findOrFail(request()->route('username'));
 
         $roles = Role::all();
 
@@ -86,28 +97,27 @@ class UserController extends Controller
             return $role->name == 'Customer';
         });
 
-        $userRoles = DB::table("model_has_roles")->where('model_id', $userDatas->id)
+        $userRoles = DB::table("model_has_roles")->where('model_id', $userData->id)
             ->pluck('model_has_roles.role_id', 'model_has_roles.role_id')
             ->all();
 
-        return view('admin.users-and-access-roles.users.edit', compact('userDatas', 'nonCustomerRoles', 'userRoles'));
+        return view('admin.users-and-access-roles.users.edit', compact('userData', 'nonCustomerRoles', 'userRoles'));
     }
 
     public function update(User $user)
     {
-        $userDatas = $user->first();
-
-        dd($userDatas);
+        $userData = $user->findOrFail(request()->route('username'));
 
         $data = request()->validate([
-            'username' => ['required', 'string', 'min:5', 'max:20', 'unique:users'],
+            'username' => 'required|string|min:5|max:20|unique:users,username,'.$userData->id,
             'name' => 'required|string|max:100|regex:/^[a-zA-Z ]+$/',
-            'email' => 'required|email|unique:users,email,'.$userDatas->id,
+            'email' => 'required|email|unique:users,email,'.$userData->id,
             'm_number' => ['required', 'phone:PH'],
             'address' => ['required', 'string', 'max:255'],
             'postal_code' => ['required', 'numeric', 'min:999', 'max:9999'],
             'city' => ['required', 'string', 'max:100'],
-            'password' => ['required', 'min:6', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/', 'confirmed'],
+            // Uncomment if needed
+            // 'password' => ['required', 'min:6', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/', 'confirmed'],
             'roles' => 'required',
         ], [
             'username.required' => __('auth.error_required'),
@@ -121,44 +131,53 @@ class UserController extends Controller
             'address.required' => __('auth.error_required'),
             'postal_code.required' => __('auth.error_required'),
             'city.required' => __('auth.error_required'),
-            'password.required' => __('auth.error_required'),
-            'password.regex' => __('auth.error_password_invalid'),
-            'password.confirmed' => __('auth.error_password_not_match'),
+            // Uncomment if needed
+            // 'password.required' => __('auth.error_required'),
+            // 'password.regex' => __('auth.error_password_invalid'),
+            // 'password.confirmed' => __('auth.error_password_not_match'),
         ]);
 
-        $userDatas->update($data);
+        $userData->update([
+            'username' => Str::of($data['username'])->trim()->lower(),
+            'name' => Str::of($data['name'])->trim()->title(),
+            'email' => Str::of($data['email'])->trim()->lower(),
+            'm_number' => preg_replace('~\D~', '', $data['m_number']),
+            'address' => Str::of($data['address'])->trim()->title(),
+            'postal_code' => $data['postal_code'],
+            'city' => Str::of($data['city'])->trim()->title(),
+            'state' => config('location.PH_cities_states')[$data['city']],
+            'country' => 'Philippines',
+            'roles' => $data['roles'],
+            // Uncomment if needed
+            // 'password' => Hash::make($data['password']),
+        ]);
 
-        DB::table('model_has_roles')->where('model_id', $userDatas->id)->delete();
+        DB::table('model_has_roles')->where('model_id', $userData->id)->delete();
 
-        $userDatas->assignRole(request('roles'));
+        $userData->assignRole(request('roles'));
 
-        return redirect()->route('admin.users.index')->with('update', $user->name . ' User has been successfully updated.');
+        return redirect()->route('admin.users')->with('update', $userData->username . ' User has been successfully updated.');
     }
 
     public function destroyConfirmation(User $user)
     {
-        $userDatas = $user->first();
-        dd($userDatas->id);
+        $userData = $user->findOrFail(request()->route('username'));
 
-        $userDetails = $user->findOrFail($userDatas->id);
-
-        dd($userDetails->email);
-
-        return view('admin.users-and-access-roles.users.confirmation', compact('userDatas'));
+        return view('admin.users-and-access-roles.users.confirmation', compact('userData'));
     }
 
     public function destroy(User $user)
     {
-        $userDatas = $user->first();
+        $userData = $user->findOrFail(request()->route('username'));
         
         $data = request()->validate([
-            'email' => ['required', new same_email($userDatas->email)]
+            'email' => ['required', new same_email($userData->email)]
         ], [
             'email.required' => 'This field is required.'
         ]);
 
-        $userDatas->delete();
+        $userData->delete();
 
-        return redirect()->route('admin.users', $userDatas->id)->with('delete', $user->name . ' User has been successfully deleted.');
+        return redirect()->route('admin.users', $userData->id)->with('delete', $userData->username . ' User has been successfully deleted.');
     }
 }

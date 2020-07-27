@@ -11,7 +11,6 @@
     <div class="container-fluid padding-25 sm-padding-10">
         <div class="container-fixed-lg">
             <ul class="breadcrumb p-l-0">
-              <li class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
               <li class="breadcrumb-item active">Users and Access Roles</li>
               <li class="breadcrumb-item active"><a href="{{ route('admin.users') }}">Manage Users</a></li>
               <li class="breadcrumb-item active">Delete User</li>
@@ -19,7 +18,7 @@
             <h3 class="page-title">Delete User Confirmation</h3>
         </div>
 
-        <form id="form-register" class="p-t-15" role="form" method="POST" action="{{ route('admin.users.destroy', $userDatas->id) }}">
+        <form id="form-register" class="p-t-15" role="form" method="POST" action="{{ route('admin.users.destroy', $userData->id) }}">
             @csrf
             @method('DELETE')
 
@@ -51,14 +50,7 @@
 @endsection
 
 @section('lower-links-extends')
-    <script src="{{ asset('pages/assets/plugins/jquery-inputmask/jquery.inputmask.min.js') }}" type="text/javascript"></script>
-    <script>
-        $(function(){
-            $("#postal_code").mask("9999");
-            $("#m_number").mask("(9999) 999-9999");
-            $('#form-register').validate();
-        })
-    </script>
+
 @endsection
 @section('lower-links-extends-page')
 

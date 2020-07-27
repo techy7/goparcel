@@ -11,7 +11,6 @@
     <div class="container-fluid padding-25 sm-padding-10">
         <div class="container-fixed-lg">
             <ul class="breadcrumb p-l-0">
-              <li class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
               <li class="breadcrumb-item active">Users and Access Roles</li>
               <li class="breadcrumb-item active"><a href="{{ route('admin.users') }}">Manage Users</a></li>
               <li class="breadcrumb-item active">Add User</li>
@@ -139,7 +138,7 @@
                                 @foreach ($nonCustomerRoles as $nonCustomerRole)
                                     <div class="col-lg-4">
                                         <div class="form-check primary">
-                                        <input name="roles[]" type="checkbox" id="{{ $nonCustomerRole->name }}" value="{{ $nonCustomerRole->id }}">
+                                        <input name="roles[]" type="checkbox" id="{{ $nonCustomerRole->name }}" value="{{ $nonCustomerRole->id }}" {{ old('roles') == array($nonCustomerRole->id) ? 'checked' : null }}>
                                         <label for="{{ $nonCustomerRole->name }}">
                                             {{ $nonCustomerRole->name }}
                                         </label>

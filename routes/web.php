@@ -44,6 +44,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('/permissions/{permission}', 'PermissionController@update')->name('admin.permissions.update');
         Route::delete('/permissions/{permission}', 'PermissionController@destroy')->name('admin.permissions.destroy');
         Route::get('/customers', 'CustomerController@index')->name('admin.customers');
-        Route::get('/customers/create', 'UserController@create')->name('admin.customers.create');
+        Route::get('/customers/create', 'CustomerController@create')->name('admin.customers.create');
+        Route::post('/customers', 'CustomerController@store')->name('admin.customers.store');
+        Route::get('/customers/{username}/edit', 'CustomerController@edit')->name('admin.customers.edit');
+        Route::patch('/customers/{username}', 'CustomerController@update')->name('admin.customers.update');
+        Route::get('/customers/{username}/confirmation', 'CustomerController@destroyConfirmation')->name('admin.customers.destroy-confirmation');
+        Route::delete('/customers/{username}', 'CustomerController@destroy')->name('admin.customers.destroy');
     });
 });
