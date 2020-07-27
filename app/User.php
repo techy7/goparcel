@@ -6,6 +6,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -74,12 +75,12 @@ class User extends Authenticatable
 
     public function initials()
     {
-      $words = explode(" ", $this->name);
-      $initials = null;
-      foreach ($words as $w)
-      {
-          $initials .= $w[0];
-      }
-      return strtoupper($initials);
+        $words = explode(" ", Str::of($this->name)->trim()->title());
+        $initials = null;
+        foreach ($words as $w)
+        {
+            $initials .= $w[0];
+        }
+        return strtoupper($initials);
    }
 }

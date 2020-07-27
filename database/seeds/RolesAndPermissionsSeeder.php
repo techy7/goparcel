@@ -68,7 +68,6 @@ class RolesAndPermissionsSeeder extends Seeder
           'name' => 'Super Admin',
           'description' => 'Super Admin has the ability to manage the access of all the functions in the website.'
         ]);
-
         $role->givePermissionTo(Permission::all());
 
         $role = Role::create([

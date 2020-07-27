@@ -125,7 +125,7 @@
             </div>
             <div class="row m-t-10 align-items-end">
                 <div class="col-md-6">
-                    <p><small>{{ __('auth.i_agree_to_the') }} <a href="https://weparcelbear.com/terms-of-use/" class="text-info"><strong>{{ __('auth.terms_of_use') }}</strong></a> & <a href="https://weparcelbear.com/privacy-policy/" class="text-info"><strong>{{ __('auth.privacy_policy') }}</strong></a>.</small></p>
+                    <p><small>{{ __('auth.i_agree_to_the') }} <a href="https://weparcelbear.com/terms-of-use/" target="_blank" class="text-info"><strong>{{ __('auth.terms_of_use') }}</strong></a> & <a href="https://weparcelbear.com/privacy-policy/" target="_blank" class="text-info"><strong>{{ __('auth.privacy_policy') }}</strong></a>.</small></p>
                     <input type="hidden" name="roles" value="3">
                     <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">{{ __('auth.create_an_account') }}</button>
                 </div>

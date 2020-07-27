@@ -67,7 +67,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'username' => ['required', 'string', 'min:5', 'max:20', 'unique:users'],
-            'name' => ['required', 'string', 'max:100'],
+            'name' => ['required', 'string', 'max:100', 'regex:/^[a-zA-Z ]+$/'],
             'email' => ['required', 'string', 'email', 'max:30', 'unique:users'],
             'm_number' => ['required', 'phone:PH'],
             'address' => ['required', 'string', 'max:255'],
@@ -101,13 +101,13 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = User::create([
-            'username' => Str::lower($data['username']),
-            'name' => Str::title($data['name']),
-            'email' => Str::lower($data['email']),
+            'username' => Str::of($data['username'])->trim()->lower(),
+            'name' => Str::of($data['name'])->trim()->title(),
+            'email' => Str::of($data['email'])->trim()->lower(),
             'm_number' => preg_replace('~\D~', '', $data['m_number']),
-            'address' => Str::title($data['address']),
+            'address' => Str::of($data['address'])->trim()->title(),
             'postal_code' => $data['postal_code'],
-            'city' => Str::title($data['city']),
+            'city' => Str::of($data['city'])->trim()->title(),
             'state' => config('location.PH_cities_states')[$data['city']],
             'country' => 'Philippines',
             'roles' => $data['roles'],

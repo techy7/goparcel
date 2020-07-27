@@ -15,8 +15,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/{username}/pickup', 'PickupController@store')->name('customer.pickup.store');
         Route::group(['prefix' => '/user'], function () {
             Route::get('/{username}/account', 'AccountController@index')->name('customer.account');
-            Route::get('/{username}/account/profile', 'AccountController@edit')->name('customer.account.edit');
-            Route::patch('/{username}/account/profile', 'AccountController@update')->name('customer.account.update');
+            Route::get('/{username}/account/edit', 'AccountController@edit')->name('customer.account.edit');
+            Route::patch('/{username}/account/update', 'AccountController@update')->name('customer.account.update');
         });
         Route::get('/{username}/bookings', 'BookingController@index')->name('customer.bookings');
     });
