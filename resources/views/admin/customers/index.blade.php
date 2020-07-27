@@ -22,12 +22,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="pull-left">
-                        <h3 class="page-title">Users</h3>
+                        <h3 class="page-title">Customers List</h3>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="pull-right">
-                        <a href="{{ route('admin.users.create') }}">Add User</a>
+                        <a href="{{ route('admin.customers.create') }}">Add Customer</a>
                     </div>
                 </div>
             </div>

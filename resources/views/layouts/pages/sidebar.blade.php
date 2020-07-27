@@ -9,7 +9,7 @@
                 <a href="{{ route('customer.dashboard', auth()->user()->username) }}"><span class="title">{{ __('general.dashboard') }}</span></a>
             </li>
             @endhasanyrole
-            @hasanyrole('Super Admin|User|Customer')
+            @hasanyrole('Super Admin|User')
             <li class="m-t-10">
                 <a href="javascript:;">
                     <span class="title">Users & Access Roles</span>
@@ -26,6 +26,11 @@
                         <a href="{{ route('admin.permissions') }}">Manage Permissions</a>
                     </li>
                 </ul>
+            </li>
+            @endhasanyrole
+            @hasanyrole('Super Admin|User')
+            <li class="m-t-10">
+                <a href="{{ route('admin.customers') }}"><span class="title">{{ __('general.customers') }}</span></a>
             </li>
             @endhasanyrole
             @hasanyrole('Super Admin|Customer')
