@@ -13,6 +13,7 @@ return [
     //Customer
     'schedule_a_pickup' => 'Schedule a Pickup',
     'my_pickup_booking' => 'My Pickup Bookings',
+    'customers' => 'Customers',
 
     //Header
     'signed_in_as' => 'Signed in as',
