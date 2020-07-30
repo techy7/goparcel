@@ -55,7 +55,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('/bookings/{username}', 'BookingController@update')->name('admin.bookings.update');
         Route::get('/bookings/{pickup}/confirmation', 'BookingController@destroyConfirmation')->name('admin.bookings.destroy-confirmation');
         Route::delete('/bookings/{pickup}', 'BookingController@destroy')->name('admin.bookings.destroy');
-        // Pickups
         Route::get('/pickups', 'PickupController@index')->name('admin.pickups');
         Route::get('/pickups/{pickup}/edit', 'PickupController@edit')->name('admin.pickups.edit');
         Route::patch('/pickups/{pickup}', 'PickupController@update')->name('admin.pickups.update');

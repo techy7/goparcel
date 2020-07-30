@@ -38,11 +38,14 @@
                                     </button>
                                       <div class="dropdown-menu" role="menu">
                                           <a href="{{ route('admin.pickups') }}" class="dropdown-item">All</a>
-                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">Date</a>
-                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">New Request</a>
-                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">Client</a>
-                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">Location</a>
                                           <div class="dropdown-divider"></div>
+                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">Date</a>
+                                          <div class="dropdown-divider"></div>
+                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">New Request</a>
+                                          <div class="dropdown-divider"></div>
+                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">Client</a>
+                                          <div class="dropdown-divider"></div>
+                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">Location</a>
                                       </div>
                                   </div>
                           </div>
