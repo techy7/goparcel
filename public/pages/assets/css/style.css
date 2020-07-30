@@ -242,6 +242,7 @@ fieldset[disabled] .btn-primary.active {
 .pace .pace-activity {
   border-top-color: #196a87;
   border-left-color: #196a87;
+  display: none;
 }
 
 .copyright {
