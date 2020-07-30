@@ -2061,10 +2061,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
   },
+  props: ['packageFiltered', 'packagingAmount', 'own', 'packages'],
   data: function data() {
     return {
       products: [],
@@ -2075,24 +2089,15 @@ __webpack_require__.r(__webpack_exports__);
       },
       packageTypes: [{
         pricing: {
-          medium: {
-            price: 28,
-            weight: '2',
-            label: 'Up to '
+          Medium: {
+            amount: 78
           },
-          large: {
-            price: 48,
-            weight: '3',
-            label: 'More than 2 to '
-          },
-          ownPackaging: {
-            price: 68,
-            weight: '4',
-            label: 'More than 3 to '
+          Large: {
+            amount: 88
           }
         }
       }],
-      currentFrequency: 'medium',
+      currentFrequency: 'Medium',
       currency: 'php'
     };
   },
@@ -2100,11 +2105,11 @@ __webpack_require__.r(__webpack_exports__);
     additionalCostComputation: function additionalCostComputation(price) {
       return price + parseInt(this.additionalCost);
     },
-    getPrice: function getPrice(price) {
+    getCurrency: function getCurrency(price) {
       return this['currency' + this.currency.toUpperCase()](price);
     },
     currencyPHP: function currencyPHP(price) {
-      return '₱' + price + '.00';
+      return '₱' + price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
     },
     addDimension: function addDimension() {
       var line_limit = 1;
@@ -2125,33 +2130,41 @@ __webpack_require__.r(__webpack_exports__);
       this.product.height = 0;
       this.product.length = 0;
       this.product.width = 0;
+      this.currentFrequency = '';
     },
     removeDimension: function removeDimension(item) {
       var del = this.products.indexOf(item);
       this.products.splice(del, 1);
+    },
+    setTwoNumberDecimal: function setTwoNumberDecimal(event) {
+      this.value = parseFloat(this.value).toFixed(2);
     }
   },
   computed: {
-    additionalWeight: function additionalWeight() {
+    additionalWeightAmount: function additionalWeightAmount() {
+      var _this = this;
+
       return this.products.reduce(function (total, item) {
-        return total + parseFloat(item.height) * parseFloat(item.length) * parseFloat(item.width) / 4000;
+        var dimensionTotal = (total + parseFloat(item.height).toFixed() * parseFloat(item.length).toFixed() * parseFloat(item.width).toFixed() / 4000).toFixed();
+        var additionalAmount = dimensionTotal * 20;
+        return additionalAmount + _this.packagingAmount.amount; // return (additionalAmount + this.ownPackaging.amount).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
       }, 0);
     },
     additionalCost: function additionalCost() {
       var chargeRate = 20;
-      return this.additionalWeight * chargeRate;
+      return this.additionalWeightAmount * chargeRate;
     },
     totalAmount: function totalAmount() {
       var ownPackagingPrice = 68;
       return this.additionalCost + ownPackagingPrice;
     },
     initialTotalAmount: function initialTotalAmount() {
-      var _this = this;
+      var _this2 = this;
 
-      var getPriceMethod = this.getPrice(this.totalAmount);
+      var getPriceMethod = this.getCurrency(this.totalAmount);
       var additionalCostComputationMethod = this.additionalCostComputation(this.totalAmount);
       this.packageTypes.forEach(function (packageType) {
-        console.log(packageType.pricing[_this.currentFrequency].price);
+        console.log(packageType.pricing[_this2.currentFrequency].price);
       }); // return getPriceMethod(additionalCostComputation&totalAmount)
     }
   }
@@ -2168,10 +2181,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
 //
 //
 //
@@ -38737,16 +38746,16 @@ var render = function() {
                 staticClass: "btn-group btn-group-toggle",
                 attrs: { "data-toggle": "buttons" }
               },
-              _vm._l(_vm.packageTypes[0].pricing, function(price, frequency) {
+              _vm._l(_vm.packages, function(pack) {
                 return _c(
                   "label",
                   {
                     staticClass: "btn btn-default",
                     class:
-                      _vm.currentFrequency == frequency ? "clicked focus" : "",
+                      _vm.currentFrequency == pack.name ? "clicked focus" : "",
                     on: {
                       click: function($event) {
-                        _vm.currentFrequency = frequency
+                        _vm.currentFrequency = pack.name
                       }
                     }
                   },
@@ -38754,8 +38763,11 @@ var render = function() {
                     _c(
                       "input",
                       _vm._g(
-                        { attrs: { type: "radio", name: frequency } },
-                        frequency == "ownPackaging"
+                        {
+                          attrs: { type: "radio", name: "package_id" },
+                          domProps: { value: pack.id }
+                        },
+                        pack.name == "Own Packaging"
                           ? {
                               click: function() {
                                 return _vm.addDimension()
@@ -38768,15 +38780,7 @@ var render = function() {
                             }
                       )
                     ),
-                    _vm._v(
-                      " " +
-                        _vm._s(
-                          frequency == "ownPackaging"
-                            ? "OWN PACKAGING"
-                            : frequency.toUpperCase()
-                        ) +
-                        "\n                    "
-                    )
+                    _vm._v(" " + _vm._s(pack.name) + "\n                    ")
                   ]
                 )
               }),
@@ -38797,7 +38801,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "col-md-3" }, [
               _c("div", { staticClass: "form-group form-group-default" }, [
-                _c("label", [_vm._v("Length")]),
+                _c("label", [_vm._v("Length(cm)")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -38813,8 +38817,9 @@ var render = function() {
                     type: "number",
                     id: "length",
                     name: "package_length",
-                    min: "0",
-                    oninput: "this.value = Math.abs(this.value)"
+                    step: "any",
+                    oninput: "this.value = Math.abs(this.value)",
+                    onKeyPress: "if(this.value.length==6) return false;"
                   },
                   domProps: { value: pro.length },
                   on: {
@@ -38833,7 +38838,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "col-md-4" }, [
               _c("div", { staticClass: "form-group form-group-default" }, [
-                _c("label", [_vm._v("Width")]),
+                _c("label", [_vm._v("Width(cm)")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -38849,8 +38854,9 @@ var render = function() {
                     type: "number",
                     id: "width",
                     name: "package_width",
-                    min: "0",
-                    oninput: "this.value = Math.abs(this.value)"
+                    step: "any",
+                    oninput: "this.value = Math.abs(this.value)",
+                    onKeyPress: "if(this.value.length==6) return false;"
                   },
                   domProps: { value: pro.width },
                   on: {
@@ -38869,7 +38875,7 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "col-md-3" }, [
               _c("div", { staticClass: "form-group form-group-default" }, [
-                _c("label", [_vm._v("Height")]),
+                _c("label", [_vm._v("Height(cm)")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -38885,8 +38891,9 @@ var render = function() {
                     type: "number",
                     id: "height",
                     name: "package_height",
-                    min: "0",
-                    oninput: "this.value = Math.abs(this.value)"
+                    step: "any",
+                    oninput: "this.value = Math.abs(this.value)",
+                    onKeyPress: "if(this.value.length==6) return false;"
                   },
                   domProps: { value: pro.height },
                   on: {
@@ -38899,175 +38906,44 @@ var render = function() {
                   }
                 })
               ])
-            ])
+            ]),
+            _vm._v(" "),
+            _c("h1", [
+              _vm._v(
+                "Total Amount: " +
+                  _vm._s(_vm.getCurrency(_vm.additionalWeightAmount))
+              )
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.additionalWeightAmount,
+                  expression: "additionalWeightAmount"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "hidden",
+                id: "package_amount",
+                name: "package_amount"
+              },
+              domProps: { value: _vm.additionalWeightAmount },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.additionalWeightAmount = $event.target.value
+                }
+              }
+            })
           ])
         }),
         _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            { staticClass: "col-md-12" },
-            _vm._l(_vm.packageTypes, function(packageType) {
-              return _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "card card-transparent" }, [
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("div", { staticClass: "table-responsive" }, [
-                      _c(
-                        "table",
-                        { staticClass: "table", attrs: { id: "basicTable" } },
-                        [
-                          _vm._m(3, true),
-                          _vm._v(" "),
-                          _c("tbody", [
-                            _c("tr", [
-                              _c("td", { staticClass: "v-align-middle " }, [
-                                _c("h4", [
-                                  _c("strong", [_vm._v("Weight:")]),
-                                  _c("small", [
-                                    _vm._v(
-                                      " " +
-                                        _vm._s(
-                                          packageType.pricing[
-                                            _vm.currentFrequency
-                                          ].label
-                                        ) +
-                                        _vm._s(
-                                          packageType.pricing[
-                                            _vm.currentFrequency
-                                          ].weight
-                                        ) +
-                                        "kg"
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value:
-                                          packageType.pricing[
-                                            _vm.currentFrequency
-                                          ].weight,
-                                        expression:
-                                          "packageType.pricing[currentFrequency].weight"
-                                      }
-                                    ],
-                                    attrs: { type: "hidden", name: "weight" },
-                                    domProps: {
-                                      value:
-                                        packageType.pricing[
-                                          _vm.currentFrequency
-                                        ].weight
-                                    },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          packageType.pricing[
-                                            _vm.currentFrequency
-                                          ],
-                                          "weight",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "v-align-middle" }, [
-                                _c("h4", [
-                                  _c("strong", [_vm._v("Additional Weight:")]),
-                                  _c("small", [
-                                    _vm._v(
-                                      " " + _vm._s(_vm.additionalWeight) + "kg"
-                                    )
-                                  ])
-                                ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", [
-                              _c("td", { staticClass: "v-align-middle " }, [
-                                _c("h4", [
-                                  _c("strong", [_vm._v("Cost:")]),
-                                  _c("small", [
-                                    _vm._v(
-                                      " " +
-                                        _vm._s(
-                                          _vm.getPrice(
-                                            packageType.pricing[
-                                              _vm.currentFrequency
-                                            ].price
-                                          )
-                                        )
-                                    )
-                                  ])
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "v-align-middle" }, [
-                                _c("h4", [
-                                  _c("strong", [_vm._v("Additional Cost:")]),
-                                  _c("small", [
-                                    _vm._v(
-                                      " " +
-                                        _vm._s(_vm.getPrice(_vm.additionalCost))
-                                    )
-                                  ])
-                                ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", [
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "v-align-middle",
-                                  attrs: { colspan: "2" }
-                                },
-                                [
-                                  _c("h4", [
-                                    _c("strong", [_vm._v("Total:")]),
-                                    _c("small", [
-                                      _vm._v(
-                                        " " +
-                                          _vm._s(
-                                            _vm.getPrice(
-                                              _vm.additionalCostComputation(
-                                                packageType.pricing[
-                                                  _vm.currentFrequency
-                                                ].price
-                                              )
-                                            )
-                                          )
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      attrs: {
-                                        type: "hidden",
-                                        name: "package_amount"
-                                      }
-                                    })
-                                  ])
-                                ]
-                              )
-                            ])
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                ])
-              ])
-            }),
-            0
-          )
-        ])
+        _vm._m(3)
       ],
       2
     )
@@ -39119,14 +38995,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticStyle: { width: "50%" } }, [
-          _c("h3", [_vm._v("Summary:")])
-        ]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { width: "50%" } })
-      ])
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" })
     ])
   }
 ]
@@ -39152,411 +39022,56 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _c(
-      "div",
-      { staticClass: "card-body" },
-      [
-        _c("h3", { staticClass: "mw-80" }, [_vm._v("Package Items")]),
+    _c("div", { staticClass: "card-body" }, [
+      _c("h3", { staticClass: "mw-80" }, [_vm._v("Package Items")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-4" }),
         _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-4" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4" }, [
-            _c(
-              "div",
-              {
-                staticClass: "btn-group btn-group-toggle",
-                attrs: { "data-toggle": "buttons" }
-              },
-              _vm._l(_vm.packages, function(packageItem) {
-                return _c(
-                  "label",
-                  {
-                    staticClass: "btn btn-default",
-                    class:
-                      _vm.currentFrequency == packageItem.name
-                        ? "clicked focus"
-                        : "",
-                    on: {
-                      click: function($event) {
-                        _vm.currentFrequency = packageItem.name
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "input",
-                      _vm._g(
-                        { attrs: { type: "radio", name: packageItem.id } },
-                        packageItem.name == "Own Packaging"
-                          ? {
-                              click: function() {
-                                return _vm.addDimension()
-                              }
-                            }
-                          : {
-                              click: function() {
-                                return _vm.removeDimension()
-                              }
-                            }
-                      )
-                    ),
-                    _vm._v(
-                      " " + _vm._s(packageItem.name) + "\n                    "
-                    )
-                  ]
-                )
-              }),
-              0
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4" })
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.products, function(pro) {
-          return _c("div", { key: pro.id, staticClass: "row" }, [
-            _c("h5", { staticClass: "btn-block m-l-10" }, [
-              _vm._v("Item Dimension:")
-            ]),
-            _vm._v(" "),
-            _vm._m(0, true),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-3" }, [
-              _c("div", { staticClass: "form-group form-group-default" }, [
-                _c("label", [_vm._v("Length")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: pro.length,
-                      expression: "pro.length"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "number",
-                    id: "length",
-                    name: "package_length",
-                    min: "0",
-                    oninput: "this.value = Math.abs(this.value)"
-                  },
-                  domProps: { value: pro.length },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(pro, "length", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(1, true),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "form-group form-group-default" }, [
-                _c("label", [_vm._v("Width")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: pro.width,
-                      expression: "pro.width"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "number",
-                    id: "width",
-                    name: "package_width",
-                    min: "0",
-                    oninput: "this.value = Math.abs(this.value)"
-                  },
-                  domProps: { value: pro.width },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(pro, "width", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(2, true),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-3" }, [
-              _c("div", { staticClass: "form-group form-group-default" }, [
-                _c("label", [_vm._v("Height")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: pro.height,
-                      expression: "pro.height"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "number",
-                    id: "height",
-                    name: "package_height",
-                    min: "0",
-                    oninput: "this.value = Math.abs(this.value)"
-                  },
-                  domProps: { value: pro.height },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(pro, "height", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ])
-          ])
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-4" }, [
           _c(
             "div",
-            { staticClass: "col-md-12" },
-            _vm._l(_vm.packageTypes, function(packageType) {
-              return _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "card card-transparent" }, [
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("div", { staticClass: "table-responsive" }, [
-                      _c(
-                        "table",
-                        { staticClass: "table", attrs: { id: "basicTable" } },
-                        [
-                          _vm._m(3, true),
-                          _vm._v(" "),
-                          _c("tbody", [
-                            _c("tr", [
-                              _c("td", { staticClass: "v-align-middle " }, [
-                                _c("h4", [
-                                  _c("strong", [_vm._v("Weight:")]),
-                                  _c("small", [
-                                    _vm._v(
-                                      " " +
-                                        _vm._s(
-                                          packageType.pricing[
-                                            _vm.currentFrequency
-                                          ].label
-                                        ) +
-                                        _vm._s(
-                                          packageType.pricing[
-                                            _vm.currentFrequency
-                                          ].weight
-                                        ) +
-                                        "kg"
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value:
-                                          packageType.pricing[
-                                            _vm.currentFrequency
-                                          ].weight,
-                                        expression:
-                                          "packageType.pricing[currentFrequency].weight"
-                                      }
-                                    ],
-                                    attrs: { type: "hidden", name: "weight" },
-                                    domProps: {
-                                      value:
-                                        packageType.pricing[
-                                          _vm.currentFrequency
-                                        ].weight
-                                    },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          packageType.pricing[
-                                            _vm.currentFrequency
-                                          ],
-                                          "weight",
-                                          $event.target.value
-                                        )
-                                      }
-                                    }
-                                  })
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "v-align-middle" }, [
-                                _c("h4", [
-                                  _c("strong", [_vm._v("Additional Weight:")]),
-                                  _c("small", [
-                                    _vm._v(
-                                      " " + _vm._s(_vm.additionalWeight) + "kg"
-                                    )
-                                  ])
-                                ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", [
-                              _c("td", { staticClass: "v-align-middle " }, [
-                                _c("h4", [
-                                  _c("strong", [_vm._v("Cost:")]),
-                                  _c("small", [
-                                    _vm._v(
-                                      " " +
-                                        _vm._s(
-                                          _vm.getPrice(
-                                            packageType.pricing[
-                                              _vm.currentFrequency
-                                            ].price
-                                          )
-                                        )
-                                    )
-                                  ])
-                                ])
-                              ]),
-                              _vm._v(" "),
-                              _c("td", { staticClass: "v-align-middle" }, [
-                                _c("h4", [
-                                  _c("strong", [_vm._v("Additional Cost:")]),
-                                  _c("small", [
-                                    _vm._v(
-                                      " " +
-                                        _vm._s(_vm.getPrice(_vm.additionalCost))
-                                    )
-                                  ])
-                                ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("tr", [
-                              _c(
-                                "td",
-                                {
-                                  staticClass: "v-align-middle",
-                                  attrs: { colspan: "2" }
-                                },
-                                [
-                                  _c("h4", [
-                                    _c("strong", [_vm._v("Total:")]),
-                                    _c("small", [
-                                      _vm._v(
-                                        " " +
-                                          _vm._s(
-                                            _vm.getPrice(
-                                              _vm.additionalCostComputation(
-                                                packageType.pricing[
-                                                  _vm.currentFrequency
-                                                ].price
-                                              )
-                                            )
-                                          )
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      attrs: {
-                                        type: "hidden",
-                                        name: "package_amount"
-                                      }
-                                    })
-                                  ])
-                                ]
-                              )
-                            ])
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                ])
+            {
+              staticClass: "btn-group btn-group-toggle",
+              attrs: { "data-toggle": "buttons" }
+            },
+            _vm._l(_vm.packages, function(packageItem) {
+              return _c("label", { staticClass: "btn btn-default" }, [
+                _c(
+                  "input",
+                  _vm._g(
+                    {
+                      attrs: { type: "radio", name: "package_id" },
+                      domProps: { value: packageItem.id }
+                    },
+                    packageItem.name == "Own Packaging"
+                      ? {
+                          click: function() {
+                            return _vm.addDimension()
+                          }
+                        }
+                      : {
+                          click: function() {
+                            return _vm.removeDimension()
+                          }
+                        }
+                  )
+                ),
+                _vm._v(
+                  " " + _vm._s(packageItem.name) + "\n                    "
+                )
               ])
             }),
             0
           )
-        ])
-      ],
-      2
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "p",
-      {
-        staticClass: "btn-block m-l-10",
-        staticStyle: { "margin-top": "-10px" }
-      },
-      [
-        _c("em", [
-          _vm._v("If your item weight is beyond 4kg, kindly fill this out.")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "col-md-1 d-flex justify-content-center align-items-center"
-      },
-      [_c("h4", [_vm._v("X")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "col-md-1 d-flex justify-content-center align-items-center"
-      },
-      [_c("h4", [_vm._v("X")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticStyle: { width: "50%" } }, [
-          _c("h3", [_vm._v("Summary:")])
         ]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "50%" } })
+        _c("div", { staticClass: "col-md-4" })
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 

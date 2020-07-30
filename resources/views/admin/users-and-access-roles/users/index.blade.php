@@ -13,9 +13,8 @@
     <div class="container-fluid padding-25 sm-padding-10">
         <div class="container-fixed-lg">
             <ul class="breadcrumb p-l-0">
-              <li class="breadcrumb-item active">Users and Access Roles
-              <li class="breadcrumb-item active">Manage Users
-              </li>
+              <li class="breadcrumb-item active">{{ __('general.users_access_roles') }}</li>
+              <li class="breadcrumb-item active"><a href="{{ route('admin.users') }}">{{ __('general.manage_users') }}</a></li>
             </ul>
             <div class="row">
                 <div class="col-md-6">
@@ -96,11 +95,13 @@
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <div class="btn-group">
+                                    <button class="btn btn-outline-primary m-1" data-toggle="modal" data-target="#modalSlideUp-{{ $nonCustomer->id }}">Access Role</button>
                                     <a href="{{ route('admin.users.edit', $nonCustomer->id) }}" class="btn btn-outline-primary m-1">Edit</a>
                                     <a href="{{ route('admin.users.destroy-confirmation', $nonCustomer->id) }}" class="btn btn-outline-danger m-1">Delete</a>
                                 </div>
                             </td>
                         </tr>
+                        @include('admin.users-and-access-roles.users.modal')
                       @endforeach
                     </tbody>
                   </table>

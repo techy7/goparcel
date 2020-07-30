@@ -12,4 +12,10 @@ class Package extends Model
     {
         return $this->hasMany(Pickup::class);
     }
+
+    public function priceFormatted($price)
+    {
+        $amount = number_format($price, 2, '.', ',');
+        return '₱' . $amount;
+    }
 }

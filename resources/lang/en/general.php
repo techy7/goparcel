@@ -15,6 +15,15 @@ return [
     'my_pickup_booking' => 'My Pickup Bookings',
     'customers' => 'Customers',
 
+    //Admin
+    'bookings' => 'Bookings',
+    'pickup_schedules' => 'Pickup Schedules',
+    'users_access_roles' => 'Users & Access Roles',
+    'manage_users' => 'Manage Users',
+    'manage_access_roles' => 'Manage Access Roles',
+    'manage_permissions' => 'Manage Permissions',
+    'packages' => 'Packages',
+
     //Header
     'signed_in_as' => 'Signed in as',
     'account' => 'Account',

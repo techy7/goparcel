@@ -17,20 +17,17 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label 
-                            @click="currentFrequency = packageItem.name" v-for="packageItem in packages" 
-                            class="btn btn-default"
-                            :class="currentFrequency == packageItem.name ? 'clicked focus' : ''"
-                            >
+                        <label v-for="packageItem in packages" class="btn btn-default">
                             <input v-on="packageItem.name == 'Own Packaging' ? { click: () => addDimension() } : { click: () => removeDimension() }" 
                                 type="radio" 
-                                :name="packageItem.id"> {{ packageItem.name }}
+                                name="package_id"
+                                :value="packageItem.id"> {{ packageItem.name }}
                         </label>
                     </div>
                 </div>
                 <div class="col-md-4"></div>
             </div>
-            <div class="row" v-for="pro in products" :key="pro.id">
+            <!-- <div class="row" v-for="pro in products" :key="pro.id">
             <h5 class="btn-block m-l-10">Item Dimension:</h5>
             <p class="btn-block m-l-10" style="margin-top: -10px;"><em>If your item weight is beyond 4kg, kindly fill this out.</em></p>
                 <div class="col-md-3">
@@ -57,8 +54,8 @@
                         <input type="number" v-model="pro.height" id="height" class="form-control" name="package_height" min="0" oninput="this.value = Math.abs(this.value)">
                     </div>
                 </div>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
                 <div class="col-md-12">
                     <div class="row" v-for="packageType in packageTypes">
                         <div class="card card-transparent">
@@ -100,7 +97,6 @@
                                     <tr>
                                         <td colspan="2" class="v-align-middle">
                                         <h4>
-                                            <!-- getPrice(additionalCostComputation(packageType.pricing[currentFrequency].price)) -->
                                             <strong>Total:</strong><small> {{ getPrice(additionalCostComputation(packageType.pricing[currentFrequency].price)) }}</small>
                                             <input type="hidden" name="package_amount">
                                         </h4>
@@ -113,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>

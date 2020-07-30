@@ -79,10 +79,10 @@ class PickupSeeder extends Seeder
             'receiver_postal_code' => '3023',
             'receiver_country' => 'Philippines',
             'package_id' => 3,
-            'package_length' => 2,
-            'package_width' => 2,
-            'package_height' => 2,
-            'package_amount' => 154,
+            'package_length' => 20.45,
+            'package_width' => 20.22,
+            'package_height' => 20.88,
+            'package_amount' => 138,
         ]);
     }
 }

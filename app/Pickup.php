@@ -33,6 +33,12 @@ class Pickup extends Model
         'package_amount',
     ];
 
+    public function priceFormatted($price)
+    {
+        $amount = number_format($price, 2, '.', ',');
+        return '₱' . $amount;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

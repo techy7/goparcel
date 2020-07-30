@@ -84,7 +84,7 @@ class UserController extends Controller
 
         $user->assignRole(request('roles'));
 
-        return redirect()->route('admin.users')->with('success', $user->username . ' User has been successfully added.');
+        return redirect()->route('admin.users')->with('success', $user->name . ' User has been successfully added.');
     }
 
     public function edit(User $user)
@@ -156,7 +156,7 @@ class UserController extends Controller
 
         $userData->assignRole(request('roles'));
 
-        return redirect()->route('admin.users')->with('update', $userData->username . ' User has been successfully updated.');
+        return redirect()->route('admin.users')->with('update', $userData->name . ' User has been successfully updated.');
     }
 
     public function destroyConfirmation(User $user)
@@ -178,6 +178,6 @@ class UserController extends Controller
 
         $userData->delete();
 
-        return redirect()->route('admin.users', $userData->id)->with('delete', $userData->username . ' User has been successfully deleted.');
+        return redirect()->route('admin.users', $userData->id)->with('delete', $userData->name . ' User has been successfully deleted.');
     }
 }

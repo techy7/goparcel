@@ -13,9 +13,8 @@
     <div class="container-fluid padding-25 sm-padding-10">
         <div class="container-fixed-lg">
             <ul class="breadcrumb p-l-0">
-              <li class="breadcrumb-item active">Users and Access Roles
-              <li class="breadcrumb-item active">Manage Permissions
-              </li>
+              <li class="breadcrumb-item active">{{ __('general.users_access_roles') }}</li>
+              <li class="breadcrumb-item active"><a href="{{ route('admin.permissions') }}">{{ __('general.manage_permissions') }}</a></li>
             </ul>
             <div class="row">
                 <div class="col-md-6">

@@ -55,5 +55,6 @@ return [
     'remember_me' => 'Remember me',
     'credentials' => 'Credentials',
     'lost_your_password' => 'Lost your password?',
+    'forgot_password' => 'Forgot Password',
     'not_a_member_yet_sign_up_now' => 'Not a member yet? Signup Now',
 ];

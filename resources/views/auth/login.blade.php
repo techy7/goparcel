@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="m-b-5 m-t-30">
-                    <a href="#" class="small"><strong>{{ __('auth.lost_your_password') }}</strong></a>
+                    <a href="{{ route('password.request') }}" class="small"><strong>{{ __('auth.lost_your_password') }}</strong></a>
                 </div>
                 <div>
                     <a href="{{ route('register') }}" class="small"><strong>{{ __('auth.not_a_member_yet_sign_up_now') }}</strong></a>

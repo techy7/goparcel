@@ -5084,7 +5084,7 @@ Dropdown menus
 .dropdown-menu > .dropdown-item {
   line-height: 20px;
   color: #4b4b4b;
-  padding: 4px 8px 4px 16px;
+  padding: 6px 10px 4px 12px;
   border-radius: 3px;
   display: block;
   clear: both;
@@ -5184,6 +5184,14 @@ Dropdown menus
   background-color: transparent;
   background-image: none;
 }
+
+/* Hover Button */
+.dropdown-menu > button.dropdown-item:hover, .dropdown-menu > button.dropdown-item:focus, .dropdown-menu > button.dropdown-item:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: #0b6181;
+}
+/* Hover Button */
 
 .dropdown-menu > li {
   padding: 0;
@@ -10328,9 +10336,9 @@ https://github.com/eternicode/bootstrap-datepicker
 }
 
 .datepicker table tr td.today, .datepicker table tr td.today:hover, .datepicker table tr td.today.disabled, .datepicker table tr td.today.disabled:hover {
-  background-color: #f4f4f4;
+  background-color: lightgray;
   background-image: none;
-  color: #fff;
+  color: #333;
 }
 
 .datepicker table tr td.disabled {
