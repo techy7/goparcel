@@ -21,8 +21,16 @@
                 </span>
                 <div class="dropdown-divider"></div>
                 <a href="{{ route('customer.account', auth()->user()->username) }}" class="dropdown-item">{{ __('general.account') }}</a>
-                <a href="{{ route('customer.pickup', auth()->user()->username) }}" class="dropdown-item">{{ __('general.schedule_a_pickup') }}</a>
-                <a href="{{ route('customer.bookings', auth()->user()->username) }}" class="dropdown-item">{{ __('general.my_pickup_bookings') }}</a>
+                @hasanyrole('Customer')
+                    <a href="{{ route('customer.pickup', auth()->user()->username) }}" class="dropdown-item">{{ __('general.schedule_a_pickup') }}</a>
+                    <a href="{{ route('customer.bookings', auth()->user()->username) }}" class="dropdown-item">{{ __('general.my_pickup_bookings') }}</a>
+                @endhasanyrole
+                @hasanyrole('Super Admin|User')
+                    <a href="{{ route('admin.customers') }}" class="dropdown-item">{{ __('general.customers') }}</a>
+                    <a href="{{ route('admin.bookings') }}" class="dropdown-item">{{ __('general.bookings') }}</a>
+                    <a href="{{ route('admin.pickups') }}" class="dropdown-item">{{ __('general.pickup_schedules') }}</a>
+                    <a href="{{ route('admin.packages') }}" class="dropdown-item">{{ __('general.packages') }}</a>
+                @endhasanyrole
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('general.logout') }}</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>

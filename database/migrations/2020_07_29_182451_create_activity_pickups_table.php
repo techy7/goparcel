@@ -16,7 +16,6 @@ class CreateActivityPickupsTable extends Migration
         Schema::create('activity_pickups', function (Blueprint $table) {
             $table->id();
             $table->string('status'); // Arrived/Pickup/Delivered
-            $table->string('tracking_number');
             $table->timestamps();
         });
     }
