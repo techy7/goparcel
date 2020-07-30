@@ -169,14 +169,23 @@
 @endsection
 
 @section('lower-links-extends')
-    <script src="{{ asset('pages/assets/plugins/jquery-inputmask/jquery.inputmask.min.js') }}" type="text/javascript"></script>
-    <script>
-        $(function(){
-            $("#postal_code").mask("9999");
-            $("#m_number").mask("(9999) 999-9999");
-            $('#form-register').validate();
-        })
-    </script>
+    <script type="text/javascript" src="{{ asset('pages/assets/plugins/select2/js/select2.full.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('pages/assets/plugins/jquery-autonumeric/autoNumeric.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('pages/assets/plugins/jquery-inputmask/jquery.inputmask.min.js') }}"></script>
+    <script src="{{ asset('pages/assets/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/plugins/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('pages/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js') }}"></script>
+    <script src="{{ asset('pages/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js') }}"></script>
+    <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
+  <script>
+    $(function(){
+      $("#postal_code").mask("9999");
+      $("#m_number").mask("(9999) 999-9999");
+      $('#form-register').validate();
+    })
+  </script>
 @endsection
 @section('lower-links-extends-page')
+  <script src="{{ asset('pages/assets/js/form_elements.js') }}" type="text/javascript"></script>
 @endsection

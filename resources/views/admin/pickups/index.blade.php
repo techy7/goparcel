@@ -29,10 +29,29 @@
         <div class="container-fixed-lg bg-white">
             <div class="card card-transparent">
                 <div class="card-header ">
-                  <div class="pull-right">
-                    <div class="col-xs-12">
-                      <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
-                    </div>
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="pull-left">
+                                  <div class="dropdown">
+                                    <button aria-label="" class="btn text-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Filter by <i class="pg-icon">filter</i>
+                                    </button>
+                                      <div class="dropdown-menu" role="menu">
+                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">All</a>
+                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">Date</a>
+                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">New Request</a>
+                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">Client</a>
+                                          <a href="{{ route('admin.pickups') }}" class="dropdown-item">Location</a>
+                                          <div class="dropdown-divider"></div>
+                                      </div>
+                                  </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="pull-right">
+                            <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
+                          </div>
+                      </div>
                   </div>
                   <div class="clearfix"></div>
                 </div>
