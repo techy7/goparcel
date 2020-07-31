@@ -40,7 +40,7 @@ return [
     'error_invalid_email' => 'Invalid email',
     'error_email_already_taken' => 'Email already taken',
     'error_invalid_phone' => 'Invalid mobile number',
-    'error_password_validation_note' => 'Password has minimum of 6 characters and must contain numeric, uppercase, lowercase and any special characters',
+    'error_password_validation_note' => 'Password has minimum of 6 characters. Must contain an alphanumeric, an uppercase, a lowercase and a special characters',
     'error_password_invalid' => 'Password requirements has not met',
     'error_password_not_match' => 'Password not match',
 
@@ -57,5 +57,5 @@ return [
     'lost_your_password' => 'Lost your password?',
     'forgot_password' => 'Forgot Password',
     'reset_password' => 'Reset Password',
-    'not_a_member_yet_sign_up_now' => 'Not a member yet? Signup Now',
+    'not_a_member_yet_sign_up_now' => 'Not a member yet? Sign Up Now',
 ];

@@ -36,7 +36,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group form-group-default required @error('password') has-error @enderror">
+                    <div class="form-group form-group-default required @error('password') has-error @enderror" data-toggle="tooltip" data-original-title="{{ __('auth.error_password_validation_note') }}">
                         <label>{{ __('auth.password') }}</label>
                         <input type="password" name="password" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.password'))]) }}" class="form-control" required>
                     </div>
