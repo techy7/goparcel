@@ -4,8 +4,7 @@ $(document).ready(function () {
     $('#datepicker-component2').datepicker({
     format: "MM dd, yyyy (D)",
     clearBtn: true,
-    todayBtn: "linked",
     todayHighlight: true,
-    startDate: currentDate
+    startDate: '+2d'
     });
 })

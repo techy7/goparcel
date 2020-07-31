@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::patch('/{username}/account/update', 'AccountController@update')->name('customer.account.update');
         });
         Route::get('/{username}/my-pickup-bookings', 'BookingController@index')->name('customer.bookings');
+        Route::get('/{username}/my-pickup-bookings/{id}/waybill', 'BookingController@waybill')->name('customer.bookings.waybill');
     });
 
     Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {
@@ -49,7 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/customers/{username}/edit', 'CustomerController@edit')->name('admin.customers.edit');
         Route::patch('/customers/{username}', 'CustomerController@update')->name('admin.customers.update');
         Route::get('/customers/{username}/confirmation', 'CustomerController@destroyConfirmation')->name('admin.customers.destroy-confirmation');
-        Route::delete('/customers/{username}', 'CustomerController@destroy')->name('admin.customers.destroy');
+        Route::put('/customers/{username}', 'CustomerController@softDestroy')->name('admin.customers.soft-destroy');
         Route::get('/bookings', 'BookingController@index')->name('admin.bookings');
         Route::get('/bookings/{username}/edit', 'BookingController@edit')->name('admin.bookings.edit');
         Route::patch('/bookings/{username}', 'BookingController@update')->name('admin.bookings.update');
@@ -59,7 +60,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/pickups/{pickup}/edit', 'PickupController@edit')->name('admin.pickups.edit');
         Route::patch('/pickups/{pickup}', 'PickupController@update')->name('admin.pickups.update');
         Route::get('/pickups/{pickup}/confirmation', 'PickupController@destroyConfirmation')->name('admin.pickups.destroy-confirmation');
-        Route::delete('/pickups/{pickup}', 'PickupController@destroy')->name('admin.pickups.destroy');
+        Route::put('/pickups/{pickup}', 'PickupController@softDestroy')->name('admin.pickups.soft-destroy');
+        Route::get('/pickups/new-request', 'PickupController@newRequest')->name('admin.pickups.new-request');
         Route::get('/packages', 'PackageController@index')->name('admin.packages');
         Route::get('/packages/create', 'PackageController@create')->name('admin.packages.create');
         Route::post('/packages', 'PackageController@store')->name('admin.packages.store');

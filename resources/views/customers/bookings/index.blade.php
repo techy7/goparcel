@@ -92,6 +92,7 @@
                             @endif
                             <td class="v-align-middle semi-bold">
                               <div class="btn-group">
+                                <a href="{{ route('customer.bookings.waybill', [auth()->user()->username, $pickup->id]) }}" class="btn btn-outline-primary m-1">Waybill</a>
                                 <div class="btn-group dropdown dropdown-default" style="margin-top: 4px">
                                   <button aria-label="" class="btn dropdown-toggle text-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Details

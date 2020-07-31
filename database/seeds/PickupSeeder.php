@@ -35,6 +35,7 @@ class PickupSeeder extends Seeder
             'package_width' => 0,
             'package_height' => 0,
             'package_amount' => 0,
+            'tracking_number' => 'PB5F22DC3FEF84E',
         ]);
 
         // Large,
@@ -59,6 +60,7 @@ class PickupSeeder extends Seeder
             'package_width' => 0,
             'package_height' => 0,
             'package_amount' => 0,
+            'tracking_number' => 'PB5F22DCF0239D7',
         ]);
 
         // Own Packaging,
@@ -83,6 +85,7 @@ class PickupSeeder extends Seeder
             'package_width' => 20.22,
             'package_height' => 20.88,
             'package_amount' => 138,
+            'tracking_number' => 'PB5F22DD0779AE6',
         ]);
     }
 }

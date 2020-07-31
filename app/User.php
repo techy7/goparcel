@@ -28,7 +28,8 @@ class User extends Authenticatable
         'state',
         'postal_code',
         'country',
-        'profile_picture'
+        'profile_picture',
+        'active'
     ];
 
     /**

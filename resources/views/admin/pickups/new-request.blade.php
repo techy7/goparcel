@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Pickups List')
+@section('title', 'New Requested Pickups')
 
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -13,12 +13,12 @@
     <div class="container-fluid padding-25 sm-padding-10">
         <div class="container-fixed-lg">
             <ul class="breadcrumb p-l-0">
-              <li class="breadcrumb-item active"><a href="{{ route('admin.pickups') }}">Pickups List</a></li>
+              <li class="breadcrumb-item active"><a href="{{ route('admin.pickups') }}">New Requested Pickups</a></li>
             </ul>
             <div class="row">
                 <div class="col-md-6">
                     <div class="pull-left">
-                        <h3 class="page-title">Pickups List</h3>
+                        <h3 class="page-title">New Requested Pickups</h3>
                     </div>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pickups as $pickup)
+                        @foreach ($newRequests as $pickup)
                         <tr>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $pickup->user->username }}</p>

@@ -22,6 +22,7 @@ class CreatePickupsTable extends Migration
             $table->string('pickup_state')->nullable();
             $table->string('pickup_postal_code')->nullable();
             $table->string('pickup_country')->nullable();
+            // $table->unsignedBigInteger('pickup_activity_id')->nullable();
             $table->string('receiver_name')->nullable();
             $table->string('receiver_email')->nullable();
             $table->string('receiver_phone')->nullable();
@@ -35,6 +36,8 @@ class CreatePickupsTable extends Migration
             $table->float('package_width')->default(0);
             $table->float('package_height')->default(0);
             $table->float('package_amount')->default(0);
+            $table->string('tracking_number')->nullable();
+            $table->boolean('active')->default(1);
             $table->timestamps();
             $table->index(['user_id'], 'FK');
         });

@@ -8,7 +8,9 @@ use App\Pickup;
 use App\Package;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Mail\CustomerPickupDetails;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class PickupController extends Controller
 {
@@ -71,7 +73,10 @@ class PickupController extends Controller
             'package_width' => $pickupData['package_width'],
             'package_height' => $pickupData['package_height'],
             'package_amount' => $pickupData['package_amount'],
+            'tracking_number' => strtoupper(uniqid('PB'))
         ]);
+
+        Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
 
         return redirect()->route('customer.pickup.store', auth()->user()->username)->with('success', 'Pickup has been successfully added.');
     }

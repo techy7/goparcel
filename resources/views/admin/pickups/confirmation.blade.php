@@ -17,9 +17,9 @@
             <h3 class="page-title">Delete Customer Pickup Confirmation</h3>
         </div>
 
-        <form id="form-register" class="p-t-15" role="form" method="POST" action="{{ route('admin.pickups.destroy', $pickup->id) }}">
+        <form id="form-register" class="p-t-15" role="form" method="POST" action="{{ route('admin.pickups.soft-destroy', $pickup->id) }}">
             @csrf
-            @method('DELETE')
+            @method('PUT')
 
             <div class="row">
                 <div class="col-md-12">

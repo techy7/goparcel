@@ -39,12 +39,6 @@ class AccountController extends Controller
             'profile_picture.image' => 'The profile picture should be an image.'
         ]);
 
-
-
-
-
-
-
         if (request('profile_picture')) {
             $imagePath = request('profile_picture')->store('uploads/images/customers/original', 'public');
             $imageMerge = ['image' => $imagePath];

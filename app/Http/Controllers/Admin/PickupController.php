@@ -13,7 +13,7 @@ class PickupController extends Controller
 {
     public function index()
     {
-        $pickups = Pickup::all();
+        $pickups = Pickup::whereActive(1)->get();
 
         return view('admin.pickups.index', compact('pickups'));
     }
@@ -49,7 +49,7 @@ class PickupController extends Controller
         return view('admin.pickups.confirmation', compact('pickup'));
     }
 
-    public function destroy(Pickup $pickup)
+    public function softDestroy(Pickup $pickup)
     {
         $data = request()->validate([
             'email' => ['required', new same_email($pickup->user->email)]
@@ -57,8 +57,17 @@ class PickupController extends Controller
             'email.required' => 'This field is required.'
         ]);
 
-        $pickup->delete();
+        $pickup->update([
+            'active' => 0
+        ]);
         
         return redirect()->route('admin.pickups', $pickup->id)->with('delete', 'Pickup for ' . $pickup->user->name . '  has been successfully deleted.');
+    }
+
+    public function newRequest()
+    {
+        $newRequests = Pickup::whereDate('pickup_date', now())->get();
+
+        return view('admin.pickups.new-request', compact('newRequests'));
     }
 }

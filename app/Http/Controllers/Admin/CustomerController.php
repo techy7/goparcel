@@ -15,7 +15,7 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = User::role('Customer')->latest()->get();
+        $customers = User::whereActive(1)->role('Customer')->latest()->get();
 
         return view('admin.customers.index', compact('customers'));
     }
@@ -159,7 +159,7 @@ class CustomerController extends Controller
         return view('admin.customers.confirmation', compact('userData'));
     }
 
-    public function destroy(User $user)
+    public function softDestroy(User $user)
     {
         $userData = $user->findOrFail(request()->route('username'));
         
@@ -169,7 +169,9 @@ class CustomerController extends Controller
             'email.required' => 'This field is required.'
         ]);
 
-        $userData->delete();
+        $userData->update([
+            'active' => 0
+        ]);
 
         return redirect()->route('admin.customers', $userData->id)->with('delete', $userData->username . ' User has been successfully deleted.');
     }

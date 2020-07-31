@@ -17760,6 +17760,12 @@ Main components
   width: 68px;
 }
 
+.profile-img-wrapper.large {
+  height: 89px;
+  width: 200px;
+  border-radius: 0 0 0 0;
+}
+
 .profile-img-wrapper.with-left-space-custom {
   margin-left: 7px;
 }
