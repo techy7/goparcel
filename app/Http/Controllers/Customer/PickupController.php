@@ -7,6 +7,7 @@ use App\User;
 use App\Pickup;
 use App\Package;
 use Carbon\Carbon;
+use App\PickupActivity;
 use Illuminate\Http\Request;
 use App\Mail\CustomerPickupDetails;
 use App\Http\Controllers\Controller;
@@ -76,6 +77,10 @@ class PickupController extends Controller
             'package_height' => $pickupData['package_height'],
             'package_amount' => $pickupData['package_amount'],
             'tracking_number' => strtoupper(uniqid('PB'))
+        ]);
+
+        PickupActivity::create([
+            'pickup_id' => $pickup->id // if error protect the fillable
         ]);
 
         Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));

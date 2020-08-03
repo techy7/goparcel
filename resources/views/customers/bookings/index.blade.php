@@ -53,6 +53,7 @@
                         <th>Pickup Date</th>
                         <th>Package Type</th>
                         <th>Total Amount</th>
+                        <th>Delivery Status</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -87,9 +88,16 @@
                               </td>
                             @endif
                             <td class="v-align-middle semi-bold">
+                                <p>
+                                  <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}">
+                                    <span class="btn btn-primary">{{ $pickup->pickupActivity->status }}</span>
+                                  </a>
+                                </p>
+                            </td>
+                            <td class="v-align-middle semi-bold">
                               <div class="btn-group">
                                 <a href="{{ route('customer.bookings.waybill', [auth()->user()->username, $pickup->id]) }}" class="btn btn-outline-primary m-1">Waybill</a>
-                                <div class="btn-group dropdown dropdown-default" style="margin-top: 4px">
+                                {{-- <div class="btn-group dropdown dropdown-default" style="margin-top: 4px">
                                   <button aria-label="" class="btn dropdown-toggle text-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Details
                                   </button>
@@ -104,7 +112,7 @@
                                       Pickup
                                     </button>
                                   </div>
-                                </div>
+                                </div> --}}
                                 </div>
                             </td>
                         </tr>

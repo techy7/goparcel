@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::patch('/{username}/account/update', 'AccountController@update')->name('customer.account.update');
         });
         Route::get('/{username}/my-pickup-bookings', 'BookingController@index')->name('customer.bookings');
+        Route::get('/{username}/my-pickup-bookings/{tracking_number}', 'BookingController@track')->name('customer.bookings.track');
         Route::get('/{username}/my-pickup-bookings/{id}/waybill', 'BookingController@waybill')->name('customer.bookings.waybill');
     });
 

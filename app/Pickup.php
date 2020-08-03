@@ -51,4 +51,9 @@ class Pickup extends Model
     {
         return $this->belongsTo(Package::class);
     }
+
+    public function pickupActivities()
+    {
+        return $this->hasMany(PickupActivity::class);
+    }
 }

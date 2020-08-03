@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Customer;
 
 use App\User;
 use App\Pickup;
-use Barryvdh\DomPDF\Facade as PDF;
+use App\PickupActivity;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 
 class BookingController extends Controller
@@ -21,6 +22,21 @@ class BookingController extends Controller
         });
 
         return view('customers.bookings.index', compact('nonCustomers'));
+    }
+
+    public function track(User $user, Pickup $pickup)
+    {
+        $pickups = $pickup->get();
+
+        $pickupOrder = $pickups->where('tracking_number', request()->route('tracking_number'))->first();
+        
+        $pickupStatus = PickupActivity::all();
+
+        foreach ($pickupOrder->pickupActivities as $pickupActivity) {
+            $pickupActive = $pickupActivity;
+        }
+
+        return view('customers.bookings.track', compact('pickupOrder', 'pickupStatus', 'pickupActive'));
     }
 
     public function waybill(User $user, Pickup $pickup)

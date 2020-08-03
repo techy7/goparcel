@@ -316,41 +316,41 @@
                 </div>
                 <hr style="margin: 10px 0 15px 0">
                 <div class="row">
-                <div class="col-md-6">
-                    <div class="pull-left">
-                    <h5 class="no-margin small"><strong>Service Fees</strong></h5>
+                    <div class="col-md-6">
+                        <div class="pull-left">
+                        <h5 class="no-margin small"><strong>Service Fees</strong></h5>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                        <h5 class="no-margin small"><strong>₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</strong></h5>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="pull-right">
-                    <h5 class="no-margin small"><strong>₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</strong></h5>
-                    </div>
-                </div>
-            </div>
                 <div class="row">
-                <div class="col-md-6">
-                    <div class="pull-left m-l-10">
-                    <h5 class="no-margin small text-muted">Additional Weight Fee</h5>
+                    <div class="col-md-6">
+                        <div class="pull-left m-l-10">
+                        <h5 class="no-margin small text-muted">Additional Weight Fee</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                        <h5 class="no-margin small text-muted">₱{{ additionalWeightFee }}.00</h5>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="pull-right">
-                    <h5 class="no-margin small text-muted">₱{{ additionalWeightFee }}.00</h5>
-                    </div>
-                </div>
-            </div>
                 <div class="row m-t-10">
-                <div class="col-md-6">
-                    <div class="pull-left">
-                    <h5 class="no-margin small"><strong>Total Amount</strong></h5>
+                    <div class="col-md-6">
+                        <div class="pull-left">
+                        <h5 class="no-margin small"><strong>Total Amount</strong></h5>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pull-right">
+                        <h5 class="no-margin small"><strong>P{{ totalAmount }}.00</strong></h5>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="pull-right">
-                    <h5 class="no-margin small"><strong>P{{ totalAmount }}.00</strong></h5>
-                    </div>
-                </div>
-            </div>
             </div>
         </div>
         </div>
