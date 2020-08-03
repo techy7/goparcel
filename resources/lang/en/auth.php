@@ -40,7 +40,7 @@ return [
     'error_invalid_email' => 'Invalid email',
     'error_email_already_taken' => 'Email already taken',
     'error_invalid_phone' => 'Invalid mobile number',
-    'error_password_validation_note' => 'Password has minimum of 6 characters. Must contain an alphanumeric, an uppercase, a lowercase and a special characters',
+    'error_password_validation_note' => 'Password must contain at least 6 characters, including upper/lowercase, numbers and special characters',
     'error_password_invalid' => 'Password requirements has not met',
     'error_password_not_match' => 'Password not match',
 
