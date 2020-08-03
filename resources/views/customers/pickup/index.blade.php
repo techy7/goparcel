@@ -1,18 +1,18 @@
 @extends('layouts.pages.app')
-
+ 
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css" media="screen">
 @endsection
-
+ 
 @section('title', 'Schedule a Pickup')
-
+ 
 @section('content')
 <div class="content sm-gutter">
     <div class="container-fluid padding-25 sm-padding-10">
-
+ 
       @include('layouts.pages.session')
-
-      <form method="POST" action="{{ route('customer.pickup.store', auth()->user()->username) }}">
+ 
+      {{-- <form method="POST" action="{{ route('customer.pickup.store', auth()->user()->username) }}">
         @csrf
         <div class="row">
           <div class="col-md-6 col-xlg-6">
@@ -174,17 +174,16 @@
                 </div>
           </div>
     </div>
-
+ 
     <input type="hidden" value="0" name="package_length">
     <input type="hidden" value="0" name="package_width">
     <input type="hidden" value="0" name="package_height">
     <input type="hidden" value="0" name="package_amount">
-
+ 
     <div class="row">
         <div class="col-md-12">
           <div id="app">
             <package-item :packages="{{ $packages }}" :own="{{ $ownPackaging }}" :packaging-amount="{{ $ownPackagingAmount }}" :package-filtered="{{ $packageFiltered }}"></package-item>
-            {{-- <package-type :packages="{{ $packages }}"></package-type> --}}
           </div>
         </div>
     </div>
@@ -202,16 +201,28 @@
       </div>
       <div class="col-5"></div>
     </div>
-  </form>
+  </form> --}}
+ 
+      <h1>Schedule a Pickup</h1>
+
+      <div class="page-content-wrapper m-b-45" id="app">
+        <div class="sm-p-l-5 bg-contrast-lower">
+          <new-package :cities="{{ json_encode($cities) }}"></new-package>
+        </div>
+ 
+        {{-- @include('customers.pickup.sender')
+        @include('customers.pickup.recipient')
+        @include('customers.pickup.package') --}}
+ 
     </div>
 </div>
-
+ 
 @endsection
-
+ 
 @section('appJs-link')
     <script src="{{ asset('js/app.js') }}"></script>
 @endsection
-
+ 
 @section('lower-links-extends')
     <script type="text/javascript" src="{{ asset('pages/assets/plugins/select2/js/select2.full.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('pages/assets/plugins/jquery-autonumeric/autoNumeric.js') }}"></script>
@@ -222,8 +233,8 @@
     <script src="{{ asset('pages/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ asset('pages/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js') }}"></script>
     <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
-    <script src="{{ asset('pages/assets/js/datepicker-custom.js') }}"></script>
-
+    {{-- <script src="{{ asset('pages/assets/js/datepicker-custom.js') }}"></script> --}}
+ 
   <script>
     $(function(){
       $("#pickup_postal_code").mask("9999");
@@ -234,5 +245,6 @@
   </script>
 @endsection
 @section('lower-links-extends-page')
+  <script src="{{ asset('pages/assets/js/timeline.js') }}" type="text/javascript"></script>
   <script src="{{ asset('pages/assets/js/form_elements.js') }}" type="text/javascript"></script>
 @endsection

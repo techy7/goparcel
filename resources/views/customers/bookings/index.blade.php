@@ -46,13 +46,12 @@
                   <table class="table table-hover demo-table-search table-responsive-block" id="tableWithSearch">
                     <thead>
                       <tr>
-                        <th>Pickup Date</th>
-                        <th>Pickup Address</th>
-                        <th>Pickup State</th>
-                        <th>Pickup Postal Code</th>
-                        <th>Pickup Country</th>
-                        <th>Package Type</th>
                         <th>Date Pickup Scheduled</th>
+                        <th>Recipient Name</th>
+                        <th>Tracking Number</th>
+                        <th>Package Type</th>
+                        <th>Pickup Date</th>
+                        <th>Package Type</th>
                         <th>Total Amount</th>
                         <th>Action</th>
                       </tr>
@@ -61,25 +60,22 @@
                         @foreach (auth()->user()->pickups as $pickup)
                         <tr>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $pickup->pickup_date->format('F d, Y (D)') }}</p>
+                                <p>{{ $pickup->created_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $pickup->pickup_address }}</p>
+                                <p>{{ $pickup->receiver_name }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $pickup->pickup_state }}</p>
-                            </td>
-                            <td class="v-align-middle semi-bold">
-                                <p>{{ $pickup->pickup_postal_code }}</p>
-                            </td>
-                            <td class="v-align-middle semi-bold">
-                                <p>{{ $pickup->pickup_country }}</p>
+                                <p>{{ $pickup->tracking_number }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $pickup->package->name }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $pickup->created_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
+                                <p>{{ $pickup->pickup_date->format('F d, Y (D)') }}</p>
+                            </td>
+                            <td class="v-align-middle semi-bold">
+                                <p>{{ $pickup->package->name }}</p>
                             </td>
                             @if ($pickup->package->name == 'Own Packaging')
                               <td class="v-align-middle semi-bold">

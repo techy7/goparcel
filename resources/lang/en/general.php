@@ -12,8 +12,11 @@ return [
 
     //Customer
     'schedule_a_pickup' => 'Schedule a Pickup',
-    'my_pickup_booking' => 'My Pickup Bookings',
+    'my_pickup_booking' => 'Pickup Bookings',
     'customers' => 'Customers',
+    'help_center' => 'Help Center',
+    'terms_of_service' => 'Terms of Service',
+    'privacy_policy' => 'Privacy Policy',
 
     //Admin
     'bookings' => 'Bookings',

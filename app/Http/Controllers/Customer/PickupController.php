@@ -16,6 +16,8 @@ class PickupController extends Controller
 {
     public function index()
     {
+        $cities = config('location.PH_states_cities');
+
         $productTypes = Type::all();
 
         $packages = Package::all();
@@ -27,7 +29,7 @@ class PickupController extends Controller
         $ownPackagingAmount = Package::where('name', 'Own Packaging')->first();
         $ownPackaging = Package::where('name', 'Own Packaging')->get();
         
-        return view('customers.pickup.index', compact('productTypes', 'packages', 'packageFiltered', 'ownPackagingAmount', 'ownPackaging'));
+        return view('customers.pickup.index', compact('productTypes', 'packages', 'packageFiltered', 'ownPackagingAmount', 'ownPackaging', 'cities'));
     }
 
     public function store()
