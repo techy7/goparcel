@@ -4,7 +4,7 @@
     </div>
     <div class="sidebar-menu">
         <ul class="menu-items">
-            @hasanyrole('Super Admin')
+            @hasanyrole('Super Admin|User')
             <li class="m-t-10">
                 <a href="{{ route('admin.dashboard') }}"><span class="title">{{ __('general.dashboard') }}</span></a>
             </li>
@@ -12,6 +12,21 @@
             @hasanyrole('Customer')
             <li class="m-t-10">
                 <a href="{{ route('customer.dashboard', auth()->user()->username) }}"><span class="title">{{ __('general.dashboard') }}</span></a>
+            </li>
+            <li class="m-t-10">
+                <a href="{{ route('customer.pickup', auth()->user()->username) }}"><span class="title">{{ __('general.schedule_a_pickup') }}</span></a>
+            </li>
+            <li class="m-t-10">
+                <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.my_pickup_booking') }}</span></a>
+            </li>
+            <li class="m-t-10">
+                <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.help_center') }}</span></a>
+            </li>
+            <li class="m-t-10">
+                <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.terms_of_service') }}</span></a>
+            </li>
+            <li class="m-t-10">
+                <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.privacy_policy') }}</span></a>
             </li>
             @endhasanyrole
             @hasanyrole('Super Admin|User')
@@ -51,16 +66,6 @@
             @hasanyrole('Super Admin')
             <li class="m-t-10">
                 <a href="{{ route('admin.packages') }}"><span class="title">{{ __('general.packages') }}</span></a>
-            </li>
-            @endhasanyrole
-            @hasanyrole('Customer')
-            <li>
-                <a href="{{ route('customer.pickup', auth()->user()->username) }}"><span class="title">{{ __('general.schedule_a_pickup') }}</span></a>
-            </li>
-            @endhasanyrole
-            @hasanyrole('Customer')
-            <li>
-                <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.my_pickup_booking') }}</span></a>
             </li>
             @endhasanyrole
         </ul>
