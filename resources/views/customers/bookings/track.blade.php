@@ -133,77 +133,27 @@
                                 <div class="card card-default" style="border: 1px solid #ccc">
                                     <div class="card-body" style="padding: 8px !important;">
                                         <h5 class="address-title text-muted">Tracking Details</h5>
-                                            <div class="card-body" style="margin-bottom: -45px;">
+                                            <div class="card-body" style="padding: 10px 20px 0px 10px !important;">
                                             <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-                                                {{-- @foreach ($pickupStatus as $key => $status)
+                                                @foreach ($pickupOrder->pickupActivities as $key => $active)
                                                     <div class="step 
-                                                        @if($pickupActive->status == 'Order Created')
-                                                            @if($status->status == $pickupActive->status) completed @endif
-                                                        @endif
-                                                        @if($pickupActive->status == 'In Transit for Collection')
-                                                            @if($pickupOrder->pickup_activity_id > 0)
-                                                                @if($status->status == $pickupActive->status) completed @endif
-                                                            @endif
-                                                        @endif
+                                                            @if(($active->deliveryStatus->name == 'Order Created') || ($active->deliveryStatus->name == 'In Transit for Collection') || ($active->deliveryStatus->name == 'Arrived at Manila Hub') || ($active->deliveryStatus->name == 'In Transit for Delivery')) completed @endif
                                                         ">
                                                         <div class="step-icon-wrap">
                                                             <div class="step-icon"><i class="
-                                                                @if($status->status == 'Order Created') pe-7s-note 
-                                                                @elseif($status->status == 'In Transit for Collection') pe-7s-albums 
-                                                                @elseif($status->status == 'Arrived at Manila Hub') pe-7s-map-marker 
-                                                                @elseif($status->status == 'In Transit for Delivery') pe-7s-car 
-                                                                @elseif($status->status == 'Delivered') pe-7s-box2 
-                                                                @elseif($status->status == 'Back to Sender') pe-7s-back-2
+                                                                @if($active->deliveryStatus->name == 'Order Created') pe-7s-note 
+                                                                @elseif($active->deliveryStatus->name == 'In Transit for Collection') pe-7s-albums 
+                                                                @elseif($active->deliveryStatus->name == 'Arrived at Manila Hub') pe-7s-map-marker 
+                                                                @elseif($active->deliveryStatus->name == 'In Transit for Delivery') pe-7s-car 
+                                                                @elseif($active->deliveryStatus->name == 'Delivered') pe-7s-box2 
+                                                                @elseif($active->deliveryStatus->name == 'Back to Sender') pe-7s-back-2
                                                                 @endif
                                                             "></i></div>
                                                         </div>
-                                                        <h4 class="step-title">{{ $status->status }}</h4>
-                                                        <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $pickupOrder->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
+                                                        <h4 class="step-title">{{ $active->deliveryStatus->name }}</h4>
+                                                        <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $active->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
                                                     </div>
-                                                @endforeach --}}
-                                                
-                                                @if(($pickupActive->status == 'Order Created') || ($pickupActive->status == 'In Transit for Collection') || ($pickupActive->status == 'Arrived at Manila Hub') || ($pickupActive->status == 'In Transit for Delivery') || ($pickupActive->status == 'Delivered') || ($pickupActive->status == 'Back to Sender'))
-                                                <div class="step completed">
-                                                    <div class="step-icon-wrap">
-                                                        <div class="step-icon"><i class="pe-7s-note"></i></div>
-                                                    </div>
-                                                    <h4 class="step-title">Order Created</h4>
-                                                    <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $pickupActive->pivot->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
-                                                </div>
-                                                <div class="step @if(($pickupActive->status == 'In Transit for Collection') || ($pickupActive->status == 'Arrived at Manila Hub') || ($pickupActive->status == 'In Transit for Delivery') || ($pickupActive->status == 'Delivered') || ($pickupActive->status == 'Back to Sender')) completed @endif">
-                                                    <div class="step-icon-wrap">
-                                                        <div class="step-icon"><i class="pe-7s-albums"></i></div>
-                                                    </div>
-                                                    <h4 class="step-title">In Transit for Collection</h4>
-                                                    <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $pickupActive->pivot->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
-                                                </div>
-                                                <div class="step @if(($pickupActive->status == 'Arrived at Manila Hub') || ($pickupActive->status == 'In Transit for Delivery') || ($pickupActive->status == 'Delivered') || ($pickupActive->status == 'Back to Sender')) completed @endif">
-                                                    <div class="step-icon-wrap">
-                                                        <div class="step-icon"><i class="pe-7s-map-marker"></i></div>
-                                                    </div>
-                                                    <h4 class="step-title">Arrived at Manila Hub</h4>
-                                                    <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $pickupActive->pivot->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
-                                                </div>
-                                                <div class="step @if(($pickupActive->status == 'In Transit for Delivery') || ($pickupActive->status == 'Delivered') || ($pickupActive->status == 'Back to Sender')) completed @endif">
-                                                    <div class="step-icon-wrap">
-                                                        <div class="step-icon"><i class="pe-7s-car"></i></div>
-                                                    </div>
-                                                    <h4 class="step-title">In Transit for Delivery</h4>
-                                                </div>
-                                                <div class="step @if(($pickupActive->status == 'Delivered') || ($pickupActive->status == 'Back to Sender')) completed @endif">
-                                                    <div class="step-icon-wrap">
-                                                        <div class="step-icon"><i class="pe-7s-box2"></i></div>
-                                                    </div>
-                                                    <h4 class="step-title">Delivered</h4>
-                                                </div>
-                                                <div class="step @if($pickupActive->status == 'Back to Sender') completed @endif">
-                                                    <div class="step-icon-wrap">
-                                                        <div class="step-icon"><i class="pe-7s-back-2"></i></div>
-                                                    </div>
-                                                    <h4 class="step-title">Back to Sender</h4>
-                                                </div>
-                                                @endif
-                                            </div>
+                                                @endforeach
                                             </div>
                                         <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center m-b-10">
                                             <div class="custom-control custom-checkbox">

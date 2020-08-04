@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\User;
 use App\Pickup;
+use App\DeliveryStatus;
 use App\PickupActivity;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -29,14 +30,29 @@ class BookingController extends Controller
         $pickups = $pickup->get();
 
         $pickupOrder = $pickups->where('tracking_number', request()->route('tracking_number'))->first();
-        
-        $pickupStatus = PickupActivity::all();
 
-        foreach ($pickupOrder->pickupActivities as $pickupActivity) {
-            $pickupActive = $pickupActivity;
+        foreach ($pickupOrder->pickupActivities as $pick) {
+            $pick = $pick->deliveryStatus;
         }
 
-        return view('customers.bookings.track', compact('pickupOrder', 'pickupStatus', 'pickupActive'));
+        $pickupStatus = PickupActivity::all();
+
+        $deliveryStatus = DeliveryStatus::all();
+
+        foreach ($pickupOrder->pickupActivities as $pickupActivity) {
+            $pickupActivityDate = $pickupActivity;
+            $pickupActive = $pickupActivity->deliveryStatus;
+        }
+
+        return view('customers.bookings.track', 
+        compact(
+            'pickupOrder', 
+            'pickupStatus', 
+            'pickupActive', 
+            'deliveryStatus', 
+            'pick',
+            'pickupActivityDate'
+        ));
     }
 
     public function waybill(User $user, Pickup $pickup)
