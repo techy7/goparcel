@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Customer;
 
-use App\Type;
 use App\User;
 use App\Pickup;
 use App\Package;
@@ -18,8 +17,6 @@ class PickupController extends Controller
     public function index()
     {
         $cities = config('location.PH_states_cities');
-
-        $productTypes = Type::all();
 
         $packages = Package::all();
 
