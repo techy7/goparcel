@@ -90,7 +90,7 @@
                             <td class="v-align-middle semi-bold">
                                 <p>
                                   <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}">
-                                    <span class="btn btn-primary">{{ dd($pickup) }}</span>
+                                    <span class="btn btn-primary">{{ dd($pickup->pickupActivities->name) }}</span>
                                   </a>
                                 </p>
                             </td>
