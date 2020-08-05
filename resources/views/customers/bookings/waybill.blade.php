@@ -6,10 +6,10 @@
         <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
         <link rel="icon" type="image/x-icon" href="{{ asset('pages/assets/img/icon.png') }}" />
-    
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="{{ asset('pages/assets/plugins/bootstrap/css/bootstrap.min.css') }}">
     </head>
-    
+
     <body>
         <div class="bg-white" style="padding: 40px; padding-bottom: 0;">
             <div class="card">
