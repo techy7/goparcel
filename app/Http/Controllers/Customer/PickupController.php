@@ -53,13 +53,15 @@ class PickupController extends Controller
             'package_amount' => 'nullable|max:5',
         ], [
             'receiver_name.regex' => 'The :attribute field can only contain letters.',
+            'sender_phone.phone' => 'The sender contact number field contains an invalid number.',
             'receiver_phone.phone' => 'The receiver contact number field contains an invalid number.',
+            'package_id.required' => 'The package field is required.',
         ]);
 
         $pickup = auth()->user()->pickups()->create([
             'sender_name' => request('sender_name'),
             'sender_phone' => request('sender_phone'),
-            'pickup_date' => Carbon::createFromFormat('F d, Y (D)', $pickupData['pickup_date']),
+            'pickup_date' => $pickupData['pickup_date'],
             'pickup_address' => request('pickup_address'),
             'pickup_city' => $pickupData['pickup_city'],
             'pickup_state' => config('location.PH_cities_states')[$pickupData['pickup_city']],
@@ -83,8 +85,11 @@ class PickupController extends Controller
 
         $pickup->pickupActivities()->create();
 
-        Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
+        return response()->json($pickup);
 
-        return redirect()->route('customer.pickup', auth()->user()->username)->with('success', 'Pickup has been successfully added.');
+
+        // Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
+
+        // return redirect()->route('customer.pickup', auth()->user()->username)->with('success', 'Pickup has been successfully added.');
     }
 }

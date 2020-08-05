@@ -205,14 +205,14 @@
  
       <h1>Schedule a Pickup</h1>
 
-      <form method="POST" action="{{ route('customer.pickup.store', auth()->user()->username) }}">
-      @csrf
+      {{-- <form method="POST" action="{{ route('customer.pickup.store', auth()->user()->username) }}">
+      @csrf --}}
       <div class="page-content-wrapper m-b-45" id="app">
         <div class="sm-p-l-5 bg-contrast-lower">
-            <new-package :cities="{{ json_encode($cities) }}"></new-package>
+          <new-package username="{{ auth()->user()->username }}" :cities="{{ json_encode($cities) }}"></new-package>
           </div>
         </div>
-      </form>
+      {{-- </form> --}}
 </div>
  
 @endsection

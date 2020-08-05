@@ -53,8 +53,8 @@ class BookingController extends Controller
         $userPickup = $pickupId->first();
 
         $pdf = PDF::loadView('customers.bookings.waybill', compact('userPickup'));
-        return $pdf->download(config('app.name') . ' Waybill.pdf');
+        return $pdf->download(config('app.name') . ' ' . $userPickup->tracking_number . '.pdf');
 
-        // return view('customers.bookings.waybill', compact('userPickup', 'pickupActive'));
+        // return view('customers.bookings.waybill', compact('userPickup'));
     }
 }
