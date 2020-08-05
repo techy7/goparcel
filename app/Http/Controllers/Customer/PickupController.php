@@ -34,6 +34,8 @@ class PickupController extends Controller
     public function store()
     {
         $pickupData = request()->validate([
+            'sender_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
+            'sender_phone' => 'required|phone:PH',
             'pickup_date' => 'required',
             'pickup_address' => 'required|string|max:255',
             'pickup_city' => 'required|string|max:255',
@@ -55,6 +57,8 @@ class PickupController extends Controller
         ]);
 
         $pickup = auth()->user()->pickups()->create([
+            'sender_name' => request('sender_name'),
+            'sender_phone' => request('sender_phone'),
             'pickup_date' => Carbon::createFromFormat('F d, Y (D)', $pickupData['pickup_date']),
             'pickup_address' => request('pickup_address'),
             'pickup_city' => $pickupData['pickup_city'],
@@ -70,19 +74,17 @@ class PickupController extends Controller
             'receiver_postal_code' => request('receiver_postal_code'),
             'receiver_country' => 'Philippines',
             'package_id' => request('package_id'),
-            'package_length' => $pickupData['package_length'],
-            'package_width' => $pickupData['package_width'],
-            'package_height' => $pickupData['package_height'],
-            'package_amount' => $pickupData['package_amount'],
+            'package_length' => request('package_length') ?? 0,
+            'package_width' => request('package_width') ?? 0,
+            'package_height' => request('package_height') ?? 0,
+            'package_amount' => request('package_amount'),
             'tracking_number' => strtoupper(uniqid('PB'))
         ]);
 
-        PickupActivity::create([
-            'pickup_id' => $pickup->id // if error protect the fillable
-        ]);
+        $pickup->pickupActivities()->create();
 
         Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
 
-        return redirect()->route('customer.pickup.store', auth()->user()->username)->with('success', 'Pickup has been successfully added.');
+        return redirect()->route('customer.pickup', auth()->user()->username)->with('success', 'Pickup has been successfully added.');
     }
 }

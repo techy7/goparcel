@@ -31,27 +31,14 @@ class BookingController extends Controller
 
         $pickupOrder = $pickups->where('tracking_number', request()->route('tracking_number'))->first();
 
-        foreach ($pickupOrder->pickupActivities as $pick) {
-            $pick = $pick->deliveryStatus;
-        }
-
-        $pickupStatus = PickupActivity::all();
-
-        $deliveryStatus = DeliveryStatus::all();
-
         foreach ($pickupOrder->pickupActivities as $pickupActivity) {
-            $pickupActivityDate = $pickupActivity;
             $pickupActive = $pickupActivity->deliveryStatus;
         }
 
         return view('customers.bookings.track', 
         compact(
             'pickupOrder', 
-            'pickupStatus', 
             'pickupActive', 
-            'deliveryStatus', 
-            'pick',
-            'pickupActivityDate'
         ));
     }
 
@@ -66,16 +53,8 @@ class BookingController extends Controller
         $userPickup = $pickupId->first();
 
         $pdf = PDF::loadView('customers.bookings.waybill', compact('userPickup'));
-        return $pdf->download('waybill.pdf');
+        return $pdf->download(config('app.name') . ' Waybill.pdf');
 
-        // return view('customers.bookings.waybill', compact('userPickup'));
-    }
-
-    public function download(User $user)
-    {
-        $pdf = PDF::loadView('customers.bookings.waybill');
-        return $pdf->download('waybill.pdf');
-
-        return redirect()->route('customer.bookings.waybill', auth()->user()->username)->with('success', 'Waybill has been successfully downloaded.');
+        // return view('customers.bookings.waybill', compact('userPickup', 'pickupActive'));
     }
 }

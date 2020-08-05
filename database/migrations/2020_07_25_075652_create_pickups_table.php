@@ -16,6 +16,8 @@ class CreatePickupsTable extends Migration
         Schema::create('pickups', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable();
+            $table->string('sender_name')->nullable();
+            $table->string('sender_phone')->nullable();
             $table->timestamp('pickup_date')->nullable();
             $table->string('pickup_address')->nullable();
             $table->string('pickup_city')->nullable();

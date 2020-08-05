@@ -1,21 +1,8 @@
 <template>
-
-<div>
-
-    
-
-
-
-
-
-
-
-
-
     <div class="row">
         <div class="col-md-6">
             <div v-for="send in sender" :key="send.id" >
-            <button class="address" data-toggle="modal" data-target="#modalSlideUp-1">
+            <button type="button" class="address" data-toggle="modal" data-target="#modalSlideUp-1">
                 <div class="address-title text-muted">Sender Address &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
                 <h5 class="no-margin"><strong>{{ send.name ? send.name : 'Sender Name' }} | {{ send.number ? send.number : 'Phone Number' }} | {{ send.pickup_date ? send.pickup_date : 'Pickup Date' }}</strong></h5>
                 <p>{{ send.address ? send.address : 'Address' }} {{ send.city ? send.city : 'City' }} {{ send.postal_code ? send.postal_code : 'Postal Code' }}</p>
@@ -36,8 +23,7 @@
                             <div class="col-md-12">
                                 <div class="form-group form-group-default">
                                 <label>Sender Name</label>
-                                <input v-model="send.name" type="text" class="form-control" :name="name" placeholder="Enter name">
-                    
+                                    <input v-model="send.name" type="text" class="form-control" name="sender_name" placeholder="Enter sender name">
                                 </div>
                             </div>
                             </div>
@@ -45,7 +31,7 @@
                             <div class="col-md-12">
                                 <div class="form-group form-group-default">
                                 <label>Phone Number</label>
-                                <input v-model="send.number" type="text" class="form-control" :name="phone_number" placeholder="Enter phone number">
+                                <input v-model="send.number" type="text" class="form-control" name="sender_phone" placeholder="Enter phone number">
                     
                                 </div>
                             </div>
@@ -55,7 +41,7 @@
                                         <div class="form-group form-group-default input-group">
                                             <div class="form-input-group">
                                                 <label>Pickup Date</label>
-                                                <input v-model="send.pickup_date" type="text" class="form-control" :name="pickup_date" placeholder="Pick a date" id="datepicker-component2">
+                                                <input v-model="send.pickup_date" type="text" class="form-control" name="pickup_date" placeholder="Pick a date" id="datepicker-component2">
                                                 </div>
                                                 <div class="input-group-append">
                                                 <span class="input-group-text"><i class="pg-icon">calendar</i></span>
@@ -67,8 +53,7 @@
                                         <div class="col-md-12">
                                         <div class="form-group form-group-default">
                                             <label>Address</label>
-                                            <input v-model="send.address" type="text" class="form-control" placeholder="123 Manuel St.">
-                                
+                                            <input v-model="send.address" type="text" class="form-control" name="pickup_address" placeholder="123 Manuel St.">
                                         </div>
                                         </div>
                                     </div>
@@ -90,7 +75,7 @@
                                         <div class="col-xl-12">
                                         <div class="form-group form-group-default">
                                             <label>Postal Code</label>
-                                            <input v-model="send.postal_code" type="text" id="" :name="pickup_postal_code" placeholder="Enter postal coe" class="form-control">
+                                            <input v-model="send.postal_code" type="text" id="" name="pickup_postal_code" placeholder="Enter postal coe" class="form-control">
                                         </div>
                                         </div>
                                     </div>
@@ -110,9 +95,9 @@
         </div>
             <hr class="no-margin">
             <div v-for="reci in recipient" :key="reci.id">
-                <button class="address" data-toggle="modal" data-target="#modalSlideUp-2">
+                <button type="button" class="address" data-toggle="modal" data-target="#modalSlideUp-2">
                     <div class="address-title text-muted">Recipient Address &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
-                    <h5 class="no-margin" style="margin-top: -12px !important"><strong>{{ reci.name }} | {{ reci.number }} | {{ reci.email }}</strong></h5>
+                    <h5 class="no-margin"><strong>{{ reci.name }} | {{ reci.number }} | {{ reci.email }}</strong></h5>
                     <p>{{ reci.address }} {{ reci.city }} {{ reci.postal_code }}</p>
                 </button>
                 <div class="modal fade slide-up disable-scroll" id="modalSlideUp-2" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
@@ -131,13 +116,13 @@
                                         <div class="col-xl-6">
                                             <div class="form-group form-group-default">
                                             <label>Name</label>
-                                            <input v-model="reci.name" type="text" placeholder="John Doe" :name="receiver_name" class="form-control">
+                                            <input v-model="reci.name" type="text" placeholder="John Doe" name="receiver_name" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-xl-6">
                                             <div class="form-group form-group-default">
                                             <label>Email</label>
-                                            <input v-model="reci.email" type="email" placeholder="email@gmail.com" :name="receiver_email" class="form-control">
+                                            <input v-model="reci.email" type="email" placeholder="email@gmail.com" name="receiver_email" class="form-control">
                                             </div>
                                         </div>
                                         </div>
@@ -145,21 +130,21 @@
                                         <div class="col-xl-6">
                                             <div class="form-group form-group-default">
                                             <label>Phone Number</label>
-                                            <input v-model="reci.number" type="text" id="" :name="receiver_phone" placeholder="Enter phone number" class="form-control">
+                                            <input v-model="reci.number" type="text" id="" name="receiver_phone" placeholder="Enter phone number" class="form-control">
                                         </div>
                                         </div>
                                         <div class="col-xl-6">
                                             <div class="form-group form-group-default">
                                             <label>Address</label>
-                                            <input v-model="reci.address" type="text" class="form-control" :name="receiver_address" placeholder="123 Manuel St.">
+                                            <input v-model="reci.address" type="text" class="form-control" name="receiver_address" placeholder="123 Manuel St.">
                                             </div>
                                         </div>
                                         </div>
                                         <div class="row clearfix">
                                         <div class="col-xl-12">
-                                        <div class="form-group form-group-default form-group-default-select2 @error('pickup_city') has-error @enderror">
+                                        <div class="form-group form-group-default form-group-default-select2 @error('receiver_city') has-error @enderror">
                                             <p style="margin-top: 10px; margin-left: 10px; padding: 0px; margin-bottom: 0px; color: blue; font-weight: bold; color: #196a87 !important;">City</p>
-                                                <select v-model="reci.city" name="pickup_city" class="full-width" data-init-plugin="select2" >
+                                                <select v-model="reci.city" name="receiver_city" class="full-width" data-init-plugin="select2" >
                                                     <optgroup v-for="(city, state) in cities" :label="state">
                                                         <option v-for="cit in city" :value="cit">
                                                             {{ cit }}
@@ -173,7 +158,7 @@
                                         <div class="col-xl-12">
                                             <div class="form-group form-group-default">
                                             <label>Postal Code</label>
-                                            <input v-model="reci.postal_code" type="text" id="" name="receiver_postal_code" placeholder="Enterh postal code" class="form-control">
+                                            <input v-model="reci.postal_code" type="text" id="" name="receiver_postal_code" placeholder="Enter postal code" class="form-control">
                                             </div>
                                         </div>
                                         </div>
@@ -216,7 +201,8 @@
                                                     <p class="package-description">Max weight: {{ pack.weight }} kg</p>
                                                     <p class="package-description price">₱{{ pack.rate }}.00</p>
                                                     <p class="package-description">Rate</p>
-                                                    <input type="radio" :value="packageTypes[packs]" checked="checked" v-model="selectedPackageType" name="radio">
+                                                    <input type="radio" :value="packageTypes[packs]" checked="checked" v-model="selectedPackageType">
+                                                    <input type="hidden" v-model="selectedPackageType.id" name="package_id">
                                                     <span class="checkmark"></span>
                                                 </label>
                                                 </span>
@@ -253,12 +239,13 @@
                                         <div class="col-6">
                                             <div class="pull-right">
                                                 <p>₱{{ totalAmount }}.00</p>
+                                                <input v-model="totalAmount" type="hidden" name="package_amount">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row m-t-20 clearfix">
                                         <div class="col-xl-12">
-                                            <button @click="packageDetailsButton()" type="button" data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-block btn-primary">Save Package Details</button>
+                                            <button @click.prevent="packageDetailsButton()" type="button" data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-block btn-primary">Save Package Details</button>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
@@ -282,7 +269,7 @@
                     </div>
                     <div class="col-6">
                     <div class="pull-right">
-                        <button class="address package address-title text-primary" data-toggle="modal" data-target="#modalSlideUp-3">Edit</button>
+                        <button type="button" class="address package address-title text-primary" data-toggle="modal" data-target="#modalSlideUp-3">Edit</button>
                     </div>
                     </div>
                 </div>
@@ -359,15 +346,14 @@
             <div class="card-header">
                 <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-block btn-rounded btn-primary">BOOK NOW</button>
+                    <button type="submit" class="btn btn-block btn-rounded btn-primary">BOOK NOW</button>
                 </div>
                 </div>
             </div>
         </div>
         </div>
     </div>
-    </div>
-    </div>
+</div>
 </template>
 
 <script>
@@ -404,16 +390,19 @@
 
                 packageTypes: [
                     {
+                        id: 1,
                         name: 'Medium Parcel',
                         weight: 2,
                         rate: 78
                     },
                     {
+                        id: 2,
                         name: 'Large Parcel',
                         weight: 3,
                         rate: 88
                     },
                     {
+                        id: 3,
                         name: 'Own Packaging',
                         weight: 4,
                         rate: 98
@@ -444,16 +433,25 @@
 
         computed: {
             additionalWeightFee: function () {
-                return this.dimension.reduce((total, item) => {
-                    let dimensionTotal = (total + parseFloat(item.height).toFixed() * parseFloat(item.length).toFixed() * parseFloat(item.width).toFixed() / 4000).toFixed()
-                    let additionalAmount = dimensionTotal * 20;
-                    return additionalAmount
-                }, 0)
+                if (this.selectedPackageType.name == 'Own Packaging') {
+                    return this.dimension.reduce((total, item) => {
+                        let dimensionTotal = (total + parseFloat(item.height).toFixed() * parseFloat(item.length).toFixed() * parseFloat(item.width).toFixed() / 4000).toFixed()
+                        let additionalAmount = dimensionTotal * 20;
+                        return additionalAmount
+                    }, 0)
+                } else {
+                    return 0
+                }
             },
 
             totalAmount: function () {
-                let packageRate = this.selectedPackageType.rate ? this.selectedPackageType.rate : 0
-                return this.additionalWeightFee + packageRate
+                if (this.selectedPackageType.name == 'Own Packaging') {
+                    let packageRate = this.selectedPackageType.rate ? this.selectedPackageType.rate : 0
+                    return this.additionalWeightFee + packageRate
+                } else {
+                    let packageRate = this.selectedPackageType.rate ? this.selectedPackageType.rate : 0
+                    return packageRate
+                }
             },
         },
     }

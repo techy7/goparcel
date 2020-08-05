@@ -18,9 +18,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{username}/account/edit', 'AccountController@edit')->name('customer.account.edit');
             Route::patch('/{username}/account/update', 'AccountController@update')->name('customer.account.update');
         });
-        Route::get('/{username}/my-pickup-bookings', 'BookingController@index')->name('customer.bookings');
-        Route::get('/{username}/my-pickup-bookings/{tracking_number}', 'BookingController@track')->name('customer.bookings.track');
-        Route::get('/{username}/my-pickup-bookings/{id}/waybill', 'BookingController@waybill')->name('customer.bookings.waybill');
+            Route::get('/{username}/pickup-bookings', 'BookingController@index')->name('customer.bookings');
+            Route::get('/{username}/pickup-bookings/{tracking_number}', 'BookingController@track')->name('customer.bookings.track');
+            Route::get('/{username}/pickup-bookings/{id}/waybill', 'BookingController@waybill')->name('customer.bookings.waybill');
     });
 
     Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {

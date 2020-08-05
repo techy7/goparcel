@@ -2,6 +2,7 @@
 
 use App\Pickup;
 use Carbon\Carbon;
+use App\PickupActivity;
 use Illuminate\Database\Seeder;
 
 class PickupSeeder extends Seeder
@@ -14,9 +15,11 @@ class PickupSeeder extends Seeder
     public function run()
     {
         // Medium,
-        Pickup::create([
+        $mediumPickup = Pickup::create([
             'user_id' => 5,
             'pickup_date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'sender_name' => 'David De Leon',
+            'sender_phone' => '09451260066',
             'pickup_address' => '8 Estrella Street Barangay Sangandaan Project 8',
             'pickup_city' => 'Quezon City',
             'pickup_state' => 'Metro Manila',
@@ -37,11 +40,25 @@ class PickupSeeder extends Seeder
             'package_amount' => 0,
             'tracking_number' => 'PB5F22DC3FEF84E',
         ]);
+        PickupActivity::create([
+            'pickup_id' => $mediumPickup->id,
+            'delivery_status_id' => 1,
+            'created_at' => '2020-08-04 00:00:00',
+            'updated_at' => '2020-08-04 00:00:00'
+        ]);
+        PickupActivity::create([
+            'pickup_id' => $mediumPickup->id,
+            'delivery_status_id' => 2,
+            'created_at' => '2020-08-05 00:00:00',
+            'updated_at' => '2020-08-05 00:00:00'
+        ]);
 
         // Large,
-        Pickup::create([
+        $largePickup = Pickup::create([
             'user_id' => 5,
             'pickup_date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'sender_name' => 'Jayson De Leon',
+            'sender_phone' => '09451260066',
             'pickup_address' => '8 Estrella Street Barangay Sangandaan Project 8',
             'pickup_city' => 'Quezon City',
             'pickup_state' => 'Metro Manila',
@@ -62,11 +79,37 @@ class PickupSeeder extends Seeder
             'package_amount' => 0,
             'tracking_number' => 'PB5F22DCF0239D7',
         ]);
+        PickupActivity::create([
+            'pickup_id' => $largePickup->id,
+            'delivery_status_id' => 1,
+            'created_at' => '2020-08-04 00:00:00',
+            'updated_at' => '2020-08-04 00:00:00'
+        ]);
+        PickupActivity::create([
+            'pickup_id' => $largePickup->id,
+            'delivery_status_id' => 2,
+            'created_at' => '2020-08-05 00:00:00',
+            'updated_at' => '2020-08-05 00:00:00'
+        ]);
+        PickupActivity::create([
+            'pickup_id' => $largePickup->id,
+            'delivery_status_id' => 3,
+            'created_at' => '2020-08-06 00:00:00',
+            'updated_at' => '2020-08-06 00:00:00'
+        ]);
+        PickupActivity::create([
+            'pickup_id' => $largePickup->id,
+            'delivery_status_id' => 4,
+            'created_at' => '2020-08-07 00:00:00',
+            'updated_at' => '2020-08-07 00:00:00'
+        ]);
 
         // Own Packaging,
-        Pickup::create([
+        $ownPickup = Pickup::create([
             'user_id' => 5,
             'pickup_date' => Carbon::now()->format('Y-m-d H:i:s'),
+            'sender_name' => 'Cosilet De Leon',
+            'sender_phone' => '09451260066',
             'pickup_address' => '8 Estrella Street Barangay Sangandaan Project 8',
             'pickup_city' => 'Quezon City',
             'pickup_state' => 'Metro Manila',
@@ -86,6 +129,42 @@ class PickupSeeder extends Seeder
             'package_height' => 20.88,
             'package_amount' => 138,
             'tracking_number' => 'PB5F22DD0779AE6',
+        ]);
+        PickupActivity::create([
+            'pickup_id' => $ownPickup->id,
+            'delivery_status_id' => 1,
+            'created_at' => '2020-08-04 00:00:00',
+            'updated_at' => '2020-08-04 00:00:00'
+        ]);
+        PickupActivity::create([
+            'pickup_id' => $ownPickup->id,
+            'delivery_status_id' => 2,
+            'created_at' => '2020-08-05 00:00:00',
+            'updated_at' => '2020-08-05 00:00:00'
+        ]);
+        PickupActivity::create([
+            'pickup_id' => $ownPickup->id,
+            'delivery_status_id' => 3,
+            'created_at' => '2020-08-06 00:00:00',
+            'updated_at' => '2020-08-06 00:00:00'
+        ]);
+        PickupActivity::create([
+            'pickup_id' => $ownPickup->id,
+            'delivery_status_id' => 4,
+            'created_at' => '2020-08-07 00:00:00',
+            'updated_at' => '2020-08-07 00:00:00'
+        ]);
+        PickupActivity::create([
+            'pickup_id' => $ownPickup->id,
+            'delivery_status_id' => 5,
+            'created_at' => '2020-08-08 00:00:00',
+            'updated_at' => '2020-08-08 00:00:00'
+        ]);
+        PickupActivity::create([
+            'pickup_id' => $ownPickup->id,
+            'delivery_status_id' => 6,
+            'created_at' => '2020-08-09 00:00:00',
+            'updated_at' => '2020-08-09 00:00:00'
         ]);
     }
 }

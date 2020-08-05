@@ -101,6 +101,8 @@ class UserController extends Controller
             ->pluck('model_has_roles.role_id', 'model_has_roles.role_id')
             ->all();
 
+        // dd($userRoles);
+
         return view('admin.users-and-access-roles.users.edit', compact('userData', 'nonCustomerRoles', 'userRoles'));
     }
 

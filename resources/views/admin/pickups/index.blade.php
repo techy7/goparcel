@@ -63,17 +63,17 @@
                   <table class="table table-hover demo-table-search table-responsive-block" id="tableWithSearch">
                     <thead>
                       <tr>
-                        <th>Customer Username</th>
                         <th>Customer Name</th>
+                        <th>Tracking Number</th>
                         <th>Pickup Address</th>
                         <th>Pickup City</th>
                         <th>Pickup State</th>
                         <th>Pickup Postal Code</th>
-                        <th>Pickup Country</th>
                         <th>Package Type</th>
                         <th>Total Amount</th>
                         <th>Delivery Date</th>
                         <th>Pickup Date Scheduled</th>
+                        <th>Delivery Status</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -81,10 +81,10 @@
                         @foreach ($pickups as $pickup)
                         <tr>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $pickup->user->username }}</p>
+                                <p>{{ $pickup->user->name }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $pickup->user->name }}</p>
+                              <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}" class="btn btn-rounded btn-sm btn-outline-primary">{{ $pickup->tracking_number }}</a>
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $pickup->pickup_address }}</p>
@@ -97,9 +97,6 @@
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $pickup->pickup_postal_code }}</p>
-                            </td>
-                            <td class="v-align-middle semi-bold">
-                                <p>{{ $pickup->pickup_country }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $pickup->package->name }}</p>
@@ -118,6 +115,11 @@
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $pickup->created_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
+                            </td>
+                            <td class="v-align-middle semi-bold">
+                              <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}" class="btn btn-rounded btn-sm btn-outline-primary">
+                                {{ $pickup->pickupActivities->last()->deliveryStatus->name }}
+                              </a>
                             </td>
                             <td class="v-align-middle semi-bold">
                               <div class="btn-group">

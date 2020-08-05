@@ -13,6 +13,8 @@
               <div class="form-group-attached">
                 <div class="row">
                   <div class="col-md-12 m-l-20">
+                      <p class="bold font-montserrat text-uppercase">Tracking Number: <span><small class="text-uppercase">{{ $pickup->tracking_number }}</small></span></p>
+                      <p class="bold font-montserrat text-uppercase">Delivery Status: <span><small class="text-uppercase">{{ $pickup->pickupActivities->last()->deliveryStatus->name }}</small></span></p>
                       <p class="bold font-montserrat text-uppercase">Address: <span><small class="text-uppercase">{{ $pickup->pickup_address }}</small></span></p>
                       <p class="bold font-montserrat text-uppercase">City: <span><small class="text-uppercase">{{ $pickup->pickup_city }}</small></span></p>
                       <p class="bold font-montserrat text-uppercase">State: <span><small class="text-uppercase">{{ $pickup->pickup_state }}</small></span></p>
