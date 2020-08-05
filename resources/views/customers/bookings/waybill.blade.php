@@ -27,7 +27,7 @@
         }
     </style>
     </head>
-    
+
     <body>
         <div style="padding: 40px; padding-bottom: 0;">
             <div>
