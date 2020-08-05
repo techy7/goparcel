@@ -23,6 +23,8 @@
                 <a href="{{ route('customer.account', auth()->user()->username) }}" class="dropdown-item">{{ __('general.account') }}</a>
                 @hasanyrole('Super Admin|User')
                     <a href="{{ route('admin.customers') }}" class="dropdown-item">{{ __('general.customers') }}</a>
+                @endhasanyrole
+                @hasanyrole('Super Admin')
                     <a href="{{ route('admin.bookings') }}" class="dropdown-item">{{ __('general.bookings') }}</a>
                     <a href="{{ route('admin.pickups') }}" class="dropdown-item">{{ __('general.pickup_schedules') }}</a>
                     <a href="{{ route('admin.packages') }}" class="dropdown-item">{{ __('general.packages') }}</a>

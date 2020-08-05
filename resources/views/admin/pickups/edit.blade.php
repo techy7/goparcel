@@ -14,8 +14,15 @@
               <li class="breadcrumb-item active"><a href="{{ route('admin.pickups') }}">Pickup Schedules List</a></li>
               <li class="breadcrumb-item active">Edit Customer Pickup</li>
             </ul>
-            <h3 class="page-title">Update Customer Pickup</h3>
-        </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h3 class="page-title">Update Customer Pickup</h3>
+              </div>
+              <div class="col-md-6">
+                <h3 class="page-title">TRACKING NUMBER: {{ $pickup->tracking_number }}</h3>
+              </div>
+            </div>
+          </div>
 
         <form id="form-register" class="p-t-15" role="form" method="POST" action="{{ route('admin.pickups.update', $pickup->id) }}">
             @csrf
@@ -80,6 +87,24 @@
                           {{ $message }}
                       </label>
                   @enderror
+                </div>
+              </div>
+              <div class="row clearfix">
+                <div class="col-xl-12">
+                  <div class="form-group form-group-default form-group-default-select2 @error('delivery_status_id') has-error @enderror">
+                    <label>Delivery Status</label>
+                        <select name="delivery_status_id" class="full-width" data-init-plugin="select2">
+                            <option value="0">{{ $latestPickupStatus->name }}</option>
+                            @foreach ($deliveryStatus as $status)
+                              <option value="{{ $status->id }}" {{ in_array($status->id, $customerPickupStatus) ? 'disabled' : '' }}>{{ $status->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    @error('delivery_status_id')
+                        <label class="error" for="delivery_status_id">
+                            {{ $message }}
+                        </label>
+                    @enderror
                 </div>
               </div>
               <div class="clearfix"></div>

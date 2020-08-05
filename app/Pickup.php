@@ -9,8 +9,10 @@ class Pickup extends Model
     protected $dates = ['pickup_date'];
 
     protected $fillable = [
-        'pickup_date',
+        'sender_name',
+        'sender_phone',
 
+        'pickup_date',
         'pickup_address',
         'pickup_city',
         'pickup_state',
@@ -56,4 +58,9 @@ class Pickup extends Model
     {
         return $this->hasMany(PickupActivity::class);
     }
+
+    // public function getDeliveryStatus($pickupId)
+    // {
+    //     return $pickupId;
+    // }
 }

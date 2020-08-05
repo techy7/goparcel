@@ -54,19 +54,20 @@
             </li>
             @endhasanyrole
         </ul>
-        <div class="clearfix"></div>
-        @hasanyrole('Customer')
-        <ul class="d-flex align-items-end">
-            <li class="m-t-10 d-flex align-items-end">
-                <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.help_center') }}</span></a>
-            </li>
-            <li class="m-t-10">
-                <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.terms_of_service') }}</span></a>
-            </li>
-            <li class="m-t-10">
-                <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.privacy_policy') }}</span></a>
-            </li>
-        </ul>
-        @endhasanyrole
+        <div class="clearfix">
+            @hasanyrole('Customer')
+            <ul class="d-flex align-items-end">
+                <li class="m-t-10 d-flex align-items-end">
+                    <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.help_center') }}</span></a>
+                </li>
+                <li class="m-t-10">
+                    <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.terms_of_service') }}</span></a>
+                </li>
+                <li class="m-t-10">
+                    <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.privacy_policy') }}</span></a>
+                </li>
+            </ul>
+            @endhasanyrole
+        </div>
     </div>
 </nav>

@@ -42,10 +42,12 @@
                     <thead>
                       <tr>
                         <th>Customer Name</th>
+                        <th>Tracking Number</th>
                         <th>Package Type</th>
                         <th>Total Amount</th>
                         <th>Delivery Date</th>
                         <th>Pickup Date Scheduled</th>
+                        <th>Delivery Status</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -54,6 +56,9 @@
                         <tr>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $pickup->user->name }}</p>
+                            </td>
+                            <td class="v-align-middle semi-bold">
+                              <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}" class="btn btn-rounded btn-sm btn-outline-primary">{{ $pickup->tracking_number }}</a>
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $pickup->package->name }}</p>
@@ -74,12 +79,18 @@
                                 <p>{{ $pickup->created_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
+                              <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}" class="btn btn-rounded btn-sm btn-outline-primary">{{ $pickup->pickupActivities->last()->deliveryStatus->name }}</a>
+                            </td>
+                            <td class="v-align-middle semi-bold">
                               <div class="btn-group">
                                 <div class="btn-group dropdown dropdown-default" style="margin-top: 4px">
                                   <button aria-label="" class="btn dropdown-toggle text-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Details
                                   </button>
                                   <div class="dropdown-menu">
+                                    <button class="dropdown-item" data-toggle="modal" data-target="#modalSlideUp-{{ $pickup->id }}-{{ $pickup->id }}-{{ $pickup->id }}-{{ $pickup->id }}">
+                                      Pickup
+                                    </button>
                                     <button class="dropdown-item" data-toggle="modal" data-target="#modalSlideUp-{{ $pickup->id }}">
                                       Package
                                     </button>
@@ -88,9 +99,6 @@
                                     </button>
                                     <button class="dropdown-item" data-toggle="modal" data-target="#modalSlideUp-{{ $pickup->id }}-{{ $pickup->id }}-{{ $pickup->id }}">
                                       Customer
-                                    </button>
-                                    <button class="dropdown-item" data-toggle="modal" data-target="#modalSlideUp-{{ $pickup->id }}-{{ $pickup->id }}-{{ $pickup->id }}-{{ $pickup->id }}">
-                                      Pickup
                                     </button>
                                   </div>
                                 </div>

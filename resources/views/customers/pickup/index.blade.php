@@ -205,16 +205,14 @@
  
       <h1>Schedule a Pickup</h1>
 
+      <form method="POST" action="{{ route('customer.pickup.store', auth()->user()->username) }}">
+      @csrf
       <div class="page-content-wrapper m-b-45" id="app">
         <div class="sm-p-l-5 bg-contrast-lower">
-          <new-package :cities="{{ json_encode($cities) }}"></new-package>
+            <new-package :cities="{{ json_encode($cities) }}"></new-package>
+          </div>
         </div>
- 
-        {{-- @include('customers.pickup.sender')
-        @include('customers.pickup.recipient')
-        @include('customers.pickup.package') --}}
- 
-    </div>
+      </form>
 </div>
  
 @endsection
@@ -241,7 +239,17 @@
       $("#receiver_postal_code").mask("9999");
       $("#m_number").mask("(9999) 999-9999");
       $('#form-register').validate();
-    })
+    });
+
+    $(function(){
+        $('#datepicker-component2').datepicker({
+          format: "dd-M-yyyy",
+          clearBtn: true,
+          todayHighlight: true,
+          startDate: '+4d'
+        });
+    });
+
   </script>
 @endsection
 @section('lower-links-extends-page')
