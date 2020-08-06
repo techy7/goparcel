@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Mail\CustomerPickupDetails;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Resources\PickupResource;
 
 class PickupController extends Controller
 {
@@ -91,5 +92,36 @@ class PickupController extends Controller
         // Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
 
         // return redirect()->route('customer.pickup', auth()->user()->username)->with('success', 'Pickup has been successfully added.');
+    }
+
+    public function trackDelivery()
+    {
+        return view('customers.pickup.order-tracking');
+    }
+
+    public function trackDeliveryShow(Pickup $pickup)
+    {
+
+        $pickups = $pickup->get();
+
+        $pickupOrder = $pickups->where('tracking_number', request()->route('tracking_number'))->first();
+
+        foreach ($pickupOrder->pickupActivities as $pickupActivity) {
+            $pickupActive = $pickupActivity->deliveryStatus;
+        }
+
+        // return response()->json($pickupOrder);
+
+        // return view('customers.pickup.order-tracking');
+
+        if (request()->wantsJson()) {
+        return response()->json($pickupOrder);
+            // return $blogs;
+        }
+        return view('customers.pickup.order-tracking',compact('pickupOrder'));
+
+        // return response()->json([
+        //     'html' => view('customers.pickup.order-tracking', compact('pickupOrder'))->render(),
+        // ]);
     }
 }

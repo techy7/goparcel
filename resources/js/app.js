@@ -8,6 +8,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import moment from 'moment';
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -23,12 +25,17 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('package-item', require('./components/PackageItem.vue').default);
 Vue.component('package-type', require('./components/PackageType.vue').default);
 Vue.component('new-package', require('./components/NewPackage.vue').default);
+Vue.component('track-delivery', require('./components/TrackDelivery.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+Vue.filter('formattedDate', function (updated) {
+    return moment(updated).format('MMMM Do YYYY, h:mm:ss a')
+});
 
 const app = new Vue({
     el: '#app',
