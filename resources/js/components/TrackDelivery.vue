@@ -92,7 +92,7 @@
                     })
                     
                     .catch(error => {
-                        if (error.response.status == 500) {
+                        if (error.response.status == 500 || 404) {
                             this.errorInput = 'Wrong tracking number'
                             this.pickup = []
                         } 

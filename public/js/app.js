@@ -3221,7 +3221,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.pickup = response.data;
         }
       })["catch"](function (error) {
-        if (error.response.status == 500) {
+        if (error.response.status == 500 || 404) {
           _this.errorInput = 'Wrong tracking number';
           _this.pickup = [];
         }
