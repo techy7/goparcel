@@ -8,6 +8,9 @@ Route::get('/home', 'HomeController@index')->middleware('homepage')->name('home'
 
 Route::get('/', 'HomeController@index')->middleware('homepage')->name('index');
 
+Route::get('/track-delivery', 'Customer\PickupController@trackDelivery')->name('track-delivery');
+Route::get('/track-delivery/{tracking_number}', 'Customer\PickupController@trackDeliveryShow')->name('track-delivery.show');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['namespace' => 'Customer'], function () {
         Route::get('/{username}/dashboard', 'DashboardController@dashboard')->name('customer.dashboard');
@@ -23,8 +26,6 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{username}/pickup-bookings/{id}/waybill', 'BookingController@waybill')->name('customer.bookings.waybill');
 
     });
-    Route::get('/track-delivery', 'Customer\PickupController@trackDelivery')->name('track-delivery');
-    Route::get('/track-delivery/{tracking_number}', 'Customer\PickupController@trackDeliveryShow')->name('track-delivery.show');
 
     Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {
         Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
