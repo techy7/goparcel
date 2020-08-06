@@ -36,30 +36,7 @@
                 <div class="register-container full-height sm-p-t-40 sm-p-b-40">
                     <div class="d-flex justify-content-center flex-column full-height ">
                         <img src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" alt="logo" data-src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" data-src-retina="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" class="margin-center" width="200" height="85">
-                        {{-- <div class="card-body" style="padding: 10px 20px 0px 10px !important;">
-                                <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-                                    @foreach ($pickupOrder->pickupActivities as $key => $active)
-                                        <div class="step 
-                                                @if(($active->deliveryStatus->name == 'Order Created') || ($active->deliveryStatus->name == 'In Transit for Collection') || ($active->deliveryStatus->name == 'Arrived at Manila Hub') || ($active->deliveryStatus->name == 'In Transit for Delivery') || ($active->deliveryStatus->name == 'Delivered') || ($active->deliveryStatus->name == 'Back to Sender')) completed @endif
-                                            ">
-                                            <div class="step-icon-wrap">
-                                                <div class="step-icon"><i class="
-                                                    @if($active->deliveryStatus->name == 'Order Created') pe-7s-note 
-                                                    @elseif($active->deliveryStatus->name == 'In Transit for Collection') pe-7s-albums 
-                                                    @elseif($active->deliveryStatus->name == 'Arrived at Manila Hub') pe-7s-map-marker 
-                                                    @elseif($active->deliveryStatus->name == 'In Transit for Delivery') pe-7s-car 
-                                                    @elseif($active->deliveryStatus->name == 'Delivered') pe-7s-box2 
-                                                    @elseif($active->deliveryStatus->name == 'Back to Sender') pe-7s-back-2
-                                                    @endif
-                                                "></i></div>
-                                            </div>
-                                            <h4 class="step-title">{{ $active->deliveryStatus->name }}</h4>
-                                            <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $active->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
-                                        </div>
-                                    @endforeach
-                                </div>
-                        </div> --}}
-                            <track-delivery></track-delivery>
+                        <track-delivery></track-delivery>
                     </div>
                 </div>
             </div>

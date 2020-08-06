@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\User;
+use Exception;
 use App\Pickup;
 use App\Package;
 use Carbon\Carbon;
@@ -106,22 +107,17 @@ class PickupController extends Controller
 
         $pickupOrder = $pickups->where('tracking_number', request()->route('tracking_number'))->first();
 
+        if ($pickupOrder == null) {
+            abort(404);
+        }
+
         foreach ($pickupOrder->pickupActivities as $pickupActivity) {
             $pickupActive = $pickupActivity->deliveryStatus;
         }
 
-        // return response()->json($pickupOrder);
-
-        // return view('customers.pickup.order-tracking');
-
         if (request()->wantsJson()) {
-        return response()->json($pickupOrder);
-            // return $blogs;
+            return response()->json($pickupOrder);
         }
         return view('customers.pickup.order-tracking',compact('pickupOrder'));
-
-        // return response()->json([
-        //     'html' => view('customers.pickup.order-tracking', compact('pickupOrder'))->render(),
-        // ]);
     }
 }
