@@ -178,7 +178,10 @@
                                             <div class="custom-control custom-checkbox">
                                             <div class="text-left text-sm-right"><a class="btn btn-outline-primary btn-rounded btn-sm" href="{{ route('customer.bookings.waybill', [auth()->user()->username, $pickupOrder->id]) }}">Download Waybill</a></div>
                                             </div>
-                                            <div class="text-left text-sm-right m-r-20"><a class="btn btn-outline-primary btn-rounded btn-sm" href="#">Share Tracking</a></div>
+                                            <div class="text-left text-sm-right m-r-20">
+                                                <a class="btn btn-outline-primary btn-rounded btn-sm" onmouseout="outFunc()" data-clipboard-text="https://app.weparcelbear.com/track-delivery/{{ $pickupOrder->tracking_number }}">Share Tracking</a>
+                                                <span class="tooltiptext" id="myTooltip"></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -199,6 +202,18 @@
     <script src="{{ asset('pages/assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js') }}" type="text/javascript"></script>
     <script type="text/javascript" src="{{ asset('pages/assets/plugins/datatables-responsive/js/datatables.responsive.js') }}"></script>
     <script type="text/javascript" src="{{ asset('pages/assets/plugins/datatables-responsive/js/lodash.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script>
+        var clipboard = new ClipboardJS('.btn');
+            clipboard.on('success', function(e) {
+                var tooltip = document.getElementById("myTooltip");
+                tooltip.innerHTML = "<small><strong>Copied!</strong></small>";
+        });
+        function outFunc() {
+            var tooltip = document.getElementById("myTooltip");
+            tooltip.innerHTML = "";
+        }
+    </script>
 @endsection
 @section('lower-links-extends-page')
     <script src="{{ asset('pages/assets/js/datatables.js') }}" type="text/javascript"></script>
