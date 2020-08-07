@@ -154,7 +154,7 @@
                                         </div>
                                             <div class="card-body" style="padding: 10px 20px 0px 10px !important;">
                                             <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-                                                @foreach ($pickupOrder->pickupActivities as $key => $active)
+                                                @foreach ($pickupOrder->pickupActivities->sortBy('created_at') as $key => $active)
                                                     <div class="step 
                                                             @if(($active->deliveryStatus->name == 'Order Created') || ($active->deliveryStatus->name == 'In Transit for Collection') || ($active->deliveryStatus->name == 'Arrived at Manila Hub') || ($active->deliveryStatus->name == 'In Transit for Delivery') || ($active->deliveryStatus->name == 'Delivered') || ($active->deliveryStatus->name == 'Back to Sender')) completed @endif
                                                         ">

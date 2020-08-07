@@ -79,7 +79,7 @@
                                 <p>{{ $pickup->created_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                              <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}" class="btn btn-rounded btn-sm btn-outline-primary">{{ $pickup->pickupActivities->last()->deliveryStatus->name }}</a>
+                              <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}" class="btn btn-rounded btn-sm btn-outline-primary">{{ $pickup->pickupActivities->first()->deliveryStatus->name }}</a>
                             </td>
                             <td class="v-align-middle semi-bold">
                               <div class="btn-group">

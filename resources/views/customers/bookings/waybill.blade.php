@@ -45,7 +45,7 @@
                         <div style="margin: 15px">
                             <h4><strong>Shipment Details:</strong></h4>
                             <p><strong>Tracking No.: </strong><small>{{ $userPickup->tracking_number }}</small></p>
-                            <p><strong>Status: </strong><small>{{ $userPickup->pickupActivities->last()->deliveryStatus->name }}</small></p>
+                            <p><strong>Status: </strong><small>{{ $userPickup->pickupActivities->first()->deliveryStatus->name }}</small></p>
                             <p><strong>Shipping Package Type: </strong><small>{{ $userPickup->package->name }}</small></p>
                         </div>
                         <div style="margin: 15px">

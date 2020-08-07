@@ -118,7 +118,7 @@
                             </td>
                             <td class="v-align-middle semi-bold">
                               <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}" class="btn btn-rounded btn-sm btn-outline-primary">
-                                {{ $pickup->pickupActivities->last()->deliveryStatus->name }}
+                                {{ $pickup->pickupActivities->first()->deliveryStatus->name }}
                               </a>
                             </td>
                             <td class="v-align-middle semi-bold">

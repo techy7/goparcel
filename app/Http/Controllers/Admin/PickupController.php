@@ -27,7 +27,7 @@ class PickupController extends Controller
 
         $customerPickupStatus = $pickup->pickupActivities->pluck('delivery_status_id')->all();
 
-        $latestPickupStatus = $pickup->pickupActivities->last()->deliveryStatus;
+        $latestPickupStatus = $pickup->pickupActivities->first()->deliveryStatus;
         
         return view('admin.pickups.edit', compact('pickup', 'deliveryStatus', 'customerPickupStatus', 'latestPickupStatus'));
     }

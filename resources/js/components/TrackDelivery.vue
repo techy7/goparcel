@@ -15,7 +15,7 @@
                 <div class="row m-b-10">
                     <div class="col-4"></div>
                     <div class="col-4">
-                        <button class="btn btn-outline-complete btn-rounded btn-block" @click="showDelivery">Track Order</button>
+                        <button ref="triggerShowDelivery" class="btn btn-outline-complete btn-rounded btn-block" @click="showDelivery">Track Order</button>
                     </div>
                     <div class="col-4"></div>
                 </div>
@@ -66,9 +66,7 @@
                   'Accept':'application/json'
               }
           }
-          console.log(this.currentTrackingNumber)
-          console.log(this.url)
-            console.log(' Component is ready.')
+        this.$refs.triggerShowDelivery.click()
         },
 
         data() {

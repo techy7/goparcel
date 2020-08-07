@@ -56,7 +56,7 @@ class Pickup extends Model
 
     public function pickupActivities()
     {
-        return $this->hasMany(PickupActivity::class);
+        return $this->hasMany(PickupActivity::class)->latest();
     }
 
     // public function getDeliveryStatus($pickupId)
