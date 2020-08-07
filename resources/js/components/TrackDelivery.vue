@@ -6,7 +6,6 @@
                     <label>Tracking Number</label>
                     <input type="text" v-model="search" name="tracking_number" placeholder="Enter tracking number" class="form-control">
                 </div>
-                sample
                 <label v-if="errorInput" class="error" for="tracking_number">
                     {{ errorInput }}
                 </label>
