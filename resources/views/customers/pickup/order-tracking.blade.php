@@ -28,6 +28,12 @@
             document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="{{ asset('pages/pages/css/windows.chrome.fix.css')}}" />'
         }
         </script>
+
+        <style>
+            body.dashboard .page-container{
+                background: #fff !important;
+            }
+        </style>
       </head>
     
     <body class="fixed-header dashboard menu-pin">
@@ -35,7 +41,6 @@
             <div class="container-fluid padding-25 sm-padding-10">
                 <div class="register-container full-height sm-p-t-40 sm-p-b-40">
                     <div class="d-flex justify-content-center flex-column full-height ">
-                        <img src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" alt="logo" data-src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" data-src-retina="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" class="margin-center" width="200" height="85">
                         <track-delivery></track-delivery>
                     </div>
                 </div>
