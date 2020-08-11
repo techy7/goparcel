@@ -5,6 +5,7 @@
 @section('content')
 <div class="content sm-gutter">
     <div class="container-fluid padding-25 sm-padding-10">
+        @include('layouts.pages.session')
         <div class="row">
             <div class="col-md-2 col-lg-3 col-xlg-4"></div>
             <div class="col-md-8 col-lg-6 col-xlg-4">
@@ -53,6 +54,12 @@
                                     <label for="position" class="col-md-5 control-label">{{ __('account.address') }}</label>
                                     <div class="col-md-7 p-t-5">
                                         <p>{{ $user->address ?? null }}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="position" class="col-md-5 control-label">{{ __('account.state') }}</label>
+                                    <div class="col-md-7 p-t-5">
+                                        <p>{{ $user->state ?? null }}</p>
                                     </div>
                                 </div>
                                 <div class="form-group row">

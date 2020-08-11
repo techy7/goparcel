@@ -29,7 +29,7 @@ class PickupController extends Controller
         $ownPackagingAmount = Package::where('name', 'Own Packaging')->first();
         
         $ownPackaging = Package::where('name', 'Own Packaging')->get();
-        
+
         return view('customers.pickup.index', compact('packages', 'packageFiltered', 'ownPackagingAmount', 'ownPackaging', 'cities'));
     }
 

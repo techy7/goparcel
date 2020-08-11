@@ -289,7 +289,7 @@
                                                     <img alt="Packange Picture" width="90" height="50" :src="'/pages/assets/img/icon.png'">
                                                     <p class="package-title">{{ pack.name }}</p>
                                                     <p class="package-description">Max weight: {{ pack.weight }} kg</p>
-                                                    <p class="package-description price">₱{{ pack.rate }}</p>
+                                                    <p class="package-description price">{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(pack.rate) }}</p>
                                                     <p class="package-description">Rate</p>
                                                     <input type="radio" :value="packageTypes[packs]" checked="checked" v-model="selectedPackageType">
                                                     <input type="hidden" v-model="selectedPackageType.id" name="package_id">
@@ -328,7 +328,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="pull-right">
-                                                <p>₱{{ totalAmount }}</p>
+                                                <p>{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(totalAmount) }}</p>
                                                 <input v-model="totalAmount" type="hidden" name="package_amount">
                                             </div>
                                         </div>
@@ -373,7 +373,7 @@
                     <div class="col-md-9">
                     <h5 class="no-margin"><strong>{{ selectedPackageType.name ? selectedPackageType.name : 'Package Name' }}</strong></h5>
                     <p>Max Weight: {{ selectedPackageType.weight ? selectedPackageType.weight : 0 }} kg</p>
-                    <p>Rate: ₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}</p>
+                    <p>Rate: ₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</p>
                     </div>
                 </div>
             </div>
@@ -400,7 +400,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                        <h5 class="no-margin small"><strong>₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}</strong></h5>
+                        <h5 class="no-margin small"><strong>₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</strong></h5>
                         </div>
                     </div>
                 </div>
@@ -412,7 +412,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                        <h5 class="no-margin small text-muted">₱{{ additionalWeightFee }}</h5>
+                        <h5 class="no-margin small text-muted">{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(additionalWeightFee) }}</h5>
                         </div>
                     </div>
                 </div>
@@ -424,7 +424,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                        <h5 class="no-margin small"><strong>P{{ totalAmount }}</strong></h5>
+                        <h5 class="no-margin small"><strong>{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(totalAmount) }}</strong></h5>
                         </div>
                     </div>
                 </div>
@@ -767,7 +767,8 @@
                         let dimensionTotal = (total + parseFloat(item.height) * parseFloat(item.length) * parseFloat(item.width) / 4000)
                         if (dimensionTotal > ownPackagingMaxWeight) {
                             let dimensionGrandTotal = dimensionTotal - ownPackagingMaxWeight
-                            return dimensionGrandTotal * ownPackagingFee
+                            let feesTotal = dimensionGrandTotal * ownPackagingFee
+                            return feesTotal
                         } else {
                             return 0
                         }
@@ -780,7 +781,8 @@
             totalAmount: function () {
                 if (this.selectedPackageType.name == 'Own Packaging') {
                     let packageRate = this.selectedPackageType.rate ? this.selectedPackageType.rate : 0
-                    return this.additionalWeightFee + packageRate
+                    let packageTotal = this.additionalWeightFee + packageRate
+                    return packageTotal
                 } else {
                     let packageRate = this.selectedPackageType.rate ? this.selectedPackageType.rate : 0
                     return packageRate

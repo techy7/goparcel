@@ -8,7 +8,7 @@
             <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="profile dropdown">
                 <span class="thumbnail-wrapper d32 circular inline">
                     @if (auth()->user()->profile_picture)
-                    <img src="{{ $user->imageAvatarSize() }}" alt="{{ auth()->user()->username }}" data-src="{{ $user->imageAvatarSize() }}" data-src-retina="{{ $user->imageAvatarSize() }}" width="32" height="32">
+                    <img src="{{ auth()->user()->imageAvatarSize() }}" alt="{{ auth()->user()->username }}" data-src="{{ auth()->user()->imageAvatarSize() }}" data-src-retina="{{ auth()->user()->imageAvatarSize() }}" width="32" height="32">
                     @else
                     <span>{{ auth()->user()->initials() }}</span>
                     @endif

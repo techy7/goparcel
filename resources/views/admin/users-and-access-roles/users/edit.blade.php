@@ -102,7 +102,7 @@
                     @enderror
                 </div>
                 <div class="col-md-4">
-                    <div class="form-group form-group-default @error('postal_code') has-error @enderror">
+                    <div class="form-group form-group-default required @error('postal_code') has-error @enderror">
                         <label>{{ __('auth.postal_code') }}</label>
                         <input type="text" id="postal_code" name="postal_code" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.postal_code'))]) }}" value="{{ old('postal_code') ?? $userData->postal_code ?? 'N/A' }}" class="form-control" >
                     </div>

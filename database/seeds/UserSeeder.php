@@ -39,6 +39,11 @@ class UserSeeder extends Seeder
             'name' => 'Super Admin',
             'email' => 'superadmin@gmail.com',
             'password' => bcrypt('123456789'),
+            'address' => 'Main St. 123',
+            'city' => 'Quezon City',
+            'state' => 'Metro Manila',
+            'postal_code' =>  '1116',
+            'country' => 'Philippines',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         $role = Role::find(1);
@@ -49,6 +54,11 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123456789'),
+            'address' => 'Main St. 123',
+            'city' => 'Quezon City',
+            'state' => 'Metro Manila',
+            'postal_code' =>  '1116',
+            'country' => 'Philippines',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         $role = Role::find(2);
@@ -60,6 +70,7 @@ class UserSeeder extends Seeder
             'name' => 'John Doe',
             'm_number' => '09451260066',
             'password' => bcrypt('123456789'),
+            'address' => 'Main St. 123',
             'city' => 'Quezon City',
             'state' => 'Metro Manila',
             'postal_code' =>  '1116',
