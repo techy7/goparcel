@@ -95,6 +95,7 @@
                                         </label>
                                         </div>
                                     </div>
+                                    <!-- try select2 and jquery in another method -->
                                     <div class="row clearfix">
                                         <div class="col-xl-12">
                                         <div class="form-group form-group-default form-group-default-select2 @error('pickup_city') has-error @enderror">
@@ -288,7 +289,7 @@
                                                     <img alt="Packange Picture" width="90" height="50" :src="'/pages/assets/img/icon.png'">
                                                     <p class="package-title">{{ pack.name }}</p>
                                                     <p class="package-description">Max weight: {{ pack.weight }} kg</p>
-                                                    <p class="package-description price">₱{{ pack.rate }}.00</p>
+                                                    <p class="package-description price">₱{{ pack.rate }}</p>
                                                     <p class="package-description">Rate</p>
                                                     <input type="radio" :value="packageTypes[packs]" checked="checked" v-model="selectedPackageType">
                                                     <input type="hidden" v-model="selectedPackageType.id" name="package_id">
@@ -327,7 +328,7 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="pull-right">
-                                                <p>₱{{ totalAmount }}.00</p>
+                                                <p>₱{{ totalAmount }}</p>
                                                 <input v-model="totalAmount" type="hidden" name="package_amount">
                                             </div>
                                         </div>
@@ -372,7 +373,7 @@
                     <div class="col-md-9">
                     <h5 class="no-margin"><strong>{{ selectedPackageType.name ? selectedPackageType.name : 'Package Name' }}</strong></h5>
                     <p>Max Weight: {{ selectedPackageType.weight ? selectedPackageType.weight : 0 }} kg</p>
-                    <p>Rate: ₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</p>
+                    <p>Rate: ₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}</p>
                     </div>
                 </div>
             </div>
@@ -399,7 +400,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                        <h5 class="no-margin small"><strong>₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</strong></h5>
+                        <h5 class="no-margin small"><strong>₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}</strong></h5>
                         </div>
                     </div>
                 </div>
@@ -411,7 +412,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                        <h5 class="no-margin small text-muted">₱{{ additionalWeightFee }}.00</h5>
+                        <h5 class="no-margin small text-muted">₱{{ additionalWeightFee }}</h5>
                         </div>
                     </div>
                 </div>
@@ -423,7 +424,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                        <h5 class="no-margin small"><strong>P{{ totalAmount }}.00</strong></h5>
+                        <h5 class="no-margin small"><strong>P{{ totalAmount }}</strong></h5>
                         </div>
                     </div>
                 </div>
@@ -761,9 +762,15 @@
             additionalWeightFee: function () {
                 if (this.selectedPackageType.name == 'Own Packaging') {
                     return this.dimension.reduce((total, item) => {
-                        let dimensionTotal = (total + parseFloat(item.height).toFixed() * parseFloat(item.length).toFixed() * parseFloat(item.width).toFixed() / 4000).toFixed()
-                        let additionalAmount = dimensionTotal * 20;
-                        return additionalAmount
+                        let ownPackagingFee = 26
+                        let ownPackagingMaxWeight = 4
+                        let dimensionTotal = (total + parseFloat(item.height) * parseFloat(item.length) * parseFloat(item.width) / 4000)
+                        if (dimensionTotal > ownPackagingMaxWeight) {
+                            let dimensionGrandTotal = dimensionTotal - ownPackagingMaxWeight
+                            return dimensionGrandTotal * ownPackagingFee
+                        } else {
+                            return 0
+                        }
                     }, 0)
                 } else {
                     return 0
