@@ -12,14 +12,14 @@
  
       @include('layouts.pages.session')
  
-      <h1>Schedule a Pickup</h1>
+      <h3 class="page-title">Schedule a Pickup</h3>
 
       <div class="page-content-wrapper m-b-45" id="app">
         <div class="sm-p-l-5 bg-contrast-lower">
-          <new-package username="{{ auth()->user()->username }}" :cities="{{ json_encode($cities) }}"></new-package>
+          <new-package username="{{ auth()->user()->username }}" :user-details="{{ auth()->user() }}" :cities="{{ json_encode($cities) }}"></new-package>
         </div>
       </div>
-</div>
+    </div>
  
 @endsection
  
@@ -50,6 +50,7 @@
     $(function(){
         $('#datepicker-component2').datepicker({
           format: "dd-M-yyyy",
+          forceParse: true,
           clearBtn: true,
           todayHighlight: true,
           startDate: '+3d'

@@ -13,10 +13,14 @@
     <div class="row">
         <div class="col-md-6">
             <div v-for="send in sender" :key="send.id" >
-            <button type="button" class="address" data-toggle="modal" data-target="#modalSlideUp-1">
-                <div class="address-title text-muted">Sender Address &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
-                <h5 class="no-margin"><strong>{{ send.name ? send.name : 'Sender Name' }} | {{ send.number ? send.number : 'Phone Number' }} | {{ send.pickup_date ? send.pickup_date : 'Pickup Date' }}</strong></h5>
-                <p>{{ send.address ? send.address : 'Address' }} {{ send.city ? send.city : 'City' }} {{ send.postal_code ? send.postal_code : 'Postal Code' }}</p>
+            <button type="button" class="btn-block address" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalSlideUp-1">
+                <div class="address-title text-muted">Sender Address</div>
+                <h5 class="no-margin">Sender Name: <span><small>{{ send.name ? send.name : userDetails.name }}</small></span></h5>
+                <h5 class="no-margin">Phone Number: <span><small>{{ send.number ? send.number : userDetails.m_number }}</small></span></h5>
+                <h5 class="no-margin">Pickup Date: <span><small>{{ send.pickup_date ? send.pickup_date : '' }}</small></span></h5>
+                <h5 class="no-margin">Address: <span><small>{{ send.address ? send.address : userDetails.address }}</small></span></h5>
+                <h5 class="no-margin">City: <span><small>{{ send.city ? send.city : userDetails.city }}</small></span></h5>
+                <h5 class="no-margin">Postal Code: <span><small>{{ send.postal_code ? send.postal_code : userDetails.postal_code }}</small></span></h5>
                 <label v-if="errors.sender_name || errors.sender_phone || errors.pickup_date || errors.pickup_address || errors.pickup_city || errors.pickup_postal_code" class="error no-margin font-weight-bold">
                     Error occured in Sender Form.
                 </label>
@@ -70,10 +74,10 @@
                             </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                        <div class="form-group form-group-default input-group">
+                                        <!-- <div class="form-group form-group-default input-group">
                                             <div class="form-input-group">
                                                 <label>Pickup Date</label>
-                                                <input v-model="send.pickup_date" type="text" class="form-control" name="pickup_date" placeholder="Pick a date" id="datepicker-component2">
+                                                <input v-model="send.pickup_date" type="text" class="form-control" name="pickup_date" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-component2">
                                                 </div>
                                                 <div class="input-group-append">
                                                 <span class="input-group-text"><i class="pg-icon">calendar</i></span>
@@ -82,8 +86,11 @@
                                         </div>
                                             <label v-if="errors.pickup_date" class="error" for="pickup_date">
                                                 {{ errors.pickup_date[0] }}
-                                            </label>
+                                            </label> -->
+                                                <label for="example-datepicker">Choose a date</label>
+                                                <b-form-datepicker id="example-datepicker" v-model="send.pickup_date" :date-disabled-fn="dateDisabled" class="mb-2 no-padding"></b-form-datepicker>
                                     </div>
+                                        </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                         <div class="form-group form-group-default">
@@ -95,12 +102,11 @@
                                         </label>
                                         </div>
                                     </div>
-                                    <!-- try select2 and jquery in another method -->
                                     <div class="row clearfix">
                                         <div class="col-xl-12">
-                                        <div class="form-group form-group-default form-group-default-select2 @error('pickup_city') has-error @enderror">
-                                            <p style="margin-top: 10px; margin-left: 10px; padding: 0px; margin-bottom: 0px; color: blue; font-weight: bold; color: #196a87 !important;">City</p>
-                                                <select v-model="send.city" name="pickup_city" class="full-width" data-init-plugin="select2" >
+                                        <div class="form-group form-group-default">
+                                            <p style="color: blue; font-weight: bold; color: #196a87 !important;">City</p>
+                                                <select v-model="send.city" name="pickup_city" class="form-control" id="exampleFormControlSelect1">
                                                     <optgroup v-for="(city, state) in cities" :label="state">
                                                         <option v-for="cit in city" :value="cit">
                                                             {{ cit }}
@@ -130,7 +136,7 @@
                                     <div class="clearfix"></div>
                                     <div class="row m-t-20 clearfix">
                                         <div class="col-xl-12">
-                                            <button type="submit" :data-dismiss="modal" class="btn btn-rounded btn-block btn-primary">Save Sender Details</button>
+                                            <button type="submit" :data-dismiss="modal" class="btn btn-rounded btn-lg btn-block btn-primary">Save Sender Details</button>
                                         </div>
                                     </div>
                             </div>
@@ -144,10 +150,14 @@
         </div>
             <hr class="no-margin">
             <div v-for="reci in recipient" :key="reci.id">
-                <button type="button" class="address" data-toggle="modal" data-target="#modalSlideUp-2">
-                    <div class="address-title text-muted">Recipient Address &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div>
-                    <h5 class="no-margin"><strong>{{ reci.name ? reci.name : 'Recipient Name' }} | {{ reci.number ? reci.number : 'Phone Number' }} | {{ reci.email ? reci.email : 'Email' }}</strong></h5>
-                    <p>{{ reci.address ? reci.address : 'Address' }} {{ reci.city ? reci.city : 'City' }} {{ reci.postal_code ? reci.postal_code : 'Postal Code' }}</p>
+                <button type="button" class="btn-block address" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalSlideUp-2">
+                    <div class="address-title text-muted">Recipient Address</div>
+                    <h5 class="no-margin">Recipient Name: <span><small>{{ reci.name ? reci.name : '' }}</small></span></h5>
+                    <h5 class="no-margin">Phone Number: <span><small>{{ reci.number ? reci.number : '' }}</small></span></h5>
+                    <h5 class="no-margin">Email: <span><small>{{ reci.email ? reci.email : '' }}</small></span></h5>
+                    <h5 class="no-margin">Address: <span><small>{{ reci.address ? reci.address : '' }}</small></span></h5>
+                    <h5 class="no-margin">City: <span><small>{{ reci.city ? reci.city : '' }}</small></span></h5>
+                    <h5 class="no-margin">Postal Code: <span><small>{{ reci.postal_code ? reci.postal_code : '' }}</small></span></h5>
                     <label v-if="errors.receiver_name || errors.receiver_email || errors.receiver_phone || errors.receiver_address || errors.receiver_city || errors.receiver_postal_code" class="error no-margin font-weight-bold">
                         Error occured in Recipient Form.
                     </label>
@@ -222,9 +232,9 @@
                                         </div>
                                         <div class="row clearfix">
                                         <div class="col-xl-12">
-                                        <div class="form-group form-group-default form-group-default-select2 @error('receiver_city') has-error @enderror">
-                                            <p style="margin-top: 10px; margin-left: 10px; padding: 0px; margin-bottom: 0px; color: blue; font-weight: bold; color: #196a87 !important;">City</p>
-                                                <select v-model="reci.city" name="receiver_city" class="full-width" data-init-plugin="select2" >
+                                        <div class="form-group form-group-default">
+                                            <p style="color: blue; font-weight: bold; color: #196a87 !important;">City</p>
+                                                <select v-model="reci.city" name="receiver_city" class="form-control" id="exampleFormControlSelect1">
                                                     <optgroup v-for="(city, state) in cities" :label="state">
                                                         <option v-for="cit in city" :value="cit">
                                                             {{ cit }}
@@ -254,7 +264,7 @@
                                         <div class="clearfix"></div>
                                         <div class="row m-t-20 clearfix">
                                             <div class="col-xl-12">
-                                                <button type="submit" :data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-block btn-primary">Save Recipient Details</button>
+                                                <button type="submit" :data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-lg btn-block btn-primary">Save Recipient Details</button>
                                             </div>
                                         </div>
                                     </div>
@@ -335,7 +345,7 @@
                                     </div>
                                     <div class="row m-t-20 clearfix">
                                         <div class="col-xl-12">
-                                            <button @click.prevent="packageDetailsButton()" type="button" data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-block btn-primary">Save Package Details</button>
+                                            <button @click.prevent="packageDetailsButton()" type="button" data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-lg btn-block btn-primary">Save Package Details</button>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
@@ -359,7 +369,7 @@
                     </div>
                     <div class="col-6">
                     <div class="pull-right">
-                        <button type="button" class="address package address-title text-primary" data-toggle="modal" data-target="#modalSlideUp-3">Edit</button>
+                        <button type="button" class="address package address-title text-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalSlideUp-3">Edit</button>
                     </div>
                     </div>
                 </div>
@@ -436,7 +446,7 @@
             <div class="card-header">
                 <div class="row">
                 <div class="col-12">
-                    <button @click="createPickup" :disabled="submitted" class="btn btn-block btn-rounded btn-primary">BOOK NOW</button>
+                    <button @click="createPickup" :disabled="submitted" class="btn btn-block btn-lg btn-rounded btn-primary m-b-10">BOOK NOW</button>
                 </div>
                 </div>
             </div>
@@ -453,7 +463,7 @@
             console.log('Component mounted.')
         },
 
-        props: ['cities', 'username'],
+        props: ['cities', 'username', 'userDetails'],
 
         data: function () {
             return {
@@ -571,6 +581,15 @@
         },
 
         methods: {
+            dateDisabled(ymd, date) {
+                // Disable weekends (Sunday = `0`, Saturday = `6`) and
+                // disable days that fall on the 13th of the month
+                const weekday = date.getDay()
+                const day = date.getDate()
+                // Return `true` if the date should be disabled
+                return weekday === 0 || weekday === 6 || day === 13
+            },
+
             senderForm:function(e) {
                 e.preventDefault();
                 this.errors = [];

@@ -444,14 +444,13 @@ button.address.package:hover {
 #div2 { 
   overflow-x: scroll; 
   overflow-y: hidden;
-  height: 200px !important;
+  height: 185px !important;
 }
 
 span.b {
   display: inline-block;
   width: 150px;
   height: 150px;
-  padding: 5px;
 }
 
 /* The container-radio */
@@ -481,6 +480,7 @@ span.b {
   text-align: center;
   box-shadow: 0px 3px 10px -2px hsla(150, 5%, 65%, 0.5);
   position: relative;
+  margin-top: 0.5rem;
 }
 
 /* Hide the browser's default radio button */
@@ -559,4 +559,8 @@ span.b {
 .tooltip {
   position: relative;
   display: inline-block;
+}
+
+.sender-title {
+  font-size: 13px;
 }
