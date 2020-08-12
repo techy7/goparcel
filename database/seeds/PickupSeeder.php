@@ -37,7 +37,7 @@ class PickupSeeder extends Seeder
             'package_length' => 0,
             'package_width' => 0,
             'package_height' => 0,
-            'package_amount' => 0,
+            'package_amount' => 78,
             'tracking_number' => 'PB5F22DC3FEF84E',
         ]);
         PickupActivity::create([
@@ -76,7 +76,7 @@ class PickupSeeder extends Seeder
             'package_length' => 0,
             'package_width' => 0,
             'package_height' => 0,
-            'package_amount' => 0,
+            'package_amount' => 88,
             'tracking_number' => 'PB5F22DCF0239D7',
         ]);
         PickupActivity::create([
@@ -124,10 +124,10 @@ class PickupSeeder extends Seeder
             'receiver_postal_code' => '3023',
             'receiver_country' => 'Philippines',
             'package_id' => 3,
-            'package_length' => 20.45,
-            'package_width' => 20.22,
-            'package_height' => 20.88,
-            'package_amount' => 138,
+            'package_length' => 35,
+            'package_width' => 36,
+            'package_height' => 45,
+            'package_amount' => 264.55,
             'tracking_number' => 'PB5F22DD0779AE6',
         ]);
         PickupActivity::create([

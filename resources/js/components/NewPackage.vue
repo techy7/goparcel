@@ -53,9 +53,9 @@
                                 <label v-if="msg.senderName" class="error" for="sender_name">
                                     {{ msg.senderName }}
                                 </label>
-                                <!-- <label v-if="errors.sender_name" class="error" for="sender_name">
+                                <label v-if="errors.sender_name" class="error" for="sender_name">
                                     {{ errors.sender_name[0] }}
-                                </label> -->
+                                </label>
                             </div>
                             </div>
                             <div class="row">
@@ -67,30 +67,29 @@
                                 <label v-if="msg.senderNumber" class="error" for="sender_phone">
                                     {{ msg.senderNumber }}
                                 </label>
-                                <!-- <label v-if="errors.sender_phone" class="error" for="sender_phone">
+                                <label v-if="errors.sender_phone" class="error" for="sender_phone">
                                     {{ errors.sender_phone[0] }}
-                                </label> -->
+                                </label>
                             </div>
                             </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                        <!-- <div class="form-group form-group-default input-group">
-                                            <div class="form-input-group">
-                                                <label>Pickup Date</label>
-                                                <input v-model="send.pickup_date" type="text" class="form-control" name="pickup_date" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-component2">
+                                            <div class="form-group form-group-default input-group">
+                                                <div class="form-input-group">
+                                                    <label>Pickup Date</label>
+                                                    <input v-model="send.pickup_date" type="text" class="form-control" name="pickup_date" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-component2">
                                                 </div>
                                                 <div class="input-group-append">
-                                                <span class="input-group-text"><i class="pg-icon">calendar</i></span>
+                                                    <span class="input-group-text"><i class="pg-icon">calendar</i></span>
                                                 </div>
                                             </div>
                                         </div>
                                             <label v-if="errors.pickup_date" class="error" for="pickup_date">
                                                 {{ errors.pickup_date[0] }}
-                                            </label> -->
-                                                <label for="example-datepicker">Choose a date</label>
-                                                <b-form-datepicker id="example-datepicker" v-model="send.pickup_date" :date-disabled-fn="dateDisabled" class="mb-2 no-padding"></b-form-datepicker>
+                                            </label>
+                                                <!-- <label for="example-datepicker">Choose a date</label>
+                                                <b-form-datepicker id="example-datepicker" v-model="send.pickup_date" :date-disabled-fn="dateDisabled" class="mb-2 no-padding"></b-form-datepicker> -->
                                     </div>
-                                        </div>
                                     <div class="row">
                                         <div class="col-md-12">
                                         <div class="form-group form-group-default">
@@ -125,12 +124,12 @@
                                         <label>Postal Code</label>
                                             <input v-model="senderPostalCode" type="text" id="" name="pickup_postal_code" placeholder="Enter postal coe" class="form-control">
                                         </div>
-                                        <label v-if="msg.senderPostalCode" class="error" for="sender_phone">
+                                        <label v-if="msg.senderPostalCode" class="error" for="pickup_postal_code">
                                             {{ msg.senderPostalCode }}
                                         </label>
-                                        <!-- <label v-if="errors.pickup_postal_code" class="error" for="pickup_postal_code">
+                                        <label v-if="errors.pickup_postal_code" class="error" for="pickup_postal_code">
                                             {{ errors.pickup_postal_code[0] }}
-                                        </label> -->
+                                        </label>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
@@ -190,9 +189,9 @@
                                             <label v-if="msg.recipientName" class="error" for="receiver_email">
                                                 {{ msg.recipientName }}
                                             </label>
-                                            <!-- <label v-if="errors.receiver_name" class="error" for="receiver_name">
+                                            <label v-if="errors.receiver_name" class="error" for="receiver_name">
                                                 {{ errors.receiver_name[0] }}
-                                            </label> -->
+                                            </label>
                                         </div>
                                         <div class="col-xl-6">
                                             <div class="form-group form-group-default">
@@ -202,9 +201,9 @@
                                             <label v-if="msg.recipientEmail" class="error" for="receiver_email">
                                                 {{ msg.recipientEmail }}
                                             </label>
-                                            <!-- <label v-if="errors.receiver_email" class="error" for="receiver_email">
+                                            <label v-if="errors.receiver_email" class="error" for="receiver_email">
                                                 {{ errors.receiver_email[0] }}
-                                            </label> -->
+                                            </label>
                                         </div>
                                         </div>
                                         <div class="row">
@@ -216,9 +215,9 @@
                                         <label v-if="msg.recipientNumber" class="error" for="receiver_email">
                                             {{ msg.recipientNumber }}
                                         </label>
-                                        <!-- <label v-if="errors.receiver_phone" class="error" for="receiver_phone">
+                                        <label v-if="errors.receiver_phone" class="error" for="receiver_phone">
                                             {{ errors.receiver_phone[0] }}
-                                        </label> -->
+                                        </label>
                                         </div>
                                         <div class="col-xl-6">
                                             <div class="form-group form-group-default">
@@ -256,9 +255,9 @@
                                             <label v-if="msg.recipientPostalCode" class="error" for="receiver_email">
                                                 {{ msg.recipientPostalCode }}
                                             </label>
-                                            <!-- <label v-if="errors.receiver_postal_code" class="error" for="receiver_postal_code">
+                                            <label v-if="errors.receiver_postal_code" class="error" for="receiver_postal_code">
                                                 {{ errors.receiver_postal_code[0] }}
-                                            </label> -->
+                                            </label>
                                         </div>
                                         </div>
                                         <div class="clearfix"></div>

@@ -49,10 +49,10 @@ class PickupController extends Controller
             'receiver_city' => 'required|string|max:255',
             'receiver_postal_code' => 'required|string|max:255',
             'package_id' => 'required',
-            'package_length' => 'nullable|max:5',
-            'package_width' => 'nullable|max:5',
-            'package_height' => 'nullable|max:5',
-            'package_amount' => 'nullable|max:5',
+            'package_length' => 'nullable|max:8',
+            'package_width' => 'nullable|max:8',
+            'package_height' => 'nullable|max:8',
+            'package_amount' => 'nullable|max:8',
         ], [
             'receiver_name.regex' => 'The :attribute field can only contain letters.',
             'sender_phone.phone' => 'The sender contact number field contains an invalid number.',
@@ -87,10 +87,11 @@ class PickupController extends Controller
 
         $pickup->pickupActivities()->create();
 
+        Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
+
         return response()->json($pickup);
 
 
-        // Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
 
         // return redirect()->route('customer.pickup', auth()->user()->username)->with('success', 'Pickup has been successfully added.');
     }

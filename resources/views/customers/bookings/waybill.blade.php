@@ -59,11 +59,7 @@
 
             <div class="row" style="margin-bottom: -30px !important">
                 <div style="padding: 15px">
-                    @if ($userPickup->package->name == 'Own Packaging')
-                        <h4 style="margin: 0px; margin-top: 10px"><strong>Total Payment:</strong> <small>P{{ $userPickup->package_amount }}.00</small></h4>
-                    @else
-                        <h4 style="margin: 0px; margin-top: 10px"><strong>Total Payment:</strong> <small>P{{ $userPickup->package->amount }}.00</small></h4>
-                    @endif
+                        <h4 style="margin: 0px; margin-top: 10px"><strong>Total Payment:</strong> <small>P{{ number_format($userPickup->package_amount, 2, '.', ',') }}</small></h4>
                 </div>
                 <div style="padding: 15px; margin-left: 400px">
                     <h4 style="margin: 0px; margin-top: 10px"><strong>Signature:</strong></h4>
