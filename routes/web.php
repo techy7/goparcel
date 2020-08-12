@@ -16,19 +16,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{username}/dashboard', 'DashboardController@dashboard')->name('customer.dashboard');
         Route::get('/{username}/pickup', 'PickupController@index')->name('customer.pickup');
         Route::post('/{username}/pickup', 'PickupController@store')->name('customer.pickup.store');
-        Route::group(['prefix' => '/user'], function () {
-            Route::get('/{username}/account', 'AccountController@index')->name('customer.account');
-            Route::get('/{username}/account/edit', 'AccountController@edit')->name('customer.account.edit');
-            Route::patch('/{username}/account/update', 'AccountController@update')->name('customer.account.update');
-        });
-            Route::get('/{username}/pickup-bookings', 'BookingController@index')->name('customer.bookings');
-            Route::get('/{username}/pickup-bookings/{tracking_number}', 'BookingController@track')->name('customer.bookings.track');
-            Route::get('/{username}/pickup-bookings/{id}/waybill', 'BookingController@waybill')->name('customer.bookings.waybill');
-
+        Route::get('/user/{username}/account', 'AccountController@index')->name('customer.account');
+        Route::get('/user/{username}/account/edit', 'AccountController@edit')->name('customer.account.edit');
+        Route::patch('/user/{username}/account/update', 'AccountController@update')->name('customer.account.update');
+        Route::get('/{username}/pickup-bookings', 'BookingController@index')->name('customer.bookings');
+        Route::get('/{username}/pickup-bookings/{tracking_number}', 'BookingController@track')->name('customer.bookings.track');
+        Route::get('/{username}/pickup-bookings/{id}/waybill', 'BookingController@waybill')->name('customer.bookings.waybill');
     });
 
-    Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {
-        Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
+        Route::get('/admin-dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
+        Route::group(['prefix' => '/admin', 'namespace' => 'Admin'], function () {
         Route::get('/users', 'UserController@index')->name('admin.users');
         Route::get('/users/create', 'UserController@create')->name('admin.users.create');
         Route::post('/users', 'UserController@store')->name('admin.users.store');
