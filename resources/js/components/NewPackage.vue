@@ -15,12 +15,26 @@
             <div v-for="send in sender" :key="send.id" >
             <button type="button" class="btn-block address" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalSlideUp-1">
                 <div class="address-title text-muted">Sender Address</div>
-                <h5 class="no-margin">Sender Name: <span><small>{{ send.name ? send.name : userDetails.name }}</small></span></h5>
-                <h5 class="no-margin">Phone Number: <span><small>{{ send.number ? send.number : userDetails.m_number }}</small></span></h5>
-                <h5 class="no-margin">Pickup Date: <span><small>{{ send.pickup_date ? send.pickup_date : '' }}</small></span></h5>
-                <h5 class="no-margin">Address: <span><small>{{ send.address ? send.address : userDetails.address }}</small></span></h5>
-                <h5 class="no-margin">City: <span><small>{{ send.city ? send.city : userDetails.city }}</small></span></h5>
-                <h5 class="no-margin">Postal Code: <span><small>{{ send.postal_code ? send.postal_code : userDetails.postal_code }}</small></span></h5>
+                <hr style="margin: 3px 0px -15px 0px;">
+                <br>
+                <h5 class="details-title">Sender Name: </h5>
+                <span class="text-muted" style="display:inline;">{{ send.name ? send.name : userDetails.name }}</span>
+                <br>
+                <h5 class="details-title">Phone Number: </h5>
+                <span class="text-muted" style="display:inline;">{{ send.number ? send.number : userDetails.m_number }}</span>
+                <br>
+                <h5 class="details-title">Pickup Date: </h5>
+                <span class="text-muted" style="display:inline;">{{ send.pickup_date ? send.pickup_date : '' }}</span>
+                <br>
+                <h5 class="details-title">Address: </h5>
+                <span class="text-muted" style="display:inline;">{{ send.address ? send.address : userDetails.address }}</span>
+                <br>
+                <h5 class="details-title">City: </h5>
+                <span class="text-muted" style="display:inline;">{{ send.city ? send.city : userDetails.city }}</span>
+                <br>
+                <h5 class="details-title">Postal Code: </h5>
+                <span class="text-muted" style="display:inline;">{{ send.postal_code ? send.postal_code : userDetails.postal_code }}</span>
+                <br>
                 <label v-if="errors.sender_name || errors.sender_phone || errors.pickup_date || errors.pickup_address || errors.pickup_city || errors.pickup_postal_code" class="error no-margin font-weight-bold">
                     Error occured in Sender Form.
                 </label>
@@ -157,12 +171,26 @@
             <div v-for="reci in recipient" :key="reci.id">
                 <button type="button" class="btn-block address" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalSlideUp-2">
                     <div class="address-title text-muted">Recipient Address</div>
-                    <h5 class="no-margin">Recipient Name: <span><small>{{ reci.name ? reci.name : '' }}</small></span></h5>
-                    <h5 class="no-margin">Phone Number: <span><small>{{ reci.number ? reci.number : '' }}</small></span></h5>
-                    <h5 class="no-margin">Email: <span><small>{{ reci.email ? reci.email : '' }}</small></span></h5>
-                    <h5 class="no-margin">Address: <span><small>{{ reci.address ? reci.address : '' }}</small></span></h5>
-                    <h5 class="no-margin">City: <span><small>{{ reci.city ? reci.city : '' }}</small></span></h5>
-                    <h5 class="no-margin">Postal Code: <span><small>{{ reci.postal_code ? reci.postal_code : '' }}</small></span></h5>
+                    <hr style="margin: 3px 0px -15px 0px;">
+                    <br>
+                    <h5 class="details-title">Recipient Name: </h5>
+                    <span class="text-muted" style="display:inline;">{{ reci.name ? reci.name : '' }}</span>
+                    <br>
+                    <h5 class="details-title">Phone Number: </h5>
+                    <span class="text-muted" style="display:inline;">{{ reci.number ? reci.number : '' }}</span>
+                    <br>
+                    <h5 class="details-title">Email: </h5>
+                    <span class="text-muted" style="display:inline;">{{ reci.email ? reci.email : '' }}</span>
+                    <br>
+                    <h5 class="details-title">Address: </h5>
+                    <span class="text-muted" style="display:inline;">{{ reci.address ? reci.address : '' }}</span>
+                    <br>
+                    <h5 class="details-title">City: </h5>
+                    <span class="text-muted" style="display:inline;">{{ reci.city ? reci.city : '' }}</span>
+                    <br>
+                    <h5 class="details-title">Postal Code: </h5>
+                    <span class="text-muted" style="display:inline;">{{ reci.postal_code ? reci.postal_code : '' }}</span>
+                    <br>
                     <label v-if="errors.receiver_name || errors.receiver_email || errors.receiver_phone || errors.receiver_address || errors.receiver_city || errors.receiver_postal_code" class="error no-margin font-weight-bold">
                         Error occured in Recipient Form.
                     </label>
@@ -291,102 +319,92 @@
 
     <div class="row m-t-10">
         <div class="col-md-6">
-            <div class="modal fade slide-up disable-scroll" id="modalSlideUp-3" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
-                <div class="modal-dialog ">
-                <div class="modal-content-wrapper">
-                    <div class="modal-content">
-                    <div class="modal-header clearfix">
-                        <button aria-label="" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-icon">close</i>
-                        </button>
-                        <h5 class="text-uppercase">Package Details</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                        <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h4 class="address-title">Select Package Type</h4>
-                                            <div id="div2">
-                                                <span v-for="(pack, packs) in packageTypes" :key="pack.id" class="b">
-                                                <label class="container-radio radio-label">
-                                                    <img alt="Packange Picture" width="90" height="50" :src="'/pages/assets/img/icon.png'">
-                                                    <p class="package-title">{{ pack.name }}</p>
-                                                    <p class="package-description">Max weight: {{ pack.weight }} kg</p>
-                                                    <p class="package-description price">{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(pack.rate) }}</p>
-                                                    <p class="package-description">Rate</p>
-                                                    <input type="radio" :value="packageTypes[packs]" checked="checked" v-model="selectedPackageType">
-                                                    <input type="hidden" v-model="selectedPackageType.id" name="package_id">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                                </span>
-                                            </div>
-                                            <div class="row m-t-10" v-if="selectedPackageType.name == 'Own Packaging'" v-for="dime in dimension" :key="dime.id">
-                                            <p class="btn-block m-t-10 m-l-10"><em>If your item weight is beyond 4kg, kindly fill this out.</em></p>
-                                                <div class="col-4">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Length(cm)</label>
-                                                        <input type="number" class="form-control" name="package_length" v-model="dime.length" step="any" oninput="this.value = Math.abs(this.value)" onKeyPress="if(this.value.length==6) return false;">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Width(cm)</label>
-                                                        <input type="number" class="form-control" name="package_width" v-model="dime.width" step="any" oninput="this.value = Math.abs(this.value)" onKeyPress="if(this.value.length==6) return false;">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Height(cm)</label>
-                                                        <input type="number" class="form-control" name="package_height" v-model="dime.height" step="any" oninput="this.value = Math.abs(this.value)" onKeyPress="if(this.value.length==6) return false;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row m-t-20">
-                                        <div class="col-6">
-                                            <div class="pull-left">
-                                                <p>Total Amount</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="pull-right">
-                                                <p>{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(totalAmount) }}</p>
-                                                <input v-model="totalAmount" type="hidden" name="package_amount">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row m-t-20 clearfix">
-                                        <div class="col-xl-12">
-                                            <button @click.prevent="packageDetailsButton()" type="button" data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-lg btn-block btn-primary">Save Package Details</button>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                            </div>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-
             <div class="card-body no-padding">
             <div class="card card-default">
                 <div class="card-header">
-                <div class="row">
+                    <div class="row">
                     <div class="col-6">
                     <div class="pull-left">
                         <div class="card-title text-muted">Package Details</div>
                     </div>
                     </div>
-                    <div class="col-6">
-                    <div class="pull-right">
-                        <button type="button" class="address package address-title text-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalSlideUp-3">Edit</button>
-                    </div>
+                </div>
+                </div>
+                <div class="card-body">
+                <hr style="margin: -3px 0px 17px 0px">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <h4 class="address-title">Select Package Type</h4> -->
+                        <!-- <div id="div2">
+                            <span v-for="(pack, packs) in packageTypes" :key="pack.id" class="b">
+                            <label class="container-radio radio-label">
+                                <img alt="Packange Picture" width="90" height="50" :src="'/pages/assets/img/icon.png'">
+                                <p class="package-title">{{ pack.name }}</p>
+                                <p class="package-description">Max weight: {{ pack.weight }} kg</p>
+                                <p class="package-description price">{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(pack.rate) }}</p>
+                                <p class="package-description">Rate</p>
+                                <input type="radio" :value="packageTypes[packs]" checked="checked" v-model="selectedPackageType">
+                                <input type="hidden" v-model="selectedPackageType.id" name="package_id">
+                                <span class="checkmark"></span>
+                            </label>
+                            </span>
+                        </div> -->
+                        <div class="row" style="margin-right: 20px; margin-left: -15px; margin-top: -9px">
+                            <div class="col-md-4" v-for="(pack, packs) in packageTypes" :key="pack.id">
+                                    <label class="container-radio radio-label">
+                                        <img alt="Packange Picture" width="75" height="45" :src="'/pages/assets/img/icon.png'">
+                                        <p class="package-title">{{ pack.name }}</p>
+                                        <p class="package-description">Max weight: {{ pack.weight }} kg</p>
+                                        <p class="package-description price">{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(pack.rate) }}</p>
+                                        <p class="package-description rate">Rate</p>
+                                        <input type="radio" :value="packageTypes[packs]" checked="checked" v-model="selectedPackageType">
+                                        <input type="hidden" v-model="selectedPackageType.id" name="package_id">
+                                        <span class="checkmark"></span>
+                                    </label>
+                            </div>
+                        </div>
+                        <div class="row m-t-10" v-if="selectedPackageType.name == 'Own Packaging'" v-for="dime in dimension" :key="dime.id">
+                        <p class="btn-block m-t-10 m-l-10"><em>If your item weight is beyond 4kg, kindly fill this out.</em></p>
+                            <div class="col-4">
+                                <div class="form-group form-group-default">
+                                    <label>Length(cm)</label>
+                                    <input type="number" class="form-control" name="package_length" v-model="dime.length" step="any" oninput="this.value = Math.abs(this.value)" onKeyPress="if(this.value.length==6) return false;">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group form-group-default">
+                                    <label>Width(cm)</label>
+                                    <input type="number" class="form-control" name="package_width" v-model="dime.width" step="any" oninput="this.value = Math.abs(this.value)" onKeyPress="if(this.value.length==6) return false;">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group form-group-default">
+                                    <label>Height(cm)</label>
+                                    <input type="number" class="form-control" name="package_height" v-model="dime.height" step="any" oninput="this.value = Math.abs(this.value)" onKeyPress="if(this.value.length==6) return false;">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <hr style="margin: 10px 0 15px 0">
+                <!-- <div class="row m-t-20">
+                    <div class="col-6">
+                        <div class="pull-left">
+                            <p>Total Amount</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="pull-right">
+                            <p>{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(totalAmount) }}</p>
+                            <input v-model="totalAmount" type="hidden" name="package_amount">
+                        </div>
+                    </div>
+                </div> -->
+                <!-- <div class="row m-t-20 clearfix">
+                    <div class="col-xl-12">
+                        <button @click.prevent="packageDetailsButton()" type="button" data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-lg btn-block btn-primary">Save Package Details</button>
+                    </div>
+                </div> -->
+                <!-- <hr style="margin: 10px 0 15px 0">
                 <div class="row">
                     <div class="col-md-3">
                     <div class="user-pic">
@@ -398,12 +416,12 @@
                     <p>Max Weight: {{ selectedPackageType.weight ? selectedPackageType.weight : 0 }} kg</p>
                     <p>Rate: ₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</p>
                     </div>
-                </div>
+                </div> -->
             </div>
             </div>
         </div>
         </div>
-        <div v-if="feesAndBreakdown == true" class="col-md-6">
+        <div class="col-md-6">
         <div class="card-body no-padding">
             <div class="card card-default">
             <div class="card-header">
@@ -414,41 +432,48 @@
                     </div>
                 </div>
                 </div>
-                <hr style="margin: 10px 0 15px 0">
+                <hr style="margin: 3px 0px 12px 0px">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="pull-left">
-                        <h5 class="no-margin small"><strong>Service Fees</strong></h5>
+                        <h5 class="no-margin details-title"><strong>Service Fees</strong></h5>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                        <h5 class="no-margin small"><strong>₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</strong></h5>
+                        <h5 class="no-margin"><strong>₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</strong></h5>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="pull-left m-l-10">
-                        <h5 class="no-margin small text-muted">Additional Weight Fee</h5>
+                        <h5 class="no-margin text-muted">Additional Weight Fee</h5>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                        <h5 class="no-margin small text-muted">{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(additionalWeightFee) }}</h5>
+                        <h5 class="no-margin text-muted">{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(additionalWeightFee) }}</h5>
                         </div>
                     </div>
                 </div>
-                <div class="row m-t-10">
+                <!-- <hr class="no-margin" style="margin: 20px 0px 0px 0px !important"> -->
+                <div class="row m-t-20">
                     <div class="col-md-6">
                         <div class="pull-left">
-                        <h5 class="no-margin small"><strong>Total Amount</strong></h5>
+                        <h5 class="no-margin details-title"><strong>Total Amount</strong></h5>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                        <h5 class="no-margin small"><strong>{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(totalAmount) }}</strong></h5>
+                        <h5 class="no-margin"><strong>{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(totalAmount) }}</strong></h5>
                         </div>
+                    </div>
+                </div>
+                
+                <div class="row m-t-20">
+                    <div class="col-md-12">
+                        <button @click="createPickup" :disabled="submitted" class="btn btn-block btn-lg btn-rounded btn-primary m-b-10">BOOK NOW</button>
                     </div>
                 </div>
             </div>
@@ -456,32 +481,13 @@
         </div>
     </div>
     </div>
-    <div class="row">
-        <div class="col-md-6"></div>
-        <div class="col-md-6">
-        <div class="card-body no-padding" style="margin-top: -10px">
-            <div class="card card-default">
-            <div class="card-header">
-                <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6">
-                    <button @click="createPickup" :disabled="submitted" class="btn btn-block btn-lg btn-rounded btn-primary m-b-10">BOOK NOW</button>
-                </div>
-                <div class="col-3"></div>
-                </div>
-            </div>
-        </div>
-        </div>
-        </div>
-    </div>
-</div>
 </div>
 </template>
 
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            console.log('Parcel Bear.')
         },
 
         props: ['cities', 'username', 'userDetails'],
@@ -526,13 +532,13 @@
                 packageTypes: [
                     {
                         id: 1,
-                        name: 'Medium Parcel',
+                        name: 'Medium',
                         weight: 2,
                         rate: 78
                     },
                     {
                         id: 2,
-                        name: 'Large Parcel',
+                        name: 'Large',
                         weight: 3,
                         rate: 88
                     },
@@ -553,8 +559,6 @@
                         width: 0,
                     }
                 ],
-
-                feesAndBreakdown: false,
 
                 errors: [],
 
@@ -729,12 +733,6 @@
                 } else {
                     this.msg['recipientPostalCode'] = 'Invalid Postal Code';
                 } 
-            },
-
-            packageDetailsButton: function () {
-                if (this.selectedPackageType.length == undefined) {
-                    this.feesAndBreakdown = true
-                }
             },
 
             createPickup: function () {
