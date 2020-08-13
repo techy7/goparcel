@@ -9213,7 +9213,7 @@ form legend {
 .form-control:focus {
   border-color: unset;
   background-color: #fff;
-  border: 1px solid #7252D3;
+  border: 1px solid rgb(180, 180, 180);
   box-shadow: none;
   outline: 0 !important;
 }

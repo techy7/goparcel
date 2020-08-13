@@ -51,7 +51,7 @@
           forceParse: true,
           clearBtn: true,
           todayHighlight: true,
-          startDate: '+3d'
+          startDate: '+1d'
         });
     });
 

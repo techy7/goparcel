@@ -11,7 +11,7 @@
         <div class="col-lg-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+    <div class="col-md-6">
             <div v-for="send in sender" :key="send.id" >
             <button type="button" class="btn-block address" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalSlideUp-1">
                 <div class="address-title text-muted">Sender Address</div>
@@ -31,9 +31,14 @@
                 <div class="modal-content-wrapper">
                     <div class="modal-content">
                     <div class="modal-header clearfix">
-                        <button aria-label="" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-icon">close</i>
-                        </button>
-                        <h5 class="text-uppercase">Sender Details</h5>
+                        <div class="row m-b-10">
+                            <div class="pull-right">
+                                <button aria-label="" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-icon">close</i></button>
+                            </div>
+                            <div class="pull-left">
+                                <h5 class="text-uppercase no-margin" style="margin-top: -10px !important">Sender Details</h5>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-body">
                         <p v-if="errors.length">
@@ -147,7 +152,8 @@
             </div>
             </form>
         </div>
-            <hr class="no-margin">
+    </div>
+    <div class="col-md-6">
             <div v-for="reci in recipient" :key="reci.id">
                 <button type="button" class="btn-block address" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalSlideUp-2">
                     <div class="address-title text-muted">Recipient Address</div>
@@ -167,9 +173,14 @@
                     <div class="modal-content-wrapper">
                         <div class="modal-content">
                         <div class="modal-header clearfix">
-                            <button aria-label="" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-icon">close</i>
-                            </button>
-                            <h5 class="text-uppercase">Recipient Details</h5>
+                            <div class="row m-b-10">
+                                <div class="pull-right">
+                                    <button aria-label="" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-icon">close</i></button>
+                                </div>
+                                <div class="pull-left">
+                                    <h5 class="text-uppercase no-margin" style="margin-top: -10px !important">Recipient Details</h5>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-body">
                             <p v-if="errors.length">
@@ -179,104 +190,107 @@
                                 </ul>
                             </p>
                             <div class="row">
-                            <div class="col-md-12">
-                                        <div class="row clearfix">
-                                        <div class="col-xl-6">
-                                            <div class="form-group form-group-default">
-                                            <label>Name</label>
-                                                <input v-model="recipientName" type="text" placeholder="John Doe" name="receiver_name" class="form-control">
-                                            </div>
-                                            <label v-if="msg.recipientName" class="error" for="receiver_email">
-                                                {{ msg.recipientName }}
-                                            </label>
-                                            <label v-if="errors.receiver_name" class="error" for="receiver_name">
-                                                {{ errors.receiver_name[0] }}
-                                            </label>
-                                        </div>
-                                        <div class="col-xl-6">
-                                            <div class="form-group form-group-default">
-                                            <label>Email</label>
-                                                <input v-model="recipientEmail" type="email" placeholder="email@gmail.com" name="receiver_email" class="form-control">
-                                            </div>
-                                            <label v-if="msg.recipientEmail" class="error" for="receiver_email">
-                                                {{ msg.recipientEmail }}
-                                            </label>
-                                            <label v-if="errors.receiver_email" class="error" for="receiver_email">
-                                                {{ errors.receiver_email[0] }}
-                                            </label>
-                                        </div>
-                                        </div>
-                                        <div class="row">
-                                        <div class="col-xl-6">
-                                        <div class="form-group form-group-default">
-                                        <label>Phone Number</label>
-                                            <input v-model="recipientNumber" type="text" id="" name="receiver_phone" placeholder="Enter phone number" class="form-control">
-                                        </div>
-                                        <label v-if="msg.recipientNumber" class="error" for="receiver_email">
-                                            {{ msg.recipientNumber }}
-                                        </label>
-                                        <label v-if="errors.receiver_phone" class="error" for="receiver_phone">
-                                            {{ errors.receiver_phone[0] }}
-                                        </label>
-                                        </div>
-                                        <div class="col-xl-6">
-                                            <div class="form-group form-group-default">
-                                            <label>Address</label>
-                                                <input v-model="reci.address" type="text" class="form-control" name="receiver_address" placeholder="123 Manuel St.">
-                                            </div>
-                                            <label v-if="errors.receiver_address" class="error" for="receiver_address">
-                                                {{ errors.receiver_address[0] }}
-                                            </label>
-                                        </div>
-                                        </div>
-                                        <div class="row clearfix">
-                                        <div class="col-xl-12">
-                                        <div class="form-group form-group-default">
-                                            <p style="color: blue; font-weight: bold; color: #196a87 !important;">City</p>
-                                                <select v-model="reci.city" name="receiver_city" class="form-control" id="exampleFormControlSelect1">
-                                                    <optgroup v-for="(city, state) in cities" :label="state">
-                                                        <option v-for="cit in city" :value="cit">
-                                                            {{ cit }}
-                                                        </option>
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-                                            <label v-if="errors.receiver_city" class="error" for="receiver_city">
-                                                {{ errors.receiver_city[0] }}
-                                            </label>
-                                        </div>
+                                <div class="col-md-12">
+                                    <div class="form-group form-group-default">
+                                    <label>Name</label>
+                                        <input v-model="recipientName" type="text" placeholder="John Doe" name="receiver_name" class="form-control">
                                     </div>
-                                        <div class="row">
-                                        <div class="col-xl-12">
-                                            <div class="form-group form-group-default">
-                                            <label>Postal Code</label>
-                                                <input v-model="recipientPostalCode" type="text" id="" name="receiver_postal_code" placeholder="Enter postal code" class="form-control">
-                                            </div>
-                                            <label v-if="msg.recipientPostalCode" class="error" for="receiver_email">
-                                                {{ msg.recipientPostalCode }}
-                                            </label>
-                                            <label v-if="errors.receiver_postal_code" class="error" for="receiver_postal_code">
-                                                {{ errors.receiver_postal_code[0] }}
-                                            </label>
-                                        </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="row m-t-20 clearfix">
-                                            <div class="col-xl-12">
-                                                <button type="submit" :data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-lg btn-block btn-primary">Save Recipient Details</button>
-                                            </div>
-                                        </div>
+                                    <label v-if="msg.recipientName" class="error" for="receiver_email">
+                                        {{ msg.recipientName }}
+                                    </label>
+                                    <label v-if="errors.receiver_name" class="error" for="receiver_name">
+                                        {{ errors.receiver_name[0] }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-group-default">
+                                    <label>Email</label>
+                                        <input v-model="recipientEmail" type="email" placeholder="email@gmail.com" name="receiver_email" class="form-control">
                                     </div>
+                                    <label v-if="msg.recipientEmail" class="error" for="receiver_email">
+                                        {{ msg.recipientEmail }}
+                                    </label>
+                                    <label v-if="errors.receiver_email" class="error" for="receiver_email">
+                                        {{ errors.receiver_email[0] }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-group-default">
+                                    <label>Phone Number</label>
+                                        <input v-model="recipientNumber" type="text" id="" name="receiver_phone" placeholder="Enter phone number" class="form-control">
+                                    </div>
+                                    <label v-if="msg.recipientNumber" class="error" for="receiver_email">
+                                        {{ msg.recipientNumber }}
+                                    </label>
+                                    <label v-if="errors.receiver_phone" class="error" for="receiver_phone">
+                                        {{ errors.receiver_phone[0] }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-group-default">
+                                    <label>Address</label>
+                                        <input v-model="reci.address" type="text" class="form-control" name="receiver_address" placeholder="123 Manuel St.">
+                                    </div>
+                                    <label v-if="errors.receiver_address" class="error" for="receiver_address">
+                                        {{ errors.receiver_address[0] }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-group-default">
+                                    <p style="color: blue; font-weight: bold; color: #196a87 !important;">City</p>
+                                        <select v-model="reci.city" name="receiver_city" class="form-control" id="exampleFormControlSelect1">
+                                            <optgroup v-for="(city, state) in cities" :label="state">
+                                                <option v-for="cit in city" :value="cit">
+                                                    {{ cit }}
+                                                </option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <label v-if="errors.receiver_city" class="error" for="receiver_city">
+                                        {{ errors.receiver_city[0] }}
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-group-default">
+                                    <label>Postal Code</label>
+                                        <input v-model="recipientPostalCode" type="text" id="" name="receiver_postal_code" placeholder="Enter postal code" class="form-control">
+                                    </div>
+                                    <label v-if="msg.recipientPostalCode" class="error" for="receiver_email">
+                                        {{ msg.recipientPostalCode }}
+                                    </label>
+                                    <label v-if="errors.receiver_postal_code" class="error" for="receiver_postal_code">
+                                        {{ errors.receiver_postal_code[0] }}
+                                    </label>
+                                </div>
+                            </div>
+                                <div class="clearfix"></div>
+                                <div class="row m-t-20 clearfix">
+                                    <div class="col-xl-12">
+                                        <button type="submit" :data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-lg btn-block btn-primary">Save Recipient Details</button>
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
-                        </div>
                     </div>
                     </div>
-                </div>
                 </form>
             </div>
+        </div>
+    </div>
 
-
+    <div class="row m-t-10">
+        <div class="col-md-6">
             <div class="modal fade slide-up disable-scroll" id="modalSlideUp-3" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
                 <div class="modal-dialog ">
                 <div class="modal-content-wrapper">
@@ -357,7 +371,7 @@
             </div>
 
 
-            <div class="card-body no-padding" style="margin-top: 10px">
+            <div class="card-body no-padding">
             <div class="card card-default">
                 <div class="card-header">
                 <div class="row">
@@ -440,15 +454,23 @@
             </div>
         </div>
         </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
         <div class="card-body no-padding" style="margin-top: -10px">
             <div class="card card-default">
             <div class="card-header">
                 <div class="row">
-                <div class="col-12">
+                <div class="col-3"></div>
+                <div class="col-6">
                     <button @click="createPickup" :disabled="submitted" class="btn btn-block btn-lg btn-rounded btn-primary m-b-10">BOOK NOW</button>
                 </div>
+                <div class="col-3"></div>
                 </div>
             </div>
+        </div>
         </div>
         </div>
     </div>
