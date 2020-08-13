@@ -12,9 +12,6 @@
 <div class="content sm-gutter">
     <div class="container-fluid padding-25 sm-padding-10">
         <div class="container-fixed-lg">
-            <ul class="breadcrumb p-l-0">
-              <li class="breadcrumb-item active"><a href="{{ route('admin.bookings') }}">Bookings List</a></li>
-            </ul>
             <div class="row">
                 <div class="col-md-6">
                     <div class="pull-left">
@@ -103,7 +100,7 @@
                                   </div>
                                 </div>
                                   {{-- <a href="{{ route('admin.bookings.edit', $pickup->id) }}" class="btn btn-outline-primary m-1">Edit</a> --}}
-                                  <a href="{{ route('admin.bookings.destroy-confirmation', $pickup->id) }}" class="btn btn-outline-danger m-1">Delete</a>
+                                  <a href="{{ route('admin.bookings.destroy-confirmation', $pickup->id) }}" class="btn btn-outline-danger text-danger m-1">Delete</a>
                                 </div>
                             </td>
                         </tr>

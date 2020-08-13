@@ -12,10 +12,6 @@
 <div class="content sm-gutter">
     <div class="container-fluid padding-25 sm-padding-10">
         <div class="container-fixed-lg">
-            <ul class="breadcrumb p-l-0">
-              <li class="breadcrumb-item active"><a href="{{ route('admin.packages') }}">{{ __('general.packages') }}</a></li>
-              <li class="breadcrumb-item active">Packages</li>
-            </ul>
             <div class="row">
                 <div class="col-md-6">
                     <div class="pull-left">

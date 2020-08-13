@@ -11,16 +11,19 @@
             @endhasanyrole
             @hasanyrole('Super Admin')
             <li class="m-t-10">
-                <a href="{{ route('admin.bookings') }}"><span class="title">{{ __('general.bookings') }}</span></a>
+                <a href="{{ route('admin.pickups') }}"><span class="title">{{ __('general.pickup_schedules') }}</span></a>
             </li>
             <li class="m-t-10">
-                <a href="{{ route('admin.pickups') }}"><span class="title">{{ __('general.pickup_schedules') }}</span></a>
+                <a href="{{ route('admin.bookings') }}"><span class="title">{{ __('general.bookings') }}</span></a>
             </li>
             <li class="m-t-10">
                 <a href="{{ route('admin.packages') }}"><span class="title">{{ __('general.packages') }}</span></a>
             </li>
             @endhasanyrole
             @hasanyrole('Super Admin|User')
+            <li class="m-t-10">
+                <a href="{{ route('admin.customers') }}"><span class="title">{{ __('general.customers') }}</span></a>
+            </li>
             <li class="m-t-10">
                 <a href="javascript:;">
                     <span class="title">{{ __('general.users_access_roles') }}</span>
@@ -38,9 +41,6 @@
                     </li>
                 </ul>
             </li>
-            <li class="m-t-10">
-                <a href="{{ route('admin.customers') }}"><span class="title">{{ __('general.customers') }}</span></a>
-            </li>
             @endhasanyrole
             @hasanyrole('Customer')
             <li class="m-t-10">
@@ -52,7 +52,6 @@
             <li class="m-t-10">
                 <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.my_pickup_booking') }}</span></a>
             </li>
-            <hr style="border-bottom: 1px solid rgb(223, 222, 222) !important; margin-top: 85% !important;">
             <div class="d-flex flex-column" style="position: absolute; bottom: 85px; left: 35px;">
                 <li class="m-t-35">
                     <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.help_center') }}</span></a>

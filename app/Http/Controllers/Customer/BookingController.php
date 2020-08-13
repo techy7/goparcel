@@ -35,6 +35,11 @@ class BookingController extends Controller
             $pickupActive = $pickupActivity->deliveryStatus;
         }
 
+        $arrayOne = DeliveryStatus::all()->pluck('id')->toArray();
+        $arrayTwo = $pickupOrder->pickupActivities->pluck('delivery_status_id')->toArray();
+        
+        dd(array_diff($arrayOne, $arrayTwo)); // 3 4 5 6 ang lumabas sa dd kasi nga eto pa yung mga wala pa sa package parcel so baka puede itong magamit sa ui
+
         return view('customers.bookings.track', 
         compact(
             'pickupOrder', 

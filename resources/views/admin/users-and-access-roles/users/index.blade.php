@@ -97,7 +97,7 @@
                                 <div class="btn-group">
                                     <button class="btn btn-outline-primary m-1" data-toggle="modal" data-target="#modalSlideUp-{{ $nonCustomer->id }}">Access Role</button>
                                     <a href="{{ route('admin.users.edit', $nonCustomer->id) }}" class="btn btn-outline-primary m-1">Edit</a>
-                                    <a href="{{ route('admin.users.destroy-confirmation', $nonCustomer->id) }}" class="btn btn-outline-danger m-1">Delete</a>
+                                    <a href="{{ route('admin.users.destroy-confirmation', $nonCustomer->id) }}" class="btn btn-outline-danger text-danger m-1">Delete</a>
                                 </div>
                             </td>
                         </tr>

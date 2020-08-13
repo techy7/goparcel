@@ -11,6 +11,15 @@
 @section('content')
 <div class="content sm-gutter">
     <div class="container-fluid padding-25 sm-padding-10">
+      <div class="container-fixed-lg">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pull-left">
+                    <h3 class="page-title">Dashboard</h3>
+                </div>
+            </div>
+        </div>
+      </div>
       <div class="row">
             <div class="col-md-4 m-b-10">
               <div class="widget-9 card  bg-success no-margin widget-loader-bar">
@@ -58,7 +67,7 @@
       <div class="row">
         <div class="col-lg-8 m-b-10">
           <div class="card card-transparent">
-            <h2 class="pull-left m-t-5 m-b-5">Pickups List</h2>
+            <h3 class="pull-left m-t-5 m-b-5 page-title">Pickups List</h3>
             <div class="card-header ">
               <div class="row">
                   <div class="col-md-6">
