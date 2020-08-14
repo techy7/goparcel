@@ -56,10 +56,7 @@
                     </div>
                     <div class="modal-body">
                         <p v-if="errors.length">
-                            <b>Please correct the following error(s):</b>
-                            <ul>
-                            <li v-for="error in errors">{{ error }}</li>
-                            </ul>
+                            <b>Make sure that you fill out all the fields.</b>
                         </p>
                         <div class="row">
                         <div class="col-md-12">
@@ -457,7 +454,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <hr class="no-margin" style="margin: 20px 0px 0px 0px !important"> -->
                 <div class="row m-t-20">
                     <div class="col-md-6">
                         <div class="pull-left">
@@ -619,30 +615,56 @@
                 e.preventDefault();
                 this.errors = [];
 
-                if (this.sender[0].name === '') {
-                    this.errors.push("Sender Name is required.");
-                }
+                // if (this.sender[0].name === '') {
+                //     this.errors.push("Sender Name is required.");
+                // }
 
-                if (this.sender[0].number === '') {
-                    this.errors.push("Sender Mobile Number is required.");
-                }
+                // if (this.sender[0].number === '') {
+                //     this.errors.push("Sender Mobile Number is required.");
+                // }
                 
-                if (this.sender[0].address === '') {
-                    this.errors.push("Sender Address is required.");
-                }
+                // if (this.sender[0].address === '') {
+                //     this.errors.push("Sender Address is required.");
+                // }
 
-                if (this.sender[0].city === '') {
-                    this.errors.push("Sender City is required.");
-                }
+                // if (this.sender[0].city === '') {
+                //     this.errors.push("Sender City is required.");
+                // }
 
-                if (this.sender[0].postal_code === '') {
-                    this.errors.push("Sender Postal Code is required.");
-                }
+                // if (this.sender[0].postal_code === '') {
+                //     this.errors.push("Sender Postal Code is required.");
+                // }
 
-                if (this.errors.length == 0) {
-                    this.modal = 'modal'
-                    e.preventDefault();
-                }
+                // if (this.errors.length == 0) {
+                //     this.modal = 'modal'
+                //     e.preventDefault();
+                // }
+
+                axios.post('/' + this.username + '/pickup', {
+                    sender_name: this.sender[0].name,
+                    sender_phone: this.sender[0].number,
+                    pickup_date: this.sender[0].pickup_date,
+                    pickup_address: this.sender[0].address,
+                    pickup_city: this.sender[0].city,
+                    pickup_postal_code: this.sender[0].postal_code,
+                })
+                    .then(response => {
+                        this.successful = response.data,
+                        this.sender[0].name = '',
+                        this.sender[0].number = '',
+                        this.sender[0].pickup_date = '',
+                        this.sender[0].address = '',
+                        this.sender[0].city = '',
+                        this.sender[0].postal_code = '',
+                        this.senderName = '',
+                        this.senderNumber = '',
+                        this.senderPostalCode = ''
+                    })
+                    .catch(error => {
+                        if (error.response.status == 422) {
+                            this.errors = error.response.data.errors
+                        }
+                    })
             },
 
             recipientForm:function(e) {
@@ -680,11 +702,19 @@
             },
 
             validateSenderName(value) {
-                if (/^[a-zA-Z ]+$/.test(value)) {
-                    this.msg['senderName'] = '';
+                // if (/^[a-zA-Z ]+$/.test(value)) {
+                //     this.msg['senderName'] = '';
+                // } else {
+                //     this.msg['senderName'] = 'The name field can only contain letters.';
+                // } 
+
+                // this is working
+                if (this.sender[0].name === '') {
+                    this.msg['senderName'] = 'This field is required';
+                    // this.errors.push("Sender Name is required.");
                 } else {
-                    this.msg['senderName'] = 'The name field can only contain letters.';
-                } 
+                    this.msg['senderName'] = '';
+                }
             },
 
             validateSenderNumber(value) {

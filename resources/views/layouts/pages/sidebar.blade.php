@@ -8,11 +8,11 @@
             <li class="m-t-10">
                 <a href="{{ route('admin.dashboard') }}"><span class="title">{{ __('general.dashboard') }}</span></a>
             </li>
-            @endhasanyrole
-            @hasanyrole('Super Admin')
             <li class="m-t-10">
                 <a href="{{ route('admin.pickups') }}"><span class="title">{{ __('general.pickup_schedules') }}</span></a>
             </li>
+            @endhasanyrole
+            @hasanyrole('Super Admin')
             <li class="m-t-10">
                 <a href="{{ route('admin.bookings') }}"><span class="title">{{ __('general.bookings') }}</span></a>
             </li>
