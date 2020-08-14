@@ -17,6 +17,9 @@
                 <div class="address-title text-muted">Sender Address</div>
                 <hr style="margin: 3px 0px -15px 0px;">
                 <br>
+                <label v-if="errors.sender_name || errors.sender_phone || errors.pickup_date || errors.pickup_address || errors.pickup_city || errors.pickup_postal_code" class="error no-margin font-weight-bold" style="margin-left: -3px !important;">
+                    Kindly fill out all the fields.
+                </label>
                 <h5 class="details-title">Sender Name: </h5>
                 <span class="text-muted" style="display:inline;">{{ send.name ? send.name : userDetails.name }}</span>
                 <br>
@@ -35,9 +38,6 @@
                 <h5 class="details-title">Postal Code: </h5>
                 <span class="text-muted" style="display:inline;">{{ send.postal_code ? send.postal_code : userDetails.postal_code }}</span>
                 <br>
-                <label v-if="errors.sender_name || errors.sender_phone || errors.pickup_date || errors.pickup_address || errors.pickup_city || errors.pickup_postal_code" class="error no-margin font-weight-bold">
-                    Error occured in Sender Form.
-                </label>
             </button>
             <form @submit="senderForm">
             <div class="modal fade slide-up disable-scroll" id="modalSlideUp-1" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
@@ -55,9 +55,9 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        <p v-if="errors.length">
-                            <b>Make sure that you fill out all the fields.</b>
-                        </p>
+                        <!-- <p v-if="senderErrors.length">
+                            <label class="error">Kindly fill out all the fields.</label>
+                        </p> -->
                         <div class="row">
                         <div class="col-md-12">
                             <div class="row">
@@ -68,9 +68,6 @@
                                 </div>
                                 <label v-if="msg.senderName" class="error" for="sender_name">
                                     {{ msg.senderName }}
-                                </label>
-                                <label v-if="errors.sender_name" class="error" for="sender_name">
-                                    {{ errors.sender_name[0] }}
                                 </label>
                             </div>
                             </div>
@@ -83,9 +80,6 @@
                                 <label v-if="msg.senderNumber" class="error" for="sender_phone">
                                     {{ msg.senderNumber }}
                                 </label>
-                                <label v-if="errors.sender_phone" class="error" for="sender_phone">
-                                    {{ errors.sender_phone[0] }}
-                                </label>
                             </div>
                             </div>
                                     <div class="row">
@@ -93,16 +87,16 @@
                                             <div class="form-group form-group-default input-group">
                                                 <div class="form-input-group">
                                                     <label>Pickup Date</label>
-                                                    <input v-model="send.pickup_date" type="text" class="form-control" name="pickup_date" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-component2">
+                                                    <input v-model="senderPickupDate" type="text" class="form-control" name="pickup_date" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-component2">
                                                 </div>
                                                 <div class="input-group-append">
                                                     <span class="input-group-text"><i class="pg-icon">calendar</i></span>
                                                 </div>
                                             </div>
                                         </div>
-                                            <label v-if="errors.pickup_date" class="error" for="pickup_date">
-                                                {{ errors.pickup_date[0] }}
-                                            </label>
+                                        <label v-if="msg.senderPickupDate" class="error" for="pickup_date">
+                                            {{ msg.senderPickupDate }}
+                                        </label>
                                                 <!-- <label for="example-datepicker">Choose a date</label>
                                                 <b-form-datepicker id="example-datepicker" v-model="send.pickup_date" :date-disabled-fn="dateDisabled" class="mb-2 no-padding"></b-form-datepicker> -->
                                     </div>
@@ -110,10 +104,10 @@
                                         <div class="col-md-12">
                                         <div class="form-group form-group-default">
                                         <label>Address</label>
-                                            <input v-model="send.address" type="text" class="form-control" name="pickup_address" placeholder="123 Manuel St.">
+                                            <input v-model="senderAddress" type="text" class="form-control" name="pickup_address" placeholder="123 Manuel St.">
                                         </div>
-                                        <label v-if="errors.pickup_address" class="error" for="pickup_address">
-                                            {{ errors.pickup_address[0] }}
+                                        <label v-if="msg.senderAddress" class="error" for="pickup_address">
+                                            {{ msg.senderAddress }}
                                         </label>
                                         </div>
                                     </div>
@@ -121,7 +115,7 @@
                                         <div class="col-xl-12">
                                         <div class="form-group form-group-default">
                                             <p style="color: blue; font-weight: bold; color: #196a87 !important;">City</p>
-                                                <select v-model="send.city" name="pickup_city" class="form-control" id="exampleFormControlSelect1">
+                                                <select v-model="senderCity" name="pickup_city" class="form-control" id="exampleFormControlSelect1">
                                                     <optgroup v-for="(city, state) in cities" :label="state">
                                                         <option v-for="cit in city" :value="cit">
                                                             {{ cit }}
@@ -129,8 +123,8 @@
                                                     </optgroup>
                                                 </select>
                                             </div>
-                                            <label v-if="errors.pickup_city" class="error" for="pickup_city">
-                                                {{ errors.pickup_city[0] }}
+                                            <label v-if="msg.senderCity" class="error" for="pickup_city">
+                                                {{ msg.senderCity }}
                                             </label>
                                         </div>
                                     </div>
@@ -143,15 +137,12 @@
                                         <label v-if="msg.senderPostalCode" class="error" for="pickup_postal_code">
                                             {{ msg.senderPostalCode }}
                                         </label>
-                                        <label v-if="errors.pickup_postal_code" class="error" for="pickup_postal_code">
-                                            {{ errors.pickup_postal_code[0] }}
-                                        </label>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="row m-t-20 clearfix">
                                         <div class="col-xl-12">
-                                            <button type="submit" :data-dismiss="modal" class="btn btn-rounded btn-lg btn-block btn-primary">Save Sender Details</button>
+                                            <button type="submit" :data-dismiss="senderModal" :disabled="isSenderSubmit" class="btn btn-rounded btn-lg btn-block btn-primary">Save Sender Details</button>
                                         </div>
                                     </div>
                             </div>
@@ -170,6 +161,9 @@
                     <div class="address-title text-muted">Recipient Address</div>
                     <hr style="margin: 3px 0px -15px 0px;">
                     <br>
+                    <label v-if="errors.receiver_name || errors.receiver_email || errors.receiver_phone || errors.receiver_address || errors.receiver_city || errors.receiver_postal_code" class="error no-margin font-weight-bold" style="margin-left: -3px !important;">
+                        Kindly fill out all the fields.
+                    </label>
                     <h5 class="details-title">Recipient Name: </h5>
                     <span class="text-muted" style="display:inline;">{{ reci.name ? reci.name : '' }}</span>
                     <br>
@@ -188,9 +182,6 @@
                     <h5 class="details-title">Postal Code: </h5>
                     <span class="text-muted" style="display:inline;">{{ reci.postal_code ? reci.postal_code : '' }}</span>
                     <br>
-                    <label v-if="errors.receiver_name || errors.receiver_email || errors.receiver_phone || errors.receiver_address || errors.receiver_city || errors.receiver_postal_code" class="error no-margin font-weight-bold">
-                        Error occured in Recipient Form.
-                    </label>
                 </button>
                 <form @submit="recipientForm">
                 <div class="modal fade slide-up disable-scroll" id="modalSlideUp-2" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
@@ -208,11 +199,8 @@
                             </div>
                         </div>
                         <div class="modal-body">
-                            <p v-if="errors.length">
-                                <b>Please correct the following error(s):</b>
-                                <ul>
-                                <li v-for="error in errors">{{ error }}</li>
-                                </ul>
+                            <p v-if="recipientErrors.length">
+                                <label class="error">Kindly fill out all the fields.</label>
                             </p>
                             <div class="row">
                                 <div class="col-md-12">
@@ -223,8 +211,8 @@
                                     <label v-if="msg.recipientName" class="error" for="receiver_email">
                                         {{ msg.recipientName }}
                                     </label>
-                                    <label v-if="errors.receiver_name" class="error" for="receiver_name">
-                                        {{ errors.receiver_name[0] }}
+                                    <label v-if="recipientErrors[0]" class="error" for="receiver_name">
+                                        {{ recipientErrors[0] }}
                                     </label>
                                 </div>
                             </div>
@@ -237,8 +225,8 @@
                                     <label v-if="msg.recipientEmail" class="error" for="receiver_email">
                                         {{ msg.recipientEmail }}
                                     </label>
-                                    <label v-if="errors.receiver_email" class="error" for="receiver_email">
-                                        {{ errors.receiver_email[0] }}
+                                    <label v-if="recipientErrors[1]" class="error" for="receiver_email">
+                                        {{ recipientErrors[1] }}
                                     </label>
                                 </div>
                             </div>
@@ -251,8 +239,8 @@
                                     <label v-if="msg.recipientNumber" class="error" for="receiver_email">
                                         {{ msg.recipientNumber }}
                                     </label>
-                                    <label v-if="errors.receiver_phone" class="error" for="receiver_phone">
-                                        {{ errors.receiver_phone[0] }}
+                                    <label v-if="recipientErrors[2]" class="error" for="receiver_phone">
+                                        {{ recipientErrors[2] }}
                                     </label>
                                 </div>
                             </div>
@@ -260,10 +248,13 @@
                                 <div class="col-md-12">
                                     <div class="form-group form-group-default">
                                     <label>Address</label>
-                                        <input v-model="reci.address" type="text" class="form-control" name="receiver_address" placeholder="123 Manuel St.">
+                                        <input v-model="recipientAddress" type="text" class="form-control" name="receiver_address" placeholder="123 Manuel St.">
                                     </div>
-                                    <label v-if="errors.receiver_address" class="error" for="receiver_address">
-                                        {{ errors.receiver_address[0] }}
+                                    <label v-if="msg.recipientAddress" class="error" for="receiver_email">
+                                        {{ msg.recipientAddress }}
+                                    </label>
+                                    <label v-if="recipientErrors[3]" class="error" for="receiver_address">
+                                        {{ recipientErrors[3] }}
                                     </label>
                                 </div>
                             </div>
@@ -279,8 +270,8 @@
                                             </optgroup>
                                         </select>
                                     </div>
-                                    <label v-if="errors.receiver_city" class="error" for="receiver_city">
-                                        {{ errors.receiver_city[0] }}
+                                    <label v-if="recipientErrors[4]" class="error" for="receiver_city">
+                                        {{ recipientErrors[4] }}
                                     </label>
                                 </div>
                             </div>
@@ -293,15 +284,15 @@
                                     <label v-if="msg.recipientPostalCode" class="error" for="receiver_email">
                                         {{ msg.recipientPostalCode }}
                                     </label>
-                                    <label v-if="errors.receiver_postal_code" class="error" for="receiver_postal_code">
-                                        {{ errors.receiver_postal_code[0] }}
+                                    <label v-if="recipientErrors[5]" class="error" for="receiver_postal_code">
+                                        {{ recipientErrors[5] }}
                                     </label>
                                 </div>
                             </div>
                                 <div class="clearfix"></div>
                                 <div class="row m-t-20 clearfix">
                                     <div class="col-xl-12">
-                                        <button type="submit" :data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-lg btn-block btn-primary">Save Recipient Details</button>
+                                        <button type="submit" :data-dismiss="recipientModal" aria-hidden="true" class="btn btn-rounded btn-lg btn-block btn-primary">Save Recipient Details</button>
                                     </div>
                                 </div>
                             </div>
@@ -346,6 +337,9 @@
                             </label>
                             </span>
                         </div> -->
+                        <label v-if="errors.package_id" class="error no-margin font-weight-bold" style="margin-left: -3px !important; margin-top: -12px !important; margin-bottom: 3px !important;">
+                            Select Package Type
+                        </label>
                         <div class="row" style="margin-right: 20px; margin-left: -15px; margin-top: -9px">
                             <div class="col-md-4" v-for="(pack, packs) in packageTypes" :key="pack.id">
                                     <label class="container-radio radio-label">
@@ -469,6 +463,7 @@
                 
                 <div class="row m-t-20">
                     <div class="col-md-12">
+                        <!-- if senderErrors.length == 0 && recipientErrors.length == 0 && errors.length == 0 then submitted = false -->
                         <button @click="createPickup" :disabled="submitted" class="btn btn-block btn-lg btn-rounded btn-primary m-b-10">BOOK NOW</button>
                     </div>
                 </div>
@@ -514,15 +509,21 @@
 
                 msg: [],
 
-                modal: false,
+                senderModal: false,
+
+                recipientModal: false,
 
                 senderName: '',
                 senderNumber: '',
+                senderAddress: '',
+                senderCity: '',
+                senderPickupDate: '',
                 senderPostalCode: '',
 
                 recipientName: '',
                 recipientEmail: '',
                 recipientNumber: '',
+                recipientAddress: '',
                 recipientPostalCode: '',
 
                 packageTypes: [
@@ -558,6 +559,10 @@
 
                 errors: [],
 
+                senderErrors: [],
+
+                recipientErrors: [],
+
                 successful: [],
 
                 submitted: false,
@@ -573,6 +578,21 @@
             senderNumber(value) {
                 this.sender[0].number = value;
                 this.validateSenderNumber(value);
+            },
+            
+            senderPickupDate(value) {
+                this.sender[0].pickup_date = value;
+                this.validateSenderPickupDate(value);
+            },
+            
+            senderAddress(value) {
+                this.sender[0].address = value;
+                this.validateSenderAddress(value);
+            },
+            
+            senderCity(value) {
+                this.sender[0].city = value;
+                this.validateSenderCity(value);
             },
             
             senderPostalCode(value) {
@@ -595,6 +615,11 @@
                 this.validateRecipientNumber(value);
             },
             
+            recipientAddress(value) {
+                this.recipient[0].address = value;
+                this.validateRecipientAddress(value);
+            },
+            
             recipientPostalCode(value) {
                 this.recipient[0].postal_code = value;
                 this.validateRecipientPostalCode(value);
@@ -613,155 +638,175 @@
 
             senderForm:function(e) {
                 e.preventDefault();
-                this.errors = [];
+                this.senderErrors = [];
 
-                // if (this.sender[0].name === '') {
-                //     this.errors.push("Sender Name is required.");
-                // }
+                this.validateSenderName()
 
-                // if (this.sender[0].number === '') {
-                //     this.errors.push("Sender Mobile Number is required.");
-                // }
-                
-                // if (this.sender[0].address === '') {
-                //     this.errors.push("Sender Address is required.");
-                // }
+                this.validateSenderNumber(this.sender[0].number)
 
-                // if (this.sender[0].city === '') {
-                //     this.errors.push("Sender City is required.");
-                // }
+                this.validateSenderPickupDate()
 
-                // if (this.sender[0].postal_code === '') {
-                //     this.errors.push("Sender Postal Code is required.");
-                // }
+                this.validateSenderAddress()
 
-                // if (this.errors.length == 0) {
-                //     this.modal = 'modal'
-                //     e.preventDefault();
-                // }
+                this.validateSenderCity()
 
-                axios.post('/' + this.username + '/pickup', {
-                    sender_name: this.sender[0].name,
-                    sender_phone: this.sender[0].number,
-                    pickup_date: this.sender[0].pickup_date,
-                    pickup_address: this.sender[0].address,
-                    pickup_city: this.sender[0].city,
-                    pickup_postal_code: this.sender[0].postal_code,
-                })
-                    .then(response => {
-                        this.successful = response.data,
-                        this.sender[0].name = '',
-                        this.sender[0].number = '',
-                        this.sender[0].pickup_date = '',
-                        this.sender[0].address = '',
-                        this.sender[0].city = '',
-                        this.sender[0].postal_code = '',
-                        this.senderName = '',
-                        this.senderNumber = '',
-                        this.senderPostalCode = ''
-                    })
-                    .catch(error => {
-                        if (error.response.status == 422) {
-                            this.errors = error.response.data.errors
-                        }
-                    })
+                this.validateSenderPostalCode(this.sender[0].postal_code)
+
+                if (this.senderErrors.length == 0) {
+                    this.senderModal = 'modal'
+                    e.preventDefault();
+                }
             },
 
             recipientForm:function(e) {
                 e.preventDefault();
-                this.errors = [];
+                this.recipientErrors = [];
 
                 if (this.recipient[0].name === '') {
-                    this.errors.push("Recipient Name is required.");
+                    this.recipientErrors[0] = "This field is required";
                 }
 
                 if (this.recipient[0].number === '') {
-                    this.errors.push("Recipient Mobile Number is required.");
+                    this.recipientErrors[1] = "This field is required";
                 }
 
                 if (this.recipient[0].email === '') {
-                    this.errors.push("Recipient Email is required.");
+                    this.recipientErrors[2] = "This field is required";
                 }
                 
                 if (this.recipient[0].address === '') {
-                    this.errors.push("Recipient Address is required.");
+                    this.recipientErrors[3] = "This field is required";
                 }
 
                 if (this.recipient[0].city === '') {
-                    this.errors.push("Recipient City is required.");
+                    this.recipientErrors[4] = "This field is required";
                 }
 
                 if (this.recipient[0].postal_code === '') {
-                    this.errors.push("Recipient Postal Code is required.");
+                    this.recipientErrors[5] = "This field is required";
                 }
 
-                if (this.errors.length == 0) {
-                    this.modal = 'modal'
+                if (this.recipientErrors.length == 0) {
+                    this.recipientModal = 'modal'
                     e.preventDefault();
                 }
             },
 
             validateSenderName(value) {
-                // if (/^[a-zA-Z ]+$/.test(value)) {
-                //     this.msg['senderName'] = '';
-                // } else {
-                //     this.msg['senderName'] = 'The name field can only contain letters.';
-                // } 
-
-                // this is working
                 if (this.sender[0].name === '') {
                     this.msg['senderName'] = 'This field is required';
-                    // this.errors.push("Sender Name is required.");
+                    this.senderErrors[0] = 'Sender Name'
+                } else if (!/^[a-zA-Z ]+$/.test(value)) {
+                    this.msg['senderName'] = 'The name field can only contain letters.';
+                    this.senderErrors[0] = 'Sender Name'
                 } else {
                     this.msg['senderName'] = '';
+                    return true
                 }
             },
 
             validateSenderNumber(value) {
-                if (/^(09|\+639)\d{9}$/.test(value)) {
-                    this.msg['senderNumber'] = '';
+                if (this.sender[0].number === '') {
+                    this.msg['senderNumber'] = 'This field is required';
+                    this.senderErrors[1] = 'Sender Number'
+                } else if (!/^(09|\+639)\d{9}$/.test(value)) {
+                    this.msg['senderNumber'] = 'Phone Number is invalid.';
+                    this.senderErrors[1] = 'Sender Number'
                 } else {
-                    this.msg['senderNumber'] = 'Invalid Phone Number';
+                    this.msg['senderNumber'] = '';
+                    return true
+                } 
+            },
+
+            validateSenderPickupDate(value) {
+                if (this.sender[0].pickup_date === '') {
+                    this.msg['senderPickupDate'] = 'This field is required';
+                    this.senderErrors[2] = 'Sender Pickup Date'
+                } else {
+                    this.msg['senderPickupDate'] = '';
+                    return true
+                } 
+            },
+
+            validateSenderAddress(value) {
+                if (this.sender[0].address === '') {
+                    this.msg['senderAddress'] = 'This field is required';
+                    this.senderErrors[3] = 'Sender Address'
+                } else {
+                    this.msg['senderAddress'] = '';
+                    return true
+                } 
+            },
+
+            validateSenderCity(value) {
+                if (this.sender[0].city === '') {
+                    this.msg['senderCity'] = 'This field is required';
+                    this.senderErrors[4] = 'Sender City'
+                } else {
+                    this.msg['senderCity'] = '';
+                    return true
                 } 
             },
 
             validateSenderPostalCode(value) {
-                if (/^[0-9]{4}$/.test(value)) {
-                    this.msg['senderPostalCode'] = '';
+                if (this.sender[0].postal_code === '') {
+                    this.msg['senderPostalCode'] = 'This field is required';
+                    this.senderErrors[5] = 'Sender Postal Code'
+                } else if (!/^[0-9]{4}$/.test(value)) {
+                    this.msg['senderPostalCode'] = 'Postal Code is invalid.';
+                    this.senderErrors[5] = 'Sender Postal Code'
                 } else {
-                    this.msg['senderPostalCode'] = 'Invalid Postal Code';
+                    this.msg['senderPostalCode'] = '';
+                    return true
                 } 
             },
 
             validateRecipientName(value) {
-                if (/^[a-zA-Z ]+$/.test(value)) {
-                    this.msg['recipientName'] = '';
-                } else {
+                if (this.recipient[0].name === '') {
+                    this.msg['recipientName'] = 'This field is required';
+                } else if (!/^[a-zA-Z ]+$/.test(value)) {
                     this.msg['recipientName'] = 'The name field can only contain letters.';
+                } else {
+                    this.msg['recipientName'] = '';
                 } 
             },
 
             validateRecipientEmail(value) {
-                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
-                    this.msg['recipientEmail'] = '';
+                if (this.recipient[0].email === '') {
+                    this.msg['recipientEmail'] = 'This field is required';
+                } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+                    this.msg['recipientEmail'] = 'Email Address is invalid.';
                 } else {
-                    this.msg['recipientEmail'] = 'Invalid Email Address';
+                    this.msg['recipientEmail'] = '';
                 } 
             },
 
             validateRecipientNumber(value) {
-                if (/^(09|\+639)\d{9}$/.test(value)) {
-                    this.msg['recipientNumber'] = '';
+                if (this.recipient[0].number === '') {
+                    this.msg['recipientNumber'] = 'This field is required';
+                } else if (!/^(09|\+639)\d{9}$/.test(value)) {
+                    this.msg['recipientNumber'] = 'Phone Number is invalid.';
                 } else {
-                    this.msg['recipientNumber'] = 'Invalid Phone Number';
+                    this.msg['recipientNumber'] = '';
+                } 
+            },
+
+            validateRecipientAddress(value) {
+                if (this.recipient[0].address === '') {
+                    this.msg['recipientAddress'] = 'This field is required';
+                } else {
+                    this.msg['recipientAddress'] = '';
                 } 
             },
 
             validateRecipientPostalCode(value) {
-                if (/^[0-9]{4}$/.test(value)) {
-                    this.msg['recipientPostalCode'] = '';
+                if (this.recipient[0].postal_code === '') {
+                    this.msg['recipientPostalCode'] = 'This field is required';
+                }
+                else if (!/^[0-9]{4}$/.test(value)) {
+                    this.msg['recipientPostalCode'] = 'Postal Code is invalid.';
                 } else {
-                    this.msg['recipientPostalCode'] = 'Invalid Postal Code';
+                    this.msg['recipientPostalCode'] = '';
                 } 
             },
 
@@ -810,10 +855,12 @@
                         this.submitted = false,
                         this.senderName = '',
                         this.senderNumber = '',
+                        this.senderAddress = '',
                         this.senderPostalCode = '',
                         this.recipientName = '',
                         this.recipientEmail = '',
                         this.recipientNumber = '',
+                        this.recipientAddress = ''
                         this.recipientPostalCode = ''
                     })
                     .catch(error => {
@@ -827,6 +874,14 @@
         },
 
         computed: {
+            isSenderSubmit: function () {
+                if (this.validateSenderName() == true && this.validateSenderNumber(this.sender[0].number) == true && this.validateSenderPickupDate() == true && this.validateSenderAddress() == true && this.validateSenderCity() == true && this.validateSenderPostalCode(this.sender[0].postal_code) == true) {
+                    return false    
+                } else {
+                    return true
+                }
+            },
+
             additionalWeightFee: function () {
                 if (this.selectedPackageType.name == 'Own Packaging') {
                     return this.dimension.reduce((total, item) => {
