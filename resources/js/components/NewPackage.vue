@@ -55,9 +55,6 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        <!-- <p v-if="senderErrors.length">
-                            <label class="error">Kindly fill out all the fields.</label>
-                        </p> -->
                         <div class="row">
                         <div class="col-md-12">
                             <div class="row">
@@ -322,21 +319,6 @@
                 <hr style="margin: -3px 0px 17px 0px">
                 <div class="row">
                     <div class="col-md-12">
-                        <!-- <h4 class="address-title">Select Package Type</h4> -->
-                        <!-- <div id="div2">
-                            <span v-for="(pack, packs) in packageTypes" :key="pack.id" class="b">
-                            <label class="container-radio radio-label">
-                                <img alt="Packange Picture" width="90" height="50" :src="'/pages/assets/img/icon.png'">
-                                <p class="package-title">{{ pack.name }}</p>
-                                <p class="package-description">Max weight: {{ pack.weight }} kg</p>
-                                <p class="package-description price">{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(pack.rate) }}</p>
-                                <p class="package-description">Rate</p>
-                                <input type="radio" :value="packageTypes[packs]" checked="checked" v-model="selectedPackageType">
-                                <input type="hidden" v-model="selectedPackageType.id" name="package_id">
-                                <span class="checkmark"></span>
-                            </label>
-                            </span>
-                        </div> -->
                         <label v-if="errors.package_id" class="error no-margin font-weight-bold" style="margin-left: -3px !important; margin-top: -12px !important; margin-bottom: 3px !important;">
                             Select Package Type
                         </label>
@@ -377,37 +359,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row m-t-20">
-                    <div class="col-6">
-                        <div class="pull-left">
-                            <p>Total Amount</p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="pull-right">
-                            <p>{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(totalAmount) }}</p>
-                            <input v-model="totalAmount" type="hidden" name="package_amount">
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="row m-t-20 clearfix">
-                    <div class="col-xl-12">
-                        <button @click.prevent="packageDetailsButton()" type="button" data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-lg btn-block btn-primary">Save Package Details</button>
-                    </div>
-                </div> -->
-                <!-- <hr style="margin: 10px 0 15px 0">
-                <div class="row">
-                    <div class="col-md-3">
-                    <div class="user-pic">
-                        <img alt="Package Picture" width="90" height="50" :src="'/pages/assets/img/icon.png'">
-                    </div>
-                    </div>
-                    <div class="col-md-9">
-                    <h5 class="no-margin"><strong>{{ selectedPackageType.name ? selectedPackageType.name : 'Package Name' }}</strong></h5>
-                    <p>Max Weight: {{ selectedPackageType.weight ? selectedPackageType.weight : 0 }} kg</p>
-                    <p>Rate: ₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</p>
-                    </div>
-                </div> -->
             </div>
             </div>
         </div>
@@ -463,7 +414,6 @@
                 
                 <div class="row m-t-20">
                     <div class="col-md-12">
-                        <!-- if senderErrors.length == 0 && recipientErrors.length == 0 && errors.length == 0 then submitted = false -->
                         <button @click="createPickup" :disabled="submitted" class="btn btn-block btn-lg btn-rounded btn-primary m-b-10">BOOK NOW</button>
                     </div>
                 </div>
