@@ -7,7 +7,7 @@
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('pages/assets/plugins/datatables-responsive/css/datatables.responsive.css') }}" rel="stylesheet" type="text/css" media="screen" />
     <link href="{{ asset('pages/assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css" media="screen">
-     <link href="{{ asset('css/Custom/filtrify.css') }}" rel="stylesheet" type="text/css" >
+    <link href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" media="screen" />
 @endsection
 
 @section('content')
@@ -28,31 +28,14 @@
     <div class="container-fixed-lg bg-white">
       <div class="card card-transparent">
           <div class="card-header ">
-            <div class="row">
-                {{-- <div class="col-md-6">
-                    <div class="pull-left">
-                            <div class="dropdown">
-                              <button aria-label="" class="btn text-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Filter by <i class="pg-icon">filter</i>
-                              </button>
-                                <div class="dropdown-menu" role="menu">
-                                    <a href="{{ route('admin.pickups') }}" class="dropdown-item">All</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="{{ route('admin.pickups') }}" class="dropdown-item">Date</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="{{ route('admin.pickups.new-request') }}" class="dropdown-item">New Request</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="{{ route('admin.pickups') }}" class="dropdown-item">Location</a>
-                                </div>
-                            </div>
-                    </div>
-                </div> --}}
+            {{-- <div class="row">
+
                 <div class="col-md-12">
-                    <div class="pull-right">
-                      <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
-                    </div>
+                  <div class="pull-right">
+                    <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
+                  </div>
                 </div>
-            </div>
+            </div> --}}
               {{-- <div class="pull-right">
                 <div class="col-xs-12">
                   <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
@@ -76,7 +59,7 @@
             Show/Hide Filter 
           </a>
         </div>
-        <div class="show bg-light w-100 py-4 px-3" id="collapseForm">
+        <div class="show bg-light w-100 py-4 px-3 mb-5" id="collapseForm">
           <form action="{{ route('admin.pickup.filter') }}" method="get"  data-parsley-validate autocomplete="off" class="d-print-none" >
             <div class="row">
               <div class="col-md-3">
@@ -187,7 +170,7 @@
         </div> {{--End of Collapse Form--}}
 
         <div class="table-responsive mt-3">
-            <table class="table table-hover demo-table-search table-responsive-block" id="tableWithSearch">
+            <table class="table table-hover demo-table-search table-responsive-block" id="pickup_table">
               <thead>
                 <tr>
                   <th>Customer Name</th>
@@ -294,7 +277,7 @@
     <script src="{{ asset('pages/assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js') }}" type="text/javascript"></script>
     <script type="text/javascript" src="{{ asset('pages/assets/plugins/datatables-responsive/js/datatables.responsive.js') }}"></script>
     <script type="text/javascript" src="{{ asset('pages/assets/plugins/datatables-responsive/js/lodash.min.js') }}"></script>
-    
+    {{-- Additional JS for datatables --}}
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"> </script>
     
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"> </script>
@@ -308,17 +291,21 @@
 
 
 @section('lower-links-extends-page')
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+    {{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  --}}
+    <script src="{{ asset('pages/assets/js/tables.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/js/datatables.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/js/demo.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ asset('js/Custom/bootstrap-tagsinput.js') }}"></script>
+    
+    {{-- JS for DatePicker --}}
     <script src="{{ asset('pages/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js') }}"></script>
     <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
 
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
      $(document).ready(function() {
         // Setup - add a text input to each footer cell
-        $('#example thead tr').clone(true).appendTo( '#example thead' );
+        /*$('#example thead tr').clone(true).appendTo( '#example thead' );
         $('#example thead tr:eq(1) th').each( function (i) {
             var title = $(this).text();
             $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
@@ -331,43 +318,26 @@
                         .draw();
                 }
             } );
-        } );
-    
-        var table = $('#example').DataTable( {
-            orderCellsTop: true,
-            fixedHeader: false,
-            responsive: true,
-            dom: 'Bfrtip',
-              buttons: [
-                  'copyHtml5',
-                  'excelHtml5',
-                  'csvHtml5',
-                  'pdfHtml5'
-              ]
-        } );
+        } );*/
+
         
-    } );
-    </script>--}}
-
-    {{-- Try Filtrify--}}
-    
-    <script type="text/javascript" src="{{ asset('js/Custom/filtrify.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/Custom/bootstrap-tagsinput.js') }}"></script>
-    <script src="{{ asset('pages/assets/js/datatables.js') }}" type="text/javascript"></script>
-
-   <script type="text/javascript">
-      $(function() {
-
-        $.filtrify("container", "placeHolder");
-
-      });
-  </script>
+      } );
+    </script>
 
   <script>
     $(document).ready(function(){
 
-      //$('#displayCity').tagsinput('add',"1,2,3");
-    
+       $('#pickup_table').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+             { extend: 'excel', text: 'Download Excel' },
+            {   extend: 'pdfHtml5',
+                text: 'Download PDF',
+                orientation: 'landscape',
+                pageSize: 'LEGAL' }
+        ],
+        "pageLength": 15
+    } );
      @if(!empty($searches))
         var s = {!! json_encode($searches) !!};
         $('#displayCity').tagsinput('add', s["cities"].join());
