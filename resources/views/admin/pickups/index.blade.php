@@ -189,7 +189,7 @@
                 
               </thead>
               <tbody id="container">
-                  @forelse ($pickups as $pickup)
+                  @foreach ($pickups as $pickup)
                   <tr data-city="{{ $pickup->pickup_city }}" data-state="{{ $pickup->pickup_state }}" data-postal-code="{{ $pickup->pickup_postal_code }}" data-package-type="{{ $pickup->package->name }}" data-delivery-status="{{ $pickup->pickupActivities->first()->deliveryStatus->name }}">
                       <td class="v-align-middle semi-bold">
                           <p>{{ $pickup->user->name }}</p>
@@ -254,11 +254,9 @@
                             <a href="{{ route('admin.pickups.destroy-confirmation', $pickup->id) }}" class="btn btn-outline-danger text-danger m-1">Delete</a>
                           </div>
                       </td>
+                      @include('admin.pickups.modals')
+                    @endforeach
                   </tr>
-                  @include('admin.pickups.modals')
-                @empty
-                  <td class="text-center" colspan="20"><h3 class="text-danger">No Result Found</h3></td>
-                @endforelse
               </tbody>
             </table> 
           </div>
