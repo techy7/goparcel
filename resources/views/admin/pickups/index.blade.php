@@ -6,6 +6,7 @@
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('pages/assets/plugins/datatables-responsive/css/datatables.responsive.css') }}" rel="stylesheet" type="text/css" media="screen" />
+    <link href="{{ asset('pages/assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css" media="screen">
      <link href="{{ asset('css/Custom/filtrify.css') }}" rel="stylesheet" type="text/css" >
 @endsection
 
@@ -75,7 +76,7 @@
             Show/Hide Filter 
           </a>
         </div>
-        <div class="show bg-light w-100 p-3" id="collapseForm">
+        <div class="show bg-light w-100 py-4 px-3" id="collapseForm">
           <form action="{{ route('admin.pickup.filter') }}" method="get"  data-parsley-validate autocomplete="off" class="d-print-none" >
             <div class="row">
               <div class="col-md-3">
@@ -144,13 +145,11 @@
                 </div>
               </div>
               <div class="col-md-3">
-                {{-- <div class="dropdown">
-                  <button class="btn btn-primary" type="button">From Date
-                </div> --}}
+                <button class="btn btn-primary " type="button">Delivery Date</button>
                 <div class="form-group form-group-default input-group">
                   <div class="form-input-group">
                     <label>From Date</label> 
-                    <input type="text" name="pickup_date" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-component2" class="form-control">
+                    <input type="text" name="datepickerFrom" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-from" class="form-control datepicker-standard">
                   </div> 
                   <div class="input-group-append">
                     <span class="input-group-text"><i class="pg-icon">calendar</i>
@@ -160,13 +159,11 @@
               </div>
 
               <div class="col-md-3">
-                {{-- <div class="dropdown">
-                  <button class="btn btn-primary" type="button">From Date
-                </div> --}}
-                <div class="form-group form-group-default input-group">
+                <button class="btn btn-primary invisible " type="button">Delivery Date</button>
+                <div class="form-group form-group-default input-group">     
                   <div class="form-input-group">
                     <label>To Date</label> 
-                    <input type="text" name="pickup_date" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-component2" class="form-control">
+                    <input type="text" name="datepickerTo" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-to" class="form-control datepicker-standard">
                   </div> 
                   <div class="input-group-append">
                     <span class="input-group-text"><i class="pg-icon">calendar</i>
@@ -209,7 +206,7 @@
                 
               </thead>
               <tbody id="container">
-                  @foreach ($pickups as $pickup)
+                  @forelse ($pickups as $pickup)
                   <tr data-city="{{ $pickup->pickup_city }}" data-state="{{ $pickup->pickup_state }}" data-postal-code="{{ $pickup->pickup_postal_code }}" data-package-type="{{ $pickup->package->name }}" data-delivery-status="{{ $pickup->pickupActivities->first()->deliveryStatus->name }}">
                       <td class="v-align-middle semi-bold">
                           <p>{{ $pickup->user->name }}</p>
@@ -276,7 +273,9 @@
                       </td>
                   </tr>
                   @include('admin.pickups.modals')
-                @endforeach
+                @empty
+                  <td class="text-center" colspan="20"><h3 class="text-danger">No Result Found</h3></td>
+                @endforelse
               </tbody>
             </table> 
           </div>
@@ -309,8 +308,13 @@
 
 
 @section('lower-links-extends-page')
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
     <script src="{{ asset('pages/assets/js/datatables.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('pages/assets/js/demo.js') }}" type="text/javascript"></script> --}}
+    <script src="{{ asset('pages/assets/js/demo.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js') }}"></script>
+    <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
+
     {{-- <script type="text/javascript">
      $(document).ready(function() {
         // Setup - add a text input to each footer cell
@@ -346,7 +350,7 @@
     </script>--}}
 
     {{-- Try Filtrify--}}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
     <script type="text/javascript" src="{{ asset('js/Custom/filtrify.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/Custom/bootstrap-tagsinput.js') }}"></script>
     <script src="{{ asset('pages/assets/js/datatables.js') }}" type="text/javascript"></script>
@@ -363,12 +367,14 @@
     $(document).ready(function(){
 
       //$('#displayCity').tagsinput('add',"1,2,3");
-
+    
      @if(!empty($searches))
-       var s = {!! json_encode($searches) !!};
-       $('#displayCity').tagsinput('add', s["cities"].join());
+        var s = {!! json_encode($searches) !!};
+        $('#displayCity').tagsinput('add', s["cities"].join());
         $('#displayState').tagsinput('add', s["states"].join());
-         $('#displayPostalCode').tagsinput('add', s["postalCodes"].join());
+        $('#displayPostalCode').tagsinput('add', s["postalCodes"].join());
+        $('#datepicker-from').val(s['fromDate']);
+        $('#datepicker-to').val(s['toDate']);
      @endif  
 
 
@@ -427,6 +433,21 @@
       $('#displayPackageType').tagsinput('add', $(this).attr('data-value'));
       });
     });
+
+
+     $(function(){
+        $('.datepicker-standard').datepicker({
+          format: "dd-M-yyyy",
+          forceParse: true,
+          clearBtn: true,
+          todayHighlight: true,
+         // startDate: '+1d'
+        });
+    });
+
+
+  
+    
    
 
 </script>

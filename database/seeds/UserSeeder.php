@@ -79,5 +79,21 @@ class UserSeeder extends Seeder
         ]);
         $role = Role::find(3);
         $customer->assignRole($role);
+
+        $customer = User::create([
+            'username' => 'customer',
+            'email' => 'customer@gmail.com',
+            'name' => 'Name Surname',
+            'm_number' => '09451260066',
+            'password' => bcrypt('123456789'),
+            'address' => 'Main St. 123',
+            'city' => 'Los Banos',
+            'state' => 'Laguna',
+            'postal_code' =>  '1116',
+            'country' => 'Philippines',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        $role = Role::find(3);
+        $customer->assignRole($role);   
     }
 }

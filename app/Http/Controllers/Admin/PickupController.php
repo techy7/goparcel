@@ -41,14 +41,20 @@ class PickupController extends Controller
         $searchStates = preg_split('/,+/',$request->displayState, -1, PREG_SPLIT_NO_EMPTY); 
         $searchPostalCodes= preg_split('/,+/',$request->displayPostalCode, -1, PREG_SPLIT_NO_EMPTY); 
 
+        //$request->datepickerFrom = $request->datepickerFrom.' 23:59:59';
+        //dd(date('Y-m-d H:i:s',strtotime($request->datepickerFrom)));
         $searches = array(
             'cities' => $searchCities,
             'states' => $searchStates,
-            'postalCodes' => $searchPostalCodes
+            'postalCodes' => $searchPostalCodes,
+            'fromDate' =>  $request->datepickerFrom,
+            'toDate' =>  $request->datepickerTo,
         );
         
-         //dd($searches["cities"]);
-        $pickups= Pickup::where(function ($q) use ($searchCities) {
+  
+        $pickups= Pickup::
+        join('packages', 'pickups.package_id','=','packages.id')
+         ->where(function ($q) use ($searchCities) {
             foreach ($searchCities as $value) {
               $q->orWhere('pickup_city', 'like', "%{$value}%");
             }
@@ -63,6 +69,18 @@ class PickupController extends Controller
               $q->orWhere('pickup_postal_code', 'like', "%{$value}%");
             }
           })
+          ->where(function ($q) use ($request) {
+            if(!empty($request->datepickerTo)){
+             $q->where('pickup_date','<=',date('Y-m-d H:i:s',strtotime($request->datepickerTo.' 23:59:59')));
+            }
+          })
+          ->where(function ($q) use ($request) {
+            if(!empty($request->datepickerFrom)){
+             $q->where('pickup_date','>=',date('Y-m-d H:i:s',strtotime($request->datepickerFrom.' 00:00:00')));
+            }
+          })
+        //   ->where('pickup_date','<=',date('Y-m-d h:i:s',strtotime($request->datepickerTo)) && !empty($request->datepickerTo))
+        //   ->where('pickup_date','>=',date('Y-m-d h:i:s',strtotime($request->datepickerFrom)))
           ->get();
 
           return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types', 'searches'));
