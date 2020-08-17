@@ -8,11 +8,11 @@
             <li class="m-t-10">
                 <a href="{{ route('admin.dashboard') }}"><span class="title">{{ __('general.dashboard') }}</span></a>
             </li>
-            @endhasanyrole
-            @hasanyrole('Super Admin')
             <li class="m-t-10">
                 <a href="{{ route('admin.pickups') }}"><span class="title">{{ __('general.pickup_schedules') }}</span></a>
             </li>
+            @endhasanyrole
+            @hasanyrole('Super Admin')
             <li class="m-t-10">
                 <a href="{{ route('admin.bookings') }}"><span class="title">{{ __('general.bookings') }}</span></a>
             </li>
@@ -54,13 +54,13 @@
             </li>
             <div class="d-flex flex-column" style="position: absolute; bottom: 85px; left: 35px;">
                 <li class="m-t-35">
-                    <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.help_center') }}</span></a>
+                    <a href="https://weparcelbear.com/help-center/"><span class="title">{{ __('general.help_center') }}</span></a>
                 </li>
                 <li class="m-t-35">
-                    <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.terms_of_service') }}</span></a>
+                    <a href="https://weparcelbear.com/terms-of-use/"><span class="title">{{ __('general.terms_of_service') }}</span></a>
                 </li>
                 <li class="m-t-35">
-                    <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.privacy_policy') }}</span></a>
+                    <a href="https://weparcelbear.com/privacy-policy/"><span class="title">{{ __('general.privacy_policy') }}</span></a>
                 </li>
             </div>
             @endhasanyrole

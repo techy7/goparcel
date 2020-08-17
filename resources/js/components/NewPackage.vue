@@ -15,15 +15,29 @@
             <div v-for="send in sender" :key="send.id" >
             <button type="button" class="btn-block address" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalSlideUp-1">
                 <div class="address-title text-muted">Sender Address</div>
-                <h5 class="no-margin">Sender Name: <span><small>{{ send.name ? send.name : userDetails.name }}</small></span></h5>
-                <h5 class="no-margin">Phone Number: <span><small>{{ send.number ? send.number : userDetails.m_number }}</small></span></h5>
-                <h5 class="no-margin">Pickup Date: <span><small>{{ send.pickup_date ? send.pickup_date : '' }}</small></span></h5>
-                <h5 class="no-margin">Address: <span><small>{{ send.address ? send.address : userDetails.address }}</small></span></h5>
-                <h5 class="no-margin">City: <span><small>{{ send.city ? send.city : userDetails.city }}</small></span></h5>
-                <h5 class="no-margin">Postal Code: <span><small>{{ send.postal_code ? send.postal_code : userDetails.postal_code }}</small></span></h5>
-                <label v-if="errors.sender_name || errors.sender_phone || errors.pickup_date || errors.pickup_address || errors.pickup_city || errors.pickup_postal_code" class="error no-margin font-weight-bold">
-                    Error occured in Sender Form.
+                <hr style="margin: 3px 0px -15px 0px;">
+                <br>
+                <label v-if="errors.sender_name || errors.sender_phone || errors.pickup_date || errors.pickup_address || errors.pickup_city || errors.pickup_postal_code" class="error no-margin font-weight-bold" style="margin-left: -3px !important;">
+                    Kindly fill out all the fields.
                 </label>
+                <h5 class="details-title">Sender Name: </h5>
+                <span class="text-muted" style="display:inline;">{{ send.name ? send.name : userDetails.name }}</span>
+                <br>
+                <h5 class="details-title">Phone Number: </h5>
+                <span class="text-muted" style="display:inline;">{{ send.number ? send.number : userDetails.m_number }}</span>
+                <br>
+                <h5 class="details-title">Pickup Date: </h5>
+                <span class="text-muted" style="display:inline;">{{ send.pickup_date ? send.pickup_date : '' }}</span>
+                <br>
+                <h5 class="details-title">Address: </h5>
+                <span class="text-muted" style="display:inline;">{{ send.address ? send.address : userDetails.address }}</span>
+                <br>
+                <h5 class="details-title">City: </h5>
+                <span class="text-muted" style="display:inline;">{{ send.city ? send.city : userDetails.city }}</span>
+                <br>
+                <h5 class="details-title">Postal Code: </h5>
+                <span class="text-muted" style="display:inline;">{{ send.postal_code ? send.postal_code : userDetails.postal_code }}</span>
+                <br>
             </button>
             <form @submit="senderForm">
             <div class="modal fade slide-up disable-scroll" id="modalSlideUp-1" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
@@ -41,12 +55,6 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        <p v-if="errors.length">
-                            <b>Please correct the following error(s):</b>
-                            <ul>
-                            <li v-for="error in errors">{{ error }}</li>
-                            </ul>
-                        </p>
                         <div class="row">
                         <div class="col-md-12">
                             <div class="row">
@@ -57,9 +65,6 @@
                                 </div>
                                 <label v-if="msg.senderName" class="error" for="sender_name">
                                     {{ msg.senderName }}
-                                </label>
-                                <label v-if="errors.sender_name" class="error" for="sender_name">
-                                    {{ errors.sender_name[0] }}
                                 </label>
                             </div>
                             </div>
@@ -72,9 +77,6 @@
                                 <label v-if="msg.senderNumber" class="error" for="sender_phone">
                                     {{ msg.senderNumber }}
                                 </label>
-                                <label v-if="errors.sender_phone" class="error" for="sender_phone">
-                                    {{ errors.sender_phone[0] }}
-                                </label>
                             </div>
                             </div>
                                     <div class="row">
@@ -82,16 +84,16 @@
                                             <div class="form-group form-group-default input-group">
                                                 <div class="form-input-group">
                                                     <label>Pickup Date</label>
-                                                    <input v-model="send.pickup_date" type="text" class="form-control" name="pickup_date" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-component2">
+                                                    <input v-model="senderPickupDate" type="text" class="form-control" name="pickup_date" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-component2">
                                                 </div>
                                                 <div class="input-group-append">
                                                     <span class="input-group-text"><i class="pg-icon">calendar</i></span>
                                                 </div>
                                             </div>
                                         </div>
-                                            <label v-if="errors.pickup_date" class="error" for="pickup_date">
-                                                {{ errors.pickup_date[0] }}
-                                            </label>
+                                        <label v-if="msg.senderPickupDate" class="error" for="pickup_date">
+                                            {{ msg.senderPickupDate }}
+                                        </label>
                                                 <!-- <label for="example-datepicker">Choose a date</label>
                                                 <b-form-datepicker id="example-datepicker" v-model="send.pickup_date" :date-disabled-fn="dateDisabled" class="mb-2 no-padding"></b-form-datepicker> -->
                                     </div>
@@ -99,10 +101,10 @@
                                         <div class="col-md-12">
                                         <div class="form-group form-group-default">
                                         <label>Address</label>
-                                            <input v-model="send.address" type="text" class="form-control" name="pickup_address" placeholder="123 Manuel St.">
+                                            <input v-model="senderAddress" type="text" class="form-control" name="pickup_address" placeholder="123 Manuel St.">
                                         </div>
-                                        <label v-if="errors.pickup_address" class="error" for="pickup_address">
-                                            {{ errors.pickup_address[0] }}
+                                        <label v-if="msg.senderAddress" class="error" for="pickup_address">
+                                            {{ msg.senderAddress }}
                                         </label>
                                         </div>
                                     </div>
@@ -110,7 +112,7 @@
                                         <div class="col-xl-12">
                                         <div class="form-group form-group-default">
                                             <p style="color: blue; font-weight: bold; color: #196a87 !important;">City</p>
-                                                <select v-model="send.city" name="pickup_city" class="form-control" id="exampleFormControlSelect1">
+                                                <select v-model="senderCity" name="pickup_city" class="form-control" id="exampleFormControlSelect1">
                                                     <optgroup v-for="(city, state) in cities" :label="state">
                                                         <option v-for="cit in city" :value="cit">
                                                             {{ cit }}
@@ -118,8 +120,8 @@
                                                     </optgroup>
                                                 </select>
                                             </div>
-                                            <label v-if="errors.pickup_city" class="error" for="pickup_city">
-                                                {{ errors.pickup_city[0] }}
+                                            <label v-if="msg.senderCity" class="error" for="pickup_city">
+                                                {{ msg.senderCity }}
                                             </label>
                                         </div>
                                     </div>
@@ -132,15 +134,12 @@
                                         <label v-if="msg.senderPostalCode" class="error" for="pickup_postal_code">
                                             {{ msg.senderPostalCode }}
                                         </label>
-                                        <label v-if="errors.pickup_postal_code" class="error" for="pickup_postal_code">
-                                            {{ errors.pickup_postal_code[0] }}
-                                        </label>
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="row m-t-20 clearfix">
                                         <div class="col-xl-12">
-                                            <button type="submit" :data-dismiss="modal" class="btn btn-rounded btn-lg btn-block btn-primary">Save Sender Details</button>
+                                            <button type="submit" :data-dismiss="senderModal" :disabled="isSenderSubmit" class="btn btn-rounded btn-lg btn-block btn-primary">Save Sender Details</button>
                                         </div>
                                     </div>
                             </div>
@@ -157,15 +156,29 @@
             <div v-for="reci in recipient" :key="reci.id">
                 <button type="button" class="btn-block address" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalSlideUp-2">
                     <div class="address-title text-muted">Recipient Address</div>
-                    <h5 class="no-margin">Recipient Name: <span><small>{{ reci.name ? reci.name : '' }}</small></span></h5>
-                    <h5 class="no-margin">Phone Number: <span><small>{{ reci.number ? reci.number : '' }}</small></span></h5>
-                    <h5 class="no-margin">Email: <span><small>{{ reci.email ? reci.email : '' }}</small></span></h5>
-                    <h5 class="no-margin">Address: <span><small>{{ reci.address ? reci.address : '' }}</small></span></h5>
-                    <h5 class="no-margin">City: <span><small>{{ reci.city ? reci.city : '' }}</small></span></h5>
-                    <h5 class="no-margin">Postal Code: <span><small>{{ reci.postal_code ? reci.postal_code : '' }}</small></span></h5>
-                    <label v-if="errors.receiver_name || errors.receiver_email || errors.receiver_phone || errors.receiver_address || errors.receiver_city || errors.receiver_postal_code" class="error no-margin font-weight-bold">
-                        Error occured in Recipient Form.
+                    <hr style="margin: 3px 0px -15px 0px;">
+                    <br>
+                    <label v-if="errors.receiver_name || errors.receiver_email || errors.receiver_phone || errors.receiver_address || errors.receiver_city || errors.receiver_postal_code" class="error no-margin font-weight-bold" style="margin-left: -3px !important;">
+                        Kindly fill out all the fields.
                     </label>
+                    <h5 class="details-title">Recipient Name: </h5>
+                    <span class="text-muted" style="display:inline;">{{ reci.name ? reci.name : '' }}</span>
+                    <br>
+                    <h5 class="details-title">Phone Number: </h5>
+                    <span class="text-muted" style="display:inline;">{{ reci.number ? reci.number : '' }}</span>
+                    <br>
+                    <h5 class="details-title">Email: </h5>
+                    <span class="text-muted" style="display:inline;">{{ reci.email ? reci.email : '' }}</span>
+                    <br>
+                    <h5 class="details-title">Address: </h5>
+                    <span class="text-muted" style="display:inline;">{{ reci.address ? reci.address : '' }}</span>
+                    <br>
+                    <h5 class="details-title">City: </h5>
+                    <span class="text-muted" style="display:inline;">{{ reci.city ? reci.city : '' }}</span>
+                    <br>
+                    <h5 class="details-title">Postal Code: </h5>
+                    <span class="text-muted" style="display:inline;">{{ reci.postal_code ? reci.postal_code : '' }}</span>
+                    <br>
                 </button>
                 <form @submit="recipientForm">
                 <div class="modal fade slide-up disable-scroll" id="modalSlideUp-2" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
@@ -183,11 +196,8 @@
                             </div>
                         </div>
                         <div class="modal-body">
-                            <p v-if="errors.length">
-                                <b>Please correct the following error(s):</b>
-                                <ul>
-                                <li v-for="error in errors">{{ error }}</li>
-                                </ul>
+                            <p v-if="recipientErrors.length">
+                                <label class="error">Kindly fill out all the fields.</label>
                             </p>
                             <div class="row">
                                 <div class="col-md-12">
@@ -198,8 +208,8 @@
                                     <label v-if="msg.recipientName" class="error" for="receiver_email">
                                         {{ msg.recipientName }}
                                     </label>
-                                    <label v-if="errors.receiver_name" class="error" for="receiver_name">
-                                        {{ errors.receiver_name[0] }}
+                                    <label v-if="recipientErrors[0]" class="error" for="receiver_name">
+                                        {{ recipientErrors[0] }}
                                     </label>
                                 </div>
                             </div>
@@ -212,8 +222,8 @@
                                     <label v-if="msg.recipientEmail" class="error" for="receiver_email">
                                         {{ msg.recipientEmail }}
                                     </label>
-                                    <label v-if="errors.receiver_email" class="error" for="receiver_email">
-                                        {{ errors.receiver_email[0] }}
+                                    <label v-if="recipientErrors[1]" class="error" for="receiver_email">
+                                        {{ recipientErrors[1] }}
                                     </label>
                                 </div>
                             </div>
@@ -226,8 +236,8 @@
                                     <label v-if="msg.recipientNumber" class="error" for="receiver_email">
                                         {{ msg.recipientNumber }}
                                     </label>
-                                    <label v-if="errors.receiver_phone" class="error" for="receiver_phone">
-                                        {{ errors.receiver_phone[0] }}
+                                    <label v-if="recipientErrors[2]" class="error" for="receiver_phone">
+                                        {{ recipientErrors[2] }}
                                     </label>
                                 </div>
                             </div>
@@ -235,10 +245,13 @@
                                 <div class="col-md-12">
                                     <div class="form-group form-group-default">
                                     <label>Address</label>
-                                        <input v-model="reci.address" type="text" class="form-control" name="receiver_address" placeholder="123 Manuel St.">
+                                        <input v-model="recipientAddress" type="text" class="form-control" name="receiver_address" placeholder="123 Manuel St.">
                                     </div>
-                                    <label v-if="errors.receiver_address" class="error" for="receiver_address">
-                                        {{ errors.receiver_address[0] }}
+                                    <label v-if="msg.recipientAddress" class="error" for="receiver_email">
+                                        {{ msg.recipientAddress }}
+                                    </label>
+                                    <label v-if="recipientErrors[3]" class="error" for="receiver_address">
+                                        {{ recipientErrors[3] }}
                                     </label>
                                 </div>
                             </div>
@@ -254,8 +267,8 @@
                                             </optgroup>
                                         </select>
                                     </div>
-                                    <label v-if="errors.receiver_city" class="error" for="receiver_city">
-                                        {{ errors.receiver_city[0] }}
+                                    <label v-if="recipientErrors[4]" class="error" for="receiver_city">
+                                        {{ recipientErrors[4] }}
                                     </label>
                                 </div>
                             </div>
@@ -268,15 +281,15 @@
                                     <label v-if="msg.recipientPostalCode" class="error" for="receiver_email">
                                         {{ msg.recipientPostalCode }}
                                     </label>
-                                    <label v-if="errors.receiver_postal_code" class="error" for="receiver_postal_code">
-                                        {{ errors.receiver_postal_code[0] }}
+                                    <label v-if="recipientErrors[5]" class="error" for="receiver_postal_code">
+                                        {{ recipientErrors[5] }}
                                     </label>
                                 </div>
                             </div>
                                 <div class="clearfix"></div>
                                 <div class="row m-t-20 clearfix">
                                     <div class="col-xl-12">
-                                        <button type="submit" :data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-lg btn-block btn-primary">Save Recipient Details</button>
+                                        <button type="submit" :data-dismiss="recipientModal" aria-hidden="true" class="btn btn-rounded btn-lg btn-block btn-primary">Save Recipient Details</button>
                                     </div>
                                 </div>
                             </div>
@@ -291,119 +304,66 @@
 
     <div class="row m-t-10">
         <div class="col-md-6">
-            <div class="modal fade slide-up disable-scroll" id="modalSlideUp-3" tabindex="-1" role="dialog" aria-labelledby="modalSlideUpLabel" aria-hidden="false">
-                <div class="modal-dialog ">
-                <div class="modal-content-wrapper">
-                    <div class="modal-content">
-                    <div class="modal-header clearfix">
-                        <button aria-label="" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-icon">close</i>
-                        </button>
-                        <h5 class="text-uppercase">Package Details</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                        <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h4 class="address-title">Select Package Type</h4>
-                                            <div id="div2">
-                                                <span v-for="(pack, packs) in packageTypes" :key="pack.id" class="b">
-                                                <label class="container-radio radio-label">
-                                                    <img alt="Packange Picture" width="90" height="50" :src="'/pages/assets/img/icon.png'">
-                                                    <p class="package-title">{{ pack.name }}</p>
-                                                    <p class="package-description">Max weight: {{ pack.weight }} kg</p>
-                                                    <p class="package-description price">{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(pack.rate) }}</p>
-                                                    <p class="package-description">Rate</p>
-                                                    <input type="radio" :value="packageTypes[packs]" checked="checked" v-model="selectedPackageType">
-                                                    <input type="hidden" v-model="selectedPackageType.id" name="package_id">
-                                                    <span class="checkmark"></span>
-                                                </label>
-                                                </span>
-                                            </div>
-                                            <div class="row m-t-10" v-if="selectedPackageType.name == 'Own Packaging'" v-for="dime in dimension" :key="dime.id">
-                                            <p class="btn-block m-t-10 m-l-10"><em>If your item weight is beyond 4kg, kindly fill this out.</em></p>
-                                                <div class="col-4">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Length(cm)</label>
-                                                        <input type="number" class="form-control" name="package_length" v-model="dime.length" step="any" oninput="this.value = Math.abs(this.value)" onKeyPress="if(this.value.length==6) return false;">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Width(cm)</label>
-                                                        <input type="number" class="form-control" name="package_width" v-model="dime.width" step="any" oninput="this.value = Math.abs(this.value)" onKeyPress="if(this.value.length==6) return false;">
-                                                    </div>
-                                                </div>
-                                                <div class="col-4">
-                                                    <div class="form-group form-group-default">
-                                                        <label>Height(cm)</label>
-                                                        <input type="number" class="form-control" name="package_height" v-model="dime.height" step="any" oninput="this.value = Math.abs(this.value)" onKeyPress="if(this.value.length==6) return false;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row m-t-20">
-                                        <div class="col-6">
-                                            <div class="pull-left">
-                                                <p>Total Amount</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="pull-right">
-                                                <p>{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(totalAmount) }}</p>
-                                                <input v-model="totalAmount" type="hidden" name="package_amount">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row m-t-20 clearfix">
-                                        <div class="col-xl-12">
-                                            <button @click.prevent="packageDetailsButton()" type="button" data-dismiss="modal" aria-hidden="true" class="btn btn-rounded btn-lg btn-block btn-primary">Save Package Details</button>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                            </div>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-
             <div class="card-body no-padding">
             <div class="card card-default">
                 <div class="card-header">
-                <div class="row">
+                    <div class="row">
                     <div class="col-6">
                     <div class="pull-left">
                         <div class="card-title text-muted">Package Details</div>
                     </div>
                     </div>
-                    <div class="col-6">
-                    <div class="pull-right">
-                        <button type="button" class="address package address-title text-primary" data-backdrop="static" data-keyboard="false" data-toggle="modal" data-target="#modalSlideUp-3">Edit</button>
-                    </div>
-                    </div>
                 </div>
-                <hr style="margin: 10px 0 15px 0">
+                </div>
+                <div class="card-body">
+                <hr style="margin: -3px 0px 17px 0px">
                 <div class="row">
-                    <div class="col-md-3">
-                    <div class="user-pic">
-                        <img alt="Package Picture" width="90" height="50" :src="'/pages/assets/img/icon.png'">
-                    </div>
-                    </div>
-                    <div class="col-md-9">
-                    <h5 class="no-margin"><strong>{{ selectedPackageType.name ? selectedPackageType.name : 'Package Name' }}</strong></h5>
-                    <p>Max Weight: {{ selectedPackageType.weight ? selectedPackageType.weight : 0 }} kg</p>
-                    <p>Rate: ₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</p>
+                    <div class="col-md-12">
+                        <label v-if="errors.package_id" class="error no-margin font-weight-bold" style="margin-left: -3px !important; margin-top: -12px !important; margin-bottom: 3px !important;">
+                            Select Package Type
+                        </label>
+                        <div class="row" style="margin-right: 20px; margin-left: -15px; margin-top: -9px">
+                            <div class="col-md-4" v-for="(pack, packs) in packageTypes" :key="pack.id">
+                                    <label class="container-radio radio-label">
+                                        <img alt="Packange Picture" width="75" height="45" :src="'/pages/assets/img/icon.png'">
+                                        <p class="package-title">{{ pack.name }}</p>
+                                        <p class="package-description">Max weight: {{ pack.weight }} kg</p>
+                                        <p class="package-description price">{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(pack.rate) }}</p>
+                                        <p class="package-description rate">Rate</p>
+                                        <input type="radio" :value="packageTypes[packs]" checked="checked" v-model="selectedPackageType">
+                                        <input type="hidden" v-model="selectedPackageType.id" name="package_id">
+                                        <span class="checkmark"></span>
+                                    </label>
+                            </div>
+                        </div>
+                        <div class="row m-t-10" v-if="selectedPackageType.name == 'Own Packaging'" v-for="dime in dimension" :key="dime.id">
+                        <p class="btn-block m-t-10 m-l-10"><em>If your item weight is beyond 4kg, kindly fill this out.</em></p>
+                            <div class="col-4">
+                                <div class="form-group form-group-default">
+                                    <label>Length(cm)</label>
+                                    <input type="number" class="form-control" name="package_length" v-model="dime.length" step="any" oninput="this.value = Math.abs(this.value)" onKeyPress="if(this.value.length==6) return false;">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group form-group-default">
+                                    <label>Width(cm)</label>
+                                    <input type="number" class="form-control" name="package_width" v-model="dime.width" step="any" oninput="this.value = Math.abs(this.value)" onKeyPress="if(this.value.length==6) return false;">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group form-group-default">
+                                    <label>Height(cm)</label>
+                                    <input type="number" class="form-control" name="package_height" v-model="dime.height" step="any" oninput="this.value = Math.abs(this.value)" onKeyPress="if(this.value.length==6) return false;">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             </div>
         </div>
         </div>
-        <div v-if="feesAndBreakdown == true" class="col-md-6">
+        <div class="col-md-6">
         <div class="card-body no-padding">
             <div class="card card-default">
             <div class="card-header">
@@ -414,41 +374,47 @@
                     </div>
                 </div>
                 </div>
-                <hr style="margin: 10px 0 15px 0">
+                <hr style="margin: 3px 0px 12px 0px">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="pull-left">
-                        <h5 class="no-margin small"><strong>Service Fees</strong></h5>
+                        <h5 class="no-margin details-title"><strong>Service Fees</strong></h5>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                        <h5 class="no-margin small"><strong>₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</strong></h5>
+                        <h5 class="no-margin"><strong>₱{{ selectedPackageType.rate ? selectedPackageType.rate : 0 }}.00</strong></h5>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="pull-left m-l-10">
-                        <h5 class="no-margin small text-muted">Additional Weight Fee</h5>
+                        <h5 class="no-margin text-muted">Additional Weight Fee</h5>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                        <h5 class="no-margin small text-muted">{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(additionalWeightFee) }}</h5>
+                        <h5 class="no-margin text-muted">{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(additionalWeightFee) }}</h5>
                         </div>
                     </div>
                 </div>
-                <div class="row m-t-10">
+                <div class="row m-t-20">
                     <div class="col-md-6">
                         <div class="pull-left">
-                        <h5 class="no-margin small"><strong>Total Amount</strong></h5>
+                        <h5 class="no-margin details-title"><strong>Total Amount</strong></h5>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="pull-right">
-                        <h5 class="no-margin small"><strong>{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(totalAmount) }}</strong></h5>
+                        <h5 class="no-margin"><strong>{{ new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(totalAmount) }}</strong></h5>
                         </div>
+                    </div>
+                </div>
+                
+                <div class="row m-t-20">
+                    <div class="col-md-12">
+                        <button @click="createPickup" :disabled="submitted" class="btn btn-block btn-lg btn-rounded btn-primary m-b-10">BOOK NOW</button>
                     </div>
                 </div>
             </div>
@@ -456,32 +422,13 @@
         </div>
     </div>
     </div>
-    <div class="row">
-        <div class="col-md-6"></div>
-        <div class="col-md-6">
-        <div class="card-body no-padding" style="margin-top: -10px">
-            <div class="card card-default">
-            <div class="card-header">
-                <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6">
-                    <button @click="createPickup" :disabled="submitted" class="btn btn-block btn-lg btn-rounded btn-primary m-b-10">BOOK NOW</button>
-                </div>
-                <div class="col-3"></div>
-                </div>
-            </div>
-        </div>
-        </div>
-        </div>
-    </div>
-</div>
 </div>
 </template>
 
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            console.log('Parcel Bear.')
         },
 
         props: ['cities', 'username', 'userDetails'],
@@ -512,27 +459,33 @@
 
                 msg: [],
 
-                modal: false,
+                senderModal: false,
+
+                recipientModal: false,
 
                 senderName: '',
                 senderNumber: '',
+                senderAddress: '',
+                senderCity: '',
+                senderPickupDate: '',
                 senderPostalCode: '',
 
                 recipientName: '',
                 recipientEmail: '',
                 recipientNumber: '',
+                recipientAddress: '',
                 recipientPostalCode: '',
 
                 packageTypes: [
                     {
                         id: 1,
-                        name: 'Medium Parcel',
+                        name: 'Medium',
                         weight: 2,
                         rate: 78
                     },
                     {
                         id: 2,
-                        name: 'Large Parcel',
+                        name: 'Large',
                         weight: 3,
                         rate: 88
                     },
@@ -554,9 +507,11 @@
                     }
                 ],
 
-                feesAndBreakdown: false,
-
                 errors: [],
+
+                senderErrors: [],
+
+                recipientErrors: [],
 
                 successful: [],
 
@@ -573,6 +528,21 @@
             senderNumber(value) {
                 this.sender[0].number = value;
                 this.validateSenderNumber(value);
+            },
+            
+            senderPickupDate(value) {
+                this.sender[0].pickup_date = value;
+                this.validateSenderPickupDate(value);
+            },
+            
+            senderAddress(value) {
+                this.sender[0].address = value;
+                this.validateSenderAddress(value);
+            },
+            
+            senderCity(value) {
+                this.sender[0].city = value;
+                this.validateSenderCity(value);
             },
             
             senderPostalCode(value) {
@@ -595,6 +565,11 @@
                 this.validateRecipientNumber(value);
             },
             
+            recipientAddress(value) {
+                this.recipient[0].address = value;
+                this.validateRecipientAddress(value);
+            },
+            
             recipientPostalCode(value) {
                 this.recipient[0].postal_code = value;
                 this.validateRecipientPostalCode(value);
@@ -613,128 +588,176 @@
 
             senderForm:function(e) {
                 e.preventDefault();
-                this.errors = [];
+                this.senderErrors = [];
 
-                if (this.sender[0].name === '') {
-                    this.errors.push("Sender Name is required.");
-                }
+                this.validateSenderName()
 
-                if (this.sender[0].number === '') {
-                    this.errors.push("Sender Mobile Number is required.");
-                }
-                
-                if (this.sender[0].address === '') {
-                    this.errors.push("Sender Address is required.");
-                }
+                this.validateSenderNumber(this.sender[0].number)
 
-                if (this.sender[0].city === '') {
-                    this.errors.push("Sender City is required.");
-                }
+                this.validateSenderPickupDate()
 
-                if (this.sender[0].postal_code === '') {
-                    this.errors.push("Sender Postal Code is required.");
-                }
+                this.validateSenderAddress()
 
-                if (this.errors.length == 0) {
-                    this.modal = 'modal'
+                this.validateSenderCity()
+
+                this.validateSenderPostalCode(this.sender[0].postal_code)
+
+                if (this.senderErrors.length == 0) {
+                    this.senderModal = 'modal'
                     e.preventDefault();
                 }
             },
 
             recipientForm:function(e) {
                 e.preventDefault();
-                this.errors = [];
+                this.recipientErrors = [];
 
                 if (this.recipient[0].name === '') {
-                    this.errors.push("Recipient Name is required.");
+                    this.recipientErrors[0] = "This field is required";
                 }
 
                 if (this.recipient[0].number === '') {
-                    this.errors.push("Recipient Mobile Number is required.");
+                    this.recipientErrors[1] = "This field is required";
                 }
 
                 if (this.recipient[0].email === '') {
-                    this.errors.push("Recipient Email is required.");
+                    this.recipientErrors[2] = "This field is required";
                 }
                 
                 if (this.recipient[0].address === '') {
-                    this.errors.push("Recipient Address is required.");
+                    this.recipientErrors[3] = "This field is required";
                 }
 
                 if (this.recipient[0].city === '') {
-                    this.errors.push("Recipient City is required.");
+                    this.recipientErrors[4] = "This field is required";
                 }
 
                 if (this.recipient[0].postal_code === '') {
-                    this.errors.push("Recipient Postal Code is required.");
+                    this.recipientErrors[5] = "This field is required";
                 }
 
-                if (this.errors.length == 0) {
-                    this.modal = 'modal'
+                if (this.recipientErrors.length == 0) {
+                    this.recipientModal = 'modal'
                     e.preventDefault();
                 }
             },
 
             validateSenderName(value) {
-                if (/^[a-zA-Z ]+$/.test(value)) {
-                    this.msg['senderName'] = '';
-                } else {
+                if (this.sender[0].name === '') {
+                    this.msg['senderName'] = 'This field is required';
+                    this.senderErrors[0] = 'Sender Name'
+                } else if (!/^[a-zA-Z ]+$/.test(value)) {
                     this.msg['senderName'] = 'The name field can only contain letters.';
-                } 
+                    this.senderErrors[0] = 'Sender Name'
+                } else {
+                    this.msg['senderName'] = '';
+                    return true
+                }
             },
 
             validateSenderNumber(value) {
-                if (/^(09|\+639)\d{9}$/.test(value)) {
-                    this.msg['senderNumber'] = '';
+                if (this.sender[0].number === '') {
+                    this.msg['senderNumber'] = 'This field is required';
+                    this.senderErrors[1] = 'Sender Number'
+                } else if (!/^(09|\+639)\d{9}$/.test(value)) {
+                    this.msg['senderNumber'] = 'Phone Number is invalid.';
+                    this.senderErrors[1] = 'Sender Number'
                 } else {
-                    this.msg['senderNumber'] = 'Invalid Phone Number';
+                    this.msg['senderNumber'] = '';
+                    return true
+                } 
+            },
+
+            validateSenderPickupDate(value) {
+                if (this.sender[0].pickup_date === '') {
+                    this.msg['senderPickupDate'] = 'This field is required';
+                    this.senderErrors[2] = 'Sender Pickup Date'
+                } else {
+                    this.msg['senderPickupDate'] = '';
+                    return true
+                } 
+            },
+
+            validateSenderAddress(value) {
+                if (this.sender[0].address === '') {
+                    this.msg['senderAddress'] = 'This field is required';
+                    this.senderErrors[3] = 'Sender Address'
+                } else {
+                    this.msg['senderAddress'] = '';
+                    return true
+                } 
+            },
+
+            validateSenderCity(value) {
+                if (this.sender[0].city === '') {
+                    this.msg['senderCity'] = 'This field is required';
+                    this.senderErrors[4] = 'Sender City'
+                } else {
+                    this.msg['senderCity'] = '';
+                    return true
                 } 
             },
 
             validateSenderPostalCode(value) {
-                if (/^[0-9]{4}$/.test(value)) {
-                    this.msg['senderPostalCode'] = '';
+                if (this.sender[0].postal_code === '') {
+                    this.msg['senderPostalCode'] = 'This field is required';
+                    this.senderErrors[5] = 'Sender Postal Code'
+                } else if (!/^[0-9]{4}$/.test(value)) {
+                    this.msg['senderPostalCode'] = 'Postal Code is invalid.';
+                    this.senderErrors[5] = 'Sender Postal Code'
                 } else {
-                    this.msg['senderPostalCode'] = 'Invalid Postal Code';
+                    this.msg['senderPostalCode'] = '';
+                    return true
                 } 
             },
 
             validateRecipientName(value) {
-                if (/^[a-zA-Z ]+$/.test(value)) {
-                    this.msg['recipientName'] = '';
-                } else {
+                if (this.recipient[0].name === '') {
+                    this.msg['recipientName'] = 'This field is required';
+                } else if (!/^[a-zA-Z ]+$/.test(value)) {
                     this.msg['recipientName'] = 'The name field can only contain letters.';
+                } else {
+                    this.msg['recipientName'] = '';
                 } 
             },
 
             validateRecipientEmail(value) {
-                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
-                    this.msg['recipientEmail'] = '';
+                if (this.recipient[0].email === '') {
+                    this.msg['recipientEmail'] = 'This field is required';
+                } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+                    this.msg['recipientEmail'] = 'Email Address is invalid.';
                 } else {
-                    this.msg['recipientEmail'] = 'Invalid Email Address';
+                    this.msg['recipientEmail'] = '';
                 } 
             },
 
             validateRecipientNumber(value) {
-                if (/^(09|\+639)\d{9}$/.test(value)) {
-                    this.msg['recipientNumber'] = '';
+                if (this.recipient[0].number === '') {
+                    this.msg['recipientNumber'] = 'This field is required';
+                } else if (!/^(09|\+639)\d{9}$/.test(value)) {
+                    this.msg['recipientNumber'] = 'Phone Number is invalid.';
                 } else {
-                    this.msg['recipientNumber'] = 'Invalid Phone Number';
+                    this.msg['recipientNumber'] = '';
+                } 
+            },
+
+            validateRecipientAddress(value) {
+                if (this.recipient[0].address === '') {
+                    this.msg['recipientAddress'] = 'This field is required';
+                } else {
+                    this.msg['recipientAddress'] = '';
                 } 
             },
 
             validateRecipientPostalCode(value) {
-                if (/^[0-9]{4}$/.test(value)) {
-                    this.msg['recipientPostalCode'] = '';
-                } else {
-                    this.msg['recipientPostalCode'] = 'Invalid Postal Code';
-                } 
-            },
-
-            packageDetailsButton: function () {
-                if (this.selectedPackageType.length == undefined) {
-                    this.feesAndBreakdown = true
+                if (this.recipient[0].postal_code === '') {
+                    this.msg['recipientPostalCode'] = 'This field is required';
                 }
+                else if (!/^[0-9]{4}$/.test(value)) {
+                    this.msg['recipientPostalCode'] = 'Postal Code is invalid.';
+                } else {
+                    this.msg['recipientPostalCode'] = '';
+                } 
             },
 
             createPickup: function () {
@@ -782,10 +805,12 @@
                         this.submitted = false,
                         this.senderName = '',
                         this.senderNumber = '',
+                        this.senderAddress = '',
                         this.senderPostalCode = '',
                         this.recipientName = '',
                         this.recipientEmail = '',
                         this.recipientNumber = '',
+                        this.recipientAddress = ''
                         this.recipientPostalCode = ''
                     })
                     .catch(error => {
@@ -799,6 +824,14 @@
         },
 
         computed: {
+            isSenderSubmit: function () {
+                if (this.validateSenderName() == true && this.validateSenderNumber(this.sender[0].number) == true && this.validateSenderPickupDate() == true && this.validateSenderAddress() == true && this.validateSenderCity() == true && this.validateSenderPostalCode(this.sender[0].postal_code) == true) {
+                    return false    
+                } else {
+                    return true
+                }
+            },
+
             additionalWeightFee: function () {
                 if (this.selectedPackageType.name == 'Own Packaging') {
                     return this.dimension.reduce((total, item) => {

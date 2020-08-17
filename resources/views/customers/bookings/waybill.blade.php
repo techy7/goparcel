@@ -32,9 +32,10 @@
         <div style="padding: 40px; padding-bottom: 0;">
             <div>
                 <div>
-                    <h2><strong>{{ config('app.name') }}</strong></h2>
-                    <h4><strong>TRACKING ID: {{ $userPickup->tracking_number }}</strong></h4>
-                    <hr style="margin: 25px 0px -15px 0px">
+                    <img src="data:image/png;base64,{{ $logo }}" alt="logo" width="180" height="75">
+                    <h4 style="margin-top: -4px !important"><strong>TRACKING ID: {{ $userPickup->tracking_number }}</strong></h4>
+                    <a href="https://app.weparcelbear.com/track-delivery/{{ $userPickup->tracking_number }}"><em>Track Order</em></a>
+                    <hr style="margin: 20px 0px -15px 0px">
                         <div style="margin: 15px">
                             <h4><strong>Sender Details:</strong></h4>
                             <p><strong>Name: </strong><small>{{ $userPickup->user->name }}</small></p>
