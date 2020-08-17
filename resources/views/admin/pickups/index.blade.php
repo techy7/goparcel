@@ -330,11 +330,22 @@
        $('#pickup_table').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-             { extend: 'excel', text: 'Download Excel' },
-            {   extend: 'pdfHtml5',
-                text: 'Download PDF',
-                orientation: 'landscape',
-                pageSize: 'LEGAL' }
+            {   
+              extend: 'excel', 
+              text: 'Download Excel' ,                
+              exportOptions: {
+                columns: 'th:not(:last-child)'
+              }
+            },
+            {   
+              extend: 'pdfHtml5',
+              text: 'Download PDF',
+              orientation: 'landscape',
+              pageSize: 'LEGAL' ,
+              exportOptions: {
+                  columns: 'th:not(:last-child)'
+                }
+            }
         ],
         "pageLength": 15
     } );
