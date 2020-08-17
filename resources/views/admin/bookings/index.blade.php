@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Bookings List')
+@section('title', 'Bookings')
 
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="pull-left">
-                        <h3 class="page-title">Bookings List</h3>
+                        <h3 class="page-title">{{ __('general.bookings') }}</h3>
                     </div>
                 </div>
             </div>
@@ -125,6 +125,7 @@
     <script type="text/javascript" src="{{ asset('pages/assets/plugins/datatables-responsive/js/lodash.min.js') }}"></script>
 @endsection
 @section('lower-links-extends-page')
+    <script src="{{ asset('pages/assets/js/tables.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/js/datatables.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/js/demo.js') }}" type="text/javascript"></script>
 @endsection

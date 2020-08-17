@@ -20,7 +20,7 @@ return [
 
     //Admin
     'bookings' => 'Bookings',
-    'pickup_schedules' => 'Pickup Schedules',
+    'pickup_schedules' => 'Pickups',
     'users_access_roles' => 'Users & Access Roles',
     'manage_users' => 'Manage Users',
     'manage_access_roles' => 'Manage Access Roles',

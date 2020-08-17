@@ -18,7 +18,54 @@ class PickupController extends Controller
     {
         $pickups = Pickup::whereActive(1)->get();
 
-        return view('admin.pickups.index', compact('pickups'));
+        $cities = DB::table('pickups')->distinct()->pluck('pickup_city');
+        $states = DB::table('pickups')->distinct()->pluck('pickup_state');
+        $cities = DB::table('pickups')->distinct()->pluck('pickup_city');
+        $postal_codes = DB::table('pickups')->distinct()->pluck('pickup_postal_code');
+        $package_types = DB::table('packages')->distinct()->pluck('name');
+
+       // return dd($city);
+        return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types'));
+    }
+
+    public function filter(Request $request)
+    {
+
+        $cities = DB::table('pickups')->distinct()->pluck('pickup_city');
+        $states = DB::table('pickups')->distinct()->pluck('pickup_state');
+        $cities = DB::table('pickups')->distinct()->pluck('pickup_city');
+        $postal_codes = DB::table('pickups')->distinct()->pluck('pickup_postal_code');
+        $package_types = DB::table('packages')->distinct()->pluck('name');
+
+        $searchCities = preg_split('/,+/',$request->displayCity, -1, PREG_SPLIT_NO_EMPTY);
+        $searchStates = preg_split('/,+/',$request->displayState, -1, PREG_SPLIT_NO_EMPTY); 
+        $searchPostalCodes= preg_split('/,+/',$request->displayPostalCode, -1, PREG_SPLIT_NO_EMPTY); 
+
+        $searches = array(
+            'cities' => $searchCities,
+            'states' => $searchStates,
+            'postalCodes' => $searchPostalCodes
+        );
+        
+         //dd($searches["cities"]);
+        $pickups= Pickup::where(function ($q) use ($searchCities) {
+            foreach ($searchCities as $value) {
+              $q->orWhere('pickup_city', 'like', "%{$value}%");
+            }
+          })
+          ->where(function ($q) use ($searchStates) {
+            foreach ($searchStates as $value) {
+              $q->orWhere('pickup_state', 'like', "%{$value}%");
+            }
+          })
+          ->where(function ($q) use ($searchPostalCodes) {
+            foreach ($searchPostalCodes as $value) {
+              $q->orWhere('pickup_postal_code', 'like', "%{$value}%");
+            }
+          })
+          ->get();
+
+          return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types', 'searches'));
     }
 
     public function edit(Pickup $pickup)
@@ -28,9 +75,12 @@ class PickupController extends Controller
         $customerPickupStatus = $pickup->pickupActivities->pluck('delivery_status_id')->all();
 
         $latestPickupStatus = $pickup->pickupActivities->first()->deliveryStatus;
+
+
         
         return view('admin.pickups.edit', compact('pickup', 'deliveryStatus', 'customerPickupStatus', 'latestPickupStatus'));
     }
+
 
     public function update(Pickup $pickup)
     {

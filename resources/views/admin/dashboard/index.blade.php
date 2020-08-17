@@ -64,7 +64,9 @@
               </div>
         </div>
       </div>
+      
       <div class="row">
+        <!--
         <div class="col-lg-8 m-b-10">
           <div class="card card-transparent">
             <h3 class="pull-left m-t-5 m-b-5 page-title">Pickups List</h3>
@@ -180,6 +182,7 @@
           </div>
         </div>
         </div>
+        -->
         <div class="col-lg-6 col-xl-4 m-b-10 hidden-xlg">
           <div class="widget-11-2 card  no-margin widget-loader-circle full-height d-flex flex-column">
             <div class="card-header">
@@ -207,8 +210,8 @@
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
+          </div> 
+        </div> 
     </div>
   </div>
 @endsection

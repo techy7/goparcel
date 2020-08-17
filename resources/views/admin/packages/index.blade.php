@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="pull-left">
-                        <h3 class="page-title">Packages List</h3>
+                        <h3 class="page-title">{{ __('general.packages') }}</h3>
                     </div>
                 </div>
                 <div class="col-md-6">

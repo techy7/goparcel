@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/bookings/{pickup}/confirmation', 'BookingController@destroyConfirmation')->name('admin.bookings.destroy-confirmation');
         Route::delete('/bookings/{pickup}', 'BookingController@destroy')->name('admin.bookings.destroy');
         Route::get('/pickups', 'PickupController@index')->name('admin.pickups');
+        Route::get('/pickups/filter', 'PickupController@filter')->name('admin.pickup.filter');
         Route::get('/pickups/{pickup}/edit', 'PickupController@edit')->name('admin.pickups.edit');
         Route::patch('/pickups/{pickup}', 'PickupController@update')->name('admin.pickups.update');
         Route::get('/pickups/{pickup}/confirmation', 'PickupController@destroyConfirmation')->name('admin.pickups.destroy-confirmation');

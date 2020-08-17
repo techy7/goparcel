@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="pull-left">
-                        <h3 class="page-title">Customers List</h3>
+                        <h3 class="page-title">{{ __('general.customers') }}</h3>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -30,9 +30,18 @@
 
         <div class="container-fixed-lg bg-white">
             <div class="card card-transparent">
+                <div class="card-header ">
+                  <div class="pull-right">
+                    <div class="col-xs-12">
+                      <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+
               <div class="card-body">
                 <div class="table-responsive">
-                  <table class="table table-hover" id="basicTable">
+                  <table class="table table-hover demo-table-search table-responsive-block" id="tableWithSearch">
                     <thead>
                       <tr>
                         <th>Username</th>
@@ -117,4 +126,6 @@
 @endsection
 @section('lower-links-extends-page')
     <script src="{{ asset('pages/assets/js/tables.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/js/datatables.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('pages/assets/js/demo.js') }}" type="text/javascript"></script>
 @endsection
