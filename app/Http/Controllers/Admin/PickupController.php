@@ -16,7 +16,8 @@ class PickupController extends Controller
 {
     public function index()
     {
-        $pickups = Pickup::whereActive(1)->get();
+        $pickups = Pickup::join('packages', 'pickups.package_id','=','packages.id')
+        ->whereActive(1)->get();
 
         $cities = DB::table('pickups')->distinct()->pluck('pickup_city');
         $states = DB::table('pickups')->distinct()->pluck('pickup_state');
@@ -90,6 +91,7 @@ class PickupController extends Controller
         //   ->where('pickup_date','>=',date('Y-m-d h:i:s',strtotime($request->datepickerFrom)))
           ->get();
 
+          //dd($pickups);
           return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types', 'searches'));
     }
 
