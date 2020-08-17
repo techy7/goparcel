@@ -227,15 +227,15 @@
                           <p>{{ $pickup->pickup_postal_code }}</p>
                       </td>
                       <td class="v-align-middle semi-bold">
-                          <p>{{ $pickup->package->name }}</p>
+                          <p>{{ $pickup->name }}</p>
                       </td>
-                      @if ($pickup->package->name == 'Own Packaging')
+                      @if ($pickup->name == 'Own Packaging')
                         <td class="v-align-middle semi-bold">
                           <p>{{ $pickup->priceFormatted($pickup->package_amount) }}</p>
                         </td>
                       @else
                         <td class="v-align-middle semi-bold">
-                          <p>{{ $pickup->priceFormatted($pickup->package->amount) }}</p>
+                          <p>{{ $pickup->priceFormatted($pickup->amount) }}</p>
                         </td>
                       @endif
                       <td class="v-align-middle semi-bold">
@@ -373,6 +373,7 @@
         $('#displayCity').tagsinput('add', s["cities"].join());
         $('#displayState').tagsinput('add', s["states"].join());
         $('#displayPostalCode').tagsinput('add', s["postalCodes"].join());
+        $('#displayPackageType').tagsinput('add', s["packageTypes"].join());
         $('#datepicker-from').val(s['fromDate']);
         $('#datepicker-to').val(s['toDate']);
      @endif  

@@ -39,7 +39,8 @@ class PickupController extends Controller
 
         $searchCities = preg_split('/,+/',$request->displayCity, -1, PREG_SPLIT_NO_EMPTY);
         $searchStates = preg_split('/,+/',$request->displayState, -1, PREG_SPLIT_NO_EMPTY); 
-        $searchPostalCodes= preg_split('/,+/',$request->displayPostalCode, -1, PREG_SPLIT_NO_EMPTY); 
+        $searchPostalCodes= preg_split('/,+/',$request->displayPostalCode, -1, PREG_SPLIT_NO_EMPTY);
+        $searchPackageType= preg_split('/,+/',$request->displayPackageType, -1, PREG_SPLIT_NO_EMPTY);  
 
         //$request->datepickerFrom = $request->datepickerFrom.' 23:59:59';
         //dd(date('Y-m-d H:i:s',strtotime($request->datepickerFrom)));
@@ -47,6 +48,7 @@ class PickupController extends Controller
             'cities' => $searchCities,
             'states' => $searchStates,
             'postalCodes' => $searchPostalCodes,
+            'packageTypes' => $searchPackageType,
             'fromDate' =>  $request->datepickerFrom,
             'toDate' =>  $request->datepickerTo,
         );
@@ -67,6 +69,11 @@ class PickupController extends Controller
           ->where(function ($q) use ($searchPostalCodes) {
             foreach ($searchPostalCodes as $value) {
               $q->orWhere('pickup_postal_code', 'like', "%{$value}%");
+            }
+          })
+          ->where(function ($q) use ($searchPackageType) {
+            foreach ($searchPackageType as $value) {
+              $q->orWhere('name', 'like', "%{$value}%");
             }
           })
           ->where(function ($q) use ($request) {
