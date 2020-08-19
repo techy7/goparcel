@@ -28,7 +28,7 @@ class BookingController extends Controller
     public function track(User $user, Pickup $pickup)
     {
         $pickups = $pickup->get();
-
+       
         $pickupOrder = $pickups->where('tracking_number', request()->route('tracking_number'))->first();
 
         foreach ($pickupOrder->pickupActivities as $pickupActivity) {
@@ -38,7 +38,7 @@ class BookingController extends Controller
         $arrayOne = DeliveryStatus::all()->pluck('id')->toArray();
         $arrayTwo = $pickupOrder->pickupActivities->pluck('delivery_status_id')->toArray();
         
-        dd(array_diff($arrayOne, $arrayTwo)); // 3 4 5 6 ang lumabas sa dd kasi nga eto pa yung mga wala pa sa package parcel so baka puede itong magamit sa ui
+        //dd(array_diff($arrayOne, $arrayTwo)); // 3 4 5 6 ang lumabas sa dd kasi nga eto pa yung mga wala pa sa package parcel so baka puede itong magamit sa ui
 
         return view('customers.bookings.track', 
         compact(

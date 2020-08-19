@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Pickup;
+use App\DeliveryStatus;
+use App\PickupActivity;
 
 class CustomerController extends Controller
 {
@@ -174,5 +177,18 @@ class CustomerController extends Controller
         ]);
 
         return redirect()->route('admin.customers', $userData->id)->with('delete', $userData->username . ' User has been successfully deleted.');
+    }
+
+
+    public function showPickups($customer_id)
+    {
+        $pickups= Pickup::
+        join('users', 'pickups.user_id','=','users.id')
+        ->where('user_id',$customer_id)
+        ->first();
+    
+        //dd($pickups);
+        
+        return view('admin.customers.pickups', compact('pickups'));
     }
 }

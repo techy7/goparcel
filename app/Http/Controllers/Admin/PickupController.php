@@ -11,6 +11,8 @@ use App\Rules\same_email;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use DateTime;
+use DateInterval;
 
 class PickupController extends Controller
 {
@@ -43,6 +45,27 @@ class PickupController extends Controller
         $searchPostalCodes= preg_split('/,+/',$request->displayPostalCode, -1, PREG_SPLIT_NO_EMPTY);
         $searchPackageType= preg_split('/,+/',$request->displayPackageType, -1, PREG_SPLIT_NO_EMPTY);  
 
+        
+        
+        $fromdate = "";
+        $todate = "";
+        if($request->has('newRequest')){
+          date_default_timezone_set('Asia/Manila');
+          $date = new DateTime();
+          $date->add(DateInterval::createFromDateString('yesterday'));
+          $fromdate = date($date->format('Y-m-d')." 05:00:00");
+          $todate = date($date->format('Y-m-d')." 17:00:00");
+        }
+        else{
+          if(!empty($request->datepickerFrom)){
+            $fromdate = date('Y-m-d H:i:s',strtotime($request->datepickerFrom.' 00:00:00'));
+          }
+          if(!empty($request->datepickerTo)){
+            $todate = date('Y-m-d H:i:s',strtotime($request->datepickerTo.' 23:59:59'));
+          }
+        }
+
+        // dd(empty($fromdate),empty($todate));
         //$request->datepickerFrom = $request->datepickerFrom.' 23:59:59';
         //dd(date('Y-m-d H:i:s',strtotime($request->datepickerFrom)));
         $searches = array(
@@ -77,18 +100,17 @@ class PickupController extends Controller
               $q->orWhere('name', 'like', "%{$value}%");
             }
           })
-          ->where(function ($q) use ($request) {
-            if(!empty($request->datepickerTo)){
-             $q->where('pickup_date','<=',date('Y-m-d H:i:s',strtotime($request->datepickerTo.' 23:59:59')));
+          ->where(function ($q) use ($fromdate) {
+            if(!empty($fromdate)){
+             $q->where('pickup_date','>=',$fromdate);
             }
           })
-          ->where(function ($q) use ($request) {
-            if(!empty($request->datepickerFrom)){
-             $q->where('pickup_date','>=',date('Y-m-d H:i:s',strtotime($request->datepickerFrom.' 00:00:00')));
+          ->where(function ($q) use ($todate) {
+            if(!empty($todate)){
+              $q->where('pickup_date','<=',$todate);
             }
           })
-        //   ->where('pickup_date','<=',date('Y-m-d h:i:s',strtotime($request->datepickerTo)) && !empty($request->datepickerTo))
-        //   ->where('pickup_date','>=',date('Y-m-d h:i:s',strtotime($request->datepickerFrom)))
+          
           ->get();
 
           //dd($pickups);

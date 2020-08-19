@@ -100,6 +100,7 @@
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <div class="btn-group">
+                                    <a href="{{ route('admin.customers.showPickups', $customer->id) }}" class="btn btn-outline-primary m-1">View Pickups</a>
                                     <a href="{{ route('admin.customers.edit', $customer->id) }}" class="btn btn-outline-primary m-1">Edit</a>
                                     <a href="{{ route('admin.customers.destroy-confirmation', $customer->id) }}" class="btn btn-outline-danger text-danger m-1">Delete</a>
                                 </div>

@@ -59,131 +59,8 @@
             Show/Hide Filter 
           </a>
         </div>
-        <div class="show bg-light w-100 py-4 px-3 mb-5" id="collapseForm">
-          <form action="{{ route('admin.pickup.filter') }}" method="get"  data-parsley-validate autocomplete="off" class="d-print-none" >
-            <div class="row">
-              <div class="col-md-3">
-                <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">City
-                  <span class="caret"></span></button>
-                  <ul id="dropdown-city" class="dropdown-menu">
-                    <input class="form-control" id="input-city" type="text" placeholder="Search..">
-                    @foreach($cities as $city)
-                      <li id="{{$city}}" data-value="{{$city}}"><a href="#">{{$city}}</a></li>
-                    @endforeach  
-                  </ul>
-                </div>
-                <input id="displayCity" name="displayCity" type="text" value="" data-role="tagsinput"/>
-              </div>
+   
 
-              <div class="col-md-3">
-                <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">State
-                  <span class="caret"></span></button>
-                  <ul id="dropdown-state" class="dropdown-menu">
-                    <input class="form-control" id="input-state" type="text" placeholder="Search..">
-                    @foreach($states as $state)
-                      <li id="{{$state}}" data-value="{{$state}}"><a href="#">{{$state}}</a></li>
-                    @endforeach  
-                  </ul>
-                </div>
-              <input id="displayState" name="displayState" type="text" value="" data-role="tagsinput"/>
-              </div>
-
-
-              <div class="col-md-3">
-                <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Postal Code
-                  <span class="caret"></span></button>
-                  <ul id="dropdown-postal-code" class="dropdown-menu">
-                    <input class="form-control" id="input-postal-code" type="text" placeholder="Search..">
-                    @foreach($postal_codes as $postal_code)
-                      <li id="{{$postal_code}}" data-value="{{$postal_code}}"><a href="#">{{$postal_code}}</a></li>
-                    @endforeach  
-                  </ul>
-                </div>
-                <input id="displayPostalCode" name="displayPostalCode" type="text" value="" data-role="tagsinput"/>
-              </div>
-
-              <div class="col-md-3">
-                <div class="dropdown ">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Package Type
-                  <span class="caret"></span></button>
-                  <ul id="dropdown-package-type" class="dropdown-menu">
-                    <input class="form-control" id="input-package-type" type="text" placeholder="Search..">
-                    @foreach($package_types as $package_type)
-                      <li id="{{$package_type}}" data-value="{{$package_type}}"><a href="#">{{$package_type}}</a></li>
-                    @endforeach  
-                  </ul>
-                </div>
-                <input id="displayPackageType" name="displayPackageType" type="text" value="" data-role="tagsinput"/>
-              </div>
-
-              
-
-            </div>{{--End of Row 1--}}
-            <div class="row mt-3">
-              <div class="col-md-3">
-                 <div class="form-check">
-                  {{-- <input type="checkbox" class="form-check-input" id="checkNewPickups" name="checkNewPickups">
-                  <label class="form-check-label" for="checkNewPickups">Show New Request</label> --}}
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div id="fromDiv">
-                  <button class="btn btn-primary " type="button">Delivery Date</button>
-                  <div class="form-group form-group-default input-group">
-                    <div class="form-input-group">
-                      <label>From Date</label> 
-                      <input type="text" name="datepickerFrom" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-from" class="form-control datepicker-standard">
-                    </div> 
-                    <div class="input-group-append">
-                      <span class="input-group-text"><i class="pg-icon">calendar</i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-3">
-                <div id="toDiv">
-                <button class="btn btn-primary invisible " type="button"></button>
-                  <div class="form-group form-group-default input-group">     
-                    <div class="form-input-group">
-                      <label>To Date</label> 
-                      <input type="text" name="datepickerTo" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-to" class="form-control datepicker-standard">
-                    </div> 
-                    <div class="input-group-append">
-                      <span class="input-group-text"><i class="pg-icon">calendar</i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-3">
-                <button class="btn btn-primary invisible " type="button"></button>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="newRequest" name="newRequest">
-                  <label class="form-check-label" for="newRequest">
-                    Show New Requests Only
-                  </label>
-                </div>
-              </div>
-            </div>{{--End of Row 2--}}
-
-            
-            {{-- Submit and Clear Filter Button--}}
-            <div class="row mt-3 d-flex justify-content-center">
-              <div class="col-md-2">
-                <a class="btn btn-round clear-filter w-100 mx-2"  href="{{ route('admin.pickups') }}"><i class="fa fa-times mr-2"></i>Clear Filter</a>
-              </div>
-              <div class="col-md-2">
-              <button type="submit" class="btn btn-round btn-info w-100 mx-2 "><i class="fa fa-search mr-2"></i>Filter</button>
-              </div>
-            </div> 
-          </form>
-        </div> {{--End of Collapse Form--}}
 
         <div class="table-responsive mt-3">
             <table class="table table-hover demo-table-search table-responsive-block" id="pickup_table">
@@ -442,16 +319,7 @@
     });
 
 
-  $("#newRequest").change(function() {
-    if(this.checked) {
-       $("#fromDiv").hide();
-       $("#toDiv").hide();
-    }
-    else{
-      $("#fromDiv").show();
-      $("#toDiv").show();
-    }
-  });
+  
     
    
 

@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('/customers/{username}', 'CustomerController@update')->name('admin.customers.update');
         Route::get('/customers/{username}/confirmation', 'CustomerController@destroyConfirmation')->name('admin.customers.destroy-confirmation');
         Route::put('/customers/{username}', 'CustomerController@softDestroy')->name('admin.customers.soft-destroy');
+        Route::get('/customers/{username}', 'CustomerController@showPickups')->name('admin.customers.showPickups');
         Route::get('/bookings', 'BookingController@index')->name('admin.bookings');
         Route::get('/bookings/{username}/edit', 'BookingController@edit')->name('admin.bookings.edit');
         Route::patch('/bookings/{username}', 'BookingController@update')->name('admin.bookings.update');
