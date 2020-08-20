@@ -80,20 +80,68 @@ class UserSeeder extends Seeder
         $role = Role::find(3);
         $customer->assignRole($role);
 
-        $customer = User::create([
-            'username' => 'customer',
-            'email' => 'customer@gmail.com',
-            'name' => 'Name Surname',
-            'm_number' => '09451260066',
+        $customer2 = User::create([
+            'username' => 'customer2',
+            'email' => 'customer1@gmail.com',
+            'name' => 'Roberta Buan',
+            'm_number' => '09451236547',
             'password' => bcrypt('123456789'),
             'address' => 'Main St. 123',
-            'city' => 'Los Banos',
-            'state' => 'Laguna',
+            'city' => 'Las Pinas',
+            'state' => 'Metro Manila',
             'postal_code' =>  '1116',
             'country' => 'Philippines',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         $role = Role::find(3);
-        $customer->assignRole($role);   
+        $customer2->assignRole($role);  
+
+        $customer3 = User::create([
+            'username' => 'customer3',
+            'email' => 'customer3@gmail.com',
+            'name' => 'William Criste ',
+            'm_number' => '09451236545',
+            'password' => bcrypt('123456789'),
+            'address' => 'Main St. 123',
+            'city' => 'Taguig',
+            'state' => 'Metro Manila',
+            'postal_code' =>  '1516',
+            'country' => 'Philippines',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        $role = Role::find(3);
+        $customer3->assignRole($role); 
+
+        $customer4 = User::create([
+            'username' => 'customer4',
+            'email' => 'customer4@gmail.com',
+            'name' => 'Angelica Hasta ',
+            'm_number' => '09451236245',
+            'password' => bcrypt('123456789'),
+            'address' => 'Main St. 123',
+            'city' => 'Pasay',
+            'state' => 'Metro Manila',
+            'postal_code' =>  '0516',
+            'country' => 'Philippines',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        $role = Role::find(3);
+        $customer4->assignRole($role);  
+
+        $customer5 = User::create([
+            'username' => 'customer5',
+            'email' => 'customer5@gmail.com',
+            'name' => 'Bart Acero',
+            'm_number' => '09451246245',
+            'password' => bcrypt('123456789'),
+            'address' => 'Main St. 123',
+            'city' => 'Pasig',
+            'state' => 'Metro Manila',
+            'postal_code' =>  '6416',
+            'country' => 'Philippines',
+            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        $role = Role::find(3);
+        $customer5->assignRole($role); 
     }
 }
