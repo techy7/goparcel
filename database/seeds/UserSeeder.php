@@ -15,20 +15,15 @@ class UserSeeder extends Seeder
     public function run()
     {
         $super = User::create([
-            'username' => 'daviddeleon',
-            'name' => 'David De Leon',
-            'email' => 'david@techy7.com',
-            'password' => bcrypt('123456789'),
-            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-        $role = Role::find(1);
-        $super->assignRole($role);
-
-        $super = User::create([
             'username' => 'arwinabatayo',
             'name' => 'Arwin Abatayo',
             'email' => 'arwin.abatayo@techy7.com',
-            'password' => bcrypt('123456789'),
+            'password' => bcrypt('987654321'),
+            'address' => '#2 Address Street Corner',
+            'city' => 'Quezon City',
+            'state' => 'Metro Manila',
+            'postal_code' =>  '1116',
+            'country' => 'Philippines',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         $role = Role::find(1);
@@ -38,8 +33,8 @@ class UserSeeder extends Seeder
             'username' => 'superadmin',
             'name' => 'Super Admin',
             'email' => 'superadmin@gmail.com',
-            'password' => bcrypt('123456789'),
-            'address' => 'Main St. 123',
+            'password' => bcrypt('987654321'),
+            'address' => '#2 Address Street Corner',
             'city' => 'Quezon City',
             'state' => 'Metro Manila',
             'postal_code' =>  '1116',
@@ -53,8 +48,8 @@ class UserSeeder extends Seeder
             'username' => 'admin',
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => bcrypt('123456789'),
-            'address' => 'Main St. 123',
+            'password' => bcrypt('987654321'),
+            'address' => '#2 Address Street Corner',
             'city' => 'Quezon City',
             'state' => 'Metro Manila',
             'postal_code' =>  '1116',
@@ -69,8 +64,8 @@ class UserSeeder extends Seeder
             'email' => 'customer@gmail.com',
             'name' => 'John Doe',
             'm_number' => '09451260066',
-            'password' => bcrypt('123456789'),
-            'address' => 'Main St. 123',
+            'password' => bcrypt('987654321'),
+            'address' => '#2 Address Street Corner',
             'city' => 'Quezon City',
             'state' => 'Metro Manila',
             'postal_code' =>  '1116',
@@ -82,18 +77,18 @@ class UserSeeder extends Seeder
 
         $customer = User::create([
             'username' => 'customer',
-            'email' => 'customer@gmail.com',
-            'name' => 'Name Surname',
+            'email' => 'customer1@gmail.com',
+            'name' => 'Firstname Surname',
             'm_number' => '09451260066',
-            'password' => bcrypt('123456789'),
-            'address' => 'Main St. 123',
-            'city' => 'Los Banos',
-            'state' => 'Laguna',
+            'password' => bcrypt('987654321'),
+            'address' => '#2 Address Street Corner',
+            'city' => 'Quezon City',
+            'state' => 'Metro Manila',
             'postal_code' =>  '1116',
             'country' => 'Philippines',
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         $role = Role::find(3);
-        $customer->assignRole($role);   
+        $customer->assignRole($role);
     }
 }

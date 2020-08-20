@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\ResetPasswordNotification;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -83,5 +84,5 @@ class User extends Authenticatable
             $initials .= $w[0];
         }
         return strtoupper($initials);
-   }
+    }
 }

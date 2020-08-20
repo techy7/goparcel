@@ -274,16 +274,6 @@ fieldset[disabled] .btn-primary.active {
   width: 80%;
 }
 
-@media only screen and (max-width: 1095px) {
-/*************** ADD TABLE ONLY CSS HERE  ***************/
-
-}
-
-@media only screen and (max-width: 48em) {
-/*************** ADD MOBILE ONLY CSS HERE  ***************/
-
-}
-
 .steps .step {
   display: block;
   width: 100%;
@@ -441,8 +431,8 @@ button.address.package:hover {
 	white-space: nowrap;
 }
 
-#div2 { 
-  overflow-x: scroll; 
+#div2 {
+  overflow-x: scroll;
   overflow-y: hidden;
   height: 185px !important;
 }
@@ -586,4 +576,28 @@ span.b {
 
 .sender-title {
   font-size: 13px;
+}
+
+.register-container {
+  margin: 60px auto;
+  height: auto;
+}
+
+.forgot-password-container {
+  width: 450px;
+  margin: auto;
+  height: 100%;
+}
+
+@media only screen and (max-width: 1095px) {
+/*************** ADD TABLE ONLY CSS HERE  ***************/
+
+}
+
+@media only screen and (max-width: 48em) {
+/*************** ADD MOBILE ONLY CSS HERE  ***************/
+  .forgot-password-container {
+    width: 100%;
+    padding: 15px;
+  }
 }

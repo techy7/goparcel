@@ -3,7 +3,7 @@
 @section('title', __('auth.register'))
 
 @section('content')
-<div class="register-container full-height sm-p-t-40 sm-p-b-40">
+<div class="register-container sm-p-t-40 sm-p-b-40">
   <div class="d-flex justify-content-center flex-column full-height ">
     <img src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" alt="logo" data-src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" data-src-retina="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" class="margin-center" width="200" height="89">
 
@@ -11,7 +11,7 @@
       <div class="col-md-12">
         <div class="card card-default">
           <div class="card-header">
-            <div class="card-title">{{ __('auth.reset_password') }}</div>
+            <div class="card-title">{{ __('auth.register') }}</div>
           </div>
           <div class="card-body">
             <form id="form-register" role="form" method="POST" action="{{ route('register') }}">
@@ -78,7 +78,7 @@
                 <div class="col-md-12">
                   <div class="form-group form-group-default required @error('m_number') has-error @enderror">
                     <label>{{ __('auth.mobile_number') }}</label>
-                    <input type="text" id="m_number" name="m_number" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.mobile_number'))]) }}" value="{{ old('m_number') }}" class="form-control" required>
+                    <input type="text" pattern="\d*" maxlength="15" id="m_number" name="m_number" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.mobile_number'))]) }}" value="{{ old('m_number') }}" class="form-control" required>
                   </div>
                   @error('m_number')
                   <label class="error" for="m_number">
@@ -104,7 +104,7 @@
                 <div class="col-md-6">
                   <div class="form-group form-group-default @error('postal_code') has-error @enderror">
                     <label>{{ __('auth.postal_code') }}</label>
-                    <input type="text" id="postal_code" name="postal_code" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.postal_code'))]) }}" value="{{ old('postal_code') }}" class="form-control" required>
+                    <input type="text" pattern="\d*" maxlength="4" id="postal_code" name="postal_code" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.postal_code'))]) }}" value="{{ old('postal_code') }}" class="form-control" required>
                   </div>
                   @error('postal_code')
                   <label class="error" for="postal_code">

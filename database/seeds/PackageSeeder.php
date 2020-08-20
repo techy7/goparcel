@@ -14,19 +14,19 @@ class PackageSeeder extends Seeder
     {
         Package::create([
             'name' => 'Medium',
-            'description' => 'Medium description.',
+            'description' => 'This is a medium package',
             'amount' => 78,
         ]);
-        
+
         Package::create([
             'name' => 'Large',
-            'description' => 'Large description.',
+            'description' => 'This is a large package',
             'amount' => 88,
         ]);
-        
+
         Package::create([
             'name' => 'Own Packaging',
-            'description' => 'Own Packaging description.',
+            'description' => 'This is an own packaging',
             'amount' => 98,
         ]);
     }

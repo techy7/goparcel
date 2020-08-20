@@ -3,7 +3,7 @@
 @section('title', __('auth.forgot_password'))
 
 @section('content')
-<div class="register-container full-height sm-p-t-40 sm-p-b-40">
+<div class="forgot-password-container full-height sm-p-t-40 sm-p-b-40">
   <div class="d-flex justify-content-center flex-column full-height">
     <img src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" alt="logo" data-src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" data-src-retina="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" class="margin-center" width="200" height="89">
     <div class="row p-t-15">
@@ -14,7 +14,10 @@
           </div>
           <div class="card-body">
             @if (session('status'))
-            <div class="alert alert-secondary" role="alert">{{ session('status') }}</div>
+            <div class="alert alert-success" role="alert">
+              <button aria-label="" class="close" data-dismiss="alert"></button>
+              <small>{{ session('status') }}</small>
+            </div>
             @endif
 
             <form method="POST" action="{{ route('password.email') }}">

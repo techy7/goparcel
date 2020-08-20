@@ -38,4 +38,7 @@ return [
     //Footer
     'copyright' => 'Copyright',
     'all_right_reserved' => 'All Rights Reserved',
+
+    //Email
+    'hi_there' => 'Hi There!',
 ];
