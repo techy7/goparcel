@@ -41,4 +41,7 @@ return [
 
     //Email
     'hi_there' => 'Hi There!',
+    'whoops' => 'Whoops',
+    'regards' => 'Regards',
+    'all_rights_reserved' => 'All Rights Reserved'
 ];
