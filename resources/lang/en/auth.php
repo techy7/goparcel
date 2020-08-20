@@ -58,4 +58,7 @@ return [
     'forgot_password' => 'Forgot Password',
     'reset_password' => 'Reset Password',
     'not_a_member_yet_sign_up_now' => 'Not a member yet? Sign Up Now',
+
+    //Reset Password
+    'send_password_reset_link' => 'Send Password Reset Link',
 ];
