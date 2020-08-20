@@ -41,11 +41,9 @@ class PickupController extends Controller
         $package_types = DB::table('packages')->distinct()->pluck('name');
 
         $searchCities = preg_split('/,+/',$request->displayCity, -1, PREG_SPLIT_NO_EMPTY);
-        $searchStates = preg_split('/,+/',$request->displayState, -1, PREG_SPLIT_NO_EMPTY); 
+        $searchStates = preg_split('/,+/',$request->displayState, -1, PREG_SPLIT_NO_EMPTY);
         $searchPostalCodes= preg_split('/,+/',$request->displayPostalCode, -1, PREG_SPLIT_NO_EMPTY);
-        $searchPackageType= preg_split('/,+/',$request->displayPackageType, -1, PREG_SPLIT_NO_EMPTY);  
-
-        
+        $searchPackageType= preg_split('/,+/',$request->displayPackageType, -1, PREG_SPLIT_NO_EMPTY);
         
         $fromdate = "";
         $todate = "";
@@ -76,8 +74,8 @@ class PickupController extends Controller
             'fromDate' =>  $request->datepickerFrom,
             'toDate' =>  $request->datepickerTo,
         );
-        
-  
+
+
         $pickups= Pickup::
         join('packages', 'pickups.package_id','=','packages.id')
          ->where(function ($q) use ($searchCities) {
@@ -110,7 +108,7 @@ class PickupController extends Controller
               $q->where('pickup_date','<=',$todate);
             }
           })
-          
+
           ->get();
 
           //dd($pickups);
@@ -126,7 +124,7 @@ class PickupController extends Controller
         $latestPickupStatus = $pickup->pickupActivities->first()->deliveryStatus;
 
 
-        
+
         return view('admin.pickups.edit', compact('pickup', 'deliveryStatus', 'customerPickupStatus', 'latestPickupStatus'));
     }
 
@@ -176,7 +174,7 @@ class PickupController extends Controller
         $pickup->update([
             'active' => 0
         ]);
-        
+
         return redirect()->route('admin.pickups', $pickup->id)->with('delete', 'Pickup for ' . $pickup->user->name . '  has been successfully deleted.');
     }
 

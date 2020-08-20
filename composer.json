@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "propaganistas/laravel-phone": "^4.2",
-        "spatie/laravel-permission": "^3.13"
+        "spatie/laravel-permission": "^3.13",
+        "vistag/human-readable": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

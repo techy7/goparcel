@@ -589,6 +589,21 @@ span.b {
   height: 100%;
 }
 
+.bg-color-1 {
+  background-color: #ccc0ae;
+  color: #fff;
+}
+
+.bg-color-2 {
+  background-color: #0b6181;
+  color: #fff;
+}
+
+.bg-color-3 {
+  background-color: #5489a2;
+  color: #fff;
+}
+
 @media only screen and (max-width: 1095px) {
 /*************** ADD TABLE ONLY CSS HERE  ***************/
 

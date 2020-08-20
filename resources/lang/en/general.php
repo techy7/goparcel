@@ -1,7 +1,12 @@
 <?php
 
 return [
+    //Dashboard
     'dashboard' => 'Dashboard',
+    'total_number_of_pickups' => 'Total number of pickups',
+    'total_number_of_customers' => 'Total number of customers',
+    'total_number_of_staff' => 'Total number of staff',
+    'for_todays_pickup_list' => "For today's pickup list",
 
     //Errors
     '404' => '404',
@@ -9,6 +14,10 @@ return [
     '404_sorry_but_we_couldnt_find_this_page' => 'Sorry but we couldnt find this page',
     '404_this_page_you_are_looking_for_does_not_exsist' => 'This page you are looking for does not exsist',
     '404_go_back_to_home' => 'Go back to Home?',
+
+
+
+
 
     //Customer
     'schedule_a_pickup' => 'Schedule a Pickup',
