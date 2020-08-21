@@ -84,18 +84,13 @@
                                             <div class="form-group form-group-default input-group">
                                                 <div class="form-input-group">
                                                     <label>Pickup Date</label>
-                                                    <input v-model="senderPickupDate" type="text" class="form-control" name="pickup_date" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-component2">
+                                                    <input type="text" class="form-control" name="pickup_date" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-component2">
                                                 </div>
                                                 <div class="input-group-append">
                                                     <span class="input-group-text"><i class="pg-icon">calendar</i></span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <label v-if="msg.senderPickupDate" class="error" for="pickup_date">
-                                            {{ msg.senderPickupDate }}
-                                        </label>
-                                                <!-- <label for="example-datepicker">Choose a date</label>
-                                                <b-form-datepicker id="example-datepicker" v-model="send.pickup_date" :date-disabled-fn="dateDisabled" class="mb-2 no-padding"></b-form-datepicker> -->
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
