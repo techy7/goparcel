@@ -5,7 +5,7 @@
 @section('content')
 <div class="content sm-gutter">
     <div class="container-fluid padding-25 sm-padding-10">
-      
+
       <div class="container-fixed-lg">
         <div class="row">
             <div class="col-md-6">
@@ -18,7 +18,7 @@
 
       <div class="row">
         <div class="col-md-4 m-b-10">
-          <div class="widget-9 card  bg-success no-margin widget-loader-bar">
+          <div class="widget-9 card bg-color-1 no-margin widget-loader-bar">
             <div class="full-height d-flex flex-column">
               <div class="card-header ">
                 <div class="card-title">
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="col-md-4 m-b-10">
-          <div class="widget-9 card  bg-primary no-margin widget-loader-bar">
+          <div class="widget-9 card bg-color-2 no-margin widget-loader-bar">
             <div class="full-height d-flex flex-column">
               <div class="card-header ">
                 <div class="card-title">
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="col-md-4 m-b-10">
-          <div class="widget-9 card  bg-danger no-margin widget-loader-bar">
+          <div class="widget-9 card bg-color-3 no-margin widget-loader-bar">
             <div class="full-height d-flex flex-column">
               <div class="card-header ">
                 <div class="card-title">
