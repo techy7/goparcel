@@ -158,12 +158,14 @@
                                         </div>
                                             <div class="card-body" style="padding: 10px 20px 0px 10px !important;">
                                             <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-                                                @foreach ($pickupOrder->pickupActivities->sortBy('created_at') as $key => $active)
+                                                
+                                                {{-- @foreach ($pickupOrder->pickupActivities->sortBy('created_at') as $key => $active)
                                                     <div class="step 
                                                             @if(($active->deliveryStatus->name == 'Order Created') || ($active->deliveryStatus->name == 'In Transit for Collection') || ($active->deliveryStatus->name == 'Arrived at Manila Hub') || ($active->deliveryStatus->name == 'In Transit for Delivery') || ($active->deliveryStatus->name == 'Delivered') || ($active->deliveryStatus->name == 'Back to Sender')) completed @endif
                                                         ">
+                                                        {{$key}}
                                                         <div class="step-icon-wrap">
-                                                            <div class="step-icon"><i class="
+                                                            <div class="step-icon" style="{{$key>1 ? 'background: red' : 'background: blue'}}"><i class="
                                                                 @if($active->deliveryStatus->name == 'Order Created') pe-7s-note 
                                                                 @elseif($active->deliveryStatus->name == 'In Transit for Collection') pe-7s-albums 
                                                                 @elseif($active->deliveryStatus->name == 'Arrived at Manila Hub') pe-7s-map-marker 
@@ -176,7 +178,27 @@
                                                         <h4 class="step-title">{{ $active->deliveryStatus->name }}</h4>
                                                         <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $active->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
                                                     </div>
-                                                @endforeach
+                                                @endforeach --}}
+
+                                                 @foreach ($statuses as $key => $status)
+                                                    <div class="step" style="color: red">
+                                                        <div class="step-icon-wrap">
+                                                            <div class="step-icon" style="{{$key< $count ? 'background: #0b6181; color: white;' : ''}}"><i class="
+                                                                @if($status->name == 'Order Created') pe-7s-note 
+                                                                @elseif($status->name == 'In Transit for Collection') pe-7s-albums 
+                                                                @elseif($status->name == 'Arrived at Manila Hub') pe-7s-map-marker 
+                                                                @elseif($status->name == 'In Transit for Delivery') pe-7s-car 
+                                                                @elseif($status->name == 'Delivered') pe-7s-box2 
+                                                                @elseif($status->name == 'Back to Sender') pe-7s-back-2
+                                                                @endif
+                                                            "></i></div>
+                                                        </div>
+                                                        <h4 class="step-title">{{ $status->name }}</h4>
+                                                        {{-- <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $active->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5> --}}
+                                                    </div>
+                                                @endforeach 
+                                          
+
                                             </div>
                                         <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center m-b-10">
                                             <div class="custom-control custom-checkbox">
