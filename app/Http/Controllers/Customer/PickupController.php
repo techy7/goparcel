@@ -14,27 +14,50 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\PickupResource;
 
+
+
 class PickupController extends Controller
-{
+{   
+
+    
     public function index()
     {
+        $customer = auth()->user();
+        
+        
         $cities = config('location.PH_states_cities');
 
         $packages = Package::all();
 
         $packageFiltered = $packages->reject(function ($pack, $key) {
-            return $pack->name == 'Own Packaging';
+            return $pack->name == '[aca] Packaging';
         });
 
         $ownPackagingAmount = Package::where('name', 'Own Packaging')->first();
         
         $ownPackaging = Package::where('name', 'Own Packaging')->get();
 
-        return view('customers.pickup.index', compact('packages', 'packageFiltered', 'ownPackagingAmount', 'ownPackaging', 'cities'));
+        return view('customers.pickup.index', compact('customer','packages', 'packageFiltered', 'ownPackagingAmount', 'ownPackaging', 'cities'));
     }
+
+   
+   public function computeTotal(){
+    if(request()->ajax()){
+        $additional_fee = 0; //for default packaging
+        $package = Package::where('name', request()->package)->first();
+        $additional_fee = ceil((((request()->l * request()->w * request()->h)/4000)) - 4)*28;
+        $additional_fee = ( $additional_fee < 0) ? 0 : $additional_fee;
+        $total_amount = $additional_fee + $package->amount; 
+        session(['total_amount' => $total_amount]); //set class variable 
+        return response()->json(['amount' => $package->amount, 'additional_fee'=>$additional_fee, 'total_amount'=>$total_amount]);
+    }
+   }
 
     public function store()
     {
+
+
+        $cities = config('location.PH_states_cities');
         $pickupData = request()->validate([
             'sender_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
             'sender_phone' => 'required|phone:PH',
@@ -47,53 +70,51 @@ class PickupController extends Controller
             'receiver_phone' => 'required|phone:PH',
             'receiver_address' => 'required|string|max:255',
             'receiver_city' => 'required|string|max:255',
-            'receiver_postal_code' => 'required|string|max:255',
-            'package_id' => 'required',
-            'package_length' => 'nullable|max:8',
-            'package_width' => 'nullable|max:8',
-            'package_height' => 'nullable|max:8',
-            'package_amount' => 'nullable|max:8',
-        ], [
+            'receiver_postal_code' => 'required|integer',
+            'radioPackage' => 'required',
+            'package_length' => 'required_if:radioPackage,"Own Packaging',
+            'package_width' => 'required_if:radioPackage,"Own Packaging',
+            'package_height' => 'required_if:radioPackage,"Own Packaging',
+        ]
+         , [
             'receiver_name.regex' => 'The :attribute field can only contain letters.',
-            'sender_phone.phone' => 'The sender contact number field contains an invalid number.',
-            'receiver_phone.phone' => 'The receiver contact number field contains an invalid number.',
-            'package_id.required' => 'The package field is required.',
-        ]);
+             'sender_phone.phone' => 'The sender contact number field contains an invalid number.',
+             'receiver_phone.phone' => 'The receiver contact number field contains an invalid number.',
+             'radioPackage.required' => 'Please select a package.',
+             ]
+        );
 
         $pickup = auth()->user()->pickups()->create([
             'sender_name' => request('sender_name'),
             'sender_phone' => request('sender_phone'),
-            'pickup_date' => $pickupData['pickup_date'],
+            'pickup_date' => request('pickup_date')." 00:00:00",
             'pickup_address' => request('pickup_address'),
-            'pickup_city' => $pickupData['pickup_city'],
-            'pickup_state' => config('location.PH_cities_states')[$pickupData['pickup_city']],
+            'pickup_city' => $cities['Metro Manila'][request('pickup_city')],
+            'pickup_state' => "Metro Manila",
             'pickup_postal_code' => request('pickup_postal_code'),
             'pickup_country' => 'Philippines',
             'receiver_name' => request('receiver_name'),
             'receiver_email' => request('receiver_email'),
             'receiver_phone' => request('receiver_phone'),
             'receiver_address' => request('receiver_address'),
-            'receiver_city' => $pickupData['receiver_city'],
-            'receiver_state' => config('location.PH_cities_states')[$pickupData['receiver_city']],
+            'receiver_city' => $cities['Metro Manila'][request('receiver_city')],
+            'receiver_state' => "Metro Manila",
             'receiver_postal_code' => request('receiver_postal_code'),
             'receiver_country' => 'Philippines',
-            'package_id' => request('package_id'),
+            'package_id' => Package::where('name', request('radioPackage'))->first()->id,
             'package_length' => request('package_length') ?? 0,
             'package_width' => request('package_width') ?? 0,
             'package_height' => request('package_height') ?? 0,
-            'package_amount' => request('package_amount'),
+            'package_amount' => session('total_amount'),
             'tracking_number' => strtoupper(uniqid('PB'))
         ]);
 
         $pickup->pickupActivities()->create();
-
-        Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
-
-        return response()->json($pickup);
-
-
-
-        // return redirect()->route('customer.pickup', auth()->user()->username)->with('success', 'Pickup has been successfully added.');
+        
+        // //dd($pickup->receiver_email);
+        // Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
+        
+        return redirect()->route('customer.pickup',auth()->user()->username)->with('success', 'Pickup has been successfully added. Tracking Number: '.$pickup->tracking_number);
     }
 
     public function trackDelivery()
