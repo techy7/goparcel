@@ -16,6 +16,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{username}/dashboard', 'DashboardController@dashboard')->name('customer.dashboard');
         Route::get('/{username}/pickup', 'PickupController@index')->name('customer.pickup');
         Route::post('/{username}/pickup', 'PickupController@store')->name('customer.pickup.store');
+        Route::get('{username}/computeTotal', 'PickupController@computeTotal')->name('customer.pickups.computeTotal');
         Route::get('/user/{username}/account', 'AccountController@index')->name('customer.account');
         Route::get('/user/{username}/account/edit', 'AccountController@edit')->name('customer.account.edit');
         Route::patch('/user/{username}/account/update', 'AccountController@update')->name('customer.account.update');
@@ -75,3 +76,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/packages/{package}', 'PackageController@destroy')->name('admin.packages.destroy');
     });
 });
+
+
+   

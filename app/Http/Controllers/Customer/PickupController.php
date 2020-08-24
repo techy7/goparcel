@@ -14,10 +14,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\PickupResource;
 
+
 class PickupController extends Controller
 {
     public function index()
     {
+        $customer = auth()->user();
+        
+        
         $cities = config('location.PH_states_cities');
 
         $packages = Package::all();
@@ -30,12 +34,24 @@ class PickupController extends Controller
         
         $ownPackaging = Package::where('name', 'Own Packaging')->get();
 
-        return view('customers.pickup.index', compact('packages', 'packageFiltered', 'ownPackagingAmount', 'ownPackaging', 'cities'));
+        return view('customers.pickup.index', compact('customer','packages', 'packageFiltered', 'ownPackagingAmount', 'ownPackaging', 'cities'));
     }
+
+   
+   public function computeTotal(){
+    return("test");
+    if(Request::ajax()){     
+       return "ok";
+        // return Response::json(Request::all()['package']);
+    }
+   
+   }
 
     public function store()
     {
-        $pickupData = request()->validate([
+       
+    // dd(request()); 
+        $validator = request()->validate([
             'sender_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
             'sender_phone' => 'required|phone:PH',
             'pickup_date' => 'required',
@@ -47,53 +63,62 @@ class PickupController extends Controller
             'receiver_phone' => 'required|phone:PH',
             'receiver_address' => 'required|string|max:255',
             'receiver_city' => 'required|string|max:255',
-            'receiver_postal_code' => 'required|string|max:255',
-            'package_id' => 'required',
-            'package_length' => 'nullable|max:8',
-            'package_width' => 'nullable|max:8',
-            'package_height' => 'nullable|max:8',
-            'package_amount' => 'nullable|max:8',
-        ], [
-            'receiver_name.regex' => 'The :attribute field can only contain letters.',
-            'sender_phone.phone' => 'The sender contact number field contains an invalid number.',
-            'receiver_phone.phone' => 'The receiver contact number field contains an invalid number.',
-            'package_id.required' => 'The package field is required.',
-        ]);
+            'receiver_postal_code' => 'required|integer',
+            // 'package_id' => 'required',
+            // 'package_length' => 'nullable|max:8',
+            // 'package_width' => 'nullable|max:8',
+            // 'package_height' => 'nullable|max:8',
+            // 'package_amount' => 'nullable|max:8',
+        ]
+         , [
+            //'receiver_name.regex' => 'The :attribute field can only contain letters.',
+             'sender_phone.phone' => 'The sender contact number field contains an invalid number.',
+             'receiver_phone.phone' => 'The receiver contact number field contains an invalid number.',
+        //     'package_id.required' => 'The package field is required.',
+             ]
+        );
+        // $pickup = auth()->user()->pickups()->create([
+        //     'sender_name' => request('sender_name'),
+        //     'sender_phone' => request('sender_phone'),
+        //     'pickup_date' => $pickupData['pickup_date'],
+        //     'pickup_address' => request('pickup_address'),
+        //     'pickup_city' => $pickupData['pickup_city'],
+        //     'pickup_state' => config('location.PH_cities_states')[$pickupData['pickup_city']],
+        //     'pickup_postal_code' => request('pickup_postal_code'),
+        //     'pickup_country' => 'Philippines',
+        //     'receiver_name' => request('receiver_name'),
+        //     'receiver_email' => request('receiver_email'),
+        //     'receiver_phone' => request('receiver_phone'),
+        //     'receiver_address' => request('receiver_address'),
+        //     'receiver_city' => $pickupData['receiver_city'],
+        //     'receiver_state' => config('location.PH_cities_states')[$pickupData['receiver_city']],
+        //     'receiver_postal_code' => request('receiver_postal_code'),
+        //     'receiver_country' => 'Philippines',
+        //     'package_id' => request('package_id'),
+        //     'package_length' => request('package_length') ?? 0,
+        //     'package_width' => request('package_width') ?? 0,
+        //     'package_height' => request('package_height') ?? 0,
+        //     'package_amount' => request('package_amount'),
+        //     'tracking_number' => strtoupper(uniqid('PB'))
+        // ]);
 
-        $pickup = auth()->user()->pickups()->create([
-            'sender_name' => request('sender_name'),
-            'sender_phone' => request('sender_phone'),
-            'pickup_date' => $pickupData['pickup_date'],
-            'pickup_address' => request('pickup_address'),
-            'pickup_city' => $pickupData['pickup_city'],
-            'pickup_state' => config('location.PH_cities_states')[$pickupData['pickup_city']],
-            'pickup_postal_code' => request('pickup_postal_code'),
-            'pickup_country' => 'Philippines',
-            'receiver_name' => request('receiver_name'),
-            'receiver_email' => request('receiver_email'),
-            'receiver_phone' => request('receiver_phone'),
-            'receiver_address' => request('receiver_address'),
-            'receiver_city' => $pickupData['receiver_city'],
-            'receiver_state' => config('location.PH_cities_states')[$pickupData['receiver_city']],
-            'receiver_postal_code' => request('receiver_postal_code'),
-            'receiver_country' => 'Philippines',
-            'package_id' => request('package_id'),
-            'package_length' => request('package_length') ?? 0,
-            'package_width' => request('package_width') ?? 0,
-            'package_height' => request('package_height') ?? 0,
-            'package_amount' => request('package_amount'),
-            'tracking_number' => strtoupper(uniqid('PB'))
-        ]);
+        // $pickup->pickupActivities()->create();
 
-        $pickup->pickupActivities()->create();
+        // Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
+        
+        // // return response()->json($pickup);
+        // if($validator->fails()){
 
-        Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
-
-        return response()->json($pickup);
-
-
-
-        // return redirect()->route('customer.pickup', auth()->user()->username)->with('success', 'Pickup has been successfully added.');
+        //     return Redirect::back()
+        //         ->withErrors($validator)->withInput();
+        // }
+        // else{
+        //     return ("good");
+        // }
+        //return Redirect::back()->withInput(Input::all());
+        //dd($validator);
+        // return view('customer.pickups',auth()->user()->username)->with('success', 'Pickup has been successfully added.');
+        return redirect()->route('customer.pickup',auth()->user()->username)->with('success', 'Pickup has been successfully added.');
     }
 
     public function trackDelivery()
