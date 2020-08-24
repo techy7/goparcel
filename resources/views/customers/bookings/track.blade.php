@@ -194,7 +194,9 @@
                                                             "></i></div>
                                                         </div>
                                                         <h4 class="step-title">{{ $status->name }}</h4>
-                                                        {{-- <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $active->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5> --}}
+                                                        @if($key< $count )
+                                                            <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $status->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
+                                                        @endif
                                                     </div>
                                                 @endforeach 
                                           
