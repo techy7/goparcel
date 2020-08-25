@@ -128,22 +128,28 @@
                     </div> 
                   @endforeach
                   <div class="row" id="packageDimensions">
-                    <p class="btn-block m-t-10 m-l-10"><em>If your item weight is beyond 4kg, kindly fill this out.</em></p> 
-                    <div class="col-4 p-2">
+                    <p class="btn-block"><em>If your item weight is beyond 4kg, kindly fill this out.</em></p> 
+                    <div class="col-md-3 p-2">
                       <div class="form-group form-group-default" @error('package_length') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>Length(cm)</label> 
                         <input id="package_length" value="{{ old('package_length') }}"  type="number" name="package_length" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                       </div>
                     </div> 
-                    <div class="col-4 p-2">
+                    <div class="col-md-3 p-2">
                       <div class="form-group form-group-default" @error('package_width') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label class="fade">Width(cm)</label> 
                       <input  id="package_width" value="{{ old('package_width') }}" type="number" name="package_width" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                       </div>
                     </div> 
-                    <div class="col-4 p-2">
+                    <div class="col-md-3 p-2">
                       <div class="form-group form-group-default" @error('package_height') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>Height(cm)</label> 
                         <input id="package_height" value="{{ old('package_height') }}" type="number" name="package_height" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                         </div>
                       </div>
+
+                    <div class="col-md-3 p-2">
+                      <div class="form-group form-group-default" @error('actual_weight') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>Actual Weight(kg)</label> 
+                        <input id="actual_weight" value="{{ old('actual_weight') }}" type="number" name="actual_weight" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
+                      </div>  
+                    </div>  
                     </div>
                   </div>
                 </div>
@@ -154,6 +160,7 @@
               <div id="fees" class="container card mr-3 bg-white">
                 <div class="card-body">
                   <h5 class="card-title">Fees and Breakdowns </h5>
+                    
                   <div class="row">
                       <div class="col-md-6">
                         <h5 class="no-margin details-title text-muted"><strong>Service Fee</strong></h5>
@@ -180,11 +187,25 @@
                     </div>
                   </div>
                   
-                  <div class="row mt-5 m-2">
+                 
+
+                  <div class="row mt-4">
+                    <div class="col-md-12">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" {{(old('charge_to') == "1") ? 'checked': ''}}  id="charge_to" name="charge_to">
+                        <label class="form-check-label" for="charge_to">
+                          Check this if you want to charge the amount to receiver.
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                   <div class="row mt-5 m-2">
                     <div class="col-md-12">
                       <button type="submit" class="btn btn-block btn-lg btn-rounded btn-primary p-3 w-50 pull-right">BOOK NOW</button>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div> {{--End of Col 2--}}
@@ -216,7 +237,7 @@
       
       //set selected package record
       var rad = {!! json_encode(old('radioPackage')) !!};
-      $("input[name='radioPackage'][value='"+rad+"']").prop('checked', true);
+      //$("input[name='radioPackage'][value='"+rad+"']").prop('checked', true);
       if(rad  == "Own Packaging"){
         $("#packageDimensions").show();
       }
@@ -242,7 +263,7 @@
     $('input:radio[name="radioPackage"]').change(function(){
         var chosenPackage = $(this).val();
       
-         $.get('computeTotal', {l:0, w:0, h:0,package:chosenPackage},function(data){
+         $.get('computeTotal', {l:0, w:0, h:0,aw:0,package:chosenPackage},function(data){
             //console.log(data['l']);
             $("#service_fee").html(data['amount'].toFixed(2));
             $("#additional_fee").html(data['additional_fee'].toFixed(2));
@@ -255,7 +276,8 @@
             var l = $('#package_length').val(); //length
             var w = $('#package_width').val(); //width
             var h = $('#package_height').val(); //height
-            $.get('computeTotal', {l:l, w:w, h:h,package:chosenPackage},function(data){
+            var aw = $('#actual_weight').val(); //height
+            $.get('computeTotal', {l:l, w:w, h:h,aw:aw,package:chosenPackage},function(data){
               //console.log(data["amount"].toFixed(2));
               $("#service_fee").html(data['amount'].toFixed(2));
               $("#additional_fee").html(data['additional_fee'].toFixed(2));

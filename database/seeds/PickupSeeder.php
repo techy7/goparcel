@@ -39,6 +39,7 @@ class PickupSeeder extends Seeder
             'package_height' => 0,
             'package_amount' => 78,
             'tracking_number' => 'PB5F22DC3FEF84E',
+            'charge_to_sender' => true
         ]);
         PickupActivity::create([
             'pickup_id' => $mediumPickup->id,
@@ -78,6 +79,7 @@ class PickupSeeder extends Seeder
             'package_height' => 0,
             'package_amount' => 88,
             'tracking_number' => 'PB5F22DCF0239D7',
+            'charge_to_sender' => true
         ]);
         PickupActivity::create([
             'pickup_id' => $largePickup->id,
@@ -129,6 +131,7 @@ class PickupSeeder extends Seeder
             'package_height' => 45,
             'package_amount' => 264.55,
             'tracking_number' => 'PB5F22DD0779AE6',
+            'charge_to_sender' => true
         ]);
         PickupActivity::create([
             'pickup_id' => $ownPickup->id,
@@ -192,6 +195,7 @@ class PickupSeeder extends Seeder
             'package_height' => 45,
             'package_amount' => 264.55,
             'tracking_number' => 'TRACKINGNUMBER1',
+            'charge_to_sender' => true
         ]);
         PickupActivity::create([
             'pickup_id' => $customPickup1->id,
@@ -243,6 +247,7 @@ class PickupSeeder extends Seeder
             'package_height' => 45,
             'package_amount' => 264.55,
             'tracking_number' => 'TRACKINGNUMBER2',
+            'charge_to_sender' => true
         ]);
         PickupActivity::create([
             'pickup_id' => $customPickup2->id,
@@ -283,6 +288,7 @@ class PickupSeeder extends Seeder
             'package_height' => 45,
             'package_amount' => 264.55,
             'tracking_number' => 'TRACKINGNUMBER3',
+            'charge_to_sender' => true
         ]);
         PickupActivity::create([
             'pickup_id' => $customPickup3->id,
@@ -329,6 +335,7 @@ class PickupSeeder extends Seeder
             'package_height' => 45,
             'package_amount' => 264.55,
             'tracking_number' => 'TRACKINGNUMBER4',
+            'charge_to_sender' => true
         ]);
         PickupActivity::create([
             'pickup_id' => $customPickup4->id,
@@ -375,6 +382,7 @@ class PickupSeeder extends Seeder
             'package_height' => 45,
             'package_amount' => 264.55,
             'tracking_number' => 'TRACKINGNUMBER5',
+            'charge_to_sender' => true
         ]);
         PickupActivity::create([
             'pickup_id' => $customPickup5->id,
@@ -409,6 +417,7 @@ class PickupSeeder extends Seeder
             'package_height' => 45,
             'package_amount' => 264.55,
             'tracking_number' => 'TRACKINGNUMBER6',
+            'charge_to_sender' => true
         ]);
         PickupActivity::create([
             'pickup_id' => $customPickup6->id,
@@ -448,7 +457,8 @@ class PickupSeeder extends Seeder
             'package_width' => 36,
             'package_height' => 45,
             'package_amount' => 264.55,
-            'tracking_number' => 'TRACKINGNUMBER6',
+            'tracking_number' => 'TRACKINGNUMBER7',
+            'charge_to_sender' => true
         ]);
         PickupActivity::create([
             'pickup_id' => $customPickup7->id,

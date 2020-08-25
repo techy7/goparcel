@@ -32,10 +32,12 @@ class Pickup extends Model
         'package_length',
         'package_width',
         'package_height',
+        'actual_weight',
         'package_amount',
 
         'active',
-        'tracking_number'
+        'tracking_number',
+        'charge_to_sender'
     ];
 
     public function priceFormatted($price)

@@ -45,7 +45,8 @@ class PickupController extends Controller
     if(request()->ajax()){
         $additional_fee = 0; //for default packaging
         $package = Package::where('name', request()->package)->first();
-        $additional_fee = ceil((((request()->l * request()->w * request()->h)/4000)) - 4)*28;
+        $vol_weight =  ceil(((request()->l * request()->w * request()->h)/4000));
+        $additional_fee = request()->aw > $vol_weight ? (request()->aw * 28) : ($vol_weight * 28);
         $additional_fee = ( $additional_fee < 0) ? 0 : $additional_fee;
         $total_amount = $additional_fee + $package->amount; 
         session(['total_amount' => $total_amount]); //set class variable 
@@ -56,8 +57,10 @@ class PickupController extends Controller
     public function store()
     {
 
-
         $cities = config('location.PH_states_cities');
+       
+        // dd(request()->has('charfe'));
+
         $pickupData = request()->validate([
             'sender_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
             'sender_phone' => 'required|phone:PH',
@@ -75,6 +78,7 @@ class PickupController extends Controller
             'package_length' => 'required_if:radioPackage,"Own Packaging',
             'package_width' => 'required_if:radioPackage,"Own Packaging',
             'package_height' => 'required_if:radioPackage,"Own Packaging',
+            'actual_weight' => 'required_if:radioPackage,"Own Packaging',
         ]
          , [
             'receiver_name.regex' => 'The :attribute field can only contain letters.',
@@ -84,6 +88,7 @@ class PickupController extends Controller
              ]
         );
 
+        
         $pickup = auth()->user()->pickups()->create([
             'sender_name' => request('sender_name'),
             'sender_phone' => request('sender_phone'),
@@ -105,8 +110,11 @@ class PickupController extends Controller
             'package_length' => request('package_length') ?? 0,
             'package_width' => request('package_width') ?? 0,
             'package_height' => request('package_height') ?? 0,
+            'actual_weight' => request('actual_weight') ?? 0,
             'package_amount' => session('total_amount'),
-            'tracking_number' => strtoupper(uniqid('PB'))
+            'charge_to_sender' => !(request()->has('charge_to')),
+            'tracking_number' => strtoupper(uniqid('PB')),
+            
         ]);
 
         $pickup->pickupActivities()->create();

@@ -54,7 +54,7 @@
                             <p><strong>Name: </strong><small>{{ $userPickup->receiver_name }}</small></p>
                             <p><strong>Email: </strong><small>{{ $userPickup->receiver_email }}</small></p>
                             <p><strong>Phone Number: </strong><small>{{ $userPickup->receiver_phone }}</small></p>
-                            <p><strong>Address: </strong><small>{{ $userPickup->receiver_address }} {{ $userPickup->receiver_city }}, {{ $userPickup->receiver_state }} {{ $userPickup->receiver_postal_code }}</small></p>
+                            <p><strong>Address: </strong>{{ $userPickup->receiver_address }} <u><strong> {{ $userPickup->receiver_city }}, {{ $userPickup->receiver_state }} </strong></u> {{ $userPickup->receiver_postal_code }}</p>
                         </div>
                     </div>
 
