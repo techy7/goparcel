@@ -5,17 +5,18 @@
         <meta charset="utf-8" />
         <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
-    
+        {{--     
         <link rel="apple-touch-icon" href="{{ asset('pages/assets/img/60.png') }}" />
         <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('pages/assets/img/76.png') }}" />
         <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('pages/assets/img/120.png') }}" />
         <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('pages/assets/img/152.png') }}" />
-        <link rel="icon" type="image/x-icon" href="{{ asset('pages/assets/img/icon.png') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('pages/assets/img/icon.png') }}" /> --}}
     
         <link href="{{ asset('pages/assets/plugins/pace/pace-theme-flash.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('pages/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
         <link href="{{ asset('pages/assets/plugins/jquery-scrollbar/jquery.scrollbar.css') }}" rel="stylesheet" type="text/css" media="screen" />
         <link href="{{ asset('pages/assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" media="screen" />
         <link href="{{ asset('pages/pages/css/pages.css') }}" rel="stylesheet" type="text/css" />
@@ -41,7 +42,51 @@
             <div class="container-fluid padding-25 sm-padding-10">
                 <div class="register-container full-height sm-p-t-40 sm-p-b-40">
                     <div class="d-flex justify-content-center flex-column full-height ">
-                        <track-delivery></track-delivery>
+                        {{-- <track-delivery></track-delivery> --}}
+                            @if(Session::has('message'))
+                                <div class="alert alert-error" role="alert">
+                                    {{ Session::get('message') }}
+                                </div>
+                        @endif
+                        <form action="{{ route('track-delivery.show' ) }}" method="get"  data-parsley-validate autocomplete="off" class="d-print-none mb-5" >
+                            <div class="form-group form-group-default">
+                                <label>Tracking Number</label>
+                                <input type="text" class="form-control" name="tracking_number" value=""  placeholder="Enter tracking number">
+                            </div>
+                            <div class="col-md-12 text-center mt-4">
+                                <button type="submit" class="btn btn-block btn-lg btn-rounded btn-primary p-3 w-50">Track Order</button>
+                            </div>  
+                        </form>
+                        @if(request()->has('tracking_number'))
+                            <div class="row">
+                                <p><strong>Tracking Number: </strong> {{$pickupOrder->tracking_number}}<br/>
+                                <strong>Parcel Status:</strong>  {{$pickupOrder->pickupActivities->first()->deliveryStatus->name}}</p>
+
+                            </div><br/>
+                            <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+                           
+                                @foreach ($statuses as $key => $status)
+                                    <div class="step" style="color: red">
+                                        <div class="step-icon-wrap">
+                                            <div class="step-icon" style="{{$key< $count ? 'background: #0b6181; color: white;' : ''}}"><i class="
+                                                @if($status->name == 'Order Created') pe-7s-note 
+                                                @elseif($status->name == 'In Transit for Collection') pe-7s-albums 
+                                                @elseif($status->name == 'Arrived at Manila Hub') pe-7s-map-marker 
+                                                @elseif($status->name == 'In Transit for Delivery') pe-7s-car 
+                                                @elseif($status->name == 'Delivered') pe-7s-box2 
+                                                @elseif($status->name == 'Back to Sender') pe-7s-back-2
+                                                @endif  "></i></div>
+                                        </div>
+                                        <h4 class="step-title">{{ $status->name }}</h4>
+                                        @if($key< $count )
+                                            <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $status->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
+                                        @endif
+                                    </div>
+                                @endforeach 
+                            </div>
+                        @endif
+
+                            
                     </div>
                 </div>
             </div>

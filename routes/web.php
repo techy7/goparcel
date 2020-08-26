@@ -9,7 +9,7 @@ Route::get('/home', 'HomeController@index')->middleware('homepage')->name('home'
 Route::get('/', 'HomeController@index')->middleware('homepage')->name('index');
 
 Route::get('/track-delivery', 'Customer\PickupController@trackDelivery')->name('track-delivery');
-Route::get('/track-delivery/{tracking_number}', 'Customer\PickupController@trackDeliveryShow')->name('track-delivery.show');
+Route::get('/track-delivery/track/', 'Customer\PickupController@trackDeliveryShow')->name('track-delivery.show');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['namespace' => 'Customer'], function () {
@@ -21,7 +21,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/user/{username}/account/edit', 'AccountController@edit')->name('customer.account.edit');
         Route::patch('/user/{username}/account/update', 'AccountController@update')->name('customer.account.update');
         Route::get('/{username}/pickup-bookings', 'BookingController@index')->name('customer.bookings');
-        Route::get('/{username}/pickup-bookings/{tracking_number}', 'BookingController@track')->name('customer.bookings.track');
+        Route::get('/{username}/pickup-bookings/track/{tracking_number}', 'BookingController@track')->name('customer.bookings.track');
+        Route::get('/{username}/pickup-bookings/search', 'BookingController@searchTrack')->name('customer.bookings.searchTrack');
         Route::get('/{username}/pickup-bookings/{id}/waybill', 'BookingController@waybill')->name('customer.bookings.waybill');
     });
 

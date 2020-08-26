@@ -7,8 +7,10 @@ use Exception;
 use App\Pickup;
 use App\Package;
 use Carbon\Carbon;
+use App\DeliveryStatus;
 use App\PickupActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Mail\CustomerPickupDetails;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -130,24 +132,54 @@ class PickupController extends Controller
         return view('customers.pickup.order-tracking');
     }
 
-    public function trackDeliveryShow(Pickup $pickup)
+    public function trackDeliveryShow(Request $request)
     {
+        
+        $pickupOrder = Pickup::where('tracking_number', $request->tracking_number)->first();
+        $statuses = DeliveryStatus::all();
+        //return $pickupOrder;
 
-        $pickups = $pickup->get();
-
-        $pickupOrder = $pickups->where('tracking_number', request()->route('tracking_number'))->first();
 
         if ($pickupOrder == null) {
-            abort(404);
+            if($request->tracking_number == null) 
+            Session::flash('message', 'Please enter the tracking number of your parcel!'); 
+            else
+            Session::flash('message', 'Tracking number for the parcel not found'); 
+            return redirect()->route('track-delivery');
         }
 
-        foreach ($pickupOrder->pickupActivities as $pickupActivity) {
-            $pickupActive = $pickupActivity->deliveryStatus;
-        }
+        $pa = PickupActivity::
+        where('pickup_id', $pickupOrder->id)
+        ->get();        
+       $count = $pa->count();
+ 
+        return view('customers.pickup.order-tracking', 
+        compact(
+            'pickupOrder', 
+            'statuses',
+            'count'
+        ));
 
-        if (request()->wantsJson()) {
-            return response()->json($pickupOrder);
-        }
-        return view('customers.pickup.order-tracking',compact('pickupOrder'));
+        // $pickups = $pickup->get();
+
+
+        // $pickupOrder = $pickups->where('tracking_number', request()->route('tracking_number'))->first();
+
+        // if ($pickupOrder == null) {
+        //     abort(404);
+        // }
+
+        // foreach ($pickupOrder->pickupActivities as $pickupActivity) {
+        //     $pickupActive = $pickupActivity->deliveryStatus;
+        // }
+
+        // if (request()->wantsJson()) {
+        //     return response()->json($pickupOrder);
+        // }
+        // return view('customers.pickup.order-tracking',compact('pickupOrder'));
+
+
     }
+
+  
 }

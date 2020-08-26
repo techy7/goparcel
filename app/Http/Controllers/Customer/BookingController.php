@@ -25,6 +25,12 @@ class BookingController extends Controller
         return view('customers.bookings.index', compact('nonCustomers'));
     }
 
+    public function searchTrack()
+    {
+        
+        return view('customers.bookings.track-search');
+    }
+
     public function track(User $user, Pickup $pickup)
     {
         $pickups = $pickup->get();
