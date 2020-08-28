@@ -11,7 +11,7 @@
             @endhasanyrole
             @hasanyrole('Super Admin|User')
             <li class="m-t-10">
-                <a href="{{ route('customer.bookings.searchTrack',  auth()->user()->username) }}"><span class="title">Track Parcel</span></a>
+                <a href="{{ route('customer.bookings.searchTrack',  auth()->user()->username) }}"><span class="title">{{ __('general.trackDelivery') }}</span></a>
             </li>
             @endhasanyrole
             @hasanyrole('Super Admin|User')
@@ -55,7 +55,7 @@
                 <a href="{{ route('customer.dashboard', auth()->user()->username) }}"><span class="title">{{ __('general.dashboard') }}</span></a>
             </li>
              <li class="m-t-10">
-                <a href="{{ route('customer.bookings.searchTrack',  auth()->user()->username) }}"><span class="title">Track Parcel</span></a>
+                <a href="{{ route('customer.bookings.searchTrack',  auth()->user()->username) }}"><span class="title">{{ __('general.trackDelivery') }}</span></a>
             </li>
             <li class="m-t-10">
                 <a href="{{ route('customer.pickup', auth()->user()->username) }}"><span class="title">{{ __('general.schedule_a_pickup') }}</span></a>

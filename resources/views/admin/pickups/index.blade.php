@@ -198,7 +198,7 @@
                   <th>Package Type</th>
                   <th>Total Amount</th>
                   <th>Delivery Date</th>
-                  <th>Pickup Date Scheduled</th>
+                  <th>Pickup Schedule</th>
                   <th>Delivery Status</th>
                   <th>Action</th>
                 </tr>
@@ -244,8 +244,17 @@
                           <p>{{ $pickup->created_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
                       </td>
                       <td class="v-align-middle semi-bold">
-                        <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}" class="btn btn-rounded btn-sm btn-outline-primary">
-                          {{ $pickup->pickupActivities->first()->deliveryStatus->name }}
+                        {{-- <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}" class="btn btn-rounded btn-sm btn-outline-primary">
+                          {{ $pickup->pickupActivities->first()->deliveryStatus->name }}  </a>
+                            --}}
+                            {{$pickup->setMaxActivity()}} 
+                            {{-- {{$pickup->id}} {{$pickup->user_id}} --}}
+                           <select name="delivery_status_id" class="delivery-status full-width" data-init-plugin="select2" data-pickup-id="{{$pickup->id}}" data-customer-id="{{$pickup->user_id}}">
+                              <option value="0">{{ $pickup->pickupActivities->first()->deliveryStatus->name }}</option>
+                              @foreach ($deliveryStatus as $key=>$status)
+                                <option value="{{ $status->id }}" {{ ($status->id==$pickup->getMaxActivity() + 1 ) ?  '': 'disabled' }}>{{ $status->name }}</option>
+                              @endforeach
+                          </select>
                         </a>
                       </td>
                       <td class="v-align-middle semi-bold">
@@ -266,6 +275,7 @@
                               </button>
                             </div>
                           </div>
+                           
                             <a href="{{ route('admin.pickups.edit', $pickup->id) }}" class="btn btn-outline-primary m-1">Edit</a>
                             <a href="{{ route('admin.pickups.destroy-confirmation', $pickup->id) }}" class="btn btn-outline-danger text-danger m-1">Delete</a>
                           </div>
@@ -453,6 +463,17 @@
     }
   });
     
+  $('.delivery-status').change(function(){
+    var pickup_id = $(this).data("pickup-id");
+    var cust_id = $(this).data("customer-id");
+    //alert($(this).data("customer-id"));
+    $.get("{{ route('admin.pickups.updateStatus') }}",{pickup_id: pickup_id, cust_id: cust_id}, function(data){
+        alert('Successfully update status for ' + data['tracking_number']);
+        location.reload();
+    });
+
+  });
+  
    
 
 </script>

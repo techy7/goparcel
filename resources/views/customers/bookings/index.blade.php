@@ -36,14 +36,12 @@
           <table class="table table-hover demo-table-search table-responsive-block" id="tableWithSearch">
           <thead>
             <tr>
-            <th>Date Pickup Scheduled</th>
-            <th>Recipient Name</th>
+            <th>Pickup Schedule</th>
+            <th style="width:30%">Recipient</th>
             <th>Tracking Number</th>
-            <th>Package Type</th>
-            <th>Pickup Date</th>
+            <th>Delivery Status</th>
             <th>Package Type</th>
             <th>Total Amount</th>
-            <th>Delivery Status</th>
             <th>Action</th>
             </tr>
           </thead>
@@ -55,20 +53,22 @@
               </td>
               <td class="v-align-middle semi-bold">
                 <p>{{ $pickup->receiver_name }}</p>
+                <p class="small">{{ $pickup->receiver_email }} | {{ $pickup->receiver_phone }} </p> 
+                <p class="small"></p>
+                <p class="small">{{ $pickup->receiver_address}}, {{$pickup->receiver_state}}, {{ $pickup->receiver_postal_code   }}</p>
               </td>
               <td class="v-align-middle semi-bold">
                 <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}" class="btn btn-rounded btn-sm btn-outline-primary">{{ $pickup->tracking_number }}</a>
               </td>
               <td class="v-align-middle semi-bold">
+                <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}">
+                <span class="btn btn-primary m-1">{{ $pickup->pickupActivities->first()->deliveryStatus->name }}</span>
+                </a>
+              </td>
+               <td class="v-align-middle semi-bold">
                 <p>{{ $pickup->package->name }}</p>
               </td>
-              <td class="v-align-middle semi-bold">
-                <p>{{ $pickup->pickup_date->format('F d, Y (D)') }}</p>
-              </td>
-              <td class="v-align-middle semi-bold">
-                <p>{{ $pickup->package->name }}</p>
-              </td>
-              @if ($pickup->package->name == 'Own Packaging')
+               @if ($pickup->package->name == 'Own Packaging')
                 <td class="v-align-middle semi-bold">
                 <p>{{ $pickup->priceFormatted($pickup->package_amount) }}</p>
                 </td>
@@ -78,13 +78,8 @@
                 </td>
               @endif
               <td class="v-align-middle semi-bold">
-                <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}">
-                <span class="btn btn-primary m-1">{{ $pickup->pickupActivities->first()->deliveryStatus->name }}</span>
-                </a>
-              </td>
-              <td class="v-align-middle semi-bold">
                 <div class="btn-group">
-                <a href="{{ route('customer.bookings.waybill', [auth()->user()->username, $pickup->id]) }}" class="btn btn-outline-primary m-1">Waybill</a>
+                <a href="{{ route('customer.bookings.waybill', [auth()->user()->username, $pickup->id]) }}" class="btn btn-outline-primary m-1">Download Waybill</a>
                 </div>
               </td>
             </tr>

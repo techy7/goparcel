@@ -21,14 +21,17 @@ class PickupController extends Controller
         $pickups = Pickup::join('packages', 'pickups.package_id','=','packages.id')
         ->whereActive(1)->get();
 
+
         $cities = DB::table('pickups')->distinct()->pluck('pickup_city');
         $states = DB::table('pickups')->distinct()->pluck('pickup_state');
         $cities = DB::table('pickups')->distinct()->pluck('pickup_city');
         $postal_codes = DB::table('pickups')->distinct()->pluck('pickup_postal_code');
         $package_types = DB::table('packages')->distinct()->pluck('name');
+        $deliveryStatus = DeliveryStatus::all();  
+     //   $latestPickupStatus = $pickup->pickupActivities->first()->deliveryStatus;
 
        // return dd($city);
-        return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types'));
+        return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types','deliveryStatus'));
     }
 
     public function filter(Request $request)
@@ -39,6 +42,7 @@ class PickupController extends Controller
         $cities = DB::table('pickups')->distinct()->pluck('pickup_city');
         $postal_codes = DB::table('pickups')->distinct()->pluck('pickup_postal_code');
         $package_types = DB::table('packages')->distinct()->pluck('name');
+        $deliveryStatus = DeliveryStatus::all();  
 
         $searchCities = preg_split('/,+/',$request->displayCity, -1, PREG_SPLIT_NO_EMPTY);
         $searchStates = preg_split('/,+/',$request->displayState, -1, PREG_SPLIT_NO_EMPTY);
@@ -112,11 +116,13 @@ class PickupController extends Controller
           ->get();
 
           //dd($pickups);
-          return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types', 'searches'));
+          return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types', 'searches', 'deliveryStatus'));
     }
 
     public function edit(Pickup $pickup)
     {
+        // $pickup->setMaxActivity();
+        // dd($pickup->getMaxActivity());
         $deliveryStatus = DeliveryStatus::all();
 
         $customerPickupStatus = $pickup->pickupActivities->pluck('delivery_status_id')->all();
@@ -124,6 +130,7 @@ class PickupController extends Controller
         $latestPickupStatus = $pickup->pickupActivities->first()->deliveryStatus;
 
 
+        // /dd(max($customerPickupStatus));
 
         return view('admin.pickups.edit', compact('pickup', 'deliveryStatus', 'customerPickupStatus', 'latestPickupStatus'));
     }
@@ -183,5 +190,22 @@ class PickupController extends Controller
         $newRequests = Pickup::whereDate('pickup_date', now())->get();
 
         return view('admin.pickups.new-request', compact('newRequests'));
+    }
+
+    public function updateStatus(){
+      if(request()->ajax()){
+        $pickup = Pickup::where('id',request()->pickup_id)
+        ->where('user_id', request()->cust_id)
+        ->first();
+        $pickup->setMaxActivity();
+        $tracking_number = $pickup->tracking_number;
+
+        $pickup->pickupActivities()->create([
+          'pickup_id' => request()->pickup_id,
+          'delivery_status_id' => $pickup->getMaxActivity()+1,
+        ]);
+
+        return response()->json(['tracking_number' => $tracking_number]);
+      }
     }
 }

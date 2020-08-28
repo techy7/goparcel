@@ -36,7 +36,7 @@ return [
     'manage_access_roles' => 'Manage Access Roles',
     'manage_permissions' => 'Manage Permissions',
     'packages' => 'Packages',
-
+    'trackDelivery' => 'Track Delivery',
     //Header
     'signed_in_as' => 'Signed in as',
     'account' => 'Account',

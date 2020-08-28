@@ -95,8 +95,9 @@
                     <label>Delivery Status</label>
                         <select name="delivery_status_id" class="full-width" data-init-plugin="select2">
                             <option value="0">{{ $latestPickupStatus->name }}</option>
-                            @foreach ($deliveryStatus as $status)
-                              <option value="{{ $status->id }}" {{ in_array($status->id, $customerPickupStatus) ? 'disabled' : '' }}>{{ $status->name }}</option>
+                            @foreach ($deliveryStatus as $key=>$status)
+                              
+                              <option value="{{ $status->id }}" {{ ($status->id==max($customerPickupStatus)+1 ) ?  '': 'disabled' }}>{{ $status->name }}</option>
                             @endforeach
                         </select>
                     </div>

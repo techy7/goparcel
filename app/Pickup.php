@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pickup extends Model
 {
     protected $dates = ['pickup_date'];
+    protected $maxActivity = 0;
 
     protected $fillable = [
         'sender_name',
@@ -65,4 +66,12 @@ class Pickup extends Model
     // {
     //     return $pickupId;
     // }
+
+    public function setMaxActivity(){
+       $this->maxActivity = max($this->pickupActivities->pluck('delivery_status_id')->all());
+
+    }
+    public function getMaxActivity(){
+        return $this->maxActivity;
+    }
 }

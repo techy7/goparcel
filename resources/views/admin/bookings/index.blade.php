@@ -43,7 +43,7 @@
                         <th>Package Type</th>
                         <th>Total Amount</th>
                         <th>Delivery Date</th>
-                        <th>Pickup Date Scheduled</th>
+                        <th>Pickup Schedule</th>
                         <th>Delivery Status</th>
                         <th>Action</th>
                       </tr>

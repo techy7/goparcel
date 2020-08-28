@@ -44,8 +44,9 @@
                   <table class="table table-hover demo-table-search table-responsive-block" id="tableWithSearch">
                     <thead>
                       <tr>
+                        <th>Customer Name</th>
                         <th>Username</th>
-                        <th>Name</th>
+                        
                         <th>Email</th>
                         <th>Mobile Number</th>
                         <th>Address</th>
@@ -55,7 +56,6 @@
                         <th>Country</th>
                         <th>Profile Picture</th>
                         <th>Date Registered</th>
-                        <th>Date Modified</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -63,10 +63,10 @@
                         @foreach ($customers as $customer)
                         <tr>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $customer->username }}</p>
-                            </td>
-                            <td class="v-align-middle semi-bold">
                                 <p>{{ $customer->name ?? 'N/A' }}</p>
+                            </td>
+                             <td class="v-align-middle semi-bold">
+                                <p>{{ $customer->username }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $customer->email ?? 'N/A' }}</p>
@@ -96,11 +96,8 @@
                                 <p>{{ $customer->created_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $customer->updated_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
-                            </td>
-                            <td class="v-align-middle semi-bold">
                                 <div class="btn-group">
-                                    <a href="{{ route('admin.customers.showPickups', $customer->id) }}" class="btn btn-outline-primary m-1">View Pickups</a>
+                                    {{-- <a href="{{ route('admin.customers.showPickups', $customer->id) }}" class="btn btn-outline-primary m-1">View Pickups</a> --}}
                                     <a href="{{ route('admin.customers.edit', $customer->id) }}" class="btn btn-outline-primary m-1">Edit</a>
                                     <a href="{{ route('admin.customers.destroy-confirmation', $customer->id) }}" class="btn btn-outline-danger text-danger m-1">Delete</a>
                                 </div>
