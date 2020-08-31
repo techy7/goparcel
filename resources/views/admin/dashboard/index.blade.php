@@ -13,17 +13,17 @@
   <div class="container-fluid padding-25 sm-padding-10">
     <div class="container-fixed-lg">
       <div class="row">
-          <div class="col-md-6">
-              <div class="pull-left">
-                  <h2 class="page-title">{{ __('general.dashboard') }}</h2>
-              </div>
+        <div class="col-md-6">
+          <div class="pull-left">
+            <h2 class="page-title">{{ __('general.dashboard') }}</h2>
           </div>
+        </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-4 m-b-10">
-        <div class="widget-9 card bg-color-1 no-margin">
+        <div class="widget-9 card no-margin">
           <div class="full-height d-flex flex-column">
             <div class="card-header">
               <div class="card-title">
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="col-md-4 m-b-10">
-        <div class="widget-9 card bg-color-2 no-margin">
+        <div class="widget-9 card no-margin">
           <div class="full-height d-flex flex-column">
             <div class="card-header">
               <div class="card-title">
@@ -51,7 +51,7 @@
         </div>
       </div>
       <div class="col-md-4 m-b-10">
-        <div class="widget-9 card bg-color-3 no-margin">
+        <div class="widget-9 card bg-color-2 no-margin">
           <div class="full-height d-flex flex-column">
             <div class="card-header ">
               <div class="card-title">
@@ -82,12 +82,12 @@
                     <span class="hint-text small">{{ $request->package->name }}</span>
                   </td>
                   <td class="">
-                    <span class="">₱{{ number_format($request->package_amount,2) }}</span>
+                    <span class="">{{ __('general.amount_peso', ['field' => number_format($request->package_amount,2)]) }}</span>
                   </td>
                 </tr>
                 @empty
                 <tr>
-                  <td>No current pickup list found.</td>
+                  <td>{{ __('general.no_current_pickup_list_found') }}.</td>
                 </tr>
                 @endforelse
               </tbody>

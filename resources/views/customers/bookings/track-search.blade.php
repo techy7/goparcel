@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Order Details')
+@section('title', __('general.track_delivery'))
 
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
 
          <div class="container-fixed-lg bg-white w-100">
             <iframe src="/track-delivery" title="description" style="min-height:650px;width:100%;border:none;">

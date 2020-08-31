@@ -626,4 +626,9 @@ span.b {
     width: 100%;
     padding: 15px;
   }
+  .btn-sm-block {
+    width: 100%;
+    line-height: 25px;
+    display:block;
+  }
 }

@@ -7,6 +7,12 @@ return [
     'total_number_of_customers' => 'Total number of customers',
     'total_number_of_staff' => 'Total number of staff',
     'for_todays_pickup_list' => "For today's pickup list",
+    'no_current_pickup_list_found' => 'No current pickup list found',
+    'go_to_your_bookings' => 'Go to your bookings',
+    'you_dont_have_any_bookings_yet' => "You don't have any bookings yet",
+    'book_now' => 'Book Now',
+    'go_to_track_delivery' => 'Go to track delivery',
+    'packages_rate' => 'Packages Rate',
 
     //Errors
     '404' => '404',
@@ -14,10 +20,6 @@ return [
     '404_sorry_but_we_couldnt_find_this_page' => 'Sorry but we couldnt find this page',
     '404_this_page_you_are_looking_for_does_not_exsist' => 'This page you are looking for does not exsist',
     '404_go_back_to_home' => 'Go back to Home?',
-
-
-
-
 
     //Customer
     'schedule_a_pickup' => 'Schedule a Pickup',
@@ -36,7 +38,8 @@ return [
     'manage_access_roles' => 'Manage Access Roles',
     'manage_permissions' => 'Manage Permissions',
     'packages' => 'Packages',
-    'trackDelivery' => 'Track Delivery',
+    'track_delivery' => 'Track Delivery',
+
     //Header
     'signed_in_as' => 'Signed in as',
     'account' => 'Account',
@@ -52,5 +55,8 @@ return [
     'hi_there' => 'Hi There!',
     'whoops' => 'Whoops',
     'regards' => 'Regards',
-    'all_rights_reserved' => 'All Rights Reserved'
+    'all_rights_reserved' => 'All Rights Reserved',
+
+    //Amount
+    'amount_peso' => '₱ :field',
 ];
