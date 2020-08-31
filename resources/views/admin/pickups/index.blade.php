@@ -164,7 +164,7 @@
               <div class="col-md-3">
                 <button class="btn btn-primary invisible " type="button"></button>
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="newRequest" name="newRequest">
+                  <input class="form-check-input" type="checkbox" {{(old('newRequest') == "1") ? 'checked': ''}} id="newRequest" name="newRequest">
                   <label class="form-check-label" for="newRequest">
                     Show New Requests Only
                   </label>
@@ -189,6 +189,7 @@
             <table class="table table-hover demo-table-search table-responsive-block" id="pickup_table">
               <thead>
                 <tr>
+                       <th>ID</th>
                   <th>Customer Name</th>
                   <th>Tracking Number</th>
                   <th>Pickup Address</th>
@@ -207,6 +208,9 @@
               <tbody id="container">
                   @foreach ($pickups as $pickup)
                   <tr data-city="{{ $pickup->pickup_city }}" data-state="{{ $pickup->pickup_state }}" data-postal-code="{{ $pickup->pickup_postal_code }}" data-package-type="{{ $pickup->package->name }}" data-delivery-status="{{ $pickup->pickupActivities->first()->deliveryStatus->name }}">
+                      <td class="v-align-middle semi-bold">
+                          <p>{{ $pickup->id }}</p>
+                      </td>
                       <td class="v-align-middle semi-bold">
                           <p>{{ $pickup->user->name }}</p>
                       </td>
@@ -249,7 +253,7 @@
                             --}}
                             {{$pickup->setMaxActivity()}} 
                             {{-- {{$pickup->id}} {{$pickup->user_id}} --}}
-                           <select name="delivery_status_id" class="delivery-status full-width" data-init-plugin="select2" data-pickup-id="{{$pickup->id}}" data-customer-id="{{$pickup->user_id}}">
+                           <select name="delivery_status_id" class="delivery-status full-width" data-init-plugin="select2" data-pickup-id="{{$pickup->id}}" data-customer-id="{{$pickup->user_id}}" style="width:150px;  ">
                               <option value="0">{{ $pickup->pickupActivities->first()->deliveryStatus->name }}</option>
                               @foreach ($deliveryStatus as $key=>$status)
                                 <option value="{{ $status->id }}" {{ ($status->id==$pickup->getMaxActivity() + 1 ) ?  '': 'disabled' }}>{{ $status->name }}</option>
@@ -326,32 +330,11 @@
     <script src="{{ asset('pages/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js') }}"></script>
     <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
 
-    <script type="text/javascript">
-     $(document).ready(function() {
-        // Setup - add a text input to each footer cell
-        /*$('#example thead tr').clone(true).appendTo( '#example thead' );
-        $('#example thead tr:eq(1) th').each( function (i) {
-            var title = $(this).text();
-            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-    
-            $( 'input', this ).on( 'keyup change', function () {
-                if ( table.column(i).search() !== this.value ) {
-                    table
-                        .column(i)
-                        .search( this.value )
-                        .draw();
-                }
-            } );
-        } );*/
-
-        
-      } );
-    </script>
-
   <script>
     $(document).ready(function(){
 
        $('#pickup_table').DataTable( {
+         
         dom: 'Bfrtip',
         buttons: [
             {   
@@ -371,7 +354,8 @@
                 }
             }
         ],
-        "pageLength": 15
+        "pageLength": 15,
+        "aaSorting": []
     } );
      @if(!empty($searches))
         var s = {!! json_encode($searches) !!};
@@ -381,6 +365,7 @@
         $('#displayPackageType').tagsinput('add', s["packageTypes"].join());
         $('#datepicker-from').val(s['fromDate']);
         $('#datepicker-to').val(s['toDate']);
+        $('#newRequest').prop('checked', s['newRequest']);
      @endif  
 
 
@@ -468,8 +453,8 @@
     var cust_id = $(this).data("customer-id");
     //alert($(this).data("customer-id"));
     $.get("{{ route('admin.pickups.updateStatus') }}",{pickup_id: pickup_id, cust_id: cust_id}, function(data){
-        alert('Successfully update status for ' + data['tracking_number']);
         location.reload();
+         alert('Successfully update status for ' + data['tracking_number']);
     });
 
   });

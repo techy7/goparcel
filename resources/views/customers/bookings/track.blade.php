@@ -207,7 +207,7 @@
                                             <div class="text-left text-sm-right"><a class="btn btn-outline-primary btn-rounded btn-sm" href="{{ route('customer.bookings.waybill', [auth()->user()->username, $pickupOrder->id]) }}">Download Waybill</a></div>
                                             </div>
                                             <div class="text-left text-sm-right m-r-20">
-                                                <a class="btn btn-outline-primary btn-rounded btn-sm" onmouseout="outFunc()" data-clipboard-text="https://app.weparcelbear.com/track-delivery/{{ $pickupOrder->tracking_number }}">Share Tracking</a>
+                                                <a class="btn btn-outline-primary btn-rounded btn-sm" onmouseout="outFunc()" data-clipboard-text="https://app.weparcelbear.com/track-delivery/track?tracking_number={{ $pickupOrder->tracking_number }}">Share Tracking</a>
                                                 <span class="tooltiptext" id="myTooltip"></span>
                                             </div>
                                         </div>

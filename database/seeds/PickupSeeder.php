@@ -357,40 +357,7 @@ class PickupSeeder extends Seeder
         ]);
 
 
-        // Customer8 Own Packaging,
-        $customPickup5 = Pickup::create([
-            'user_id' => 8,
-            'pickup_date' => '2020-08-24 00:00:00',
-            'sender_name' => 'Angelica Hasta',
-            'sender_phone' => '09451260066',
-            'pickup_address' => '8 Estrella Street Barangay Sangandaan Project 8',
-            'pickup_city' => 'Pasay',
-            'pickup_state' => 'Metro Manila',
-            'pickup_postal_code' => '1123',
-            'pickup_country' => 'Philippines',
-            'receiver_name' => 'Cosilet De Leon',
-            'receiver_email' => 'cosilet@techy7.com',
-            'receiver_phone' => '09274247730',
-            'receiver_address' => '31 Garnet Street Pleasant Hill San Jose Del Monte Bulacan',
-            'receiver_city' => 'Bulacan',
-            'receiver_state' => 'Metro Manila',
-            'receiver_postal_code' => '3023',
-            'receiver_country' => 'Philippines',
-            'package_id' => 3,
-            'package_length' => 35,
-            'package_width' => 36,
-            'package_height' => 45,
-            'package_amount' => 264.55,
-            'tracking_number' => 'TRACKINGNUMBER5',
-            'charge_to_sender' => true
-        ]);
-        PickupActivity::create([
-            'pickup_id' => $customPickup5->id,
-            'delivery_status_id' => 1,
-            'created_at' => '2020-08-19 00:00:00',
-            'updated_at' => '2020-08-19 00:00:00'
-        ]);
-
+    
 
          // Customer9 Own Packaging,
          $customPickup6 = Pickup::create([

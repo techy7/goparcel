@@ -49,9 +49,11 @@
                                 </div>
                         @endif
                         <form action="{{ route('track-delivery.show' ) }}" method="get"  data-parsley-validate autocomplete="off" class="d-print-none mb-5" >
-                            <div class="form-group form-group-default">
-                                <label>Tracking Number</label>
-                                <input type="text" class="form-control" name="tracking_number" value=""  placeholder="Enter tracking number">
+                            <div class="row ow justify-content-md-center">
+                                <div class="form-group form-group-default w-50">
+                                    <label>Tracking Number</label>
+                                    <input type="text" class="form-control" name="tracking_number" value=""  placeholder="Enter tracking number">
+                                </div>
                             </div>
                             <div class="col-md-12 text-center mt-4">
                                 <button type="submit" class="btn btn-block btn-lg btn-rounded btn-primary p-3 w-50">Track Order</button>

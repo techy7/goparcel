@@ -199,7 +199,6 @@
                       </div>
                     </div>
                   </div>
-
                    <div class="row mt-5 m-2">
                     <div class="col-md-12">
                       <button type="submit" class="btn btn-block btn-lg btn-rounded btn-primary p-3 w-50 pull-right">BOOK NOW</button>

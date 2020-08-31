@@ -18,9 +18,8 @@ class PickupController extends Controller
 {
     public function index()
     {
-        $pickups = Pickup::join('packages', 'pickups.package_id','=','packages.id')
-        ->whereActive(1)->get();
-
+        $pickups = Pickup::orderBy('pickups.pickup_date','DESC')->get();
+        //dd($pickups);
 
         $cities = DB::table('pickups')->distinct()->pluck('pickup_city');
         $states = DB::table('pickups')->distinct()->pluck('pickup_state');
@@ -29,7 +28,7 @@ class PickupController extends Controller
         $package_types = DB::table('packages')->distinct()->pluck('name');
         $deliveryStatus = DeliveryStatus::all();  
      //   $latestPickupStatus = $pickup->pickupActivities->first()->deliveryStatus;
-
+     // dd($pickups);
        // return dd($city);
         return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types','deliveryStatus'));
     }
@@ -77,12 +76,13 @@ class PickupController extends Controller
             'packageTypes' => $searchPackageType,
             'fromDate' =>  $request->datepickerFrom,
             'toDate' =>  $request->datepickerTo,
+            'newRequest' => $request->has('newRequest')
         );
 
 
         $pickups= Pickup::
-        join('packages', 'pickups.package_id','=','packages.id')
-         ->where(function ($q) use ($searchCities) {
+       // join('packages', 'pickups.package_id','=','packages.id')
+         where(function ($q) use ($searchCities) {
             foreach ($searchCities as $value) {
               $q->orWhere('pickup_city', 'like', "%{$value}%");
             }
