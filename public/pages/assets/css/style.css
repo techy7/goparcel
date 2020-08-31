@@ -589,6 +589,13 @@ span.b {
   height: 100%;
 }
 
+.tracking-delivery-container {
+  width: 1050px;
+  margin: 60px auto;
+  height: auto;
+}
+
+
 .bg-color-1 {
   background-color: #ccc0ae;
   color: #fff;
@@ -602,6 +609,10 @@ span.b {
 .bg-color-3 {
   background-color: #5489a2;
   color: #fff;
+}
+
+.breadcrumb > .breadcrumb-item.active {
+  color: #196a87;
 }
 
 @media only screen and (max-width: 1095px) {
