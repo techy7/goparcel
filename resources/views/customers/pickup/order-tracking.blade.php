@@ -37,28 +37,27 @@
         </style>
       </head>
 
-    <body class="fixed-header dashboard menu-pin">
-        <div class="page-container " id="app">
-            <div class="container-fluid padding-25 sm-padding-10">
-                <div class="tracking-delivery-container full-height sm-p-t-40 sm-p-b-40">
-                    <div class="d-flex justify-content-center flex-column full-height ">
-                        {{-- <track-delivery></track-delivery> --}}
+    <body class="dashboard bg-white">
+        <div class="cotainer" id="app">
+            <div class="container mt-5">
+                <div class="container  ">
+                    <div class="d-flex justify-content-center flex-column ">
                             @if(Session::has('message'))
                                 <div class="alert alert-error" role="alert">
                                     {{ Session::get('message') }}
                                 </div>
                         @endif
-                        <form action="{{ route('track-delivery.show' ) }}" method="get"  data-parsley-validate autocomplete="off" class="d-print-none mb-5" >
-                            <div class="row ow justify-content-md-center">
-                                <div class="form-group form-group-default w-50">
-                                    <label>Tracking Number</label>
-                                    <input type="text" class="form-control" name="tracking_number" value=""  placeholder="Enter tracking number">
-                                </div>
-                            </div>
-                            <div class="col-md-12 text-center mt-4">
-                                <button type="submit" class="btn btn-block btn-lg btn-rounded btn-primary p-3 w-50">Track Order</button>
-                            </div>
-                        </form>
+                                <form action="{{ route('track-delivery.show' ) }}" method="get"  data-parsley-validate autocomplete="off" class="d-print-none mb-5" >
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-12 d-flex justify-content-center mt-4">
+                                        <div class="form-group form-group-default w-50">
+                                            <label>Tracking Number</label>
+                                            <input type="text" class="form-control" name="tracking_number" value=""  placeholder="Enter tracking number">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-12 text-center mt-4">
+                                        <button type="submit" class="btn btn-block btn-lg btn-rounded btn-primary p-3 w-50">Track Order</button>
+                                    </div>
+                                </form>
                         @if(request()->has('tracking_number'))
                             <div class="row">
                                 <p><strong>Tracking Number: </strong> {{$pickupOrder->tracking_number}}<br/>

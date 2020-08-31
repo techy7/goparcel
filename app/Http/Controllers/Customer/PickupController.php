@@ -61,8 +61,8 @@ class PickupController extends Controller
 
         $cities = config('location.PH_states_cities');
        
-        // dd(request()->has('charfe'));
-
+        // dd(request()->has('charfe'));s
+       // dd();
         $pickupData = request()->validate([
             'sender_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
             'sender_phone' => 'required|phone:PH',
@@ -115,7 +115,7 @@ class PickupController extends Controller
             'actual_weight' => request('actual_weight') ?? 0,
             'package_amount' => session('total_amount'),
             'charge_to_sender' => !(request()->has('charge_to')),
-            'tracking_number' => strtoupper(uniqid('PB')),
+            'tracking_number' => strtoupper('PB'.substr(md5(time()), 0, 7)),
             
         ]);
 
@@ -129,7 +129,8 @@ class PickupController extends Controller
 
     public function trackDelivery()
     {
-        return view('customers.pickup.order-tracking');
+        $statuses = DeliveryStatus::all();
+        return view('customers.pickup.order-tracking', compact('statuses'));
     }
 
     public function trackDeliveryShow(Request $request)
@@ -152,13 +153,15 @@ class PickupController extends Controller
         where('pickup_id', $pickupOrder->id)
         ->get();        
        $count = $pa->count();
- 
+       
         return view('customers.pickup.order-tracking', 
         compact(
             'pickupOrder', 
             'statuses',
             'count'
         ));
+
+        //return redirect()->back()->with(['pickupOrder' => $pickupOrder, 'statuses' => $statuses, 'count' => $count]);
 
         // $pickups = $pickup->get();
 

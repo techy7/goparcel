@@ -38,7 +38,7 @@ class PickupSeeder extends Seeder
             'package_width' => 0,
             'package_height' => 0,
             'package_amount' => 78,
-            'tracking_number' => 'PB5F22DC3FEF84E',
+            'tracking_number' => 'PB5F22DC3',
             'charge_to_sender' => true
         ]);
         PickupActivity::create([
@@ -78,7 +78,7 @@ class PickupSeeder extends Seeder
             'package_width' => 0,
             'package_height' => 0,
             'package_amount' => 88,
-            'tracking_number' => 'PB5F22DCF0239D7',
+            'tracking_number' => 'PB5F22DCF',
             'charge_to_sender' => true
         ]);
         PickupActivity::create([
@@ -130,7 +130,7 @@ class PickupSeeder extends Seeder
             'package_width' => 36,
             'package_height' => 45,
             'package_amount' => 264.55,
-            'tracking_number' => 'PB5F22DD0779AE6',
+            'tracking_number' => 'PB5F22DDE',
             'charge_to_sender' => true
         ]);
         PickupActivity::create([
@@ -194,7 +194,7 @@ class PickupSeeder extends Seeder
             'package_width' => 36,
             'package_height' => 45,
             'package_amount' => 264.55,
-            'tracking_number' => 'TRACKINGNUMBER1',
+            'tracking_number' => 'PB5USKDNJ',
             'charge_to_sender' => true
         ]);
         PickupActivity::create([
@@ -246,7 +246,7 @@ class PickupSeeder extends Seeder
             'package_width' => 36,
             'package_height' => 45,
             'package_amount' => 264.55,
-            'tracking_number' => 'TRACKINGNUMBER2',
+            'tracking_number' => 'PB4D5WE2D',
             'charge_to_sender' => true
         ]);
         PickupActivity::create([
@@ -287,7 +287,7 @@ class PickupSeeder extends Seeder
             'package_width' => 36,
             'package_height' => 45,
             'package_amount' => 264.55,
-            'tracking_number' => 'TRACKINGNUMBER3',
+            'tracking_number' => 'PBSD565DS',
             'charge_to_sender' => true
         ]);
         PickupActivity::create([
@@ -334,7 +334,7 @@ class PickupSeeder extends Seeder
             'package_width' => 36,
             'package_height' => 45,
             'package_amount' => 264.55,
-            'tracking_number' => 'TRACKINGNUMBER4',
+            'tracking_number' => 'PB5DF232D',
             'charge_to_sender' => true
         ]);
         PickupActivity::create([
@@ -383,7 +383,7 @@ class PickupSeeder extends Seeder
             'package_width' => 36,
             'package_height' => 45,
             'package_amount' => 264.55,
-            'tracking_number' => 'TRACKINGNUMBER6',
+            'tracking_number' => 'PBSD5WSE6E',
             'charge_to_sender' => true
         ]);
         PickupActivity::create([
@@ -424,7 +424,7 @@ class PickupSeeder extends Seeder
             'package_width' => 36,
             'package_height' => 45,
             'package_amount' => 264.55,
-            'tracking_number' => 'TRACKINGNUMBER7',
+            'tracking_number' => 'PBASDD2DS',
             'charge_to_sender' => true
         ]);
         PickupActivity::create([

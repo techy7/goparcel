@@ -48,30 +48,28 @@
                         <p><small>Date Pickup Scheduled: {{ $pickupOrder->created_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</small></p>
                     </div>
                     </div>
-                    <div class="card-body" style="padding-bottom: 0px !important">
+                    <div class="card-body p-3" style="padding-bottom: 0px !important">
                         <div class="row m-t-20">
                             <div class="col-6">
                                 <div class="card card-default" style="border: 1px solid #ccc">
-                                    <div class="card-body" style="padding: 8px !important">
+                                    <div class="card-body p-3" >
                                         <h5 class="address-title text-muted">Sender Address</h5>
-                                        <h5 class="no-margin"><strong>{{ $pickupOrder->user->name }} | {{ $pickupOrder->user->m_number }} | {{ $pickupOrder->pickup_date->format('F d, Y (D)') }}</strong></h5>
-                                        <p>{{ $pickupOrder->pickup_address }} {{ $pickupOrder->pickup_city }} {{ $pickupOrder->pickup_postal_code }}</p>
+                                        <p class="no-margin"><strong>{{ $pickupOrder->user->name }} </strong> <br/> {{ $pickupOrder->user->m_number }} <br/> {{ $pickupOrder->pickup_date->format('F d, Y (D)') }} <br/> {{ $pickupOrder->pickup_address }}, <strong> {{ $pickupOrder->pickup_city }}</strong>, {{ $pickupOrder->pickup_postal_code }}<p>
                                     </div>
                                 </div>
                                 <div class="card card-default" style="border: 1px solid #ccc">
-                                    <div class="card-body" style="padding: 8px !important">
+                                    <div class="card-body p-3">
                                         <h5 class="address-title text-muted">Recipient Address</h5>
-                                        <h5 class="no-margin"><strong>{{ $pickupOrder->receiver_name }} | {{ $pickupOrder->receiver_phone }} | {{ $pickupOrder->receiver_email }}</strong></h5>
-                                        <p>{{ $pickupOrder->receiver_address }} {{ $pickupOrder->receiver_city }} {{ $pickupOrder->receiver_postal_code }}</p>
+                                        <p class="no-margin"><strong>{{ $pickupOrder->receiver_name }} </strong><br/> {{ $pickupOrder->receiver_phone }} <br/> {{ $pickupOrder->receiver_email }} <br/> {{ $pickupOrder->receiver_address }}, <strong>{{ $pickupOrder->receiver_city }}</strong>, {{ $pickupOrder->receiver_postal_code }} </p>
                                     </div>
                                 </div>
                                 <div class="card card-default" style="border: 1px solid #ccc">
-                                    <div class="card-body" style="padding: 8px !important">
+                                    <div class="card-body p-3">
                                         <h5 class="address-title text-muted">Order Summary</h5>
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="pull-left">
-                                                    <h5 class="no-margin"><strong>{{ $pickupOrder->package->name }} Packaging</strong></h5>
+                                                    <p class="no-margin">{{ $pickupOrder->package->name }} Packaging<p>
                                                 </div>
                                             </div>
                                             <div class="col-6">
@@ -85,8 +83,8 @@
                             </div>
                             <div class="col-6">
                                 <div class="card card-default" style="border: 1px solid #ccc">
-                                    <div class="card-body" style="padding: 8px !important; padding-bottom: 15px !important;">
-                                        <h5 class="address-title text-muted">Fess and Breakdown</h5>
+                                    <div class="card-body p-3">
+                                        <h5 class="address-title text-muted">Fees and Breakdown</h5>
                                         <div class="row m-t-10">
                                             <div class="col-md-6">
                                                 <div class="pull-left">

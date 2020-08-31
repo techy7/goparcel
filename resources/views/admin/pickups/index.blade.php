@@ -412,10 +412,21 @@
     }
   });
 
-  $('.delivery-status').change(function(){
+
+  var previous;
+  $('.delivery-status') 
+    .on('focus', function () {
+        previous = this.value;
+    })
+    .change(function(){
     var pickup_id = $(this).data("pickup-id");
     var cust_id = $(this).data("customer-id");
-    //alert($(this).data("customer-id"));
+    var c = confirm("Are you sure you want to update the status?");
+    if(c == false){
+      
+      this.value = previous;
+      return;
+    } 
     $.get("{{ route('admin.pickups.updateStatus') }}",{pickup_id: pickup_id, cust_id: cust_id}, function(data){
         location.reload();
          alert('Successfully update status for ' + data['tracking_number']);
