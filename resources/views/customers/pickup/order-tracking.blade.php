@@ -69,21 +69,23 @@
                                 @foreach ($statuses as $key => $status)
                                     <div class="step" style="color: red">
                                         <div class="step-icon-wrap">
-                                            <div class="step-icon" style="{{$key< $count ? 'background: #0b6181; color: white;' : ''}}"><i class="
+                                            <div class="step-icon" style="{{!is_null($status->pickup_id) ? 'background: #0b6181; color: white;' : ''}}"><i class="
                                                 @if($status->name == 'Order Created') pe-7s-note
                                                 @elseif($status->name == 'In Transit for Collection') pe-7s-albums
                                                 @elseif($status->name == 'Arrived at Manila Hub') pe-7s-map-marker
                                                 @elseif($status->name == 'In Transit for Delivery') pe-7s-car
                                                 @elseif($status->name == 'Delivered') pe-7s-box2
                                                 @elseif($status->name == 'Back to Sender') pe-7s-back-2
-                                                @endif  "></i></div>
+                                                @endif
+                                            "></i></div>
                                         </div>
                                         <h4 class="step-title">{{ $status->name }}</h4>
-                                        @if($key< $count )
+                                        @if(!is_null($status->pickup_id))
                                             <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $status->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
                                         @endif
                                     </div>
                                 @endforeach
+
                             </div>
                         @endif
 

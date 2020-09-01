@@ -48,7 +48,7 @@ class PickupController extends Controller
         $additional_fee = 0; //for default packaging
         $package = Package::where('name', request()->package)->first();
         $vol_weight =  ceil(((request()->l * request()->w * request()->h)/4000));
-        $additional_fee = request()->aw > $vol_weight ? (request()->aw * 28) : ($vol_weight * 28);
+        $additional_fee = request()->aw > $vol_weight ? ((request()->aw-4) * 28) : (($vol_weight - 4) * 28);
         $additional_fee = ( $additional_fee < 0) ? 0 : $additional_fee;
         $total_amount = $additional_fee + $package->amount; 
         session(['total_amount' => $total_amount]); //set class variable 
@@ -149,16 +149,21 @@ class PickupController extends Controller
             return redirect()->route('track-delivery');
         }
 
-        $pa = PickupActivity::
-        where('pickup_id', $pickupOrder->id)
-        ->get();        
-       $count = $pa->count();
-       
-        return view('customers.pickup.order-tracking', 
+        $statuses = DeliveryStatus::all();
+        $statuses = PickupActivity::
+        rightJoin('delivery_statuses', function($q) use ($pickupOrder){
+            $q->on('delivery_statuses.id', '=', 'pickup_activities.delivery_status_id')
+            ->where('pickup_activities.pickup_id', '=', $pickupOrder->id);
+        })
+        ->selectRaw('pickup_activities.*, delivery_statuses.name as name, delivery_statuses.created_at as ca, delivery_statuses.updated_at as ua')
+        
+        
+        ->get();
+
+        return view('customers.pickup.order-tracking',
         compact(
-            'pickupOrder', 
-            'statuses',
-            'count'
+            'pickupOrder',
+            'statuses'
         ));
 
         //return redirect()->back()->with(['pickupOrder' => $pickupOrder, 'statuses' => $statuses, 'count' => $count]);

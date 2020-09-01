@@ -131,23 +131,23 @@
                     <p class="btn-block"><em>If your item weight is beyond 4kg, kindly fill this out.</em></p> 
                     <div class="col-md-3 p-2">
                       <div class="form-group form-group-default" @error('package_length') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>Length(cm)</label> 
-                        <input id="package_length" value="{{ old('package_length') }}"  type="number" name="package_length" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
+                        <input id="package_length"  type="number" name="package_length" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                       </div>
                     </div> 
                     <div class="col-md-3 p-2">
                       <div class="form-group form-group-default" @error('package_width') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label class="fade">Width(cm)</label> 
-                      <input  id="package_width" value="{{ old('package_width') }}" type="number" name="package_width" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
+                      <input  id="package_width"  type="number" name="package_width" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                       </div>
                     </div> 
                     <div class="col-md-3 p-2">
                       <div class="form-group form-group-default" @error('package_height') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>Height(cm)</label> 
-                        <input id="package_height" value="{{ old('package_height') }}" type="number" name="package_height" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
+                        <input id="package_height"  type="number" name="package_height" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                         </div>
                       </div>
 
                     <div class="col-md-3 p-2">
                       <div class="form-group form-group-default" @error('actual_weight') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>Actual Weight(kg)</label> 
-                        <input id="actual_weight" value="{{ old('actual_weight') }}" type="number" name="actual_weight" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
+                        <input id="actual_weight"  type="number" name="actual_weight" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                       </div>  
                     </div>  
                     </div>

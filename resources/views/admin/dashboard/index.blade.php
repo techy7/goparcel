@@ -75,9 +75,16 @@
           <div class="widget-11-table auto-overflow">
             <table class="table table-condensed table-hover">
               <tbody>
+                {{-- <tr>
+                  <th> Customer Name </th>
+                  <th> Pickup Date </th>
+                  <th> Package Type</th>
+                  <th> Total Amount </th>
+                </tr> --}}
                 @forelse ($newRequests as $request)
                 <tr>
                   <td class="b-r b-dashed b-grey">{{ $request->user->name }}</td>
+                   <td class="b-r b-dashed b-grey">{{ $request->pickup_date->format('F d, Y (D)') }}</td>
                   <td class="text-right b-r b-dashed b-grey">
                     <span class="hint-text small">{{ $request->package->name }}</span>
                   </td>

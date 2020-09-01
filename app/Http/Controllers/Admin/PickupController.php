@@ -48,27 +48,25 @@ class PickupController extends Controller
         $searchPostalCodes= preg_split('/,+/',$request->displayPostalCode, -1, PREG_SPLIT_NO_EMPTY);
         $searchPackageType= preg_split('/,+/',$request->displayPackageType, -1, PREG_SPLIT_NO_EMPTY);
         
-        $fromdate = "";
-        $todate = "";
-        if($request->has('newRequest')){
-          date_default_timezone_set('Asia/Manila');
-          $date = new DateTime();
-          $date->add(DateInterval::createFromDateString('yesterday'));
-          $fromdate = date($date->format('Y-m-d')." 05:00:00");
-          $todate = date($date->format('Y-m-d')." 17:00:00");
-        }
-        else{
-          if(!empty($request->datepickerFrom)){
-            $fromdate = date('Y-m-d H:i:s',strtotime($request->datepickerFrom.' 00:00:00'));
-          }
-          if(!empty($request->datepickerTo)){
-            $todate = date('Y-m-d H:i:s',strtotime($request->datepickerTo.' 23:59:59'));
-          }
-        }
+        // $fromdateCreated = "";
+        // $todateCreated = "";
+        // if($request->has('newRequest')){
+        date_default_timezone_set('Asia/Manila');
+        $date = new DateTime();
+        $date->add(DateInterval::createFromDateString('yesterday'));
+        $fromdateCreated = date('Y-m-d H:i:s', strtotime( $date->format('Y-m-d')." 17:00:00" . ' -1 day'));
+        $todateCreated = date($date->format('Y-m-d')." 17:00:00");
 
-        // dd(empty($fromdate),empty($todate));
-        //$request->datepickerFrom = $request->datepickerFrom.' 23:59:59';
-        //dd(date('Y-m-d H:i:s',strtotime($request->datepickerFrom)));
+        $hasNewRequest = $request->has('newRequest');
+        $hasDateFrom = !is_null($request->datepickerFrom);
+        $hasDateTo = !is_null($request->datepickerFrom);
+
+        date_default_timezone_set('Asia/Manila');
+        $date = new DateTime();
+        $date->add(DateInterval::createFromDateString('yesterday'));
+        $fromdateCreated = date('Y-m-d H:i:s', strtotime( $date->format('Y-m-d')." 17:00:00" . ' -1 day'));
+        $todateCreated = date($date->format('Y-m-d')." 17:00:00");
+
         $searches = array(
             'cities' => $searchCities,
             'states' => $searchStates,
@@ -102,20 +100,30 @@ class PickupController extends Controller
               $q->orWhere('name', 'like', "%{$value}%");
             }
           })
-          ->where(function ($q) use ($fromdate) {
-            if(!empty($fromdate)){
-             $q->where('pickup_date','>=',$fromdate);
+          ->where(function ($q) use ($request, $hasDateFrom) {
+            if($hasDateFrom){
+             $q->where('pickup_date','>=', date('Y-m-d H:i:s',strtotime($request->datepickerFrom.' 00:00:00')));
             }
           })
-          ->where(function ($q) use ($todate) {
-            if(!empty($todate)){
-              $q->where('pickup_date','<=',$todate);
+          ->where(function ($q) use ($request,$hasDateTo) {
+            if($hasDateTo){
+              $q->where('pickup_date','<=', date('Y-m-d H:i:s',strtotime($request->datepickerTo.' 23:59:59')));
             }
           })
-
+          ->where(function ($q) use ($hasNewRequest, $fromdateCreated) {
+            if($hasNewRequest){
+              $q->where('created_at','>=', $fromdateCreated);
+            }
+          })
+          ->where(function ($q) use ($hasNewRequest, $todateCreated) {
+            if($hasNewRequest){
+              $q->where('created_at','<=', $todateCreated);
+            }
+          })
+          ->orderBy('pickups.pickup_date','DESC')
           ->get();
 
-          //dd($pickups);
+      
           return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types', 'searches', 'deliveryStatus'));
     }
 

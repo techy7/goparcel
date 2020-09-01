@@ -167,6 +167,7 @@
               <thead>
                 <tr>
                   <th>Pickup Schedule</th>
+                  <th>Date Created</th>
                   <th>Customer Name</th>
                   <th>Tracking Number</th>
                   <th>Address</th>
@@ -185,6 +186,9 @@
                   <tr data-city="{{ $pickup->pickup_city }}" data-state="{{ $pickup->pickup_state }}" data-postal-code="{{ $pickup->pickup_postal_code }}" data-package-type="{{ $pickup->package->name }}" data-delivery-status="{{ $pickup->pickupActivities->first()->deliveryStatus->name }}">
                     <td class="v-align-middle semi-bold">
                       <p>{{ $pickup->pickup_date->format('F d, Y (D)') }}</p>
+                    </td>
+                    <td class="v-align-middle semi-bold">
+                      <p>{{ $pickup->created_at->format('F d, Y h:m A') }}</p>
                     </td>
                       <td class="v-align-middle semi-bold">
                           <p>{{ $pickup->user->name }}</p>
@@ -221,7 +225,7 @@
                           <p>{{ $pickup->pickup_postal_code }}</p>
                       </td>
                       <td class="v-align-middle semi-bold">
-                          <p>{{ $pickup->name }}</p>
+                          <p>{{ $pickup->package->name }}</p>
                       </td>
                       @if ($pickup->name == 'Own Packaging')
                         <td class="v-align-middle semi-bold">
@@ -229,7 +233,7 @@
                         </td>
                       @else
                         <td class="v-align-middle semi-bold">
-                          <p>{{ $pickup->priceFormatted($pickup->amount) }}</p>
+                          <p>{{ $pickup->priceFormatted($pickup->package->amount) }}</p>
                         </td>
                       @endif
                       <td class="v-align-middle semi-bold">
@@ -400,17 +404,6 @@
         });
     });
 
-
-  $("#newRequest").change(function() {
-    if(this.checked) {
-       $("#fromDiv").hide();
-       $("#toDiv").hide();
-    }
-    else{
-      $("#fromDiv").show();
-      $("#toDiv").show();
-    }
-  });
 
 
   var previous;
