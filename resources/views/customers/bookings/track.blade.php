@@ -54,13 +54,12 @@
                                 <div class="card card-default" style="border: 1px solid #ccc">
                                     <div class="card-body p-3" >
                                         <h5 class="address-title text-muted">Sender Address</h5>
-                                        <p class="no-margin"><strong>{{ $pickupOrder->user->name }} </strong> <br/> {{ $pickupOrder->user->m_number }} <br/> {{ $pickupOrder->pickup_date->format('F d, Y (D)') }} <br/> {{ $pickupOrder->pickup_address }}, <strong> {{ $pickupOrder->pickup_city }}</strong>, {{ $pickupOrder->pickup_postal_code }}<p>
-                                    </div>
-                                </div>
-                                <div class="card card-default" style="border: 1px solid #ccc">
-                                    <div class="card-body p-3">
-                                        <h5 class="address-title text-muted">Recipient Address</h5>
-                                        <p class="no-margin"><strong>{{ $pickupOrder->receiver_name }} </strong><br/> {{ $pickupOrder->receiver_phone }} <br/> {{ $pickupOrder->receiver_email }} <br/> {{ $pickupOrder->receiver_address }}, <strong>{{ $pickupOrder->receiver_city }}</strong>, {{ $pickupOrder->receiver_postal_code }} </p>
+                                        <p><strong>{{ $pickupOrder->user->name }}</strong></p>
+                                        <p class="mb-0">{{ $pickupOrder->user->m_number }}</p>
+                                        <p class="mb-0">{{ $pickupOrder->pickup_date->format('F d, Y (D)') }}</p>
+                                        <p class="mb-0">{{ $pickupOrder->pickup_address }}</p>
+                                        <p class="mb-0">{{ $pickupOrder->pickup_city }}</p>
+                                        <p class="mb-0">{{ $pickupOrder->pickup_postal_code }}</p>
                                     </div>
                                 </div>
                                 <div class="card card-default" style="border: 1px solid #ccc">
@@ -82,6 +81,17 @@
                                 </div>
                             </div>
                             <div class="col-6">
+                                <div class="card card-default" style="border: 1px solid #ccc">
+                                    <div class="card-body p-3">
+                                        <h5 class="address-title text-muted">Recipient Address</h5>
+                                        <p><strong>{{ $pickupOrder->receiver_name }}</strong></p>
+                                        <p class="mb-0">{{ $pickupOrder->receiver_phone }}</p>
+                                        <p class="mb-0">{{ $pickupOrder->receiver_email }}</p>
+                                        <p class="mb-0">{{ $pickupOrder->receiver_address }}</p>
+                                        <p class="mb-0" class="mb-0">{{ $pickupOrder->receiver_city }}</p>
+                                        <p class="mb-0">{{ $pickupOrder->receiver_postal_code }}</p>
+                                    </div>
+                                </div>
                                 <div class="card card-default" style="border: 1px solid #ccc">
                                     <div class="card-body p-3">
                                         <h5 class="address-title text-muted">Fees and Breakdown</h5>
@@ -156,19 +166,19 @@
                                         </div>
                                             <div class="card-body" style="padding: 10px 20px 0px 10px !important;">
                                             <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-                                                
+
                                                 {{-- @foreach ($pickupOrder->pickupActivities->sortBy('created_at') as $key => $active)
-                                                    <div class="step 
+                                                    <div class="step
                                                             @if(($active->deliveryStatus->name == 'Order Created') || ($active->deliveryStatus->name == 'In Transit for Collection') || ($active->deliveryStatus->name == 'Arrived at Manila Hub') || ($active->deliveryStatus->name == 'In Transit for Delivery') || ($active->deliveryStatus->name == 'Delivered') || ($active->deliveryStatus->name == 'Back to Sender')) completed @endif
                                                         ">
                                                         {{$key}}
                                                         <div class="step-icon-wrap">
                                                             <div class="step-icon" style="{{$key>1 ? 'background: red' : 'background: blue'}}"><i class="
-                                                                @if($active->deliveryStatus->name == 'Order Created') pe-7s-note 
-                                                                @elseif($active->deliveryStatus->name == 'In Transit for Collection') pe-7s-albums 
-                                                                @elseif($active->deliveryStatus->name == 'Arrived at Manila Hub') pe-7s-map-marker 
-                                                                @elseif($active->deliveryStatus->name == 'In Transit for Delivery') pe-7s-car 
-                                                                @elseif($active->deliveryStatus->name == 'Delivered') pe-7s-box2 
+                                                                @if($active->deliveryStatus->name == 'Order Created') pe-7s-note
+                                                                @elseif($active->deliveryStatus->name == 'In Transit for Collection') pe-7s-albums
+                                                                @elseif($active->deliveryStatus->name == 'Arrived at Manila Hub') pe-7s-map-marker
+                                                                @elseif($active->deliveryStatus->name == 'In Transit for Delivery') pe-7s-car
+                                                                @elseif($active->deliveryStatus->name == 'Delivered') pe-7s-box2
                                                                 @elseif($active->deliveryStatus->name == 'Back to Sender') pe-7s-back-2
                                                                 @endif
                                                             "></i></div>
@@ -182,11 +192,11 @@
                                                     <div class="step" style="color: red">
                                                         <div class="step-icon-wrap">
                                                             <div class="step-icon" style="{{$key< $count ? 'background: #0b6181; color: white;' : ''}}"><i class="
-                                                                @if($status->name == 'Order Created') pe-7s-note 
-                                                                @elseif($status->name == 'In Transit for Collection') pe-7s-albums 
-                                                                @elseif($status->name == 'Arrived at Manila Hub') pe-7s-map-marker 
-                                                                @elseif($status->name == 'In Transit for Delivery') pe-7s-car 
-                                                                @elseif($status->name == 'Delivered') pe-7s-box2 
+                                                                @if($status->name == 'Order Created') pe-7s-note
+                                                                @elseif($status->name == 'In Transit for Collection') pe-7s-albums
+                                                                @elseif($status->name == 'Arrived at Manila Hub') pe-7s-map-marker
+                                                                @elseif($status->name == 'In Transit for Delivery') pe-7s-car
+                                                                @elseif($status->name == 'Delivered') pe-7s-box2
                                                                 @elseif($status->name == 'Back to Sender') pe-7s-back-2
                                                                 @endif
                                                             "></i></div>
@@ -196,8 +206,8 @@
                                                             <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $status->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
                                                         @endif
                                                     </div>
-                                                @endforeach 
-                                          
+                                                @endforeach
+
 
                                             </div>
                                         <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center m-b-10">

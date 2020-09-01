@@ -22,6 +22,11 @@ class BookingController extends Controller
         return view('admin.bookings.confirmation', compact('pickup'));
     }
 
+    public function searchTrack()
+    {
+        return view('admin.bookings.track-search');
+    }
+
     public function destroy(Pickup $pickup)
     {
         $data = request()->validate([

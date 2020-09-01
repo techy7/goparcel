@@ -27,7 +27,6 @@ class BookingController extends Controller
 
     public function searchTrack()
     {
-        
         return view('customers.bookings.track-search');
     }
 
@@ -35,17 +34,17 @@ class BookingController extends Controller
     {
         $pickups = $pickup->get();
         $statuses = DeliveryStatus::all();
-        
+
         $pickupOrder = $pickups->where('tracking_number', request()->route('tracking_number'))->first();
 
         $pa = PickupActivity::
         where('pickup_id', $pickupOrder->id)
-        ->get();        
+        ->get();
        $count = $pa->count();
- 
-        return view('customers.bookings.track', 
+
+        return view('customers.bookings.track',
         compact(
-            'pickupOrder', 
+            'pickupOrder',
             'statuses',
             'count'
         ));
