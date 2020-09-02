@@ -16,7 +16,7 @@ class PackageSeeder extends Seeder
             'name' => 'Medium',
             'description' => 'This is a medium package',
             'amount' => 78,
-            'max_weight' => 2
+            'max_weight' => 3
         ]);
 
         Package::create([
@@ -30,7 +30,7 @@ class PackageSeeder extends Seeder
             'name' => 'Own Packaging',
             'description' => 'This is an own packaging',
             'amount' => 98,
-            'max_weight' => 4,
+            'max_weight' => 5,
         ]);
     }
 }

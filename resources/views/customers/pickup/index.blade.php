@@ -85,7 +85,7 @@
                     </div>
                     <div class="form-group form-group-default" @error('receiver_address') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                       <label>Receiver Address</label>
-                      <input type="text" class="form-control" name="receiver_address" value="{{ old('receiver_address') }}" placeholder="Enter recipient address">
+                      <input type="text" class="form-control" name="receiver_address" value="{{ old('receiver_address') }}" placeholder="Enter receiver address">
                     </div>
                     <div class="form-group form-group-default" @error('receiver_city') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                         <label>Receiver City</label>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="form-group form-group-default" @error('receiver_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                       <label>Receiver Postal Code</label>
-                      <input type="text" class="form-control" name="receiver_postal_code" value="{{ old('receiver_postal_code') }}" placeholder="Enter recipient postal code">
+                      <input type="text" class="form-control" name="receiver_postal_code" value="{{ old('receiver_postal_code') }}" placeholder="Enter receiver postal code">
                     </div>
                   </div>
                 </div> 

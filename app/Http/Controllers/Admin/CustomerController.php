@@ -47,7 +47,7 @@ class CustomerController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'postal_code' => ['required', 'numeric', 'min:999', 'max:9999'],
             'city' => ['required', 'string', 'max:100'],
-            'password' => ['required', 'min:6', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/', 'confirmed'],
+            'password' => ['required', 'min:6', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'confirmed'],
             'roles' => 'required',
         ], [
             'username.required' => __('auth.error_required'),
@@ -112,8 +112,7 @@ class CustomerController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'postal_code' => ['required', 'numeric', 'min:999', 'max:9999'],
             'city' => ['required', 'string', 'max:100'],
-            // Uncomment if needed
-            // 'password' => ['required', 'min:6', 'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/', 'confirmed'],
+            'password' => ['required', 'min:6', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'confirmed'],
             'roles' => 'required',
         ], [
             'username.required' => __('auth.error_required'),
@@ -128,9 +127,9 @@ class CustomerController extends Controller
             'postal_code.required' => __('auth.error_required'),
             'city.required' => __('auth.error_required'),
             // Uncomment if needed
-            // 'password.required' => __('auth.error_required'),
-            // 'password.regex' => __('auth.error_password_invalid'),
-            // 'password.confirmed' => __('auth.error_password_not_match'),
+            'password.required' => __('auth.error_required'),
+            'password.regex' => __('auth.error_password_invalid'),
+            'password.confirmed' => __('auth.error_password_not_match'),
         ]);
 
         $userData->update([

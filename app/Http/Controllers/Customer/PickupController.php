@@ -48,7 +48,7 @@ class PickupController extends Controller
         $additional_fee = 0; //for default packaging
         $package = Package::where('name', request()->package)->first();
         $vol_weight =  ceil(((request()->l * request()->w * request()->h)/4000));
-        $additional_fee = request()->aw > $vol_weight ? ((request()->aw-4) * 28) : (($vol_weight - 4) * 28);
+        $additional_fee = request()->aw > $vol_weight ? ((request()->aw-5) * 28) : (($vol_weight - 5) * 28);
         $additional_fee = ( $additional_fee < 0) ? 0 : $additional_fee;
         $total_amount = $additional_fee + $package->amount; 
         session(['total_amount' => $total_amount]); //set class variable 
