@@ -56,17 +56,21 @@
       <li class="m-t-10">
         <a href="{{ route('customer.bookings', auth()->user()->username) }}"><span class="title">{{ __('general.my_pickup_booking') }}</span></a>
       </li>
-      <div class="d-flex flex-column" style="position: absolute; bottom: 85px; left: 35px;">
-        <li class="m-t-35">
-          <a href="https://weparcelbear.com/help-center/"><span class="title">{{ __('general.help_center') }}</span></a>
-        </li>
-        <li class="m-t-35">
-          <a href="https://weparcelbear.com/terms-of-use/"><span class="title">{{ __('general.terms_of_service') }}</span></a>
-        </li>
-        <li class="m-t-35">
-          <a href="https://weparcelbear.com/privacy-policy/"><span class="title">{{ __('general.privacy_policy') }}</span></a>
-        </li>
-      </div>
+      <li class="p-l-15 d-flex flex-column align-items-stretch h-50 w-100">
+        <div class="pl-md-3 d-flex w-100 mt-auto">
+          <ul class="list-unstyled no-padding d-block w-100">
+            <li class="m-t-30">
+              <a href="https://weparcelbear.com/help-center/"><span class="title">{{ __('general.help_center') }}</span></a>
+            </li>
+            <li class="m-t-30">
+              <a href="https://weparcelbear.com/terms-of-use/"><span class="title">{{ __('general.terms_of_service') }}</span></a>
+            </li>
+            <li class="m-t-30">
+              <a href="https://weparcelbear.com/privacy-policy/"><span class="title">{{ __('general.privacy_policy') }}</span></a>
+            </li>
+          </ul>
+        </div>
+      </li>
       @endhasanyrole
     </ul>
   </div>

@@ -59,4 +59,14 @@ return [
 
     //Amount
     'amount_peso' => '₱ :field',
+
+    //Pickup
+    'pickup_schedule' => 'Pickup Schedule',
+    'recipient' => 'Recipient',
+    'tracking_code' => 'Tracking Code',
+    'delivery_status' => 'Delivery Status',
+    'package_type' => 'Package Type',
+    'amount' => 'Amount',
+    'action' => 'Action',
+    'search' => 'Search',
 ];
