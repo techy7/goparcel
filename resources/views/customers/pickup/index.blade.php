@@ -325,7 +325,7 @@
       //$('#pickup_city').val("0");
       
     });
-
+  
 
   </script>
 @endsection
