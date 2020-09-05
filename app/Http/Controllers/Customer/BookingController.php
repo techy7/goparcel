@@ -9,6 +9,7 @@ use App\PickupActivity;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class BookingController extends Controller
 {
@@ -69,5 +70,39 @@ class BookingController extends Controller
         return $pdf->download($userPickup->tracking_number . '.pdf');
 
         // return view('customers.bookings.waybill', compact('userPickup', 'logo'));
+    }
+
+    public function trackDeliveryShow(Request $request)
+    {
+       // dd("test");
+        $pickupOrder = Pickup::where('tracking_number', $request->tracking_number)->first();
+        $statuses = DeliveryStatus::all();
+        //return $pickupOrder;
+
+
+        if ($pickupOrder == null) {
+            if($request->tracking_number == null) 
+            Session::flash('message', 'Please enter the tracking number of your parcel!'); 
+            else
+            Session::flash('message', 'Tracking number for the parcel not found'); 
+            return redirect()->route('customer.bookings.searchTrack', auth()->user()->username);
+        }
+
+        $statuses = DeliveryStatus::all();
+        $statuses = PickupActivity::
+        rightJoin('delivery_statuses', function($q) use ($pickupOrder){
+            $q->on('delivery_statuses.id', '=', 'pickup_activities.delivery_status_id')
+            ->where('pickup_activities.pickup_id', '=', $pickupOrder->id);
+        })
+        ->selectRaw('pickup_activities.*, delivery_statuses.name as name, delivery_statuses.created_at as ca, delivery_statuses.updated_at as ua')
+        
+        
+        ->get();
+
+        return view('customers.bookings.track-search',
+        compact(
+            'pickupOrder',
+            'statuses'
+        ));
     }
 }

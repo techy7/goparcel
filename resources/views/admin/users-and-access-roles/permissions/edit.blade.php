@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Edit Permission')
+@section('title',  __('general.edit_permission'))
 
 @section('upper-links-extend')
 
@@ -13,8 +13,9 @@
             <ul class="breadcrumb p-l-0">
                 <li class="breadcrumb-item active">{{ __('general.users_access_roles') }}</li>
                 <li class="breadcrumb-item active"><a href="{{ route('admin.permissions') }}">{{ __('general.manage_permissions') }}</a></li>
-                <li class="breadcrumb-item active">Edit Permission</li>
+                <li class="breadcrumb-item active">{{ __('general.edit_permission')}}</li>
             </ul>
+             <h3 class="page-title">{{ __('general.edit_permission')}}</h3>
         </div>
 
         @include('layouts.pages.session')
@@ -25,8 +26,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group form-group-default required @error('name') has-error @enderror">
-                        <label>Permission Name</label>
-                        <input type="text" name="name" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.name'))]) }}" value="{{ old('name', $permission->name) }}" class="form-control" >
+                        <label>{{ __('general.permission_name')}}</label>
+                        <input type="text" name="name" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('general.permission_name'))]) }}" value="{{ old('name', $permission->name) }}" class="form-control" >
                     </div>
                     @error('name')
                         <label class="error" for="name">
@@ -36,8 +37,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group form-group-default required @error('description') has-error @enderror">
-                        <label>Description</label>
-                        <input type="text" name="description" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.description'))]) }}" value="{{ old('description', $permission->description) }}" class="form-control" >
+                        <label>{{ __('general.permission_description')}}</label>
+                        <input type="text" name="description" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('general.permission_description'))]) }}" value="{{ old('description', $permission->description) }}" class="form-control" >
                     </div>
                     @error('description')
                         <label class="error" for="description">
@@ -49,8 +50,8 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="btn-group btn-group-md">
-                        <a href="{{ route('admin.permissions') }}" class="m-t-15 m-r-15">Back</a>
-                        <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">Edit Permission</button>
+                        <a href="{{ route('admin.permissions') }}" class="m-t-15 m-r-15">{{ __('general.back')}}</a>
+                        <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">{{ __('general.edit_permission')}}</button>
                     </div>
                 </div>
             </div>

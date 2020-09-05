@@ -73,7 +73,7 @@ class RegisterController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'postal_code' => ['required', 'numeric', 'min:999', 'max:9999'],
             'city' => ['required', 'string', 'max:100'],
-            'password' => ['required', 'min:6', 'regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/', 'confirmed'],
+            'password' => ['required', 'min:6', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'confirmed'],
         ],[
             'username.required' => __('auth.error_required'),
             'username.unique' => __('auth.error_username_already_taken'),

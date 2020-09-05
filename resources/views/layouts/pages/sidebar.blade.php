@@ -11,7 +11,7 @@
       @endhasanyrole
       @hasanyrole('Super Admin|User')
       <li class="m-t-10">
-        <a href="{{ route('admin.bookings.searchTrack',  auth()->user()->username) }}"><span class="title">{{ __('general.track_delivery') }}</span></a>
+        <a href="{{ route('customer.bookings.searchTrack',  auth()->user()->username) }}"><span class="title">{{ __('general.track_delivery') }}</span></a>
       </li>
       @endhasanyrole
       @hasanyrole('Super Admin|User')

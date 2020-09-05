@@ -39,6 +39,7 @@ return [
     'manage_permissions' => 'Manage Permissions',
     'packages' => 'Packages',
     'track_delivery' => 'Track Delivery',
+    
 
     //Header
     'signed_in_as' => 'Signed in as',
@@ -68,5 +69,64 @@ return [
     'package_type' => 'Package Type',
     'amount' => 'Amount',
     'action' => 'Action',
+    
+    'cash_on_delivery' => 'Cash-on-delivery',
+    'date_created' => 'Date Created',
+    'date_modified' => 'Date Modified',
+
+    //Customer
+    'customer_name' => 'Customer Name',
+    'add_customer' => 'Add Customer',
+    'edit_customer' => 'Edit Customer',
+    'delete_customer' => 'Delete Customer',
+
+
+
+    //Actions
     'search' => 'Search',
+    'clear_search' => 'Clear Search',
+    'show_hide' => 'Show/Hide Filters',
+    'show_new_request' => 'Show New Requests Only',
+    'back' => "Back",
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+
+
+    //Date Range
+    'from_date' => 'From Date',
+    'to_date' => 'To Date',
+
+    //Orders
+    'order_details' => 'Order Details',
+    'schedule_another' => 'Schedule Another Delivery',
+    'order_summary' => 'Order Summary',
+
+    //Users
+    'add_user' => 'Add User',
+    'edit_user' => 'Edit User',
+    'delte_user' => 'Delete User',
+
+
+    //Access Roles
+    'access_roles' => 'Access Roles',
+    'manage_access_roles' => 'Manage Access Roles',
+    'add_access_role' => 'Add Access Role',
+    'role_name' => 'Role Name',
+    'role_description' => 'Role Description',
+    'edit_access_role' => 'Edit Access Role',
+
+    //Permissions
+    'permissions' => 'Permissions',
+    'manage_permissions' => 'Manage Permissions',
+    'add_permission' => 'Add Permission',
+    'permission_name' => 'Permission Name',
+    'permission_description' => "Permission Description",
+    'edit_permission' => 'Edit Permission',
+
+    //Packages
+    'add_package' => 'Add Package',
+    'package_name' => 'Package Name',
+    'package_description' => 'Package Description',
+    'package_amount' => 'Package Amount',
+    'edit_package' => 'Edit Package',
 ];

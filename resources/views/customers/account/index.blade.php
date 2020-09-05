@@ -19,9 +19,10 @@
                                 <div class="container-xs-height mt-3">
                                     <div class="row-xs-height">
                                         <div class="social-user-profile col-xs-height text-center col-top">
-                                            <div class="thumbnail-wrapper d48 circular bordered b-white">
+                                            <div class="thumbnail-wrapper d50 circular bordered b-white">
                                                 @if (auth()->user()->profile_picture)
-                                                <img src="{{ $user->imageAvatarSize() }}" alt="{{ auth()->user()->username }}" data-src="{{ $user->imageAvatarSize() }}" data-src-retina="{{ $user->imageAvatarSize() }}" width="32" height="32">
+                                                {{-- <img src="{{ $user->imageAvatarSize() }}" alt="{{ auth()->user()->username }}" data-src="{{ $user->imageAvatarSize() }}" data-src-retina="{{ $user->imageAvatarSize() }}" width="32" height="32"> --}}
+                                                <img src="/uploads/avatars/{{auth()->user()->profile_picture}}" width="50" height="50"> 
                                                 @else
                                                 <span>{{ auth()->user()->initials() }}</span>
                                                 @endif

@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Edit Access Role')
+@section('title',  __('general.edit_access_role'))
 
 @section('upper-links-extend')
 
@@ -13,8 +13,9 @@
             <ul class="breadcrumb p-l-0">
                 <li class="breadcrumb-item active">{{ __('general.users_access_roles') }}</li>
                 <li class="breadcrumb-item active"><a href="{{ route('admin.roles') }}">{{ __('general.manage_access_roles') }}</a></li>
-                <li class="breadcrumb-item active">Edit Access Role</li>
+                <li class="breadcrumb-item active">{{ __('general.edit_access_role')}}</li>
             </ul>
+            <h3 class="page-title">{{ __('general.edit_access_role')}}</h3>
         </div>
 
         @include('layouts.pages.session')
@@ -26,8 +27,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group form-group-default required @error('name') has-error @enderror">
-                        <label>Access Role Name</label>
-                        <input type="text" name="name" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.name'))]) }}" value="{{ old('name', $role->name) }}" class="form-control" >
+                        <label>{{ __('general.role_name')}}</label>
+                        <input type="text" name="name" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('general.role_name'))]) }}" value="{{ old('name', $role->name) }}" class="form-control" >
                     </div>
                     @error('name')
                         <label class="error" for="name">
@@ -37,8 +38,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group form-group-default required @error('description') has-error @enderror">
-                        <label>Description</label>
-                        <input type="text" name="description" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.description'))]) }}" value="{{ old('description', $role->description) }}" class="form-control" >
+                        <label>{{ __('general.role_description')}}</label>
+                        <input type="text" name="description" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('general.role_description'))]) }}" value="{{ old('description', $role->description) }}" class="form-control" >
                     </div>
                     @error('description')
                         <label class="error" for="description">
@@ -50,7 +51,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-default">
-                        <h5 class="text-secondary font-weight-bold" style="margin-left: 9px">Permissions</h5>
+                        <h5 class="text-secondary font-weight-bold" style="margin-left: 9px">{{ __('general.permissions')}}</h5>
                         <div class="card-body">
                             <div class="row" style="margin-top: -15px">
                                 @foreach ($permissions as $permission)
@@ -76,8 +77,8 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="btn-group btn-group-md">
-                        <a href="{{ route('admin.roles') }}" class="m-t-15 m-r-15">Back</a>
-                        <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">Edit Access Role</button>
+                        <a href="{{ route('admin.roles') }}" class="m-t-15 m-r-15">{{ __('general.back')}}</a>
+                        <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">{{ __('general.edit_access_role')}}</button>
                     </div>
                 </div>
             </div>

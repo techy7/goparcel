@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Manage Users')
+@section('title', __('general.manage_users'))
 
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -19,12 +19,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="pull-left">
-                        <h3 class="page-title">Users</h3>
+                        <h3 class="page-title">{{ __('general.manage_users')}}</h3>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="pull-right">
-                        <a href="{{ route('admin.users.create') }}">Add User</a>
+                        <a href="{{ route('admin.users.create') }}">{{ __('general.add_user')}}</a>
                     </div>
                 </div>
             </div>
@@ -39,19 +39,18 @@
                   <table class="table table-hover" id="basicTable">
                     <thead>
                       <tr>
-                        <th>Username</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Mobile Number</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Postal Code</th>
-                        <th>Country</th>
-                        <th>Profile Picture</th>
-                        <th>Date Registered</th>
-                        <th>Date Modified</th>
-                        <th>Action</th>
+                        <th>{{ __('auth.username')}}</th>
+                        <th>{{ __('auth.name')}}</th>
+                        <th>{{ __('auth.email')}}</th>
+                        <th>{{ __('auth.mobile_number')}}</th>
+                        <th>{{ __('auth.address')}}</th>
+                        <th>{{ __('auth.city')}}</th>
+                        <th>{{ __('auth.state')}}</th>
+                        <th>{{ __('auth.postal_code')}}</th>
+                        <th>{{ __('auth.country')}}</th>
+                        <th>{{ __('auth.date_registered')}}</th>
+                        <th>{{ __('auth.date_modified')}}</th>
+                        <th>{{ __('general.action')}}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -85,9 +84,6 @@
                                 <p>{{ $nonCustomer->country ?? 'N/A' }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
-                                <p>{{ $nonCustomer->imageAvatarSize() }}</p>
-                            </td>
-                            <td class="v-align-middle semi-bold">
                                 <p>{{ $nonCustomer->created_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
@@ -95,9 +91,9 @@
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <div class="btn-group">
-                                    <button class="btn btn-outline-primary m-1" data-toggle="modal" data-target="#modalSlideUp-{{ $nonCustomer->id }}">Access Role</button>
-                                    <a href="{{ route('admin.users.edit', $nonCustomer->id) }}" class="btn btn-outline-primary m-1">Edit</a>
-                                    <a href="{{ route('admin.users.destroy-confirmation', $nonCustomer->id) }}" class="btn btn-outline-danger text-danger m-1">Delete</a>
+                                    <button class="btn btn-outline-primary m-1" data-toggle="modal" data-target="#modalSlideUp-{{ $nonCustomer->id }}">{{ __('general.access_roles')}}</button>
+                                    <a href="{{ route('admin.users.edit', $nonCustomer->id) }}" class="btn btn-outline-primary m-1">{{ __('general.edit')}}</a>
+                                    <a href="{{ route('admin.users.destroy-confirmation', $nonCustomer->id) }}" class="btn btn-outline-danger text-danger m-1">{{ __('general.delete')}}</a>
                                 </div>
                             </td>
                         </tr>

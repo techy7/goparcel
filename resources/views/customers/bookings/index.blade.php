@@ -55,7 +55,7 @@
                     <p>{{ $pickup->receiver_name }}</p>
                     <p class="small">{{ $pickup->receiver_email }} | {{ $pickup->receiver_phone }}</p>
                     <p class="small"></p>
-                    <p class="small">{{ $pickup->receiver_address}}, {{$pickup->receiver_state}}, {{ $pickup->receiver_postal_code   }}</p>
+                    <p class="small">{{ $pickup->receiver_address}}, {{$pickup->receiver_city}}, {{$pickup->receiver_state}}, {{ $pickup->receiver_postal_code   }}</p>
                   </td>
                   <td class="v-align-middle semi-bold">
                     <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}" class="btn btn-rounded btn-sm btn-outline-primary">{{ $pickup->tracking_number }}</a>
@@ -79,7 +79,7 @@
                   @endif
                   <td class="v-align-middle semi-bold">
                     <div class="btn-group">
-                      <a href="{{ route('customer.bookings.waybill', [auth()->user()->username, $pickup->id]) }}" class="btn btn-outline-primary m-1">Download Waybill</a>
+                      <a href="{{ route('customer.bookings.waybill', [auth()->user()->username, $pickup->id]) }}" class="btn btn-outline-primary m-1">{{ __('pickup.download_waybill')}}</a>
                     </div>
                   </td>
                 </tr>

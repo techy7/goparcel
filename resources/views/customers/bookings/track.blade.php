@@ -15,22 +15,22 @@
         <div class="container-fixed-lg">
             <ul class="breadcrumb p-l-0">
                 @if (auth()->user()->hasRole('Customer'))
-                    <li class="breadcrumb-item active"><a href="{{ route('customer.bookings', auth()->user()->username) }}">Order</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('customer.bookings', auth()->user()->username) }}">{{ __('general.my_pickup_bookings')}}</a></li>
                 @else
-                    <li class="breadcrumb-item active"><a href="{{ route('admin.pickups') }}">Pickup Schedules</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('admin.pickups') }}">{{ __('general.pickup_schedules')}}</a></li>
                 @endif
-              <li class="breadcrumb-item active">Tracking #: {{ $pickupOrder->tracking_number }}</li>
+              <li class="breadcrumb-item active">{{ __('general.tracking_code')}}: {{ $pickupOrder->tracking_number }}</li>
             </ul>
             <div class="row">
                 <div class="col-md-6">
                     <div class="pull-left">
-                        <h3 class="page-title">Order Details</h3>
+                        <h3 class="page-title">{{ __('general.order_details')}}</h3>
                     </div>
                 </div>
                 @hasanyrole('Customer')
                 <div class="col-md-6">
                     <div class="pull-right">
-                        <a href="{{ route('customer.pickup', auth()->user()->username) }}">Schedule Another Delivery</a>
+                        <a href="{{ route('customer.pickup', auth()->user()->username) }}">{{ __('general.schedule_another')}}</a>
                     </div>
                 </div>
                 @endhasanyrole
@@ -44,8 +44,8 @@
                 <div class="card card-default">
                     <div class="card-header  separator">
                     <div class="card-title">
-                        <h5 style="margin-bottom: 0px !important">Tracking #: {{ $pickupOrder->tracking_number }}</h5>
-                        <p><small>Date Pickup Scheduled: {{ $pickupOrder->created_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</small></p>
+                        <h5 style="margin-bottom: 0px !important">{{ __('general.tracking_code')}}: {{ $pickupOrder->tracking_number }}</h5>
+                        <p><small>{{ __('general.pickup_schedule')}}: {{ $pickupOrder->created_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</small></p>
                     </div>
                     </div>
                     <div class="card-body p-3" style="padding-bottom: 0px !important">
@@ -53,7 +53,7 @@
                             <div class="col-6">
                                 <div class="card card-default" style="border: 1px solid #ccc">
                                     <div class="card-body p-3" >
-                                        <h5 class="address-title text-muted">Sender Address</h5>
+                                        <h5 class="address-title text-muted">{{ __('pickup.pickup_address')}}</h5>
                                         <p><strong>{{ $pickupOrder->user->name }}</strong></p>
                                         <p class="mb-0">{{ $pickupOrder->user->m_number }}</p>
                                         <p class="mb-0">{{ $pickupOrder->pickup_date->format('F d, Y (D)') }}</p>
@@ -64,11 +64,11 @@
                                 </div>
                                 <div class="card card-default" style="border: 1px solid #ccc">
                                     <div class="card-body p-3">
-                                        <h5 class="address-title text-muted">Order Summary</h5>
+                                        <h5 class="address-title text-muted">{{ __('general.order_summary')}}</h5>
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="pull-left">
-                                                    <p class="no-margin">{{ $pickupOrder->package->name }} Packaging<p>
+                                                    <p class="no-margin">{{ __('pickup.package_type')}}: {{ $pickupOrder->package->name }}<p>
                                                 </div>
                                             </div>
                                             <div class="col-6">
@@ -83,7 +83,7 @@
                             <div class="col-6">
                                 <div class="card card-default" style="border: 1px solid #ccc">
                                     <div class="card-body p-3">
-                                        <h5 class="address-title text-muted">Recipient Address</h5>
+                                        <h5 class="address-title text-muted">{{ __('pickup.receiver_address')}}</h5>
                                         <p><strong>{{ $pickupOrder->receiver_name }}</strong></p>
                                         <p class="mb-0">{{ $pickupOrder->receiver_phone }}</p>
                                         <p class="mb-0">{{ $pickupOrder->receiver_email }}</p>
@@ -94,11 +94,11 @@
                                 </div>
                                 <div class="card card-default" style="border: 1px solid #ccc">
                                     <div class="card-body p-3">
-                                        <h5 class="address-title text-muted">Fees and Breakdown</h5>
+                                        <h5 class="address-title text-muted">{{ __('pickup.fees_breakdown')}}</h5>
                                         <div class="row m-t-10">
                                             <div class="col-md-6">
                                                 <div class="pull-left">
-                                                <h5 class="no-margin small"><strong>Service Fees</strong></h5>
+                                                <h5 class="no-margin small"><strong>{{ __('pickup.service_fee')}}</strong></h5>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -110,7 +110,7 @@
                                         <div class="row p-b-5">
                                             <div class="col-md-6">
                                                 <div class="pull-left m-l-10">
-                                                <h5 class="no-margin small text-muted">Additional Weight Fee</h5>
+                                                <h5 class="no-margin small text-muted">{{ __('pickup.additional_fee')}}</h5>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -126,18 +126,13 @@
                                         <div class="row m-t-10">
                                             <div class="col-md-6">
                                                 <div class="pull-left">
-                                                <h5 class="no-margin small"><strong>Total Amount</strong></h5>
+                                                <h5 class="no-margin small"><strong>{{ __('pickup.total_amount')}}</strong></h5>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="pull-right">
                                                 <h5 class="no-margin small"><strong>₱{{ number_format($pickupOrder->package_amount, 2, '.', ',') }}</strong></h5>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row m-t-10">
-                                            <div class="col-12 text-center">
-                                                <a href="{{ route('customer.pickup', auth()->user()->username) }}">Schedule Another Delivery</a>
                                             </div>
                                         </div>
                                     </div>
@@ -153,13 +148,13 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="pull-left">
-                                                    <h5 class="address-title text-muted">Tracking Details</h5>
+                                                    <h5 class="address-title text-muted">{{ __('pickup.tracking_details')}}</h5>
                                                 </div>
                                             </div>
                                             @hasanyrole('Super Admin')
                                             <div class="col-md-6">
                                                 <div class="pull-right">
-                                                    <a href="{{ route('admin.pickups.edit', $pickupOrder->id) }}">Update Delivery Status</a>
+                                                    <a href="{{ route('admin.pickups.edit', $pickupOrder->id) }}">{{ __('pickup.edit_pickup')}}</a>
                                                 </div>
                                             </div>
                                             @endhasanyrole
@@ -212,10 +207,10 @@
                                             </div>
                                         <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center m-b-10">
                                             <div class="custom-control custom-checkbox">
-                                            <div class="text-left text-sm-right"><a class="btn btn-outline-primary btn-rounded btn-sm" href="{{ route('customer.bookings.waybill', [auth()->user()->username, $pickupOrder->id]) }}">Download Waybill</a></div>
+                                            <div class="text-left text-sm-right"><a class="btn btn-outline-primary btn-rounded btn-sm" href="{{ route('customer.bookings.waybill', [auth()->user()->username, $pickupOrder->id]) }}">{{ __('pickup.download_waybill')}}</a></div>
                                             </div>
                                             <div class="text-left text-sm-right m-r-20">
-                                                <a class="btn btn-outline-primary btn-rounded btn-sm" onmouseout="outFunc()" data-clipboard-text="https://app.weparcelbear.com/track-delivery/track?tracking_number={{ $pickupOrder->tracking_number }}">Share Tracking</a>
+                                                <a class="btn btn-outline-primary btn-rounded btn-sm" onmouseout="outFunc()" data-clipboard-text="https://app.weparcelbear.com/track-delivery/track?tracking_number={{ $pickupOrder->tracking_number }}">{{ __('pickup.share_tracking')}}</a>
                                                 <span class="tooltiptext" id="myTooltip"></span>
                                             </div>
                                         </div>

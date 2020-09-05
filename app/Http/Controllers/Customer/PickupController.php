@@ -59,10 +59,6 @@ class PickupController extends Controller
     public function store()
     {
 
-        $cities = config('location.PH_states_cities');
-       
-        // dd(request()->has('charfe'));s
-       // dd();
         $pickupData = request()->validate([
             'sender_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
             'sender_phone' => 'required|phone:PH',
@@ -96,16 +92,16 @@ class PickupController extends Controller
             'sender_phone' => request('sender_phone'),
             'pickup_date' => request('pickup_date')." 00:00:00",
             'pickup_address' => request('pickup_address'),
-            'pickup_city' => $cities['Metro Manila'][request('pickup_city')],
-            'pickup_state' => "Metro Manila",
+            'pickup_city' => request('pickup_city'),
+            'pickup_state' => config('location.PH_cities_states')[request('pickup_city')],
             'pickup_postal_code' => request('pickup_postal_code'),
             'pickup_country' => 'Philippines',
             'receiver_name' => request('receiver_name'),
             'receiver_email' => request('receiver_email'),
             'receiver_phone' => request('receiver_phone'),
             'receiver_address' => request('receiver_address'),
-            'receiver_city' => $cities['Metro Manila'][request('receiver_city')],
-            'receiver_state' => "Metro Manila",
+            'receiver_city' => request('receiver_city'),
+            'receiver_state' => config('location.PH_cities_states')[request('receiver_city')],
             'receiver_postal_code' => request('receiver_postal_code'),
             'receiver_country' => 'Philippines',
             'package_id' => Package::where('name', request('radioPackage'))->first()->id,
@@ -124,7 +120,7 @@ class PickupController extends Controller
         // //dd($pickup->receiver_email);
         // Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
         
-        return redirect()->route('customer.pickup',auth()->user()->username)->with('success', 'Pickup has been successfully added. Tracking Number: '.$pickup->tracking_number);
+        return redirect()->route('customer.pickup',auth()->user()->username)->with('success', 'Pickup has been successfully added. Tracking Code: '.$pickup->tracking_number);
     }
 
     public function trackDelivery()
@@ -165,28 +161,6 @@ class PickupController extends Controller
             'pickupOrder',
             'statuses'
         ));
-
-        //return redirect()->back()->with(['pickupOrder' => $pickupOrder, 'statuses' => $statuses, 'count' => $count]);
-
-        // $pickups = $pickup->get();
-
-
-        // $pickupOrder = $pickups->where('tracking_number', request()->route('tracking_number'))->first();
-
-        // if ($pickupOrder == null) {
-        //     abort(404);
-        // }
-
-        // foreach ($pickupOrder->pickupActivities as $pickupActivity) {
-        //     $pickupActive = $pickupActivity->deliveryStatus;
-        // }
-
-        // if (request()->wantsJson()) {
-        //     return response()->json($pickupOrder);
-        // }
-        // return view('customers.pickup.order-tracking',compact('pickupOrder'));
-
-
     }
 
   

@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Edit Package')
+@section('title', __('general.edit_package'))
 
 @section('upper-links-extend')
 
@@ -12,8 +12,9 @@
         <div class="container-fixed-lg">
             <ul class="breadcrumb p-l-0">
               <li class="breadcrumb-item active"><a href="{{ route('admin.packages') }}">{{ __('general.packages') }}</a></li>
-                <li class="breadcrumb-item active">Edit Package</li>
+                <li class="breadcrumb-item active">{{ __('general.edit_package')}}</li>
             </ul>
+             <h3 class="page-title">{{ __('general.edit_package')}}</h3>
         </div>
 
         @include('layouts.pages.session')
@@ -24,8 +25,8 @@
             <div class="row justify-content-center">
                 <div class="col-md-10">
                     <div class="form-group form-group-default required @error('name') has-error @enderror">
-                        <label>Package Name</label>
-                        <input type="text" name="name" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.name'))]) }}" value="{{ old('name', $package->name) }}" class="form-control" >
+                        <label>{{ __('general.package_name')}}</label>
+                        <input type="text" name="name" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('general.package_name'))]) }}" value="{{ old('name', $package->name) }}" class="form-control" >
                     </div>
                     @error('name')
                         <label class="error" for="name">
@@ -33,8 +34,8 @@
                         </label>
                     @enderror
                     <div class="form-group form-group-default required @error('description') has-error @enderror">
-                        <label>Description</label>
-                        <input type="text" name="description" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.description'))]) }}" value="{{ old('description', $package->description) }}" class="form-control" >
+                        <label>{{ __('general.package_description')}}</label>
+                        <input type="text" name="description" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('general.package_description'))]) }}" value="{{ old('description', $package->description) }}" class="form-control" >
                     </div>
                     @error('description')
                         <label class="error" for="description">
@@ -42,8 +43,8 @@
                         </label>
                     @enderror
                     <div class="form-group form-group-default required @error('amount') has-error @enderror">
-                        <label>Amount</label>
-                        <input type="number" name="amount" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.amount'))]) }}" value="{{ old('amount', $package->amount) }}" class="form-control" >
+                        <label>{{ __('general.package_amount')}}</label>
+                        <input type="number" name="amount" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('general.package_amount'))]) }}" value="{{ old('amount', $package->amount) }}" class="form-control" >
                     </div>
                     @error('amount')
                         <label class="error" for="amount">
@@ -55,8 +56,8 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="btn-group btn-group-md">
-                        <a href="{{ route('admin.packages') }}" class="m-t-15 m-r-15">Back</a>
-                        <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">Edit Package</button>
+                        <a href="{{ route('admin.packages') }}" class="m-t-15 m-r-15">{{ __('general.back')}}</a>
+                        <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">{{ __('general.edit_package')}}</button>
                     </div>
                 </div>
             </div>

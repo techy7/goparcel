@@ -42,40 +42,39 @@
                         <h4 style="margin-top: -4px !important"><strong>TRACKING ID: <a href="https://app.weparcelbear.com/track-delivery/track?tracking_number={{ $userPickup->tracking_number }}">{{ $userPickup->tracking_number }}</a></strong></h4>
                         <hr style="margin: 5px 0px 5px 0px">
                              <div class="details" style="margin-top: 10px !important;">
-                                <p><strong>Tracking No.: </strong><small>{{ $userPickup->tracking_number }}</small></p>
-                                <p><strong>Status: </strong><small>{{ $userPickup->pickupActivities->first()->deliveryStatus->name }}</small></p>
-                                <p><strong>Shipping Package Type: </strong><small>{{ $userPickup->package->name }}</small></p>
-                                <p><strong>Cash-on-delivery: </strong><small>{{ $userPickup->charge_to_sender ? "Yes" : "No" }}</small></p>
+                                <p><strong>{{ __('general.tracking_code')}}: </strong><small>{{ $userPickup->tracking_number }}</small></p>
+                                <p><strong>{{ __('general.delivery_status')}}: </strong><small>{{ $userPickup->pickupActivities->first()->deliveryStatus->name }}</small></p>
+                                <p><strong>{{ __('general.package_type')}}: </strong><small>{{ $userPickup->package->name }}</small></p>
+                                <p><strong>{{ __('general.cash_on_delivery')}}: </strong><small>{{ $userPickup->charge_to_sender ? "No" : "Yes" }}</small></p>
                             </div>
 
                              <div class="details">
-                                <h4><strong>Sender Details:</strong></h4>
-                                <p><strong>Name: </strong><small>{{ $userPickup->user->name }}</small></p>
-                                <p><strong>Phone Number: </strong><small>{{ $userPickup->user->m_number }}</small></p>
-                                <p><strong>Address: </strong><span><small>{{ $userPickup->pickup_address }} {{ $userPickup->pickup_city }}, {{ $userPickup->pickup_state }} {{ $userPickup->pickup_postal_code }}</small></span></p>
-                                <p><strong>Pickup Date Scheduled: </strong><span><small>{{ $userPickup->pickup_date->format('F d, Y (D)') }}</small></span></p>
+                                <h4><strong>{{ __('pickup.sender_details')}}:</strong></h4>
+                                <p><strong>{{ __('pickup.sender_name')}}: </strong><small>{{ $userPickup->user->name }}</small></p>
+                                <p><strong>{{ __('pickup.sender_phone')}}: </strong><small>{{ $userPickup->user->m_number }}</small></p>
+                                <p><strong>{{ __('pickup.pickup_address')}}: </strong><span><small>{{ $userPickup->pickup_address }} {{ $userPickup->pickup_city }}, {{ $userPickup->pickup_state }} {{ $userPickup->pickup_postal_code }}</small></span></p>
+                                <p><strong>{{ __('pickup.pickup_date')}}: </strong><span><small>{{ $userPickup->pickup_date->format('F d, Y (D)') }}</small></span></p>
                             </div>
                            
                             <div class="details">
-                                <h4><strong>Receiver Details:</strong></h4>
-                                <p><strong>Name: </strong><small>{{ $userPickup->receiver_name }}</small></p>
-                                <p><strong>Email: </strong><small>{{ $userPickup->receiver_email }}</small></p>
-                                <p><strong>Phone Number: </strong><small>{{ $userPickup->receiver_phone }}</small></p>
-                                <p><strong>Address: </strong>{{ $userPickup->receiver_address }} <u><strong> {{ $userPickup->receiver_city }}, {{ $userPickup->receiver_state }} </strong></u> {{ $userPickup->receiver_postal_code }}</p>
+                                <h4><strong>{{ __('pickup.receiver_details')}}</strong></h4>
+                                <p><strong>{{ __('pickup.receiver_name')}}: </strong><small>{{ $userPickup->receiver_name }}</small></p>
+                                <p><strong>{{ __('pickup.receiver_email')}}: </strong><small>{{ $userPickup->receiver_email }}</small></p>
+                                <p><strong>{{ __('pickup.receiver_phone')}}: </strong><small>{{ $userPickup->receiver_phone }}</small></p>
+                                <p><strong>{{ __('pickup.receiver_address')}}: </strong>{{ $userPickup->receiver_address }} <u><strong> {{ $userPickup->receiver_city }}, {{ $userPickup->receiver_state }} </strong></u> {{ $userPickup->receiver_postal_code }}</p>
                             </div>
                            
                             
                         </div>
                             <hr style="margin: 5px 0px 5px 0px;">
                             <div style="padding: 5px;float:right;">
-                                    <h4 style="margin: 0px; margin-top: 10px"><strong>Total Payment:</strong> <small>P{{ number_format($userPickup->package_amount, 2, '.', ',') }}</small></h4>
+                                    <h4 style="margin: 0px; margin-top: 10px"><strong>{{ __('pickup.total_amount')}}:</strong> <small>P{{ number_format($userPickup->package_amount, 2, '.', ',') }}</small></h4>
                             </div>
                             <div style="padding: 5px; ">
-                                <h4 style="margin: 0px; margin-top: 10px"><strong>Signature:</strong></h4>
+                                <h4 style="margin: 0px; margin-top: 10px"><strong>{{ __('pickup.signature')}}:</strong></h4>
                             </div>
                             <br/>
                             <br/>
-                            <h4 style="margin: 0px;"><strong>Date:</strong> <small>{{ now()->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</small></h4>
                         </div>
                 </div>
             </div>

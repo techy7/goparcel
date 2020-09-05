@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Edit User')
+@section('title',  __('general.edit_user'))
 
 @section('upper-links-extend')
 
@@ -13,9 +13,9 @@
             <ul class="breadcrumb p-l-0">
               <li class="breadcrumb-item active">{{ __('general.users_access_roles') }}</li>
               <li class="breadcrumb-item active"><a href="{{ route('admin.users') }}">{{ __('general.manage_users') }}</a></li>
-              <li class="breadcrumb-item active">Edit User</li>
+              <li class="breadcrumb-item active">{{ __('general.edit_user')}}</li>
             </ul>
-            <h3 class="page-title">Update User</h3>
+            <h3 class="page-title">{{ __('general.edit_user')}}</h3>
         </div>
 
         <form id="form-register" class="p-t-15" role="form" method="POST" action="{{ route('admin.users.update', $userData->id) }}">
@@ -160,8 +160,8 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="btn-group btn-group-md">
-                        <a href="{{ route('admin.users') }}" class="m-t-15 m-r-15">Back</a>
-                        <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">Edit User</button>
+                        <a href="{{ route('admin.users') }}" class="m-t-15 m-r-15">{{ __('general.back')}}</a>
+                        <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">{{ __('general.edit_user')}}</button>
                     </div>
                 </div>
             </div>

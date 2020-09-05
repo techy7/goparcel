@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="pull-right">
-                        <a href="{{ route('admin.customers.create') }}">Add Customer</a>
+                        <a href="{{ route('admin.customers.create') }}">{{ __('general.add_customer')}}</a>
                     </div>
                 </div>
             </div>
@@ -44,19 +44,18 @@
                   <table class="table table-hover demo-table-search table-responsive-block" id="tableWithSearch">
                     <thead>
                       <tr>
-                        <th>Customer Name</th>
-                        <th>Username</th>
+                        <th>{{ __('general.customer_name')}}</th>
+                        <th>{{ __('auth.username')}}</th>
                         
-                        <th>Email</th>
-                        <th>Mobile Number</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Postal Code</th>
-                        <th>Country</th>
-                        <th>Profile Picture</th>
-                        <th>Date Registered</th>
-                        <th>Action</th>
+                        <th>{{ __('auth.email')}}</th>
+                        <th>{{ __('auth.mobile_number')}}</th>
+                        <th>{{ __('auth.address')}}</th>
+                        <th>{{ __('auth.city')}}</th>
+                        <th>{{ __('auth.state')}}</th>
+                        <th>{{ __('auth.postal_code')}}</th>
+                        <th>{{ __('auth.country')}}</th>
+                        <th>{{ __('auth.date_registered')}}</th>
+                        <th>{{ __('general.action')}}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -88,9 +87,6 @@
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $customer->country ?? 'N/A' }}</p>
-                            </td>
-                            <td class="v-align-middle semi-bold">
-                                <p>{{ $customer->imageAvatarSize() }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $customer->created_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>

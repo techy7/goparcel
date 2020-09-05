@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Packages List')
+@section('title', __('general.packages'))
 
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="pull-right">
-                        <a href="{{ route('admin.packages.create') }}">Add Package</a>
+                        <a href="{{ route('admin.packages.create') }}">{{ __('general.add_package')}}</a>
                     </div>
                 </div>
             </div>
@@ -41,12 +41,12 @@
                 <table class="table table-hover demo-table-search table-responsive-block" id="tableWithSearch">
                   <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Date Created</th>
-                        <th>Date Modified</th>
-                        <th>Action</th>
+                        <th>{{ __('general.package_name')}}</th>
+                        <th>{{ __('general.package_description')}}</th>
+                        <th>{{ __('general.package_amount')}}</th>
+                        <th>{{ __('general.date_created')}}</th>
+                        <th>{{ __('general.date_modified')}}</th>
+                        <th>{{ __('general.action')}}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -69,11 +69,11 @@
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <div class="btn-group">
-                                    <a href="{{ route('admin.packages.edit', $package->id) }}" class="btn btn-outline-primary m-1">Edit</a>
+                                    <a href="{{ route('admin.packages.edit', $package->id) }}" class="btn btn-outline-primary m-1">{{ __('general.edit')}}</a>
                                     <form style="margin-top: 4px; margin-left: 2px" action="{{ route('admin.packages.destroy', $package->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Are you sure you want to delete {{ $package->name }}?')" class="btn btn-outline-danger">Delete</button>
+                                        <button type="submit" onclick="return confirm('Are you sure you want to delete {{ $package->name }}?')" class="btn btn-outline-danger">{{ __('general.edit')}}</button>
                                     </form>
                                 </div>
                             </td>

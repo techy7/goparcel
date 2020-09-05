@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Add Customer')
+@section('title',  __('general.add_customer'))
 
 @section('upper-links-extend')
 
@@ -11,10 +11,10 @@
     <div class="container-fluid padding-25 sm-padding-10">
         <div class="container-fixed-lg">
             <ul class="breadcrumb p-l-0">
-              <li class="breadcrumb-item active"><a href="{{ route('admin.customers') }}">Customers</a></li>
-              <li class="breadcrumb-item active">Add Customer</li>
+              <li class="breadcrumb-item active"><a href="{{ route('admin.customers') }}">{{ __('general.customers')}}</a></li>
+              <li class="breadcrumb-item active">{{ __('general.add_customer')}}</li>
             </ul>
-            <h3 class="page-title">Create new Customer</h3>
+            <h3 class="page-title">{{ __('general.add_customer')}}</h3>
         </div>
 
         <form id="form-register" class="p-t-15" role="form" method="POST" action="{{ route('admin.customers.store') }}">
@@ -157,8 +157,8 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="btn-group btn-group-md">
-                        <a href="{{ route('admin.customers') }}" class="m-t-15 m-r-15">Back</a>
-                        <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">Add Customer</button>
+                        <a href="{{ route('admin.customers') }}" class="m-t-15 m-r-15">{{ __('general.back')}}</a>
+                        <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">{{ __('general.add_customer')}}</button>
                     </div>
                 </div>
             </div>

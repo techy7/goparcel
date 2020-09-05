@@ -45,19 +45,28 @@ class AccountController extends Controller
             'profile_picture.image' => 'The profile picture should be an image.'
         ]);
 
-        if (request('profile_picture')) {
-            $imagePath = request('profile_picture')->store('uploads/images/customers/original', 'public');
-            $imageMerge = ['image' => $imagePath];
-            $data['profile_picture'] = $imagePath;
-        }
 
         if (request('profile_picture')) {
-            $imagePath = request('profile_picture')->store('uploads/images/customers/avatar', 'public');
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(32, 32);
-            $image->save();
-            $imageMerge = ['image' => $imagePath];
-            $data['profile_picture'] = $imagePath;
+            $avatar = request()->file('profile_picture');
+            $filename = time().'.'.$avatar->getClientOriginalExtension();
+            Image::make($avatar)->resize(50,50)->save(public_path('/uploads/avatars/'.$filename));
+            $data['profile_picture']  = $filename;
         }
+
+        // if (request('profile_picture')) {
+        //     $imagePath = request('profile_picture')->store('uploads/images/customers/original', 'public');
+        //     $imageMerge = ['image' => $imagePath];
+        //     $data['profile_picture'] = $imagePath;
+        // }
+
+        // if (request('profile_picture')) {
+        //     $imagePath = request('profile_picture')->store('uploads/images/customers/avatar', 'public');
+        //     $image = Image::make(public_path("storage/{$imagePath}"))->fit(32, 32);
+        //     //$image = Image::make(request()->file('profile_picture')->getRealPath())->fit(32, 32);
+        //     $image->save();
+        //     $imageMerge = ['image' => $imagePath];
+        //     $data['profile_picture'] = $imagePath;
+        // }
 
         // if ($data['password'] != $user->password) {
         //     $data['password'] = Hash::make(request('password'));
@@ -65,9 +74,11 @@ class AccountController extends Controller
         //     $data['password'] = request('password');
         // }
 
+        // dd(isset($data['profile_picture']) );
         $updateData = [
             'name' => Str::of($data['name'])->trim()->title(),
             // 'email' => Str::of($data['email'])->trim()->lower(),
+            'profile_picture' => isset($data['profile_picture']) ? $data['profile_picture'] : null,
             'm_number' => preg_replace('~\D~', '', $data['m_number']),
             'address' => Str::of($data['address'])->trim()->title(),
             'postal_code' => $data['postal_code'],
@@ -76,14 +87,16 @@ class AccountController extends Controller
             'country' => 'Philippines',
         ];
 
-        $imageMerge = [
-            'profile_picture' => $data['profile_picture'] ?? $user->profile_picture
-        ];
+        // $imageMerge = [
+        //     'profile_picture' => $data['profile_picture'] ?? $user->profile_picture
+        // ];
 
-        $user->update(array_merge(
-            $updateData,
-            $imageMerge ?? []
-        ));
+        // $user->update(array_merge(
+        //     $updateData,
+        //     // $imageMerge ?? []
+        // ));
+           
+        $user->update($updateData);
 
         return redirect()->route('customer.account', $user->id)->with('update', 'Your profile has been successfully updated.');
     }

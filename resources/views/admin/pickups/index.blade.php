@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Pickups Schedules')
+@section('title', __('general.pickup_schedules'))
 
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -33,7 +33,7 @@
         <div class="card-body">
           <div class="p-0 mb-3">
             <a class="btn" data-toggle="collapse" href="#collapseForm" role="button" aria-expanded="false" aria-controls="collapseForm">
-              Show/Hide Filter
+              {{ __('general.show_hide')}}
             </a>
           </div>
         <div class="show bg-light w-100 py-4 px-3 mb-5" id="collapseForm">
@@ -41,10 +41,10 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">City
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ __('pickup.pickup_city')}}
                   <span class="caret"></span></button>
                   <ul id="dropdown-city" class="dropdown-menu">
-                    <input class="form-control" id="input-city" type="text" placeholder="Search..">
+                    <input class="form-control" id="input-city" type="text" placeholder="{{ __('auth.search_field', ['field' => strtolower(__('pickup.pickup_city'))]) }}">
                     @foreach($cities as $city)
                       <li id="{{$city}}" data-value="{{$city}}"><a href="#">{{ $city }}</a></li>
                     @endforeach
@@ -55,10 +55,10 @@
 
               <div class="col-md-3">
                 <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">State
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ __('pickup.pickup_state')}}
                   <span class="caret"></span></button>
                   <ul id="dropdown-state" class="dropdown-menu">
-                    <input class="form-control" id="input-state" type="text" placeholder="Search..">
+                    <input class="form-control" id="input-state" type="text" placeholder="{{ __('auth.search_field', ['field' => strtolower(__('pickup.pickup_date'))]) }}">
                     @foreach($states as $state)
                       <li id="{{$state}}" data-value="{{$state}}"><a href="#">{{$state}}</a></li>
                     @endforeach
@@ -70,10 +70,10 @@
 
               <div class="col-md-3">
                 <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Postal Code
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ __('pickup.pickup_postal')}}
                   <span class="caret"></span></button>
                   <ul id="dropdown-postal-code" class="dropdown-menu">
-                    <input class="form-control" id="input-postal-code" type="text" placeholder="Search..">
+                    <input class="form-control" id="input-postal-code" type="text" placeholder="{{ __('auth.search_field', ['field' => strtolower(__('pickup.pickup_postal'))]) }}">
                     @foreach($postal_codes as $postal_code)
                       <li id="{{$postal_code}}" data-value="{{$postal_code}}"><a href="#">{{$postal_code}}</a></li>
                     @endforeach
@@ -84,10 +84,10 @@
 
               <div class="col-md-3">
                 <div class="dropdown ">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Package Type
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ __('general.package_type')}}
                   <span class="caret"></span></button>
                   <ul id="dropdown-package-type" class="dropdown-menu">
-                    <input class="form-control" id="input-package-type" type="text" placeholder="Search..">
+                    <input class="form-control" id="input-package-type" type="text" placeholder="{{ __('auth.search_field', ['field' => strtolower(__('general.package_type'))]) }}">
                     @foreach($package_types as $package_type)
                       <li id="{{$package_type}}" data-value="{{$package_type}}"><a href="#">{{$package_type}}</a></li>
                     @endforeach
@@ -108,11 +108,11 @@
               </div>
               <div class="col-md-3">
                 <div id="fromDiv">
-                  <button class="btn btn-primary " type="button">Delivery Date</button>
+                  <button class="btn btn-primary " type="button">{{ __('pickup.pickup_date')}}</button>
                   <div class="form-group form-group-default input-group">
                     <div class="form-input-group">
-                      <label>From Date</label>
-                      <input type="text" name="datepickerFrom" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-from" class="form-control datepicker-standard">
+                      <label>{{ __('general.from_date')}}</label>
+                      <input type="text" name="datepickerFrom" placeholder="{{ __('auth.select_field', ['field' => strtolower(__('general.from_date'))]) }}" data-date-format="dd-M-yyyy" id="datepicker-from" class="form-control datepicker-standard">
                     </div>
                     <div class="input-group-append">
                       <span class="input-group-text"><i class="pg-icon">calendar</i>
@@ -127,8 +127,8 @@
                 <button class="btn btn-primary invisible " type="button"></button>
                   <div class="form-group form-group-default input-group">
                     <div class="form-input-group">
-                      <label>To Date</label>
-                      <input type="text" name="datepickerTo" placeholder="Pick a date" data-date-format="dd-M-yyyy" id="datepicker-to" class="form-control datepicker-standard">
+                      <label>{{ __('general.to_date')}}</label>
+                      <input type="text" name="datepickerTo" placeholder="{{ __('auth.select_field', ['field' => strtolower(__('general.to_date'))]) }}" data-date-format="dd-M-yyyy" id="datepicker-to" class="form-control datepicker-standard">
                     </div>
                     <div class="input-group-append">
                       <span class="input-group-text"><i class="pg-icon">calendar</i>
@@ -143,7 +143,7 @@
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" {{(old('newRequest') == "1") ? 'checked': ''}} id="newRequest" name="newRequest">
                   <label class="form-check-label" for="newRequest">
-                    Show New Requests Only
+                    {{ __('general.show_new_request')}}
                   </label>
                 </div>
               </div>
@@ -153,10 +153,10 @@
             {{-- Submit and Clear Filter Button--}}
             <div class="row mt-3 d-flex justify-content-center">
               <div class="col-md-2">
-                <a class="btn btn-round clear-filter w-100 mx-2"  href="{{ route('admin.pickups') }}"><i class="fa fa-times mr-2"></i>Clear Filter</a>
+                <a class="btn btn-round clear-filter w-100 mx-2"  href="{{ route('admin.pickups') }}"><i class="fa fa-times mr-2"></i>{{ __('general.clear_search')}}</a>
               </div>
               <div class="col-md-2">
-              <button type="submit" class="btn btn-round btn-info w-100 mx-2 "><i class="fa fa-search mr-2"></i>Filter</button>
+              <button type="submit" class="btn btn-round btn-info w-100 mx-2 "><i class="fa fa-search mr-2"></i>{{ __('general.search')}}</button>
               </div>
             </div>
           </form>
@@ -166,18 +166,18 @@
             <table class="table table-hover demo-table-search table-responsive-block" id="pickup_table">
               <thead>
                 <tr>
-                  <th>Pickup Schedule</th>
-                  <th>Date Created</th>
-                  <th>Customer Name</th>
-                  <th>Tracking Number</th>
-                  <th>Address</th>
-                  <th>City</th>
-                  <th>State</th>
-                  <th>Postal Code</th>
-                  <th>Package Type</th>
-                  <th>Total Amount</th>
-                  <th>Delivery Status</th>
-                  <th>Action</th>
+                  <th>{{ __('general.pickup_schedule')}}</th>
+                  <th>{{ __('general.date_created')}}</th>
+                  <th>{{ __('general.customer_name')}}</th>
+                  <th>{{ __('general.tracking_code')}}</th>
+                  <th>{{ __('pickup.pickup_address')}}</th>
+                  <th>{{ __('pickup.pickup_city')}}</th>
+                  <th>{{ __('pickup.pickup_state')}}</th>
+                  <th>{{ __('pickup.pickup_postal')}}</th>
+                  <th>{{ __('pickup.package_type')}}</th>
+                  <th>{{ __('pickup.total_amount')}}</th>
+                  <th>{{ __('general.delivery_status')}}</th>
+                  <th>{{ __('general.action')}}</th>
                 </tr>
 
               </thead>

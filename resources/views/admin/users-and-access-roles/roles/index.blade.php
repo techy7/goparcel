@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Manage Access Roles')
+@section('title', __('general.manage_access_roles'))
 
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -19,12 +19,12 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="pull-left">
-                        <h3 class="page-title">Roles</h3>
+                        <h3 class="page-title">{{ __('general.manage_access_roles')}}</h3>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="pull-right">
-                        <a href="{{ route('admin.roles.create') }}">Add Role</a>
+                        <a href="{{ route('admin.roles.create') }}">{{ __('general.add_access_role')}}</a>
                     </div>
                 </div>
             </div>
@@ -46,11 +46,11 @@
               <table class="table table-hover demo-table-search table-responsive-block" id="tableWithSearch">
                 <thead>
                   <tr>
-                      <th>Name</th>
-                      <th>Description</th>
-                      <th>Date Created</th>
-                      <th>Date Modified</th>
-                      <th>Action</th>
+                      <th>{{ __('general.role_name')}}</th>
+                      <th>{{ __('general.role_description')}}</th>
+                      <th>{{ __('general.date_created')}}</th>
+                      <th>{{ __('general.date_modified')}}</th>
+                      <th>{{ __('general.action')}}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -70,12 +70,12 @@
                           </td>
                           <td class="v-align-middle semi-bold">
                               <div class="btn-group">
-                                  <a href="{{ route('admin.roles.show', $role->id) }}" class="btn btn-outline-primary m-1">Permissions</a>
-                                  <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-outline-primary m-1">Edit</a>
+                                  <a href="{{ route('admin.roles.show', $role->id) }}" class="btn btn-outline-primary m-1">{{ __('general.permissions')}}</a>
+                                  <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-outline-primary m-1">{{ __('general.edit')}}</a>
                                   <form style="margin-top: 4px; margin-left: 2px" action="{{ route('admin.roles.destroy', $role->id) }}" method="post">
                                       @csrf
                                       @method('DELETE')
-                                      <button type="submit" onclick="return confirm('Are you sure you want to delete {{ $role->name }}?')" class="btn btn-outline-danger">Delete</button>
+                                      <button type="submit" onclick="return confirm('Are you sure you want to delete {{ $role->name }}?')" class="btn btn-outline-danger">{{ __('general.delete')}}</button>
                                   </form>
                               </div>
                           </td>

@@ -32,8 +32,11 @@ return [
     'country' => 'Country',
     'create_an_account' => 'Create an Account',
     'back_to_login' => 'Back to Login',
+    'date_registered' => 'Date Registered',
+    'date_modified' => 'Date Modified',
 
     'select_field' => 'Select :field',
+    'search_field' => 'Search :field',
     'enter_field' => 'Enter :field',
     'error_username_already_taken' => 'Username already taken',
     'error_required' => 'This field is required',
@@ -61,4 +64,5 @@ return [
 
     //Reset Password
     'send_password_reset_link' => 'Send Password Reset Link',
+
 ];

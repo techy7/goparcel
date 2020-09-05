@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/{username}/pickup-bookings', 'BookingController@index')->name('customer.bookings');
     Route::get('/{username}/pickup-bookings/track/{tracking_number}', 'BookingController@track')->name('customer.bookings.track');
     Route::get('/{username}/pickup-bookings/search', 'BookingController@searchTrack')->name('customer.bookings.searchTrack');
+    Route::get('{username}/track', 'BookingController@trackDeliveryShow')->name('booking.track-delivery.show');
     Route::get('/{username}/pickup-bookings/{id}/waybill', 'BookingController@waybill')->name('customer.bookings.waybill');
   });
 

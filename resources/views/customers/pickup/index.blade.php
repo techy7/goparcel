@@ -4,7 +4,7 @@
     <link href="{{ asset('pages/assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css" media="screen">
 @endsection
  
-@section('title', 'Schedule a Pickup')
+@section('title', __('general.schedule_a_pickup'))
  
 @section('content')
 <div class="content sm-gutter">
@@ -14,10 +14,10 @@
       @if($errors->any())
         <div class="alert alert-error" role="alert">
             <button aria-label="" class="close" data-dismiss="alert"></button>
-            Please correct all highlighted fields. Hover to view the error.
+            {{ __('validation.error_any')}}
         </div>
       @endif
-      <h3 class="page-title">Schedule a Pickup</h3>
+      <h3 class="page-title">{{ __('general.schedule_a_pickup')}}</h3>
 
       <div class="page-content-wrapper p-l-0 p-3 m-b-45">
         <form action="{{ route('customer.pickup.store', auth()->user() ) }}" method="post"  data-parsley-validate autocomplete="off" class="d-print-none" >
@@ -27,42 +27,43 @@
             <div class="col-md-6">
               <div id="senderInfo" class="container card mr-3 bg-white">
                   <div class="card-body">
-                    <h5 class="pull-left card-title">Sender Details </h5> <button id="clear_data" type="button" class="btn btn-danger btn-link pull-right">Clear Sender Data</button> 
+                    <h5 class="pull-left card-title">{{ __('pickup.sender_details')}} </h5> <button id="clear_data" type="button" class="btn btn-danger btn-link pull-right">{{ __('pickup.clear_sender_data')}} </button> 
                     <div class="form-group form-group-default" @error('sender_name') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
-                      <label>Sender Name</label>
-                      <input type="text" class="form-control" name="sender_name" placeholder="Enter sender name" value="{{old('_token') !== null ? old('sender_name') : auth()->user()->name }}">
+                      <label>{{ __('pickup.sender_name')}} </label>
+                      <input type="text" class="form-control" name="sender_name" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.sender_name'))]) }}" value="{{old('_token') !== null ? old('sender_name') : auth()->user()->name }}">
                       {{-- @error('sender_name') {{$message}} @enderror --}}
                     </div>
                     <div class="form-group form-group-default" @error('sender_phone') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
-                      <label>Sender Phone</label>
-                      <input type="text" class="form-control" name="sender_phone" placeholder="Enter sender phone number" value="{{ old('_token') !== null ? old('sender_phone') : auth()->user()->m_number }}">
+                      <label>{{ __('pickup.sender_phone')}}</label>
+                      <input type="text" class="form-control" name="sender_phone" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.sender_phone'))]) }}" value="{{ old('_token') !== null ? old('sender_phone') : auth()->user()->m_number }}">
                     </div>
                     <div class="form-group form-group-default input-group" @error('pickup_date') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                         <div class="form-input-group">
-                            <label>Pickup Date</label>
-                            <input type="text" class="form-control" name="pickup_date"  value="{{ old('pickup_date') }}" placeholder="Select the date of pickup" data-date-format="dd-M-yyyy" id="datepicker-component2">
+                            <label>{{ __('pickup.pickup_date')}}</label>
+                            <input type="text" class="form-control" name="pickup_date"  value="{{ old('pickup_date') }}" placeholder="{{ __('auth.select_field', ['field' => strtolower(__('pickup.pickup_date'))]) }}" data-date-format="dd-M-yyyy" id="datepicker-component2">
                         </div>
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="pg-icon">calendar</i></span>
                         </div>
                     </div>
                     <div class="form-group form-group-default" @error('pickup_address') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
-                      <label>Pickup Address</label>
-                      <input type="text" class="form-control" name="pickup_address" value="{{ old('_token') !== null  ? old('pickup_address') : auth()->user()->address }}" placeholder="Enter pickup address">
+                      <label>{{ __('pickup.pickup_address')}}</label>
+                      <input type="text" class="form-control" name="pickup_address" value="{{ old('_token') !== null  ? old('pickup_address') : auth()->user()->address }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.pickup_address'))]) }}">
                     </div>
-                    <div class="form-group form-group-default" @error('pickup_city') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
-                        <label>Pickup City</label> 
-                        <div class="dropdown">
-                        <select class="form-control" name="pickup_city" id="exampleFormControlSelect1">
-                          @foreach($cities["Metro Manila"] as $key => $city)
-                            <option value="{{ $key }}" {{ (old("pickup_city") == $key ? "selected":"") }}>{{ $city }}</option>
-                          @endforeach
-                        </select>
-                      </div>
+                    <div class="form-group form-group-default form-group-default-select2" @error('pickup_city') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
+                      <label>{{ __('pickup.pickup_city') }}</label>
+                      <select id="pickup_city" name="pickup_city" class="full-width" data-placeholder="{{ __('auth.select_field', ['field' => strtolower(__('pickup.pickup_city'))]) }}" data-init-plugin="select2">
+                        <option value=""></option>
+                        @foreach (config('location.PH_states_cities') as $state => $cities)
+                        <optgroup label="{{ $state }}">
+                          @foreach ($cities as $city)<option value="{{ $city }}" {{ old('pickup_city') == $city ? 'selected' : null }}>{{ $city }}</option>@endforeach
+                        </optgroup>
+                        @endforeach
+                      </select>
                     </div>
                     <div class="form-group form-group-default" @error('pickup_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
-                      <label>Pickup Postal Code</label>
-                      <input type="text" class="form-control" name="pickup_postal_code" value="{{ old('_token') !== null ? old('pickup_postal_code') : auth()->user()->postal_code  }}"  placeholder="Enter pickup postal code">
+                      <label>{{ __('pickup.pickup_postal')}}</label>
+                      <input type="text" class="form-control" name="pickup_postal_code" value="{{ old('_token') !== null ? old('pickup_postal_code') : auth()->user()->postal_code  }}"  placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.pickup_postal'))]) }}">
                     </div>
                   </div>
                 </div> 
@@ -70,36 +71,37 @@
             <div class="col-md-6">
               <div id="recipientInfo" class="container card mr-3 bg-white">
                   <div class="card-body">
-                    <h5 class="pull-left card-title">Receiver Details</h5>
+                    <h5 class="pull-left card-title">{{ __('pickup.receiver_details')}}</h5>
                     <div class="form-group form-group-default"  @error('receiver_name') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
-                      <label>Receiver Name</label>
-                      <input type="text" class="form-control" name="receiver_name" value="{{ old('receiver_name') }}" placeholder="Enter receiver name" >
+                      <label>{{ __('pickup.receiver_name')}}</label>
+                      <input type="text" class="form-control" name="receiver_name" value="{{ old('receiver_name') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_name'))]) }}" >
                     </div>
                     <div class="form-group form-group-default"  @error('receiver_phone')  style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
-                      <label>Receiver Phone</label>
-                      <input type="text" class="form-control" name="receiver_phone"   value="{{ old('receiver_phone') }}" placeholder="Enter receiver phone number">
+                      <label>{{ __('pickup.receiver_phone')}}</label>
+                      <input type="text" class="form-control" name="receiver_phone"   value="{{ old('receiver_phone') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_phone'))]) }}">
                     </div>
                     <div class="form-group form-group-default"  @error('receiver_email')  style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
-                      <label>Receiver Email</label>
-                      <input type="text" class="form-control" name="receiver_email" value="{{ old('receiver_email') }}" placeholder="Enter receiver email">
+                      <label>{{ __('pickup.receiver_email')}}</label>
+                      <input type="text" class="form-control" name="receiver_email" value="{{ old('receiver_email') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_email'))]) }}">
                     </div>
                     <div class="form-group form-group-default" @error('receiver_address') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
-                      <label>Receiver Address</label>
-                      <input type="text" class="form-control" name="receiver_address" value="{{ old('receiver_address') }}" placeholder="Enter receiver address">
+                      <label>{{ __('pickup.receiver_address')}}</label>
+                      <input type="text" class="form-control" name="receiver_address" value="{{ old('receiver_address') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_address'))]) }}">
                     </div>
-                    <div class="form-group form-group-default" @error('receiver_city') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
-                        <label>Receiver City</label>
-                        <div class="dropdown">
-                         <select class="form-control" id="exampleFormControlSelect2" name="receiver_city">
-                          @foreach($cities["Metro Manila"] as $key=> $city)
-                             <option value="{{ $key }}" {{ (old("receiver_city") == $key ? "selected":"") }}>{{ $city }}</option>
-                          @endforeach
-                        </select>
-                      </div>
+                    <div class="form-group form-group-default form-group-default-select2" @error('receiver_city') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
+                      <label>{{ __('pickup.receiver_city') }}</label>
+                      <select name="receiver_city" class="full-width" data-placeholder="{{ __('auth.select_field', ['field' => strtolower(__('pickup.receiver_city'))]) }}" data-init-plugin="select2">
+                        <option value=""></option>
+                        @foreach (config('location.PH_states_cities') as $state => $cities)
+                        <optgroup label="{{ $state }}">
+                          @foreach ($cities as $city)<option value="{{ $city }}" {{ old('receiver_city') == $city ? 'selected' : null }}>{{ $city }}</option>@endforeach
+                        </optgroup>
+                        @endforeach
+                      </select>
                     </div>
                     <div class="form-group form-group-default" @error('receiver_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
-                      <label>Receiver Postal Code</label>
-                      <input type="text" class="form-control" name="receiver_postal_code" value="{{ old('receiver_postal_code') }}" placeholder="Enter receiver postal code">
+                      <label>{{ __('pickup.receiver_postal')}}</label>
+                      <input type="text" class="form-control" name="receiver_postal_code" value="{{ old('receiver_postal_code') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_postal'))]) }}">
                     </div>
                   </div>
                 </div> 
@@ -110,7 +112,7 @@
             <div class="col-md-6">
               <div id="packageInfro" class="container card mr-3 bg-white">
                 <div class="card-body">
-                  <h5 class="card-title">Choose Package </h5>
+                  <h5 class="card-title">{{ __('pickup.choose_package')}}</h5>
                   <div class="row "> @error('radioPackage') <span class="alert alert-error w-100 text-center">{{$message}}</span> @enderror </div>
                   <div class="row"> 
                    @foreach($packages as $package)                
@@ -120,33 +122,33 @@
                         <label class="form-check-label" for="{{$package->name}}">
                           <img alt="Package Picture" width="75" height="45" src="/pages/assets/img/icon.png">
                           <p class="package-title">{{$package->name}}</p>
-                          <p class="package-description">Max weight: {{$package->max_weight}} kg</p>
-                          <p class="package-description price">Php {{ number_format($package->amount,2) }}</p>
-                          <p class="package-description rate">Rate</p>
+                          <p class="package-description">{{ __('pickup.max_weight')}} {{$package->max_weight}} kg</p>
+                          <p class="package-description price">{{ __('general.amount_peso', ['field' => number_format($package->amount,2)]) }}</p>
+                          <p class="package-description rate">{{ __('pickup.rate')}}</p>
                         </label>
                       </div>
                     </div> 
                   @endforeach
                   <div class="row" id="packageDimensions">
-                    <p class="btn-block"><em>If your item weight is beyond 4kg, kindly fill this out.</em></p> 
+                    <p class="btn-block"><em>If your item weight is beyond 5kg, kindly fill this out.</em></p> 
                     <div class="col-md-3 p-2">
-                      <div class="form-group form-group-default" @error('package_length') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>Length(cm)</label> 
+                      <div class="form-group form-group-default" @error('package_length') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.length')}}</label> 
                         <input id="package_length"  type="number" name="package_length" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                       </div>
                     </div> 
                     <div class="col-md-3 p-2">
-                      <div class="form-group form-group-default" @error('package_width') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label class="fade">Width(cm)</label> 
+                      <div class="form-group form-group-default" @error('package_width') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label class="fade">{{ __('pickup.width')}}</label> 
                       <input  id="package_width"  type="number" name="package_width" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                       </div>
                     </div> 
                     <div class="col-md-3 p-2">
-                      <div class="form-group form-group-default" @error('package_height') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>Height(cm)</label> 
+                      <div class="form-group form-group-default" @error('package_height') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.height')}}</label> 
                         <input id="package_height"  type="number" name="package_height" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                         </div>
                       </div>
 
                     <div class="col-md-3 p-2">
-                      <div class="form-group form-group-default" @error('actual_weight') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>Actual Weight(kg)</label> 
+                      <div class="form-group form-group-default" @error('actual_weight') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.actual_weight')}}</label> 
                         <input id="actual_weight"  type="number" name="actual_weight" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                       </div>  
                     </div>  
@@ -159,31 +161,31 @@
             <div class="col-md-6">
               <div id="fees" class="container card mr-3 bg-white">
                 <div class="card-body">
-                  <h5 class="card-title">Fees and Breakdowns </h5>
+                  <h5 class="card-title">{{ __('pickup.fees_breakdown')}}</h5>
                     
                   <div class="row">
                       <div class="col-md-6">
-                        <h5 class="no-margin details-title text-muted"><strong>Service Fee</strong></h5>
+                        <h5 class="no-margin details-title text-muted"><strong>{{ __('pickup.service_fee')}}</strong></h5>
                       </div> 
                       <div class="col-md-6">
-                        <h5 class="pull-right no-margin"> <strong class="text-muted">Php <span id="service_fee"> 0.00 </span></strong></h5>
+                        <h5 class="pull-right no-margin"> <strong class="text-muted">{{ __('general.amount_peso', ['field' => '']) }}<span id="service_fee"> 0.00 </span></strong></h5>
                       </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6">
-                        <h5 class="no-margin details-title text-muted">Additional Weight Fee</h5>
+                        <h5 class="no-margin details-title text-muted">{{ __('pickup.additional_fee')}}</h5>
                     </div> 
                     <div class="col-md-6">
-                        <h5 class="no-margin pull-right"><strong class="text-muted">Php <span id="additional_fee"> 0.00 </span></strong></h5>
+                        <h5 class="no-margin pull-right"><strong class="text-muted">{{ __('general.amount_peso', ['field' => '']) }}<span id="additional_fee"> 0.00 </span></strong></h5>
                     </div>
                   </div>
                   <hr class="m-2 p-0"/>
                   <div class="row">
                     <div class="col-md-6">
-                        <h5 class="no-margin details-title"><strong>Total Amount</strong></h5>
+                        <h5 class="no-margin details-title"><strong>{{ __('pickup.total_amount')}}</strong></h5>
                     </div> 
                     <div class="col-md-6">
-                        <h5 class="no-margin pull-right"> <strong>Php <span id="total_amount"> 0.00 </span></strong></h5>
+                        <h5 class="no-margin pull-right"> <strong>{{ __('general.amount_peso', ['field' => '']) }} <span id="total_amount"> 0.00 </span></strong></h5>
                     </div>
                   </div>
                   
@@ -194,14 +196,14 @@
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="1" {{(old('charge_to') == "1") ? 'checked': ''}}  id="charge_to" name="charge_to">
                         <label class="form-check-label" for="charge_to">
-                          Check this if you want to charge the amount to receiver.
+                          {{ __('pickup.check_charge_to')}}
                         </label>
                       </div>
                     </div>
                   </div>
                    <div class="row mt-5 m-2">
                     <div class="col-md-12">
-                      <button type="submit" class="btn btn-block btn-lg btn-rounded btn-primary p-3 w-50 pull-right">BOOK NOW</button>
+                      <button type="submit" class="btn btn-block btn-lg btn-rounded btn-primary p-3 w-50 pull-right">{{ strtoupper(__('pickup.book_now'))}}</button>
                     </div>
                   </div>
 
@@ -227,13 +229,35 @@
     <script src="{{ asset('pages/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js') }}"></script>
     <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
-     <script src="{{ asset('pages/assets/js/datepicker-custom.js') }}"></script>
  
   <script>
 
 
     $( document ).ready(function(){
       
+      var currentDate = new Date();
+      currentDate.setDate(currentDate.getDate());
+      //alert(currentDate);
+      startDate = "+1d"
+      var dt = new Date();
+      var d = new Date().setHours(17,0,0,0);
+      if(dt > d){
+           dt.setDate(dt.getDate()+2);
+      } 
+      else{
+           dt.setDate(dt.getDate()+1);
+      }
+     
+      console.log(dt);
+      
+      $('#datepicker-component2').datepicker({
+        format: "yyyy-mm-dd",
+        clearBtn: true,
+        todayHighlight: true,
+        startDate: dt,
+      });
+
+
       //set selected package record
       var rad = {!! json_encode(old('radioPackage')) !!};
       //$("input[name='radioPackage'][value='"+rad+"']").prop('checked', true);
@@ -243,12 +267,15 @@
       else{
         $("#packageDimensions").hide();
       }
-      //set pickup city  if old value is not present
+    });
+
+    $(window).on('load', function() {
+    // code here
+    //set pickup city  if old value is not present
       var val = {!! json_encode(old('pickup_city')) !!} ;
+      var text = {!! json_encode(auth()->user()->city) !!};
       if(val == null){
-        var city = {!! json_encode((array)auth()->user()->city) !!};
-        var test = '#exampleFormControlSelect1 option:contains('.concat(city).concat(')');
-        $(test).prop('selected',true);
+        $("#pickup_city").val(text).change();
       } 
     });
 
@@ -294,8 +321,11 @@
     $('#clear_data').click(function(){
       //alert("clicked");
         $('#senderInfo input').val("");
-       $('#exampleFormControlSelect1').val('0');
+        $('#pickup_city').find('option[selected]').removeAttr('selected');
+      //$('#pickup_city').val("0");
+      
     });
+
 
   </script>
 @endsection

@@ -22,7 +22,6 @@
                               <form id="form-edit-profile" class="p-t-15" role="form" enctype="multipart/form-data" method="POST" action="{{ route('customer.account.update', $user->username) }}">
                                   @csrf
                                   @method('PATCH')
-
                                   <div class="form-group form-group-default required @error('name') has-error @enderror">
                                       <label>{{ __('account.name') }}</label>
                                       <input type="text" name="name" value="{{ old('name', $user->name) }}" placeholder="{{ __('account.enter_field', ['field' => strtolower(__('account.name'))]) }}" class="form-control" required>

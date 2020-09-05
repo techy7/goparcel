@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Add User')
+@section('title',  __('general.add_user'))
 
 @section('upper-links-extend')
 
@@ -13,9 +13,9 @@
             <ul class="breadcrumb p-l-0">
               <li class="breadcrumb-item active">{{ __('general.users_access_roles') }}</li>
               <li class="breadcrumb-item active"><a href="{{ route('admin.users') }}">{{ __('general.manage_users') }}</a></li>
-              <li class="breadcrumb-item active">Add User</li>
+              <li class="breadcrumb-item active">{{ __('general.add_user')}}</li>
             </ul>
-            <h3 class="page-title">Create new User</h3>
+            <h3 class="page-title">{{ __('general.add_user')}}</h3>
         </div>
 
         <form id="form-register" class="p-t-15" role="form" method="POST" action="{{ route('admin.users.store') }}">
@@ -132,7 +132,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-default">
-                        <h5 class="text-secondary font-weight-bold" style="margin-left: 9px">Access Roles</h5>
+                        <h5 class="text-secondary font-weight-bold" style="margin-left: 9px">{{ __('general.access_roles')}}</h5>
                         <div class="card-body">
                             <div class="row" style="margin-top: -15px">
                                 @foreach ($nonCustomerRoles as $nonCustomerRole)
@@ -158,8 +158,8 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="btn-group btn-group-md">
-                        <a href="{{ route('admin.users') }}" class="m-t-15 m-r-15">Back</a>
-                        <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">Add User</button>
+                        <a href="{{ route('admin.users') }}" class="m-t-15 m-r-15">{{ __('general.back')}}</a>
+                        <button class="btn btn-primary btn-lg btn-cons m-t-10" type="submit">{{ __('general.add_user')}}</button>
                     </div>
                 </div>
             </div>

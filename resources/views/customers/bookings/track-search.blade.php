@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Order Details')
+@section('title', __('general.track_delivery'))
 
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -16,14 +16,62 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="pull-left">
-                        <h3 class="page-title">Track Parcel</h3>
+                        <h3 class="page-title">{{ __('general.track_delivery')}}</h3>
                     </div>
                 </div>
             </div>
         </div> 
 
-         <div class="container-fixed-lg bg-white w-100">
-            <iframe src="/track-delivery" title="description" style="min-height:650px;width:100%;border:none;">
+         <div class="container-fixed-lg bg-white w-100 py-3">
+            {{-- <iframe src="/track-delivery" title="description" style="min-height:650px;width:100%;border:none;"> --}}
+             @if(Session::has('message'))
+                            <div class="alert alert-error" role="alert">
+                                {{ Session::get('message') }}
+                            </div>
+                        @endif
+                        <form action="{{ route('booking.track-delivery.show', auth()->user()->username) }}" method="get"  data-parsley-validate autocomplete="off" class="d-print-none mb-5" >
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-12 d-flex justify-content-center mt-4">
+                                <div class="form-group form-group-default col-md-4 col-sm-12">
+                                    <label>{{ __('general.tracking_code')}}</label>
+                                    <input type="text" class="form-control" name="tracking_number" value=""  placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('general.tracking_code'))]) }}">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-block btn-lg btn-rounded btn-primary p-3 col-md-4 col-sm-12">{{ __('general.search')}}</button>
+                            </div>
+                        </form>
+                        @if(request()->has('tracking_number'))
+                        <div class="container">
+                            <div class="row">
+                                <p><strong>{{ __('general.tracking_code')}}: </strong> {{$pickupOrder->tracking_number}}<br/>
+                                <strong>{{ __('general.delivery_status')}}:</strong>  {{$pickupOrder->pickupActivities->first()->deliveryStatus->name}}</p>
+
+                            </div><br/>
+                            <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+
+                                @foreach ($statuses as $key => $status)
+                                    <div class="step" style="color: red">
+                                        <div class="step-icon-wrap">
+                                            <div class="step-icon" style="{{!is_null($status->pickup_id) ? 'background: #0b6181; color: white;' : ''}}"><i class="
+                                                @if($status->name == 'Order Created') pe-7s-note
+                                                @elseif($status->name == 'In Transit for Collection') pe-7s-albums
+                                                @elseif($status->name == 'Arrived at Manila Hub') pe-7s-map-marker
+                                                @elseif($status->name == 'In Transit for Delivery') pe-7s-car
+                                                @elseif($status->name == 'Delivered') pe-7s-box2
+                                                @elseif($status->name == 'Back to Sender') pe-7s-back-2
+                                                @endif
+                                            "></i></div>
+                                        </div>
+                                        <h4 class="step-title">{{ $status->name }}</h4>
+                                        @if(!is_null($status->pickup_id))
+                                            <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $status->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
+                                        @endif
+                                    </div>
+                                @endforeach
+
+                            </div>
+                         </div>   
+                        @endif
         </div>
     </div>
   </div>
