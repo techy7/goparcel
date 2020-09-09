@@ -14,6 +14,7 @@
         margin-bottom: 10px !important;
         background: white !important;
         border-bottom: none !important;
+        color: black !important;
     }
     td{
         vertical-align: top;
@@ -23,6 +24,7 @@
 
 <h1>Hi  {{ $pickup->user->name }},</h1>
 <p>
+
  {{ __('general.order_is_being_shipped', ['field' => $pickup->tracking_number]) }} 
 </p>
 
@@ -32,8 +34,10 @@
 <div class="body">
    <table>
       <tr>
-          <td>{{__('general.tracking_code')}}:</td>
-          <td>{{ $pickup->tracking_number }}</td>
+            <td>{{__('general.tracking_code')}}:</td>
+            <td>
+                <a href="https://app.weparcelbear.com/track-delivery/track?tracking_number={{$pickup->tracking_number}}">{{ $pickup->tracking_number }}</a>
+            </td>
       </tr>
       <tr>
           <td>{{__('general.package_type')}}:</td>
@@ -43,6 +47,10 @@
           <td>{{__('general.cod')}}:</td>
           <td><b> {{ $pickup->charge_to_sender ? "No" : "Yes" }} </b></td>
       </tr>
+      <tr>
+        <td>{{ __('pickup.total_amount')}}:</td>
+        <td><b> P{{ number_format($pickup->package_amount, 2, '.', ',') }} </b></td>
+    </tr>
    </table>
 </div>
 
@@ -80,19 +88,29 @@
        </tr>
        <tr>
            <td>{{ __('general.address')}}:</td>
-           <td>{{ $pickup->receiver_address }} <strong> {{ $pickup->receiver_city }}, {{ $pickup->receiver_state }}</strong>,  {{ $pickup->receiver_postal_code }}</td>
+           <td>{{ $pickup->receiver_address }}, <strong> {{ $pickup->receiver_city }}, {{ $pickup->receiver_state }}</strong>,  {{ $pickup->receiver_postal_code }}</td>
        </tr>
    </table>
 </div>
-
-<h4 style="margin: 0px; margin-top: 10px; float:right"><strong>{{ __('pickup.total_amount')}}:</strong> <small>P{{ number_format($pickup->package_amount, 2, '.', ',') }}</small></h4>
 <br>
-<p style="font-size: 16px !important; line-height:1.5rem !important;">
-  
-  Regards,<br>
+<div  style="margin-top: 10px !important;">
+    <p>
+    You will receive a message from our rider on the day of the delivery.
+    Please keep your lines open so our rider can easily reach you once your parcel is in transit.
+    <br><br>
+    <b>Got questions?</b> 
+    Our team is ready to assist you from 8am - 8pm daily. 
+    <br><br>
+    (+63) 961 476 2070 <br>
+    hello@weparcelbear.com
+    </p>
+</div>
+
+<p style="font-size: 16px !important; line-height:1.5rem !important;">  
+  At Your Service,<br>
   <strong>   
     {{ config('app.name') }}
   </strong>
- 
+
 </p>
 @endcomponent
