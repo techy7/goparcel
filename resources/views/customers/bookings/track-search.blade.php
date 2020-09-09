@@ -23,11 +23,12 @@
         </div> 
 
          <div class="container-fixed-lg bg-white w-100 py-3">
-            {{-- <iframe src="/track-delivery" title="description" style="min-height:650px;width:100%;border:none;"> --}}
              @if(Session::has('message'))
+                        <div class="container"> 
                             <div class="alert alert-error" role="alert">
                                 {{ Session::get('message') }}
                             </div>
+                        </div>
                         @endif
                         <form action="{{ route('booking.track-delivery.show', auth()->user()->username) }}" method="get"  data-parsley-validate autocomplete="off" class="d-print-none mb-5" >
                             <div class="col-xs-12 col-sm-12 col-md-12 col-12 d-flex justify-content-center mt-4">
@@ -52,15 +53,7 @@
                                 @foreach ($statuses as $key => $status)
                                     <div class="step" style="color: red">
                                         <div class="step-icon-wrap">
-                                            <div class="step-icon" style="{{!is_null($status->pickup_id) ? 'background: #0b6181; color: white;' : ''}}"><i class="
-                                                @if($status->name == 'Order Created') pe-7s-note
-                                                @elseif($status->name == 'In Transit for Collection') pe-7s-albums
-                                                @elseif($status->name == 'Arrived at Manila Hub') pe-7s-map-marker
-                                                @elseif($status->name == 'In Transit for Delivery') pe-7s-car
-                                                @elseif($status->name == 'Delivered') pe-7s-box2
-                                                @elseif($status->name == 'Back to Sender') pe-7s-back-2
-                                                @endif
-                                            "></i></div>
+                                        <div class="step-icon" style="{{!is_null($status->pickup_id) ? 'background: #0b6181; color: white;' : ''}}"><i class="{{$status->icon}}"></i></div>
                                         </div>
                                         <h4 class="step-title">{{ $status->name }}</h4>
                                         @if(!is_null($status->pickup_id))

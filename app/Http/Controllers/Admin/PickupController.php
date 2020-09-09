@@ -79,8 +79,9 @@ class PickupController extends Controller
 
 
         $pickups= Pickup::
-       // join('packages', 'pickups.package_id','=','packages.id')
-         where(function ($q) use ($searchCities) {
+          join('packages', 'pickups.package_id','=','packages.id')
+          ->selectRaw('pickups.*, packages.name as package_name')
+          ->where(function ($q) use ($searchCities) {
             foreach ($searchCities as $value) {
               $q->orWhere('pickup_city', 'like', "%{$value}%");
             }
@@ -112,17 +113,16 @@ class PickupController extends Controller
           })
           ->where(function ($q) use ($hasNewRequest, $fromdateCreated) {
             if($hasNewRequest){
-              $q->where('created_at','>=', $fromdateCreated);
+              $q->where('pickups.created_at','>=', $fromdateCreated);
             }
           })
           ->where(function ($q) use ($hasNewRequest, $todateCreated) {
             if($hasNewRequest){
-              $q->where('created_at','<=', $todateCreated);
+              $q->where('pickups.created_at','<=', $todateCreated);
             }
-          })
-          ->orderBy('pickups.pickup_date','DESC')
+          })  
+          ->orderBy('pickups.pickup_date','DESC')    
           ->get();
-
       
           return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types', 'searches', 'deliveryStatus'));
     }

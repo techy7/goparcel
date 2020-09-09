@@ -118,7 +118,7 @@ class PickupController extends Controller
         $pickup->pickupActivities()->create();
         
         // //dd($pickup->receiver_email);
-        // Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
+        Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
         
         return redirect()->route('customer.pickup',auth()->user()->username)->with('success', 'Pickup has been successfully added. Tracking Code: '.$pickup->tracking_number);
     }
@@ -151,11 +151,11 @@ class PickupController extends Controller
             $q->on('delivery_statuses.id', '=', 'pickup_activities.delivery_status_id')
             ->where('pickup_activities.pickup_id', '=', $pickupOrder->id);
         })
-        ->selectRaw('pickup_activities.*, delivery_statuses.name as name, delivery_statuses.created_at as ca, delivery_statuses.updated_at as ua')
+        ->selectRaw('pickup_activities.*, delivery_statuses.name as name, delivery_statuses.created_at as ca, delivery_statuses.updated_at as ua, delivery_statuses.icon as icon')
         
         
         ->get();
-
+        
         return view('customers.pickup.order-tracking',
         compact(
             'pickupOrder',

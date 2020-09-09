@@ -175,8 +175,10 @@
                   <th>{{ __('pickup.pickup_state')}}</th>
                   <th>{{ __('pickup.pickup_postal')}}</th>
                   <th>{{ __('pickup.package_type')}}</th>
-                  <th>{{ __('pickup.total_amount')}}</th>
+                  <th>{{ __('pickup.total_amount')}} (₱)</th>
                   <th>{{ __('general.delivery_status')}}</th>
+                  <th>{{ __('general.delivery_status')}}</th>
+                  <th>{{ __('general.received_by')}}</th>
                   <th>{{ __('general.action')}}</th>
                 </tr>
 
@@ -192,22 +194,7 @@
                     </td>
                       <td class="v-align-middle semi-bold">
                           <p>{{ $pickup->user->name }}</p>
-                          <div class="btn-group dropdown dropdown-default m-1" style="margin-top: 4px;">
-                            <button aria-label="" class="btn dropdown-toggle text-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Details
-                            </button>
-                            <div class="dropdown-menu">
-                              <button class="dropdown-item" data-toggle="modal" data-target="#modalSlideUp-{{ $pickup->id }}">
-                                Package
-                              </button>
-                              <button class="dropdown-item" data-toggle="modal" data-target="#modalSlideUp-{{ $pickup->id }}-{{ $pickup->id }}">
-                                Receiver
-                              </button>
-                              <button class="dropdown-item" data-toggle="modal" data-target="#modalSlideUp-{{ $pickup->id }}-{{ $pickup->id }}-{{ $pickup->id }}">
-                                Customer
-                              </button>
-                            </div>
-                          </div>
+                         
                       </td>
                       <td class="v-align-middle semi-bold">
                         <a href="{{ route('customer.bookings.track', [auth()->user()->username, $pickup->tracking_number]) }}" class="btn btn-rounded btn-sm btn-outline-primary">{{ $pickup->tracking_number }}</a>
@@ -229,25 +216,53 @@
                       </td>
                       @if ($pickup->name == 'Own Packaging')
                         <td class="v-align-middle semi-bold">
-                          <p>{{ $pickup->priceFormatted($pickup->package_amount) }}</p>
+                          <p> {{number_format($pickup->package_amount ,'2') }}</p>
                         </td>
                       @else
                         <td class="v-align-middle semi-bold">
-                          <p>{{ $pickup->priceFormatted($pickup->package->amount) }}</p>
+                          <p>{{ number_format($pickup->package->amount,'2') }}</p>
                         </td>
                       @endif
-                      <td class="v-align-middle semi-bold">
-                            {{ $pickup->setMaxActivity() }}
-                           <select name="delivery_status_id" class="delivery-status full-width" data-init-plugin="select2" data-pickup-id="{{$pickup->id}}" data-customer-id="{{$pickup->user_id}}" style="width:150px;  ">
-                              <option value="0">{{ $pickup->pickupActivities->first()->deliveryStatus->name }}</option>
+                      <td class="v-align-middle semi-bold"> 
+                        {{ $pickup->pickupActivities->first()->deliveryStatus->name }}
+                      </td>
+                      <td class="v-align-middle semi-bold"> 
+                        
+                           {{ $pickup->setMaxActivity() }}
+                            <select name="delivery_status_id" class="delivery-status full-width text-center" data-init-plugin="select2" data-pickup-id="{{$pickup->id}}" data-customer-id="{{$pickup->user_id}}" style="width:150px;  ">
+                              <option class="text-center" value="0"> {{ $pickup->pickupActivities->first()->deliveryStatus->name }}</option>
                               @foreach ($deliveryStatus as $key=>$status)
-                                <option value="{{ $status->id }}" {{ ($status->id==$pickup->getMaxActivity() + 1 ) ?  '': 'disabled' }}>{{ $status->name }}</option>
+                                <option value="{{ $status->id }}" 
+                                    @if($status->id==$pickup->getMaxActivity() + 1 )
+                                    
+                                    @else 
+                                      disabled
+                                    @endif>
+                                  {{ $status->name }}
+                                </option>
                               @endforeach
                           </select>
-                        </a>
+                      </td>
+                      <td class="v-align-middle semi-bold">
                       </td>
                       <td class="v-align-middle semi-bold">
                         <div class="btn-group">
+                          <div class="btn-group dropdown dropdown-default m-1" style="margin-top: 4px;">
+                            <button aria-label="" class="btn dropdown-toggle text-center" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Details
+                            </button>
+                            <div class="dropdown-menu">
+                              <button class="dropdown-item" data-toggle="modal" data-target="#modalSlideUp-{{ $pickup->id }}">
+                                Package
+                              </button>
+                              <button class="dropdown-item" data-toggle="modal" data-target="#modalSlideUp-{{ $pickup->id }}-{{ $pickup->id }}">
+                                Receiver
+                              </button>
+                              <button class="dropdown-item" data-toggle="modal" data-target="#modalSlideUp-{{ $pickup->id }}-{{ $pickup->id }}-{{ $pickup->id }}">
+                                Customer
+                              </button>
+                            </div>
+                          </div>
                           <a href="{{ route('admin.pickups.edit', $pickup->id) }}" class="btn btn-outline-primary m-1">Edit</a>
                           <a href="{{ route('admin.pickups.destroy-confirmation', $pickup->id) }}" class="btn btn-outline-danger text-danger m-1">Delete</a>
                         </div>
@@ -282,7 +297,8 @@
 
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"> </script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"> </script>
-    <script type="text/javascript" src=" https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"> </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"> </script>
+    {{-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.colVis.min.js"> </script> --}}
 @endsection
 
 
@@ -302,14 +318,20 @@
     $(document).ready(function(){
 
        $('#pickup_table').DataTable( {
-
+        fixedHeader: true,
         dom: 'Bfrtip',
+        columnDefs: [
+            {
+              visible: false, 
+              targets: [10,12] 
+            }
+        ],
         buttons: [
             {
               extend: 'excel',
               text: 'Download Excel' ,
               exportOptions: {
-                columns: 'th:not(:last-child)'
+                columns: [1,2,3,4,5,6,7,9,10,12]
               }
             },
             {
@@ -318,9 +340,9 @@
               orientation: 'landscape',
               pageSize: 'LEGAL' ,
               exportOptions: {
-                  columns: 'th:not(:last-child)'
-                }
-            }
+                columns: [1,2,3,4,5,6,7,9,10,12]
+              }
+            },
         ],
         "pageLength": 15,
         "aaSorting": []

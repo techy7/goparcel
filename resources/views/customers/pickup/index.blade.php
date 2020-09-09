@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group form-group-default" @error('sender_phone') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                       <label>{{ __('pickup.sender_phone')}}</label>
-                      <input type="text" class="form-control" name="sender_phone" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.sender_phone'))]) }}" value="{{ old('_token') !== null ? old('sender_phone') : auth()->user()->m_number }}">
+                      <input type="text" maxlength="15" id="sender_phone_number" class="form-control phone_number"  name="sender_phone" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.sender_phone'))]) }}" value="{{ old('_token') !== null ? old('sender_phone') : auth()->user()->m_number }}">
                     </div>
                     <div class="form-group form-group-default input-group" @error('pickup_date') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                         <div class="form-input-group">
@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group form-group-default" @error('pickup_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                       <label>{{ __('pickup.pickup_postal')}}</label>
-                      <input type="text" class="form-control" name="pickup_postal_code" value="{{ old('_token') !== null ? old('pickup_postal_code') : auth()->user()->postal_code  }}"  placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.pickup_postal'))]) }}">
+                      <input type="text" maxlength="4" class="form-control postal" name="pickup_postal_code" value="{{ old('_token') !== null ? old('pickup_postal_code') : auth()->user()->postal_code  }}"  placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.pickup_postal'))]) }}">
                     </div>
                   </div>
                 </div> 
@@ -78,7 +78,7 @@
                     </div>
                     <div class="form-group form-group-default"  @error('receiver_phone')  style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                       <label>{{ __('pickup.receiver_phone')}}</label>
-                      <input type="text" class="form-control" name="receiver_phone"   value="{{ old('receiver_phone') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_phone'))]) }}">
+                      <input type="text" maxlength="15" id="receiver_phone_number" class="form-control phone_number" name="receiver_phone"   value="{{ old('receiver_phone') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_phone'))]) }}">
                     </div>
                     <div class="form-group form-group-default"  @error('receiver_email')  style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                       <label>{{ __('pickup.receiver_email')}}</label>
@@ -101,7 +101,7 @@
                     </div>
                     <div class="form-group form-group-default" @error('receiver_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                       <label>{{ __('pickup.receiver_postal')}}</label>
-                      <input type="text" class="form-control" name="receiver_postal_code" value="{{ old('receiver_postal_code') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_postal'))]) }}">
+                      <input type="text" maxlength="4" class="form-control postal" name="receiver_postal_code" value="{{ old('receiver_postal_code') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_postal'))]) }}">
                     </div>
                   </div>
                 </div> 
@@ -120,7 +120,7 @@
                       <div class="form-check container-radio text-center">
                         <input class="form-check-input d-none" type="radio" name="radioPackage" id="{{$package->name}}" value="{{$package->name}}">
                         <label class="form-check-label" for="{{$package->name}}">
-                          <img alt="Package Picture" width="75" height="45" src="/pages/assets/img/icon.png">
+                          <img alt="Package Picture" width="70" height="70" src="/pages/assets/img/icon.png">
                           <p class="package-title">{{$package->name}}</p>
                           <p class="package-description">{{ __('pickup.max_weight')}} {{$package->max_weight}} kg</p>
                           <p class="package-description price">{{ __('general.amount_peso', ['field' => number_format($package->amount,2)]) }}</p>
@@ -229,7 +229,7 @@
     <script src="{{ asset('pages/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js') }}"></script>
     <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
- 
+    <script src="{{ asset('pages/assets/plugins/jquery-inputmask/jquery.inputmask.min.js') }}" type="text/javascript"></script>
   <script>
 
 
@@ -282,7 +282,8 @@
     $(function(){
       $("#pickup_postal_code").mask("9999");
       $("#receiver_postal_code").mask("9999");
-      $("#m_number").mask("(9999) 999-9999");
+      $(".phone_number").mask("(9999) 999-9999");
+      $(".postal").mask("9999");
       $('#form-register').validate();
     });
 

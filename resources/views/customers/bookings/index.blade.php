@@ -37,6 +37,7 @@
               <thead>
                 <tr>
                   <th style="width:15%">{{ __('general.pickup_schedule') }}</th>
+                  <th style="width:15%">{{ __('general.date_created') }}</th>
                   <th style="width:25%">{{ __('general.recipient') }}</th>
                   <th style="width:15%">{{ __('general.tracking_code') }}</th>
                   <th style="width:15%">{{ __('general.delivery_status') }}</th>
@@ -48,6 +49,9 @@
               <tbody>
                 @foreach (auth()->user()->pickups as $pickup)
                 <tr>
+                  <td class="v-align-middle semi-bold">
+                    <p>{{ $pickup->pickup_date->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D)') }}</p>
+                  </td>
                   <td class="v-align-middle semi-bold">
                     <p>{{ $pickup->created_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
                   </td>

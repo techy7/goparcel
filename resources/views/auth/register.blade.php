@@ -57,7 +57,7 @@
                 <div class="col-md-6">
                   <div class="form-group form-group-default required">
                     <label>{{ __('auth.confirm_password') }}</label>
-                    <input type="password" name="password_confirmation" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.confirm_password'))]) }}" class="form-control" required>
+                    <input type="password" name="password_confirmation" placeholder="{{ __('auth.retype_password') }}" class="form-control" required>
                   </div>
                 </div>
               </div>

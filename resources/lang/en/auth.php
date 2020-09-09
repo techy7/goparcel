@@ -22,6 +22,7 @@ return [
     'username' => 'Username',
     'email' => 'Email',
     'password' => 'Password',
+    'retype_password' => 'Retype password',
     'confirm_password' => 'Confirm Password',
     'name' => 'Name',
     'mobile_number' => 'Mobile Number',
@@ -46,8 +47,7 @@ return [
     'error_password_validation_note' => 'Password must contain at least 6 characters, including upper/lowercase, numbers and special characters',
     'error_password_invalid' => 'Password requirements has not met',
     'error_password_not_match' => 'Password not match',
-
-    'i_agree_to_the' => 'I agree to the',
+    'i_agree_to_the' => 'By clicking "Create an Account", you agree to Parcel Bear\'s',
     'terms_of_use' => 'Terms of Use',
     'privacy_policy' => 'Privacy Policy',
     'help_contact_support' => 'Help? Contact Support',

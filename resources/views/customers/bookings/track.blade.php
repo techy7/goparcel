@@ -1,6 +1,6 @@
 @extends('layouts.pages.app')
 
-@section('title', 'Order Details')
+@section('title', __('general.order_details'))
 
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -45,7 +45,8 @@
                     <div class="card-header  separator">
                     <div class="card-title">
                         <h5 style="margin-bottom: 0px !important">{{ __('general.tracking_code')}}: {{ $pickupOrder->tracking_number }}</h5>
-                        <p><small>{{ __('general.pickup_schedule')}}: {{ $pickupOrder->created_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</small></p>
+                        <p><small>{{ __('general.order_created')}}: {{ $pickupOrder->created_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</small><br/>
+                     <small>{{ __('general.pickup_schedule')}}: {{ $pickupOrder->pickup_date->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D)') }}</small></p>
                     </div>
                     </div>
                     <div class="card-body p-3" style="padding-bottom: 0px !important">
@@ -161,40 +162,10 @@
                                         </div>
                                             <div class="card-body" style="padding: 10px 20px 0px 10px !important;">
                                             <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-
-                                                {{-- @foreach ($pickupOrder->pickupActivities->sortBy('created_at') as $key => $active)
-                                                    <div class="step
-                                                            @if(($active->deliveryStatus->name == 'Order Created') || ($active->deliveryStatus->name == 'In Transit for Collection') || ($active->deliveryStatus->name == 'Arrived at Manila Hub') || ($active->deliveryStatus->name == 'In Transit for Delivery') || ($active->deliveryStatus->name == 'Delivered') || ($active->deliveryStatus->name == 'Back to Sender')) completed @endif
-                                                        ">
-                                                        {{$key}}
-                                                        <div class="step-icon-wrap">
-                                                            <div class="step-icon" style="{{$key>1 ? 'background: red' : 'background: blue'}}"><i class="
-                                                                @if($active->deliveryStatus->name == 'Order Created') pe-7s-note
-                                                                @elseif($active->deliveryStatus->name == 'In Transit for Collection') pe-7s-albums
-                                                                @elseif($active->deliveryStatus->name == 'Arrived at Manila Hub') pe-7s-map-marker
-                                                                @elseif($active->deliveryStatus->name == 'In Transit for Delivery') pe-7s-car
-                                                                @elseif($active->deliveryStatus->name == 'Delivered') pe-7s-box2
-                                                                @elseif($active->deliveryStatus->name == 'Back to Sender') pe-7s-back-2
-                                                                @endif
-                                                            "></i></div>
-                                                        </div>
-                                                        <h4 class="step-title">{{ $active->deliveryStatus->name }}</h4>
-                                                        <h5 class="step-title" style="font-size: 0.6rem !important; margin-top: -10px">{{ $active->updated_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</h5>
-                                                    </div>
-                                                @endforeach --}}
-
                                                  @foreach ($statuses as $key => $status)
                                                     <div class="step" style="color: red">
                                                         <div class="step-icon-wrap">
-                                                            <div class="step-icon" style="{{!is_null($status->pickup_id) ? 'background: #0b6181; color: white;' : ''}}"><i class="
-                                                                @if($status->name == 'Order Created') pe-7s-note
-                                                                @elseif($status->name == 'In Transit for Collection') pe-7s-albums
-                                                                @elseif($status->name == 'Arrived at Manila Hub') pe-7s-map-marker
-                                                                @elseif($status->name == 'In Transit for Delivery') pe-7s-car
-                                                                @elseif($status->name == 'Delivered') pe-7s-box2
-                                                                @elseif($status->name == 'Back to Sender') pe-7s-back-2
-                                                                @endif
-                                                            "></i></div>
+                                                        <div class="step-icon" style="{{!is_null($status->pickup_id) ? 'background: #0b6181; color: white;' : ''}}"><i class="{{$status->icon}}"></i></div>
                                                         </div>
                                                         <h4 class="step-title">{{ $status->name }}</h4>
                                                         @if(!is_null($status->pickup_id))
@@ -250,7 +221,3 @@
     <script src="{{ asset('pages/assets/js/datatables.js') }}" type="text/javascript"></script>
 @endsection
 
-
-
-{{-- <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> --}}

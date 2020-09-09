@@ -1,23 +1,98 @@
 @component('mail::message')
-# Customer Pickup Details
+ 
+<style>
+    .header1{
+        background: #0b6181 !important;
+        color: white !important;
+        width: 100%;
+        padding: 3px !important;
+        margin: 0px !important;
+    }
+    .body{
+        margin: 0px !important;
+        padding: 0px !important;
+        margin-bottom: 10px !important;
+        background: white !important;
+        border-bottom: none !important;
+    }
+    td{
+        vertical-align: top;
+    }
+</style>
+ 
 
-<strong>Customer Details:</strong><br>
-<strong>Name:</strong> {{ $pickup->user->name }}<br>
-<strong>Email:</strong> {{ $pickup->user->email }}<br>
-<strong>Phone Number:</strong> {{ $pickup->user->m_number }}<br>
-<strong>Address:</strong> {{ $pickup->user->address }}<br>
-<strong>City:</strong> {{ $pickup->user->city }}<br>
-<strong>State:</strong> {{ $pickup->user->state }}<br>
-<strong>Postal Code:</strong> {{ $pickup->user->postal_code }}<br>
-<strong>Country:</strong> {{ $pickup->user->country }}<br>
-<strong>Tracking Number:</strong> {{ $pickup->tracking_number }}<br>
-<strong>Pickup Date:</strong> {{ $pickup->pickup_date->format('F d, Y (D)') }}<br>
-@if ($pickup->package->name == 'Own Packaging')
-  <strong>Total Amount:</strong> {{ $pickup->priceFormatted($pickup->package_amount) }}<br>
-@else
-  <strong>Total Amount:</strong> {{ $pickup->priceFormatted($pickup->package->amount) }}<br>
-@endif
+<h1>Hi  {{ $pickup->user->name }},</h1>
+<p>
+ {{ __('general.order_is_being_shipped', ['field' => $pickup->tracking_number]) }} 
+</p>
 
-Thanks,<br>
-{{ config('app.name') }}
+<div class="header1">
+  {{__('general.order_details')}} 
+</div>
+<div class="body">
+   <table>
+      <tr>
+          <td>{{__('general.tracking_code')}}:</td>
+          <td>{{ $pickup->tracking_number }}</td>
+      </tr>
+      <tr>
+          <td>{{__('general.package_type')}}:</td>
+          <td>{{ $pickup->package->name }}</td>
+      </tr>
+      <tr>
+          <td>{{__('general.cod')}}:</td>
+          <td><b> {{ $pickup->charge_to_sender ? "No" : "Yes" }} </b></td>
+      </tr>
+   </table>
+</div>
+
+<div class="header1">
+    {{__('pickup.sender_details')}} 
+</div>
+<div class="body">
+   <table>
+       <tr>
+           <td>{{__('general.name')}}:</td>
+           <td>{{ $pickup->sender_name }}</td>
+       </tr>
+       <tr>
+           <td>{{__('general.phone')}}:</td>
+           <td>{{ $pickup->sender_phone }}</td>
+       </tr>
+       <tr>
+           <td>{{__('general.address')}}:</td>
+           <td>{{ $pickup->pickup_address }} {{ $pickup->pickup_city }}, {{ $pickup->pickup_state }}, {{ $pickup->pickup_postal_code }}</td>
+       </tr>
+   </table>
+</div>
+<div class="header1">
+   {{__('pickup.receiver_details')}} 
+</div>
+<div class="body">
+   <table>
+       <tr>
+           <td>{{ __('general.name')}}:</td>
+           <td>{{ $pickup->receiver_name }}</td>
+       </tr>
+       <tr>
+           <td>{{ __('general.phone')}}:</td>
+           <td>{{ $pickup->receiver_phone }}</td>
+       </tr>
+       <tr>
+           <td>{{ __('general.address')}}:</td>
+           <td>{{ $pickup->receiver_address }} <strong> {{ $pickup->receiver_city }}, {{ $pickup->receiver_state }}</strong>,  {{ $pickup->receiver_postal_code }}</td>
+       </tr>
+   </table>
+</div>
+
+<h4 style="margin: 0px; margin-top: 10px; float:right"><strong>{{ __('pickup.total_amount')}}:</strong> <small>P{{ number_format($pickup->package_amount, 2, '.', ',') }}</small></h4>
+<br>
+<p style="font-size: 16px !important; line-height:1.5rem !important;">
+  
+  Regards,<br>
+  <strong>   
+    {{ config('app.name') }}
+  </strong>
+ 
+</p>
 @endcomponent

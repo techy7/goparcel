@@ -27,7 +27,7 @@ return [
     'my_pickup_booking' => 'My Pickup Bookings',
     'customers' => 'Customers',
     'help_center' => 'Help Center',
-    'terms_of_service' => 'Terms of Service',
+    'terms_of_service' => 'Terms and Condition',
     'privacy_policy' => 'Privacy Policy',
 
     //Admin
@@ -73,6 +73,7 @@ return [
     'cash_on_delivery' => 'Cash-on-delivery',
     'date_created' => 'Date Created',
     'date_modified' => 'Date Modified',
+    'received_by' => 'Received By',
 
     //Customer
     'customer_name' => 'Customer Name',
@@ -100,6 +101,7 @@ return [
     'order_details' => 'Order Details',
     'schedule_another' => 'Schedule Another Delivery',
     'order_summary' => 'Order Summary',
+    'order_created' => 'Order Created',
 
     //Users
     'add_user' => 'Add User',
@@ -129,4 +131,17 @@ return [
     'package_description' => 'Package Description',
     'package_amount' => 'Package Amount',
     'edit_package' => 'Edit Package',
+
+    //waybill
+    'cod' => 'COD',
+    'name' => 'Name',
+    'phone' => 'Phone',
+    'address' => 'Address',
+    'comments' => 'Comments',
+    'delivery_attempts' => 'Delivery Attempts',
+
+    //email
+    'order_is_being_shipped' => 'A package with a tracking code of  :field is now ready to be shipped to your address. 
+    Check the delivery details below.',
+
 ];

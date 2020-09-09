@@ -43,6 +43,7 @@
                 </div>
               </div>
               <div class="p-l-20 p-r-20">
+                <h3 class="mt-0 m-b-20">&nbsp;</h3>
                 <p class="no-margin d-flex align-items-end justify-content-end"><a href="{{ route('customer.bookings.searchTrack',  auth()->user()->username) }}" class="btn btn-primary btn-cons text-white btn-sm-block">{{ __('general.go_to_track_delivery') }}</a></p>
               </div>
             </div>
