@@ -216,7 +216,7 @@
     </div>
  
 @endsection
- 
+   
 @section('appJs-link')
     <script src="{{ asset('js/app.js') }}"></script>
 @endsection
