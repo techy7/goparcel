@@ -96,7 +96,7 @@
                         <optgroup label="{{ $state }}">
                           @foreach ($cities as $city)<option value="{{ $city }}" {{ old('receiver_city') == $city ? 'selected' : null }}>{{ $city }}</option>@endforeach
                         </optgroup>
-                        @endforeach
+                        @endforeach 
                       </select>
                     </div>
                     <div class="form-group form-group-default" @error('receiver_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
