@@ -402,7 +402,7 @@
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
       });
-
+ 
        $("#input-state").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $("#dropdown-state li").filter(function() {
