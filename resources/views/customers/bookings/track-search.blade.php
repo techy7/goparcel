@@ -53,7 +53,7 @@
                                 @foreach ($statuses as $key => $status)
                                     <div class="step" style="color: red">
                                         <div class="step-icon-wrap">
-                                        <div class="step-icon" style="{{!is_null($status->pickup_id) ? 'background: #0b6181; color: white;' : ''}}"><i class="{{$status->icon}}"></i></div>
+                                            <div class="step-icon" style="{{!is_null($status->pickup_id) ? ($status->status_id ==7) ? 'background: red; color:white' : 'background: #0b6181; color: white;' : ''}}"><i class="{{$status->icon}}"></i></div>                                    
                                         </div>
                                         <h4 class="step-title">{{ $status->name }}</h4>
                                         @if(!is_null($status->pickup_id))

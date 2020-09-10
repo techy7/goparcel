@@ -42,7 +42,7 @@ class BookingController extends Controller
             $q->on('delivery_statuses.id', '=', 'pickup_activities.delivery_status_id')
             ->where('pickup_activities.pickup_id', '=', $pickupOrder->id);
         })
-        ->selectRaw('pickup_activities.*, delivery_statuses.name as name, delivery_statuses.created_at as ca, delivery_statuses.updated_at as ua, delivery_statuses.icon as icon')
+        ->selectRaw('pickup_activities.*, delivery_statuses.name as name, delivery_statuses.created_at as ca, delivery_statuses.updated_at as ua, delivery_statuses.icon as icon, delivery_statuses.id as status_id')
       
         ->get();
 
@@ -84,7 +84,7 @@ class BookingController extends Controller
             Session::flash('message', 'Please enter the tracking number of your parcel!'); 
             else
             Session::flash('message', 'Tracking number for the parcel not found'); 
-            return redirect()->route('customer.bookings.searchTrack', auth()->user()->username);
+            return redirect()->route('customer.bookings.searchTrack', auth()->ucusser()->username);
         }
 
         $statuses = DeliveryStatus::all();
@@ -93,9 +93,8 @@ class BookingController extends Controller
             $q->on('delivery_statuses.id', '=', 'pickup_activities.delivery_status_id')
             ->where('pickup_activities.pickup_id', '=', $pickupOrder->id);
         })
-        ->selectRaw('pickup_activities.*, delivery_statuses.name as name, delivery_statuses.created_at as ca, delivery_statuses.updated_at as ua,  delivery_statuses.icon as icon')  
+        ->selectRaw('pickup_activities.*, delivery_statuses.name as name, delivery_statuses.created_at as ca, delivery_statuses.updated_at as ua,  delivery_statuses.icon as icon, delivery_statuses.id  as status_id')  
         ->get();
-
         return view('customers.bookings.track-search',
         compact(
             'pickupOrder',

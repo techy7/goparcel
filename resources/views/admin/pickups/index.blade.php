@@ -101,11 +101,19 @@
             </div>{{--End of Row 1--}}
             <div class="row mt-3">
               <div class="col-md-3">
-                 <div class="form-check">
-                  {{-- <input type="checkbox" class="form-check-input" id="checkNewPickups" name="checkNewPickups">
-                  <label class="form-check-label" for="checkNewPickups">Show New Request</label> --}}
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ __('general.delivery_status')}}
+                  <span class="caret"></span></button>
+                  <ul id="dropdown-delivery-status" class="dropdown-menu">
+                    <input class="form-control" id="input-delivery-status" type="text" placeholder="{{ __('auth.search_field', ['field' => strtolower(__('general.delivery_status'))]) }}">
+                    @foreach($deliveryStatus as $status)
+                      <li id="{{$status->name}}" data-value="{{$status->name}}"><a href="#">{{$status->name}}</a></li>
+                    @endforeach
+                  </ul>
                 </div>
+                <input id="displayDeliveryStatus" name="displayDeliveryStatus" type="text" value="" data-role="tagsinput"/>
               </div>
+
               <div class="col-md-3">
                 <div id="fromDiv">
                   <button class="btn btn-primary " type="button">{{ __('pickup.pickup_date')}}</button>
@@ -230,14 +238,17 @@
                         
                            {{ $pickup->setMaxActivity() }}
                             <select name="delivery_status_id" class="delivery-status full-width text-center" data-init-plugin="select2" data-pickup-id="{{$pickup->id}}" data-customer-id="{{$pickup->user_id}}" style="width:150px;  ">
-                              <option class="text-center" value="0"> {{ $pickup->pickupActivities->first()->deliveryStatus->name }}</option>
+                              {{-- <option class="text-center" value="0"> {{ $pickup->pickupActivities->first()->deliveryStatus->name }}</option> --}}
                               @foreach ($deliveryStatus as $key=>$status)
-                                <option value="{{ $status->id }}" 
+                                <option value="{{ $status->id }}"
+                                    {{($status->id==$pickup->getMaxActivity())? 'selected': '' }}
+                                    
                                     @if($status->id==$pickup->getMaxActivity() + 1 )
                                     
                                     @else 
                                       disabled
                                     @endif>
+                                    
                                   {{ $status->name }}
                                 </option>
                               @endforeach
@@ -315,8 +326,33 @@
     <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
 
   <script>
-    $(document).ready(function(){
 
+    $(window).on('load', function () {
+      $('.delivery-status').each(function(){
+        var val = ($(this).children("option:selected").val());
+        if(val == 4){ //if in transit for delivery
+          $(this).children("option").each(function(){
+              if($(this).val() == 5 || $(this).val() == 6){
+                $(this).prop('disabled', false);
+              }
+          });
+        }
+        if(val == 5){
+          $(this).children("option").each(function(){
+            if($(this).val() > 5){
+                $(this).prop('disabled', false);
+              }
+          });
+        }
+        if(val == 6){
+          $(this).children("option").each(function(){
+            $(this).prop('disabled', true);
+          });
+        }
+      });
+    });
+
+    $(document).ready(function(){
        $('#pickup_table').DataTable( {
         fixedHeader: true,
         dom: 'Bfrtip',
@@ -353,6 +389,7 @@
         $('#displayState').tagsinput('add', s["states"].join());
         $('#displayPostalCode').tagsinput('add', s["postalCodes"].join());
         $('#displayPackageType').tagsinput('add', s["packageTypes"].join());
+        $('#displayDeliveryStatus').tagsinput('add', s["deliveryStatuses"].join());
         $('#datepicker-from').val(s['fromDate']);
         $('#datepicker-to').val(s['toDate']);
         $('#newRequest').prop('checked', s['newRequest']);
@@ -388,6 +425,13 @@
         });
       });
 
+      $("#input-delivery_status").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#dropdown-delivery_status li").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+
     });
 
     $(function() {
@@ -415,6 +459,11 @@
       });
     });
 
+    $(function() {
+      $('ul#dropdown-delivery-status li').click( function() {
+      $('#displayDeliveryStatus').tagsinput('add', $(this).attr('data-value'));
+      });
+    });
 
      $(function(){
         $('.datepicker-standard').datepicker({
@@ -434,15 +483,16 @@
         previous = this.value;
     })
     .change(function(){
+    var index = $(this).children("option:selected").val();
     var pickup_id = $(this).data("pickup-id");
     var cust_id = $(this).data("customer-id");
     var c = confirm("Are you sure you want to update the status?");
     if(c == false){
-      
-      this.value = previous;
+            this.value = previous;
       return;
     } 
-    $.get("{{ route('admin.pickups.updateStatus') }}",{pickup_id: pickup_id, cust_id: cust_id}, function(data){
+
+    $.get("{{ route('admin.pickups.updateStatus') }}",{pickup_id: pickup_id, cust_id: cust_id, index: index}, function(data){
         location.reload();
          alert('Successfully update status for ' + data['tracking_number']);
     });

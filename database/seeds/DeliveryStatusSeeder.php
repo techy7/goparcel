@@ -33,6 +33,11 @@ class DeliveryStatusSeeder extends Seeder
         ]);
 
         DeliveryStatus::create([
+            'name' => 'In Transit for 2nd Attempt',
+            'icon' => 'pe-7s-car',
+        ]);
+
+        DeliveryStatus::create([
             'name' => 'Delivered',
             'icon' => 'pe-7s-box2',
         ]);

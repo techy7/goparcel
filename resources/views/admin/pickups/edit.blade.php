@@ -90,11 +90,20 @@
                 <div class="col-xl-12">
                   <div class="form-group form-group-default form-group-default-select2 @error('delivery_status_id') has-error @enderror">
                     <label>{{ __('general.delivery_status')}}</label>
-                        <select name="delivery_status_id" class="full-width" data-init-plugin="select2">
-                            <option value="0">{{ $latestPickupStatus->name }}</option>
-                            @foreach ($deliveryStatus as $key=>$status)
-                              
-                              <option value="{{ $status->id }}" {{ ($status->id==max($customerPickupStatus)+1 ) ?  '': 'disabled' }}>{{ $status->name }}</option>
+                        {{ $pickup->setMaxActivity() }}
+                        <select id="delivery-status" name="delivery_status_id" class="full-width" data-init-plugin="select2">
+                            @foreach ($deliveryStatus as $key=>$status)              
+                            <option value="{{ $status->id }}"
+                                {{($status->id==$pickup->getMaxActivity())? 'selected': '' }}
+                                
+                                @if($status->id==$pickup->getMaxActivity() + 1 )
+                                
+                                @else 
+                                  disabled
+                                @endif>
+                                
+                              {{ $status->name }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -138,6 +147,29 @@
       $("#m_number").mask("(9999) 999-9999");
       $('#form-register').validate();
     })
+   
+    $(window).on('load', function () {
+        var val = $('#delivery-status').children("option:selected").val();
+        if(val == 4){ //if in transit for delivery
+          $('#delivery-status').children("option").each(function(){
+              if($(this).val() == 5 || $(this).val() == 6){
+                $(this).prop('disabled', false);
+              }
+          });
+        }
+        if(val == 5){
+          $('#delivery-status').children("option").each(function(){
+            if($(this).val() > 5){
+                $(this).prop('disabled', false);
+              }
+          });
+        }
+        if(val == 6){
+          $('#delivery-status').children("option").each(function(){
+            $(this).prop('disabled', true);
+          });
+        }
+    });
   </script>
 @endsection
 @section('lower-links-extends-page')

@@ -22,7 +22,7 @@
 </style>
  
 
-<h1>Hi  {{ $pickup->user->name }},</h1>
+<h1>Hi  {{ $pickup->receiver_name }},</h1>
 <p>
 
  {{ __('general.order_is_being_shipped', ['field' => $pickup->tracking_number]) }} 

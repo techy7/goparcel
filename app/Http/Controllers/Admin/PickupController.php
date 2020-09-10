@@ -45,12 +45,16 @@ class PickupController extends Controller
 
         $searchCities = preg_split('/,+/',$request->displayCity, -1, PREG_SPLIT_NO_EMPTY);
         $searchStates = preg_split('/,+/',$request->displayState, -1, PREG_SPLIT_NO_EMPTY);
-        $searchPostalCodes= preg_split('/,+/',$request->displayPostalCode, -1, PREG_SPLIT_NO_EMPTY);
-        $searchPackageType= preg_split('/,+/',$request->displayPackageType, -1, PREG_SPLIT_NO_EMPTY);
-        
-        // $fromdateCreated = "";
-        // $todateCreated = "";
-        // if($request->has('newRequest')){
+        $searchPostalCodes = preg_split('/,+/',$request->displayPostalCode, -1, PREG_SPLIT_NO_EMPTY);
+        $searchPackageType = preg_split('/,+/',$request->displayPackageType, -1, PREG_SPLIT_NO_EMPTY);
+        $searchDeliveryStatus = preg_split('/,+/',$request->displayDeliveryStatus, -1, PREG_SPLIT_NO_EMPTY);
+
+        $s = array();
+        foreach($searchDeliveryStatus as $status){
+          array_push($s,DeliveryStatus::where('name', $status)->first()->id);
+           
+        }
+
         date_default_timezone_set('Asia/Manila');
         $date = new DateTime();
         $date->add(DateInterval::createFromDateString('yesterday'));
@@ -72,15 +76,21 @@ class PickupController extends Controller
             'states' => $searchStates,
             'postalCodes' => $searchPostalCodes,
             'packageTypes' => $searchPackageType,
+            'deliveryStatuses' => $searchDeliveryStatus,
             'fromDate' =>  $request->datepickerFrom,
             'toDate' =>  $request->datepickerTo,
             'newRequest' => $request->has('newRequest')
         );
-
-
-        $pickups= Pickup::
+        //max actvity
+        $maxActivity = PickupActivity::select('pickup_id', DB::raw('MAX(delivery_status_id) as 
+          max_activity'))
+          ->groupBy('pickup_id');
+        $pickups = Pickup::
           join('packages', 'pickups.package_id','=','packages.id')
-          ->selectRaw('pickups.*, packages.name as package_name')
+          ->joinSub($maxActivity, 'max_activity', function ($join) {
+              $join->on('pickups.id', '=', 'max_activity.pickup_id');
+            })
+          ->selectRaw('pickups.*, packages.name as package_name, max_activity.max_activity')
           ->where(function ($q) use ($searchCities) {
             foreach ($searchCities as $value) {
               $q->orWhere('pickup_city', 'like', "%{$value}%");
@@ -99,6 +109,11 @@ class PickupController extends Controller
           ->where(function ($q) use ($searchPackageType) {
             foreach ($searchPackageType as $value) {
               $q->orWhere('name', 'like', "%{$value}%");
+            }
+          })
+          ->where(function ($q) use ($s) {
+            foreach ($s as $value) {
+              $q->orWhere('max_activity', 'like', "%{$value}%");
             }
           })
           ->where(function ($q) use ($request, $hasDateFrom) {
@@ -123,22 +138,16 @@ class PickupController extends Controller
           })  
           ->orderBy('pickups.pickup_date','DESC')    
           ->get();
-      
           return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types', 'searches', 'deliveryStatus'));
     }
 
     public function edit(Pickup $pickup)
     {
-        // $pickup->setMaxActivity();
-        // dd($pickup->getMaxActivity());
         $deliveryStatus = DeliveryStatus::all();
 
         $customerPickupStatus = $pickup->pickupActivities->pluck('delivery_status_id')->all();
 
         $latestPickupStatus = $pickup->pickupActivities->first()->deliveryStatus;
-
-
-        // /dd(max($customerPickupStatus));
 
         return view('admin.pickups.edit', compact('pickup', 'deliveryStatus', 'customerPickupStatus', 'latestPickupStatus'));
     }
@@ -151,8 +160,8 @@ class PickupController extends Controller
             'pickup_address' => 'required|string|max:255',
             'pickup_city' => 'required|string|max:255',
             'pickup_postal_code' => 'required|integer',
+            
         ]);
-
         $pickup->update([
             'pickup_date' => Carbon::createFromFormat('F d, Y (D)', $pickupData['pickup_date']),
             'pickup_address' => request('pickup_address'),
@@ -162,14 +171,12 @@ class PickupController extends Controller
             'pickup_country' => 'Philippines',
         ]);
 
-        $delivery = request()->validate([
-            'delivery_status_id' => 'not_in:0'
-        ], [
-            'delivery_status_id.not_in' => 'The delivery status has already been used.',
-        ]);
-
-        $pickup->pickupActivities()->create($delivery);
-
+        if(request('delivery_status_id') != null){
+          $pickup->pickupActivities()->create([
+            'pickup_id' => $pickup->id,
+            'delivery_status_id' => request('delivery_status_id'),
+          ]);
+        }
         return redirect()->route('admin.pickups')->with('update', 'Pickup for ' . $pickup->user->name . ' has been successfully updated.');
     }
 
@@ -210,9 +217,8 @@ class PickupController extends Controller
 
         $pickup->pickupActivities()->create([
           'pickup_id' => request()->pickup_id,
-          'delivery_status_id' => $pickup->getMaxActivity()+1,
+          'delivery_status_id' => request()->index,
         ]);
-
         return response()->json(['tracking_number' => $tracking_number]);
       }
     }
