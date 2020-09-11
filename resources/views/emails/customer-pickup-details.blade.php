@@ -46,7 +46,7 @@
       <tr>
           <td>{{__('general.cod')}}:</td>
           <td><b> {{ $pickup->charge_to_sender ? "No" : "Yes" }} </b></td>
-      </tr>
+      </tr> 
    </table>
 </div>
 
