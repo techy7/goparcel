@@ -104,26 +104,31 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="pull-right">
-                                                <h5 class="no-margin small"><strong>₱{{ $pickupOrder->package->amount }}.00</strong></h5>
+                                                <h5 class="no-margin small"><strong>{{ $pickupOrder->priceFormatted($pickupOrder->package->amount) }}</strong></h5>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row p-b-5">
                                             <div class="col-md-6">
-                                                <div class="pull-left m-l-10">
-                                                <h5 class="no-margin small text-muted">{{ __('pickup.additional_fee')}}</h5>
-                                                </div>
+                                                <h5 class="no-margin small"><strong>{{ __('pickup.additional_fee')}}</strong></h5>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="pull-right">
-                                                    @if ($pickupOrder->package_length == 0 && $pickupOrder->package_width == 0 && $pickupOrder->package_height == 0)
-                                                    <h5 class="no-margin small text-muted">₱0</h5>
-                                                    @else
-                                                    <h5 class="no-margin small text-muted">₱{{ abs($pickupOrder->package_amount - $pickupOrder->package->amount) }}</h5>
-                                                    @endif
+                                                    <h5 class="no-margin small"><strong>{{ $pickupOrder->priceFormatted($pickupOrder->additional_fee) }}</strong></h5>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="row p-b-5">
+                                            <div class="col-md-6">
+                                                <h5 class="no-margin small"><strong>{{ __('pickup.item_fee')}}</strong></h5>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="pull-right">
+                                                    <h5 class="no-margin small"><strong>{{ $pickupOrder->priceFormatted($pickupOrder->item_amount) }}</strong></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="m-1">
                                         <div class="row m-t-10">
                                             <div class="col-md-6">
                                                 <div class="pull-left">
@@ -132,7 +137,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="pull-right">
-                                                <h5 class="no-margin small"><strong>₱{{ number_format($pickupOrder->package_amount, 2, '.', ',') }}</strong></h5>
+                                                <h5 class="no-margin small"><strong>{{ $pickupOrder->priceFormatted($pickupOrder->item_amount + $pickupOrder->additional_fee + $pickupOrder->package->amount ) }}</strong></h5>
                                                 </div>
                                             </div>
                                         </div>

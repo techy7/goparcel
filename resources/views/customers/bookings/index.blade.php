@@ -72,15 +72,9 @@
                    <td class="v-align-middle semi-bold">
                     <p>{{ $pickup->package->name }}</p>
                   </td>
-                   @if ($pickup->package->name == 'Own Packaging')
-                    <td class="v-align-middle semi-bold">
-                      <p>{{ $pickup->priceFormatted($pickup->package_amount) }}</p>
-                    </td>
-                  @else
-                    <td class="v-align-middle semi-bold">
-                      <p>{{ $pickup->priceFormatted($pickup->package->amount) }}</p>
-                    </td>
-                  @endif
+                  <td class="v-align-middle semi-bold">
+                    <p>{{ $pickup->priceFormatted($pickup->package_amount) }}</p>
+                  </td>
                   <td class="v-align-middle semi-bold">
                     <div class="btn-group">
                       <a href="{{ route('customer.bookings.waybill', [auth()->user()->username, $pickup->id]) }}" class="btn btn-outline-primary m-1">{{ __('pickup.download_waybill')}}</a>

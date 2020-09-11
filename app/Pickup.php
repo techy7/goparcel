@@ -38,7 +38,9 @@ class Pickup extends Model
 
         'active',
         'tracking_number',
-        'charge_to_sender'
+        'charge_to_sender',
+        'item_amount',
+        'additional_fee',
     ];
 
     public function priceFormatted($price)

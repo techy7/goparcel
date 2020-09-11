@@ -53,11 +53,11 @@
         }
         .body{
             margin: 0px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             border: 1px solid black;
-            padding: 10px;
+            padding: 5px;
         }
-        .tab { margin-left: 70px; }
+        .tab { margin-left: 30px; }
         td{
             vertical-align: top;
         }
@@ -79,20 +79,14 @@
             <div class="body">
                 <table>
                     <tr>
-                        <td>{{__('general.order_created')}}:</td>
-                        <td>{{ $userPickup->created_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</td>
+                        <td colspan="2">{{__('general.order_created')}}:</td>
+                        <td colspan="2">{{ $userPickup->created_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</td>
                     </tr>
-                    <tr>
-                        <td>{{__('general.tracking_code')}}:</td>
-                        <td>{{ $userPickup->tracking_number }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{__('general.package_type')}}:</td>
-                        <td>{{ $userPickup->package->name }}</td>
-                    </tr>
-                    <tr>
+                    <tr>            
                         <td>{{__('general.cod')}}:</td>
                         <td><b> {{ $userPickup->charge_to_sender ? "No" : "Yes" }} </b></td>
+                        <td>{{__('general.package_type')}}:</td>
+                        <td>{{ $userPickup->package->name }}</td>        
                     </tr>
                 </table>
             </div>
@@ -137,45 +131,37 @@
                 </table>
             
             </div>
-
-            <h4 style="margin: 0px; margin-top: 10px; float:right"><strong>{{ __('pickup.total_amount')}}:</strong> <small>P{{ number_format($userPickup->package_amount, 2, '.', ',') }}</small></h4>
-            <i>{{ __('general.comments')}}:</i><br/><br/>   
-            <i>{{ __('general.delivery_attempts')}}: <span class="tab">1</span> <span class="tab">2</span> </i>
-
-            {{-- <h4 style="margin-top: -4px !important"><strong>TRACKING ID: <a href="https://app.weparcelbear.com/track-delivery/track?tracking_number={{ $userPickup->tracking_number }}">{{ $userPickup->tracking_number }}</a></strong></h4>
-            <hr style="margin: 5px 0px 5px 0px">
-            <div class="details" style="margin-top: 10px !important;">
-                <p><strong>{{ __('general.tracking_code')}}: </strong><small>{{ $userPickup->tracking_number }}</small></p>
-                <p><strong>{{ __('general.package_type')}}: </strong><small>{{ $userPickup->package->name }}</small></p>
-                <p><strong>{{ __('general.cash_on_delivery')}}: </strong><small>{{ $userPickup->charge_to_sender ? "No" : "Yes" }}</small></p>
-            </div>
-
-                    <div class="details">
-                    <h4><strong>{{ __('pickup.sender_details')}}:</strong></h4>
-                    <p><strong>{{ __('pickup.sender_name')}}: </strong><small>{{ $userPickup->user->name }}</small></p>
-                    <p><strong>{{ __('pickup.sender_phone')}}: </strong><small>{{ $userPickup->user->m_number }}</small></p>
-                    <p><strong>{{ __('pickup.pickup_address')}}: </strong><span><small>{{ $userPickup->pickup_address }} {{ $userPickup->pickup_city }}, {{ $userPickup->pickup_state }} {{ $userPickup->pickup_postal_code }}</small></span></p>
-                    <p><strong>{{ __('pickup.pickup_date')}}: </strong><span><small>{{ $userPickup->pickup_date->format('F d, Y (D)') }}</small></span></p>
-                </div>
-                
-                <div class="details">
-                    <h4><strong>{{ __('pickup.receiver_details')}}</strong></h4>
-                    <p><strong>{{ __('pickup.receiver_name')}}: </strong><small>{{ $userPickup->receiver_name }}</small></p>
-                    <p><strong>{{ __('pickup.receiver_email')}}: </strong><small>{{ $userPickup->receiver_email }}</small></p>
-                    <p><strong>{{ __('pickup.receiver_phone')}}: </strong><small>{{ $userPickup->receiver_phone }}</small></p>
-                    <p><strong>{{ __('pickup.receiver_address')}}: </strong>{{ $userPickup->receiver_address }} <u><strong> {{ $userPickup->receiver_city }}, {{ $userPickup->receiver_state }} </strong></u> {{ $userPickup->receiver_postal_code }}</p>
-                </div>
-                
-                
-            </div>
-            <hr style="margin: 5px 0px 5px 0px;">
-            <div style="padding: 5px;float:right;">
-                    <h4 style="margin: 0px; margin-top: 10px"><strong>{{ __('pickup.total_amount')}}:</strong> <small>P{{ number_format($userPickup->package_amount, 2, '.', ',') }}</small></h4>
-            </div>
-            <div style="padding: 5px; ">
-                <h4 style="margin: 0px; margin-top: 10px"><strong>{{ __('pickup.signature')}}:</strong></h4>
-            </div>
-            <br/> --}}
+            <table width="100%" style="margin-left: 100px; font-size: .7rem;">
+                <tr>
+                    <td><i>{{__('pickup.service_fee')}}</i></td>
+                    <td><i>:</i></td>
+                    <td style="text-align: right">P{{ number_format($userPickup->package->amount, 2, '.', ',') }}</td>
+                </tr>
+                <tr>
+                    <td><i>{{ __('pickup.additional_fee')}}</i></td>
+                    <td><i>:</i></td>
+                    <td style="text-align: right">P{{ number_format($userPickup->additional_fee, 2, '.', ',') }}</td>
+                </tr>
+                <tr>
+                    <td><i>{{ __('pickup.item_fee')}}</i></td>
+                    <td><i>:</i></td>
+                    <td style="text-align: right">P{{ number_format($userPickup->item_amount, 2, '.', ',')     }}</td>
+                </tr>
+                <tr>
+                    <td><i><strong>{{ __('pickup.total_amount')}}</strong></i></td>
+                    <td><i>:</i></td>
+                    <td style="text-align: right"><strong>P{{ number_format($userPickup->item_amount + $userPickup->additional_fee + $userPickup->package->amount, 2, '.', ',')     }}</strong></td>
+                </tr>
+            </table>
+            
+            {{-- <h4 style="margin: 0px; margin-top: 10px; float:right"><strong>{{ __('pickup.total_amount')}}:</strong> <small>P{{ number_format($userPickup->package_amount, 2, '.', ',') }}</small></h4> --}}
+            <br/>
+            <table width="100%">
+                <tr>
+                    <td width="70%"><i>{{ __('general.comments')}}:</i></td>
+                    <td style="text-align: center"> <i>{{ __('general.delivery_attempts')}} <br> <span class="tab">1</span>  <span class="tab">2</span></td>
+                </tr>
+            </table>   
         </div>
     </body>
 </html>

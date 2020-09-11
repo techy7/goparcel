@@ -46,19 +46,30 @@ class PickupController extends Controller
    public function computeTotal(){
     if(request()->ajax()){
         $additional_fee = 0; //for default packaging
-        $package = Package::where('name', request()->package)->first();
+        $service_fee = 0;
+        $item_amount = 0;
+        
+        if(!is_null(request()->package)){
+            $package = Package::where('name', request()->package)->first();
+            $service_fee = $package->amount;
+        }
         $vol_weight =  ceil(((request()->l * request()->w * request()->h)/4000));
         $additional_fee = request()->aw > $vol_weight ? ((request()->aw-5) * 28) : (($vol_weight - 5) * 28);
         $additional_fee = ( $additional_fee < 0) ? 0 : $additional_fee;
-        $total_amount = $additional_fee + $package->amount; 
-        session(['total_amount' => $total_amount]); //set class variable 
-        return response()->json(['amount' => $package->amount, 'additional_fee'=>$additional_fee, 'total_amount'=>$total_amount]);
+        $item_amount = request()->cod ? (float) request()->item : 0;
+        $total_amount = $additional_fee + $service_fee + $item_amount; 
+       
+        session(['total_amount' => $additional_fee + $service_fee]); //set class variable 
+        session(['additional_fee' => $additional_fee]);
+        // session(['service_fee' => $service_fee]); same as package amount
+
+         return response()->json(['service_fee' => $service_fee, 'additional_fee'=>$additional_fee, 'total_amount'=>$total_amount, 'item_amount'=>$item_amount]);
     }
    }
 
     public function store()
     {
-
+        // dd(request()->all());
         $pickupData = request()->validate([
             'sender_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
             'sender_phone' => 'required|phone:PH',
@@ -73,16 +84,18 @@ class PickupController extends Controller
             'receiver_city' => 'required|string|max:255',
             'receiver_postal_code' => 'required|integer',
             'radioPackage' => 'required',
-            'package_length' => 'required_if:radioPackage,"Own Packaging',
-            'package_width' => 'required_if:radioPackage,"Own Packaging',
-            'package_height' => 'required_if:radioPackage,"Own Packaging',
-            'actual_weight' => 'required_if:radioPackage,"Own Packaging',
+            'package_length' => 'required_if:radioPackage,Own Packaging',
+            'package_width' => 'required_if:radioPackage,Own Packaging',
+            'package_height' => 'required_if:radioPackage,Own Packaging',
+            'actual_weight' => 'required_if:radioPackage,Own Packaging',
+            'item_amount' => 'required_with:,charge_to, on | regex:/^[1-9][0-9]+/ |not_in:0' ,
         ]
          , [
             'receiver_name.regex' => 'The :attribute field can only contain letters.',
              'sender_phone.phone' => 'The sender contact number field contains an invalid number.',
              'receiver_phone.phone' => 'The receiver contact number field contains an invalid number.',
              'radioPackage.required' => 'Please select a package.',
+             'item_amount.required_with' => "The item amount field is required on COD.",
              ]
         );
 
@@ -112,6 +125,8 @@ class PickupController extends Controller
             'package_amount' => session('total_amount'),
             'charge_to_sender' => !(request()->has('charge_to')),
             'tracking_number' => strtoupper('PB'.substr(md5(time()), 0, 7)),
+            'additional_fee' => session('additional_fee'),
+            'item_amount' => is_null(request('item_amount'))?  0: request('item_amount'),
             
         ]);
 

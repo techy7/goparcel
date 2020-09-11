@@ -118,7 +118,7 @@
                    @foreach($packages as $package)                
                     <div class="col-md-4">
                       <div class="form-check container-radio text-center">
-                        <input class="form-check-input d-none" type="radio" name="radioPackage" id="{{$package->name}}" value="{{$package->name}}">
+                        <input class="form-check-input d-none parameter" type="radio" name="radioPackage" id="{{$package->name}}" value="{{$package->name}}" >
                         <label class="form-check-label" for="{{$package->name}}">
                           <img alt="Package Picture" width="70" height="70" src="/pages/assets/img/icon.png">
                           <p class="package-title">{{$package->name}}</p>
@@ -132,26 +132,43 @@
                   <div class="row" id="packageDimensions">
                     <p class="btn-block"><em>If your item weight is beyond 5kg, kindly fill this out.</em></p> 
                     <div class="col-md-3 p-2">
-                      <div class="form-group form-group-default" @error('package_length') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.length')}}</label> 
+                      <div class="form-group form-group-default parameter" @error('package_length') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.length')}}</label> 
                         <input id="package_length"  type="number" name="package_length" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                       </div>
                     </div> 
                     <div class="col-md-3 p-2">
-                      <div class="form-group form-group-default" @error('package_width') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label class="fade">{{ __('pickup.width')}}</label> 
+                      <div class="form-group form-group-default parameter" @error('package_width') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label class="fade">{{ __('pickup.width')}}</label> 
                       <input  id="package_width"  type="number" name="package_width" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                       </div>
                     </div> 
                     <div class="col-md-3 p-2">
-                      <div class="form-group form-group-default" @error('package_height') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.height')}}</label> 
+                      <div class="form-group form-group-default parameter" @error('package_height') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.height')}}</label> 
                         <input id="package_height"  type="number" name="package_height" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                         </div>
                       </div>
 
                     <div class="col-md-3 p-2">
-                      <div class="form-group form-group-default" @error('actual_weight') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.actual_weight')}}</label> 
+                      <div class="form-group form-group-default parameter" @error('actual_weight') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.actual_weight')}}</label> 
                         <input id="actual_weight"  type="number" name="actual_weight" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                       </div>  
                     </div>  
+                    </div>
+                  </div>
+                  <hr class="my-4">
+                  <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                          <input class="form-check-input parameter" type="checkbox" value="0"  id="charge_to" name="charge_to">
+                          <label class="form-check-label" for="charge_to">
+                            {{ __('general.cash_on_delivery')}}
+                          </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group form-group-default text-right parameter"  @error('item_amount')  style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
+                        <label>{{ __('pickup.item_amount')}}</label>
+                        <input type="text" data-inputmask="'alias': 'decimal', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'"  class="form-control amount" name="item_amount" value="0" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.item_amount'))]) }}" id="item_amount" name="item_amount">
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -179,6 +196,14 @@
                         <h5 class="no-margin pull-right"><strong class="text-muted">{{ __('general.amount_peso', ['field' => '']) }}<span id="additional_fee"> 0.00 </span></strong></h5>
                     </div>
                   </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="no-margin details-title text-muted">{{ __('pickup.item_fee')}}</h5>
+                    </div> 
+                    <div class="col-md-6">
+                        <h5 class="no-margin pull-right"><strong class="text-muted">{{ __('general.amount_peso', ['field' => '']) }}<span id="item_fee"> 0.00 </span></strong></h5>
+                    </div>
+                  </div>
                   <hr class="m-2 p-0"/>
                   <div class="row">
                     <div class="col-md-6">
@@ -186,19 +211,6 @@
                     </div> 
                     <div class="col-md-6">
                         <h5 class="no-margin pull-right"> <strong>{{ __('general.amount_peso', ['field' => '']) }} <span id="total_amount"> 0.00 </span></strong></h5>
-                    </div>
-                  </div>
-                  
-                 
-
-                  <div class="row mt-4">
-                    <div class="col-md-12">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="1" {{(old('charge_to') == "1") ? 'checked': ''}}  id="charge_to" name="charge_to">
-                        <label class="form-check-label" for="charge_to">
-                          {{ __('pickup.check_charge_to')}}
-                        </label>
-                      </div>
                     </div>
                   </div>
                    <div class="row mt-5 m-2">
@@ -230,10 +242,15 @@
     <script src="{{ asset('pages/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js') }}"></script>
     <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
     <script src="{{ asset('pages/assets/plugins/jquery-inputmask/jquery.inputmask.min.js') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js"></script>
+
   <script>
 
 
     $( document ).ready(function(){
+      
+
+      $(".amount").inputmask();
       
       var currentDate = new Date();
       currentDate.setDate(currentDate.getDate());
@@ -247,8 +264,6 @@
       else{
            dt.setDate(dt.getDate()+1);
       }
-     
-      console.log(dt);
       
       $('#datepicker-component2').datepicker({
         format: "yyyy-mm-dd",
@@ -258,15 +273,18 @@
       });
 
 
-      //set selected package record
-      var rad = {!! json_encode(old('radioPackage')) !!};
-      //$("input[name='radioPackage'][value='"+rad+"']").prop('checked', true);
-      if(rad  == "Own Packaging"){
-        $("#packageDimensions").show();
-      }
-      else{
+      // //set selected package record
+      // var rad = {!! json_encode(old('radioPackage')) !!};
+      // //$("input[name='radioPackage'][value='"+rad+"']").prop('checked', true);
+      // if(rad  == "Own Packaging"){
+      //   $("#packageDimensions").show();
+      // }
+      // else{
         $("#packageDimensions").hide();
-      }
+        $("#item_amount").attr("disabled", "disabled"); 
+      // }
+
+      
     });
 
     $(window).on('load', function() {
@@ -288,29 +306,9 @@
     });
 
     $('input:radio[name="radioPackage"]').change(function(){
-        var chosenPackage = $(this).val();
       
-         $.get('computeTotal', {l:0, w:0, h:0,aw:0,package:chosenPackage},function(data){
-            //console.log(data['l']);
-            $("#service_fee").html(data['amount'].toFixed(2));
-            $("#additional_fee").html(data['additional_fee'].toFixed(2));
-            $("#total_amount").html(data['total_amount'].toFixed(2));
-          });
-
-        if ($(this).is(':checked') && $(this).val()== "Own Packaging") {
-          $("#packageDimensions").show();
-          $('#packageDimensions input').change(function(){
-            var l = $('#package_length').val(); //length
-            var w = $('#package_width').val(); //width
-            var h = $('#package_height').val(); //height
-            var aw = $('#actual_weight').val(); //height
-            $.get('computeTotal', {l:l, w:w, h:h,aw:aw,package:chosenPackage},function(data){
-              //console.log(data["amount"].toFixed(2));
-              $("#service_fee").html(data['amount'].toFixed(2));
-              $("#additional_fee").html(data['additional_fee'].toFixed(2));
-              $("#total_amount").html(data['total_amount'].toFixed(2));
-             });
-          });
+        if ($(this).is(':checked') && $(this).val() == "Own Packaging") {
+          $("#packageDimensions").show();  
         }
         else{
             
@@ -326,7 +324,40 @@
       //$('#pickup_city').val("0");
       
     });
+
+    $('#charge_to').change(function(){
+      // /alert(this.checked);
+      if(this.checked) {
+        $('#item_amount').removeAttr("disabled"); 
+      }
+      else{
+        $("#item_amount").attr("disabled", "disabled");
+        $("#item_amount").val(0); 
+      }
   
+    });
+
+
+    $('.parameter').change(function(){
+      var chosenPackage =  $('input:radio[name="radioPackage"]:checked').val();
+      var l = $('#package_length').val(); //length
+      var w = $('#package_width').val(); //width
+      var h = $('#package_height').val(); //height
+      var aw = $('#actual_weight').val(); //height
+      var cod = $('#charge_to').is(":checked");
+      var item = $('#item_amount').val();
+      if(typeof chosenPackage === "undefined") {
+        chosenPackage = null;
+      }
+      $.get('computeTotal', {l:l, w:w, h:h,aw:aw,package:chosenPackage,cod:cod, item:item},function(data){
+        console.log(data);
+       
+        $("#service_fee").html(data['service_fee'].toFixed(2));
+        $("#item_fee").html(data['item_amount'].toFixed(2));
+        $("#additional_fee").html(data['additional_fee'].toFixed(2));
+        $("#total_amount").html(data['total_amount'].toFixed(2));
+        });
+    });
 
   </script>
 @endsection

@@ -47,10 +47,6 @@
           <td>{{__('general.cod')}}:</td>
           <td><b> {{ $pickup->charge_to_sender ? "No" : "Yes" }} </b></td>
       </tr>
-      <tr>
-        <td>{{ __('pickup.total_amount')}}:</td>
-        <td><b> P{{ number_format($pickup->package_amount, 2, '.', ',') }} </b></td>
-    </tr>
    </table>
 </div>
 
@@ -66,10 +62,6 @@
        <tr>
            <td>{{__('general.phone')}}:</td>
            <td>{{ $pickup->sender_phone }}</td>
-       </tr>
-       <tr>
-           <td>{{__('general.address')}}:</td>
-           <td>{{ $pickup->pickup_address }} {{ $pickup->pickup_city }}, {{ $pickup->pickup_state }}, {{ $pickup->pickup_postal_code }}</td>
        </tr>
    </table>
 </div>
@@ -92,8 +84,33 @@
        </tr>
    </table>
 </div>
+<hr>
+<div class="body">
+    <table width="100%">
+        <tr>
+            <td><i>{{__('pickup.service_fee')}}</i></td>
+            <td><i>:</i></td>
+            <td style="text-align: right">P{{ number_format($pickup->package->amount, 2, '.', ',') }}</td>
+        </tr>
+        <tr>
+            <td><i>{{ __('pickup.additional_fee')}}</i></td>
+            <td><i>:</i></td>
+            <td style="text-align: right">P{{ number_format($pickup->additional_fee, 2, '.', ',') }}</td>
+        </tr>
+        <tr>
+            <td><i>{{ __('pickup.item_fee')}}</i></td>
+            <td><i>:</i></td>
+            <td style="text-align: right">P{{ number_format($pickup->item_amount, 2, '.', ',')     }}</td>
+        </tr>
+        <tr>
+            <td><i><strong>{{ __('pickup.total_amount')}}</strong></i></td>
+            <td><i>:</i></td>
+            <td style="text-align: right"><strong>P{{ number_format($pickup->item_amount + $pickup->additional_fee + $pickup->package->amount, 2, '.', ',')     }}</strong></td>
+        </tr>
+    </table>
+</div>
 <br>
-<div  style="margin-top: 10px !important;">
+<div  style="margin-top: 10px !important; color: black !important">
     <p>
     You will receive a message from our rider on the day of the delivery.
     Please keep your lines open so our rider can easily reach you once your parcel is in transit.
