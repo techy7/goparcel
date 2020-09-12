@@ -9,7 +9,7 @@
         body {
             height: 100%;
             margin: 0;
-            padding: 0 10px;
+            padding: 0 5px;
             direction: ltr;
             font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
             font-size: 0.7rem;
@@ -23,7 +23,7 @@
             margin: 0;
         }
         #container{
-            padding: 10px 5px;
+            padding: 5px 5px;
             margin-top: 20px;
         }
         #track{
@@ -66,7 +66,8 @@
 
     <body>
         <div id="container">
-            <img src="data:image/png;base64,{{ $logo }}" alt="logo" width="180" height="75">
+            {{-- <img src="data:image/png;base64,{{ $logo }}" alt="logo" width="180" height="75"> --}}
+            <img src="https://i.ibb.co/JRPgCpn/Logo-black.jpg" alt="PB Logo" width="180" height="75">
             <div style="float:right">
                 <i><small>{{__('general.tracking_code')}}</small></i>
                 <div id="track">
@@ -131,14 +132,14 @@
                 </table>
             
             </div>
-            <table width="100%" style="margin-left: 100px; font-size: .7rem;">
+            <table width="100%">
                 <tr>
-                    <td><i>{{__('pickup.service_fee')}}</i></td>
+                    <td><i>{{__('pickup.service_fee')}}*</i></td>
                     <td><i>:</i></td>
                     <td style="text-align: right">P{{ number_format($userPickup->package->amount, 2, '.', ',') }}</td>
                 </tr>
                 <tr>
-                    <td><i>{{ __('pickup.additional_fee')}}</i></td>
+                    <td><i>{{ __('pickup.additional_fee')}}*</i></td>
                     <td><i>:</i></td>
                     <td style="text-align: right">P{{ number_format($userPickup->additional_fee, 2, '.', ',') }}</td>
                 </tr>
@@ -158,8 +159,9 @@
             <br/>
             <table width="100%">
                 <tr>
-                    <td width="70%"><i>{{ __('general.comments')}}:</i></td>
-                    <td style="text-align: center"> <i>{{ __('general.delivery_attempts')}} <br> <span class="tab">1</span>  <span class="tab">2</span></td>
+                    <td width="70%"><i>{{ __('general.comments')}}:
+                     <span style="text-align: center; font-size: 0.6rem"> <br><br>* Shipping rates are VAT inclusive. </span> </i></td>
+                    <td > <i>{{ __('general.delivery_attempts')}} <br> <span class="tab">1</span>  <span class="tab">2</span></td>
                 </tr>
             </table>   
         </div>

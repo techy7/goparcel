@@ -23,13 +23,17 @@
                   <span class="font-montserrat fs-11 all-caps">{{ __('general.my_pickup_booking') }}</span>
                 </div>
               </div>
-              <div class="p-l-20 p-r-20">
-                @if ($userNumberBookings)
-                <h3 class="mt-0 m-b-20">{{ $userNumberBookings }}</h3>
-                @else
-                <p>{{ __('general.you_dont_have_any_bookings_yet') }}</p>
-                @endif
-                <p class="no-margin d-flex align-items-center justify-content-end"><a href="{{ route('customer.pickup', auth()->user()->username) }}" class="btn btn-primary btn-cons text-white btn-sm-block">{{ __('general.book_now') }}</a></p>
+              <div class="card-body">
+                <div class="p-l-20 p-r-20">
+                  @if ($userNumberBookings)
+                  <h3 class="mt-0 m-b-20">{{ $userNumberBookings }}</h3>
+                  @else
+                  <p>{{ __('general.you_dont_have_any_bookings_yet') }}</p>
+                  @endif
+                </div>
+              </div>
+              <div class="card-footer bg-white border-top-0">
+                  <a href="{{ route('customer.pickup', auth()->user()->username) }}" class="btn btn-primary btn-cons text-white btn-sm-block pull-right">{{ __('general.book_now') }}</a>
               </div>
             </div>
           </div>
@@ -42,8 +46,12 @@
                   <span class="font-montserrat fs-11 all-caps">{{ __('general.track_delivery') }}</span>
                 </div>
               </div>
-              <div class="p-l-20 p-r-20">
-                <h3 class="mt-0 m-b-20">&nbsp;</h3>
+              <div class="card-body">
+                <div class="p-l-20 p-r-20">
+                  
+                </div>
+              </div>
+              <div class="card-footer bg-white border-top-0">
                 <p class="no-margin d-flex align-items-end justify-content-end"><a href="{{ route('customer.bookings.searchTrack',  auth()->user()->username) }}" class="btn btn-primary btn-cons text-white btn-sm-block">{{ __('general.go_to_track_delivery') }}</a></p>
               </div>
             </div>

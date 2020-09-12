@@ -30,7 +30,8 @@
                   <div class="form-group form-group-default input-group @error('pickup_date') has-error @enderror">
                       <div class="form-input-group">
                           <label>{{ __('pickup.pickup_date')}}</label>
-                          <input type="text" class="form-control" name="pickup_date" value="{{ old('pickup_date') ?? $pickup->pickup_date->format('F d, Y (D)') }}" placeholder="Pick a Date" id="datepicker-component2">
+                          {{-- <input type="text" class="form-control" name="pickup_date" value="{{ old('pickup_date') ?? $pickup->pickup_date->format('yy-m-d') }}" placeholder="Pick a Date" id="datepicker-component2"> --}}
+                          <input type="text" class="form-control" name="pickup_date"  value="{{ old('pickup_date') ? old('pickup_date') : date_format($pickup->pickup_date,'yy-m-d')  }}" placeholder="{{ __('auth.select_field', ['field' => strtolower(__('pickup.pickup_date'))]) }}"  id="datepicker-component2">
                         </div>
                         <div class="input-group-append">
                           <span class="input-group-text"><i class="pg-icon">calendar</i></span>
@@ -138,9 +139,31 @@
     <script src="{{ asset('pages/assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ asset('pages/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js') }}"></script>
     <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
-    <script src="{{ asset('pages/assets/js/datepicker-custom.js') }}"></script>
+    {{-- <script src="{{ asset('pages/assets/js/datepicker-custom.js') }}"></script> --}}
 
   <script>
+     $( document ).ready(function(){
+        var currentDate = new Date();
+        currentDate.setDate(currentDate.getDate());
+        //alert(currentDate);
+        startDate = "+1d"
+        var dt = new Date();
+        var d = new Date().setHours(17,0,0,0);
+        if(dt > d){
+            dt.setDate(dt.getDate()+2);
+        } 
+        else{
+            dt.setDate(dt.getDate()+1);
+        }
+        
+        $('#datepicker-component2').datepicker({
+          format: "yyyy-mm-dd",
+          clearBtn: true,
+          todayHighlight: true,
+          startDate: dt,
+        });
+      });
+     
     $(function(){
       $("#pickup_postal_code").mask("9999");
       $("#receiver_postal_code").mask("9999");

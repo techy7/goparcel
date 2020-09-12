@@ -27,7 +27,7 @@ return [
     'my_pickup_booking' => 'My Pickup Bookings',
     'customers' => 'Customers',
     'help_center' => 'Help Center',
-    'terms_of_service' => 'Terms and Condition',
+    'terms_of_service' => 'Terms and Conditions',
     'privacy_policy' => 'Privacy Policy',
 
     //Admin

@@ -8,6 +8,7 @@
     <link href="{{ asset('pages/assets/plugins/datatables-responsive/css/datatables.responsive.css') }}" rel="stylesheet" type="text/css" media="screen" />
     <link href="{{ asset('pages/assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css" media="screen">
     <link href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" media="screen" />
+    {{-- <link href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.dataTables.min.css" rel="stylesheet" type="text/css" media="screen" /> --}}
 @endsection
 
 @section('content')
@@ -39,7 +40,7 @@
         <div class="show bg-light w-100 py-4 px-3 mb-5" id="collapseForm">
           <form action="{{ route('admin.pickup.filter') }}" method="get"  data-parsley-validate autocomplete="off" class="d-print-none" >
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-3 mb-1">
                 <div class="dropdown">
                   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{ __('pickup.pickup_city')}}
                   <span class="caret"></span></button>
@@ -300,6 +301,8 @@
     <script type="text/javascript" src="{{ asset('pages/assets/plugins/datatables-responsive/js/datatables.responsive.js') }}"></script>
     <script type="text/javascript" src="{{ asset('pages/assets/plugins/datatables-responsive/js/lodash.min.js') }}"></script>
     {{-- Additional JS for datatables --}}
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"> </script>
+
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"> </script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"> </script>
@@ -309,6 +312,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"> </script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"> </script>
     <script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"> </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
     {{-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.colVis.min.js"> </script> --}}
 @endsection
 
@@ -319,7 +323,7 @@
     <script src="{{ asset('pages/assets/js/datatables.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/js/demo.js') }}" type="text/javascript"></script>
     <script type="text/javascript" src="{{ asset('js/Custom/bootstrap-tagsinput.js') }}"></script>
-
+    
     {{-- JS for DatePicker --}}
     <script src="{{ asset('pages/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}" type="text/javascript"></script>
     <script src="{{ asset('pages/assets/plugins/bootstrap-typehead/typeahead.bundle.min.js') }}"></script>
@@ -356,11 +360,21 @@
        $('#pickup_table').DataTable( {
         fixedHeader: true,
         dom: 'Bfrtip',
+        responsive: true,
         columnDefs: [
             {
               visible: false, 
-              targets: [10,12] 
-            }
+              targets: [10,12],
+              
+            },
+            // {
+            //   responsivePriority: 5, 
+            //   targets: 1000,
+            // }
+        ],
+        columnDefs: [
+            { responsivePriority: 1, targets: 3 },
+            { responsivePriority: 2, targets: -1 }
         ],
         buttons: [
             {

@@ -45,7 +45,7 @@ class CustomerController extends Controller
             'email' => ['required', 'string', 'email', 'max:30', 'unique:users'],
             'm_number' => ['required', 'phone:PH'],
             'address' => ['required', 'string', 'max:255'],
-            'postal_code' => ['required', 'numeric', 'min:999', 'max:9999'],
+            'postal_code' => ['required', 'numeric', 'max:9999'],
             'city' => ['required', 'string', 'max:100'],
             'password' => ['required', 'min:6', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'confirmed'],
             'roles' => 'required',
@@ -103,17 +103,17 @@ class CustomerController extends Controller
     public function update(User $user)
     {
         $userData = $user->findOrFail(request()->route('username'));
-
+       
         $data = request()->validate([
             'username' => 'required|string|min:5|max:20|unique:users,username,'.$userData->id,
             'name' => 'required|string|max:100|regex:/^[a-zA-Z ]+$/',
             'email' => 'required|email|unique:users,email,'.$userData->id,
             'm_number' => ['required', 'phone:PH'],
             'address' => ['required', 'string', 'max:255'],
-            'postal_code' => ['required', 'numeric', 'min:999', 'max:9999'],
+            'postal_code' => ['required', 'numeric', 'max:9999'],
             'city' => ['required', 'string', 'max:100'],
-            'password' => ['required', 'min:6', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'confirmed'],
-            'roles' => 'required',
+            // 'password' => ['required', 'min:6', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/', 'confirmed'],
+            // 'roles' => 'required',
         ], [
             'username.required' => __('auth.error_required'),
             'username.unique' => __('auth.error_username_already_taken'),
@@ -127,9 +127,9 @@ class CustomerController extends Controller
             'postal_code.required' => __('auth.error_required'),
             'city.required' => __('auth.error_required'),
             // Uncomment if needed
-            'password.required' => __('auth.error_required'),
-            'password.regex' => __('auth.error_password_invalid'),
-            'password.confirmed' => __('auth.error_password_not_match'),
+            // 'password.required' => __('auth.error_required'),
+            // 'password.regex' => __('auth.error_password_invalid'),
+            // 'password.confirmed' => __('auth.error_password_not_match'),
         ]);
 
         $userData->update([
@@ -142,7 +142,7 @@ class CustomerController extends Controller
             'city' => Str::of($data['city'])->trim()->title(),
             'state' => config('location.PH_cities_states')[$data['city']],
             'country' => 'Philippines',
-            'roles' => $data['roles'],
+            // 'roles' => $data['roles'],
             // Uncomment if needed
             // 'password' => Hash::make($data['password']),
         ]);
@@ -150,7 +150,7 @@ class CustomerController extends Controller
         DB::table('model_has_roles')->where('model_id', $userData->id)->delete();
 
         $userData->assignRole(request('roles'));
-
+        
         return redirect()->route('admin.customers')->with('update', $userData->username . ' User has been successfully updated.');
     }
 

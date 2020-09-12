@@ -163,7 +163,7 @@ class PickupController extends Controller
             
         ]);
         $pickup->update([
-            'pickup_date' => Carbon::createFromFormat('F d, Y (D)', $pickupData['pickup_date']),
+            'pickup_date' =>  $pickupData['pickup_date'],
             'pickup_address' => request('pickup_address'),
             'pickup_city' => $pickupData['pickup_city'],
             'pickup_state' => config('location.PH_cities_states')[$pickupData['pickup_city']],

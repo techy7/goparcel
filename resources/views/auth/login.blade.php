@@ -4,12 +4,12 @@
 
 @section('content')
 <div class="login-wrapper">
-  <div class="bg-pic">
+  {{-- <div class="bg-pic">
     <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20">
       <h1 class="semi-bold text-white">{{ strtoupper(config('app.name')) }}</h1>
       <p class="tagline">{{ config('app.description') }}</p>
     </div>
-  </div>
+  </div> --}}
   <div class="login-container bg-white">
     <div class="p-l-30 p-r-30 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
       <img src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" alt="logo" data-src="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" data-src-retina="{{ asset('pages/assets/img/parcel_bear_logo_h-b.png') }}" class="margin-center mb-4" width="200" height="89">
