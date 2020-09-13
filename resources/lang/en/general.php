@@ -27,7 +27,7 @@ return [
     'my_pickup_booking' => 'My Pickup Bookings',
     'customers' => 'Customers',
     'help_center' => 'Help Center',
-    'terms_of_service' => 'Terms and Conditions',
+    'terms_and_conditions' => 'Terms and Conditions',
     'privacy_policy' => 'Privacy Policy',
 
     //Admin
@@ -39,7 +39,7 @@ return [
     'manage_permissions' => 'Manage Permissions',
     'packages' => 'Packages',
     'track_delivery' => 'Track Delivery',
-    
+
 
     //Header
     'signed_in_as' => 'Signed in as',
@@ -69,7 +69,7 @@ return [
     'package_type' => 'Package Type',
     'amount' => 'Amount',
     'action' => 'Action',
-    
+
     'cash_on_delivery' => 'Cash-on-delivery',
     'date_created' => 'Date Created',
     'date_modified' => 'Date Modified',
@@ -141,7 +141,7 @@ return [
     'delivery_attempts' => 'Delivery Attempts',
 
     //email
-    'order_is_being_shipped' => 'A package with a tracking code of  :field is now ready to be shipped to your address. 
+    'order_is_being_shipped' => 'A package with a tracking code of  :field is now ready to be shipped to your address.
     Check the delivery details below.',
 
 ];

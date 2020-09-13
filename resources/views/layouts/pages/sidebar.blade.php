@@ -60,10 +60,7 @@
         <div class="pl-md-3 d-flex w-100 mt-auto">
           <ul class="list-unstyled no-padding d-block w-100">
             <li class="m-t-30">
-              <a href="https://weparcelbear.com/about-us/#contact-us"><span class="title">{{ __('general.help_center') }}</span></a>
-            </li>
-            <li class="m-t-30">
-              <a href="https://weparcelbear.com/terms-of-use/"><span class="title">{{ __('general.terms_of_service') }}</span></a>
+              <a href="https://weparcelbear.com/terms-and-conditions/"><span class="title">{{ __('general.terms_and_conditions') }}</span></a>
             </li>
             <li class="m-t-30">
               <a href="https://weparcelbear.com/privacy-policy/"><span class="title">{{ __('general.privacy_policy') }}</span></a>
