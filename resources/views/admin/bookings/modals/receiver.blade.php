@@ -2,29 +2,20 @@
     <div class="modal-dialog ">
       <div class="modal-content-wrapper">
         <div class="modal-content">
-          <div class="modal-header clearfix text-left">
-            <button aria-label="" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-icon">close</i>
-            </button>
-            <h5 class="text-uppercase">Receiver <span class="semi-bold">Details</span></h5>
+          <div class="modal-header">
+            <button aria-label="" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-icon">close</i></button>
+            <h4 class="text-uppercase">Receiver Details</h4>
             <p class="p-b-10">Here’s the receiver detail of {{ $pickup->receiver_name }}.</p>
           </div>
           <div class="modal-body">
-            <form role="form">
-              <div class="form-group-attached">
-                <div class="row">
-                  <div class="col-md-12 m-l-20">
-                    <p class="bold font-montserrat text-uppercase">Name: <span><small class="text-uppercase">{{ $pickup->receiver_name }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Email: <span><small class="text-uppercase">{{ $pickup->receiver_email }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Phone Number: <span><small class="text-uppercase">{{ $pickup->receiver_phone }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Address: <span><small class="text-uppercase">{{ $pickup->receiver_address }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">City: <span><small class="text-uppercase">{{ $pickup->receiver_city }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">State: <span><small class="text-uppercase">{{ $pickup->receiver_state }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Postal Code: <span><small class="text-uppercase">{{ $pickup->receiver_postal_code }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Country: <span><small class="text-uppercase">{{ $pickup->receiver_country }}</small></span></p>
-                  </div>
-                </div>
-              </div>
-            </form>
+            <p><b>Name:</b> {{ $pickup->receiver_name }}</p>
+            <p><b>Email:</b> {{ $pickup->receiver_email }}</p>
+            <p><b>Phone Number:</b> {{ $pickup->receiver_phone }}</p>
+            <p><b>Address:</b> {{ $pickup->receiver_address }}</p>
+            <p><b>City:</b> {{ $pickup->receiver_city }}</p>
+            <p><b>State:</b> {{ $pickup->receiver_state }}</p>
+            <p><b>Postal Code:</b> {{ $pickup->receiver_postal_code }}</p>
+            <p><b>Country:</b> {{ $pickup->receiver_country }}</p>
           </div>
         </div>
       </div>
@@ -35,47 +26,30 @@
     <div class="modal-dialog ">
       <div class="modal-content-wrapper">
         <div class="modal-content">
-          <div class="modal-header clearfix text-left">
-            <button aria-label="" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-icon">close</i>
-            </button>
-            <h5 class="text-uppercase">Customer <span class="semi-bold">Details</span></h5>
+          <div class="modal-header">
+            <button aria-label="" type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-icon">close</i></button>
+            <h4 class="text-uppercase">Customer Details</h4>
             <p class="p-b-10">Here's the detail of {{ $pickup->user->name }}.</p>
           </div>
           <div class="modal-body">
-            <form role="form">
-              <div class="form-group-attached">
-                <div class="row">
-                  <div class="col-md-12 m-l-20">
-                    <p class="bold font-montserrat text-uppercase">Name: <span><small class="text-uppercase">{{ $pickup->user->name }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Email: <span><small class="text-uppercase">{{ $pickup->user->email }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Phone Number: <span><small class="text-uppercase">{{ $pickup->user->m_number }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Address: <span><small class="text-uppercase">{{ $pickup->user->address }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">City: <span><small class="text-uppercase">{{ $pickup->user->city }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">State: <span><small class="text-uppercase">{{ $pickup->user->state }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Postal Code: <span><small class="text-uppercase">{{ $pickup->user->postal_code }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Country: <span><small class="text-uppercase">{{ $pickup->user->country }}</small></span></p>
-
-                  </div>
+            <p><b>Name:</b> {{ $pickup->user->name }}</p>
+            <p><b>Email:</b> {{ $pickup->user->email }}</p>
+            <p><b>Phone Number:</b> {{ $pickup->user->m_number }}</p>
+            <p><b>Address:</b> {{ $pickup->user->address }}</p>
+            <p><b>City:</b> {{ $pickup->user->city }}</p>
+            <p><b>State:</b> {{ $pickup->user->state }}</p>
+            <p><b>Postal Code:</b> {{ $pickup->user->postal_code }}</p>
+            <p><b>Country:</b> {{ $pickup->user->country }}</p>
+            <div class="clearfix">
+              @if ($pickup->package->name == 'Own Packaging')
+                <div class="pull-right">
+                  <p><b>Total Payment:</b> {{ $pickup->priceFormatted($pickup->package_amount) }}</p>
                 </div>
-              </div>
-            </form>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="p-t-20 clearfix p-l-10 p-r-10 m-l-5">
-                  <div class="pull-left">
-                    <p class="bold font-montserrat text-uppercase">Total Payment:</p>
-                  </div>
-                  @if ($pickup->package->name == 'Own Packaging')
-                    <div class="pull-right">
-                      <p class="bold font-montserrat text-uppercase">{{ $pickup->priceFormatted($pickup->package_amount) }}</p>
-                    </div>
-                  @else
-                    <div class="pull-right">
-                      <p class="bold font-montserrat text-uppercase">{{ $pickup->priceFormatted($pickup->package->amount) }}</p>
-                    </div>
-                  @endif
+              @else
+                <div class="pull-right">
+                  <p><b>Total Payment:</b>{{ $pickup->priceFormatted($pickup->package->amount) }}</p>
                 </div>
-              </div>
+              @endif
             </div>
           </div>
         </div>

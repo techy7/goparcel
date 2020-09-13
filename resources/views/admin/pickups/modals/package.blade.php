@@ -13,11 +13,11 @@
               <div class="form-group-attached">
                 <div class="row">
                   <div class="col-md-12 m-l-20">
-                    <p class="bold font-montserrat text-uppercase">Name: <span><small class="text-uppercase">{{ $pickup->package->name }}</small></span></p>
+                    <p class="bold">Name: <span><small>{{ $pickup->package->name }}</small></span></p>
                     @if ($pickup->package->name == 'Own Packaging')
-                        <p class="bold font-montserrat text-uppercase">Length: <span><small class="text-uppercase">{{ $pickup->package_length }}</small></span></p>
-                        <p class="bold font-montserrat text-uppercase">Width: <span><small class="text-uppercase">{{ $pickup->package_width }}</small></span></p>
-                        <p class="bold font-montserrat text-uppercase">Height: <span><small class="text-uppercase">{{ $pickup->package_height }}</small></span></p>
+                        <p class="bold">Length: <span><small>{{ $pickup->package_length }}</small></span></p>
+                        <p class="bold">Width: <span><small>{{ $pickup->package_width }}</small></span></p>
+                        <p class="bold">Height: <span><small>{{ $pickup->package_height }}</small></span></p>
                     @endif
                   </div>
                 </div>
@@ -27,15 +27,15 @@
               <div class="col-md-12">
                 <div class="p-t-20 clearfix p-l-10 p-r-10 m-l-5">
                   <div class="pull-left">
-                    <p class="bold font-montserrat text-uppercase">Total Payment:</p>
+                    <p class="bold">Total Payment:</p>
                   </div>
                   @if ($pickup->package->name == 'Own Packaging')
                     <div class="pull-right">
-                      <p class="bold font-montserrat text-uppercase">{{ $pickup->priceFormatted($pickup->package_amount) }}</p>
+                      <p class="bold">{{ $pickup->priceFormatted($pickup->package_amount) }}</p>
                     </div>
                   @else
                     <div class="pull-right">
-                      <p class="bold font-montserrat text-uppercase">{{ $pickup->priceFormatted($pickup->package->amount) }}</p>
+                      <p class="bold">{{ $pickup->priceFormatted($pickup->package->amount) }}</p>
                     </div>
                   @endif
                 </div>

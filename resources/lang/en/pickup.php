@@ -2,7 +2,8 @@
 
 return [
 
-    //Create a Pcickup
+    //Create a Pickup
+
     //Sender Details
     'clear_sender_data' => 'Clear Sender Data',
     'sender_details' => 'Sender Details',
@@ -22,8 +23,8 @@ return [
     'receiver_address' => 'Receiver Address',
     'receiver_city' => 'Receiver City',
     'receiver_postal' => 'Receiver Postal Code',
-    
-    //Package 
+
+    //Package
     'choose_package' => "Choose Package",
     'max_weight' => "Max Weight:",
     'rate' => "Rate",
@@ -35,7 +36,6 @@ return [
     'item_amount' => 'Item Amount',
     'item_fee' => 'Item Fee',
 
-
     //Fees and Breakdown
     'fees_breakdown' => 'Fees and Breakdown',
     'service_fee' => 'Service Fee',
@@ -43,7 +43,6 @@ return [
     'total_amount' => 'Total Amount',
     'check_charge_to' => "Check this if you want to charge the amount to receiver",
     'book_now' => 'Book Now',
-
     'signature' => 'Signature',
 
     //Tracking
@@ -52,5 +51,4 @@ return [
     'delete_pickup' => 'Delete Pickup',
     'download_waybill' => "Download Waybill",
     'share_tracking' => "Share Tracking",
-
 ];

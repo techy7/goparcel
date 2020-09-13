@@ -32,7 +32,7 @@ return [
 
     //Admin
     'bookings' => 'Bookings',
-    'pickup_schedules' => 'Pickups',
+    'pickup_schedules' => 'Pickup Schedules',
     'users_access_roles' => 'Users & Access Roles',
     'manage_users' => 'Manage Users',
     'manage_access_roles' => 'Manage Access Roles',

@@ -20,11 +20,11 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
 
          <div class="container-fixed-lg bg-white w-100 py-3">
              @if(Session::has('message'))
-                <div class="container"> 
+                <div class="container">
                     <div class="alert alert-error" role="alert">
                         {{ Session::get('message') }}
                     </div>
@@ -37,7 +37,7 @@
                             <input type="text" class="form-control" name="tracking_number" value=""  placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('general.tracking_code'))]) }}">
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-12 text-center mt-4">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-12 text-center mt-3">
                         <button type="submit" class="btn btn-block btn-lg btn-rounded btn-primary p-3 col-md-4 col-sm-12">{{ __('general.search')}}</button>
                     </div>
                 </form>
@@ -53,7 +53,7 @@
                         @foreach ($statuses as $key => $status)
                             <div class="step" style="color: red">
                                 <div class="step-icon-wrap">
-                                    <div class="step-icon" style="{{!is_null($status->pickup_id) ? ($status->status_id ==7) ? 'background: red; color:white' : 'background: #0b6181; color: white;' : ''}}"><i class="{{$status->icon}}"></i></div>                                    
+                                    <div class="step-icon" style="{{!is_null($status->pickup_id) ? ($status->status_id ==7) ? 'background: red; color:white' : 'background: #0b6181; color: white;' : ''}}"><i class="{{$status->icon}}"></i></div>
                                 </div>
                                 <h4 class="step-title">{{ $status->name }}</h4>
                                 @if(!is_null($status->pickup_id))
@@ -63,7 +63,7 @@
                         @endforeach
 
                     </div>
-                    </div>   
+                    </div>
                 @endif
         </div>
     </div>

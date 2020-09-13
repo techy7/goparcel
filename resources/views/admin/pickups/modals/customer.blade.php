@@ -13,15 +13,14 @@
               <div class="form-group-attached">
                 <div class="row">
                   <div class="col-md-12 m-l-20">
-                    <p class="bold font-montserrat text-uppercase">Name: <span><small class="text-uppercase">{{ $pickup->user->name }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Email: <span><small class="text-uppercase">{{ $pickup->user->email }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Phone Number: <span><small class="text-uppercase">{{ $pickup->user->m_number }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Address: <span><small class="text-uppercase">{{ $pickup->user->address }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">City: <span><small class="text-uppercase">{{ $pickup->user->city }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">State: <span><small class="text-uppercase">{{ $pickup->user->state }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Postal Code: <span><small class="text-uppercase">{{ $pickup->user->postal_code }}</small></span></p>
-                    <p class="bold font-montserrat text-uppercase">Country: <span><small class="text-uppercase">{{ $pickup->user->country }}</small></span></p>
-
+                    <p class="bold">Name: <span><small>{{ $pickup->user->name }}</small></span></p>
+                    <p class="bold">Email: <span><small>{{ $pickup->user->email }}</small></span></p>
+                    <p class="bold">Phone Number: <span><small>{{ $pickup->user->m_number }}</small></span></p>
+                    <p class="bold">Address: <span><small>{{ $pickup->user->address }}</small></span></p>
+                    <p class="bold">City: <span><small>{{ $pickup->user->city }}</small></span></p>
+                    <p class="bold">State: <span><small>{{ $pickup->user->state }}</small></span></p>
+                    <p class="bold">Postal Code: <span><small>{{ $pickup->user->postal_code }}</small></span></p>
+                    <p class="bold">Country: <span><small>{{ $pickup->user->country }}</small></span></p>
                   </div>
                 </div>
               </div>
@@ -30,15 +29,15 @@
               <div class="col-md-12">
                 <div class="p-t-20 clearfix p-l-10 p-r-10 m-l-5">
                   <div class="pull-left">
-                    <p class="bold font-montserrat text-uppercase">Total Payment:</p>
+                    <p class="bold">Total Payment:</p>
                   </div>
                   @if ($pickup->package->name == 'Own Packaging')
                     <div class="pull-right">
-                      <p class="bold font-montserrat text-uppercase">{{ $pickup->priceFormatted($pickup->package_amount) }}</p>
+                      <p class="bold">{{ $pickup->priceFormatted($pickup->package_amount) }}</p>
                     </div>
                   @else
                     <div class="pull-right">
-                      <p class="bold font-montserrat text-uppercase">{{ $pickup->priceFormatted($pickup->package->amount) }}</p>
+                      <p class="bold">{{ $pickup->priceFormatted($pickup->package->amount) }}</p>
                     </div>
                   @endif
                 </div>
