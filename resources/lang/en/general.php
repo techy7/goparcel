@@ -29,6 +29,7 @@ return [
     'help_center' => 'Help Center',
     'terms_and_conditions' => 'Terms and Conditions',
     'privacy_policy' => 'Privacy Policy',
+    'contact_us' => "Contact Us",
 
     //Admin
     'bookings' => 'Bookings',

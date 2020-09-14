@@ -1,6 +1,6 @@
 <nav class="page-sidebar" data-pages="sidebar">
   <div class="sidebar-header d-flex align-items-center">
-    <img src="{{ asset('pages/assets/img/parcel_bear_logo_h-lg.png') }}" alt="logo" class="brand margin-center" data-src="{{ asset('pages/assets/img/parcel_bear_logo_h-lg.png') }}" data-src-retina="{{ asset('pages/assets/img/parcel_bear_logo_h-lg.png') }}" width="135">
+    <a href="https://weparcelbear.com/"><img src="{{ asset('pages/assets/img/parcel_bear_logo_h-lg.png') }}" alt="logo" class="brand margin-center" data-src="{{ asset('pages/assets/img/parcel_bear_logo_h-lg.png') }}" data-src-retina="{{ asset('pages/assets/img/parcel_bear_logo_h-lg.png') }}" width="135"> </a>
   </div>
   <div class="sidebar-menu">
     <ul class="menu-items">
@@ -59,6 +59,9 @@
       <li class="p-l-15 d-flex flex-column align-items-stretch h-50 w-100">
         <div class="pl-md-3 d-flex w-100 mt-auto">
           <ul class="list-unstyled no-padding d-block w-100">
+            <li class="m-t-35">
+              <a href="https://weparcelbear.com/#contact-us"><span class="title">{{ __('general.contact_us') }}</span></a>
+            </li>
             <li class="m-t-30">
               <a href="https://weparcelbear.com/terms-and-conditions/"><span class="title">{{ __('general.terms_and_conditions') }}</span></a>
             </li>

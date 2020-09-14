@@ -168,7 +168,7 @@
                   <div class="col-md-6">
                     <div class="form-group form-group-default text-right parameter"  @error('item_amount')  style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                       <label>{{ __('pickup.item_amount')}}</label>
-                      <input type="text" data-inputmask="'alias': 'decimal', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'"  class="form-control amount" name="item_amount" value="0" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.item_amount'))]) }}" id="item_amount" name="item_amount">
+                      <input type="text" maxlength="10" data-inputmask="'alias': 'decimal', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'placeholder': '0'"  class="form-control amount" name="item_amount" value="0" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.item_amount'))]) }}" id="item_amount" name="item_amount">
                     </div>
                   </div>
                 </div>

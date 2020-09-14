@@ -88,7 +88,7 @@ class PickupController extends Controller
             'package_width' => 'required_if:radioPackage,Own Packaging',
             'package_height' => 'required_if:radioPackage,Own Packaging',
             'actual_weight' => 'required_if:radioPackage,Own Packaging',
-            'item_amount' => 'required_with:,charge_to, on | regex:/^[1-9][0-9]+/ |not_in:0' ,
+            'item_amount' => 'required_with:,charge_to, on | regex:/^[1-9][0-9]+/ |not_in:0 |max:999999' ,
         ]
          , [
             'receiver_name.regex' => 'The :attribute field can only contain letters.',
