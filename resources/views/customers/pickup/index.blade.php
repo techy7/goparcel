@@ -278,7 +278,7 @@
       // }
       // else{
         $("#packageDimensions").hide();
-        $("#item_amount").attr("disabled", "disabled"); 
+        // $("#item_amount").attr("disabled", "disabled"); 
       // }
 
       
@@ -322,17 +322,17 @@
       
     });
 
-    $('#charge_to').change(function(){
-      // /alert(this.checked);
-      if(this.checked) {
-        $('#item_amount').removeAttr("disabled"); 
-      }
-      else{
-        $("#item_amount").attr("disabled", "disabled");
-        $("#item_amount").val(0); 
-      }
+    // $('#charge_to').change(function(){
+    //   // /alert(this.checked);
+    //   if(this.checked) {
+    //     $('#item_amount').removeAttr("disabled"); 
+    //   }
+    //   else{
+    //     $("#item_amount").attr("disabled", "disabled");
+    //     $("#item_amount").val(0); 
+    //   }
   
-    });
+    // });
 
 
     $('.parameter').change(function(){

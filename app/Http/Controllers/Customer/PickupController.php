@@ -56,10 +56,12 @@ class PickupController extends Controller
         $vol_weight =  ceil(((request()->l * request()->w * request()->h)/4000));
         $additional_fee = request()->aw > $vol_weight ? ((request()->aw-5) * 28) : (($vol_weight - 5) * 28);
         $additional_fee = ( $additional_fee < 0) ? 0 : $additional_fee;
-        $item_amount = request()->cod ? (float) request()->item : 0;
-        $total_amount = $additional_fee + $service_fee + $item_amount; 
+        $item_amount =  (float) str_replace(',','',request()->item) ;
+ 
+       if(request()->cod=='true')  $total_amount =  $additional_fee + $service_fee + $item_amount; 
+       else $total_amount =  $additional_fee + $service_fee; 
        
-        session(['total_amount' => $additional_fee + $service_fee]); //set class variable 
+        session(['total_amount' => $total_amount]); //set class variable 
         session(['additional_fee' => $additional_fee]);
         // session(['service_fee' => $service_fee]); same as package amount
 
@@ -76,19 +78,19 @@ class PickupController extends Controller
             'pickup_date' => 'required',
             'pickup_address' => 'required|string|max:255',
             'pickup_city' => 'required|string|max:255',
-            'pickup_postal_code' => 'required|integer',
+            'pickup_postal_code' => 'required',
             'receiver_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
             'receiver_email' => 'required|email',
             'receiver_phone' => 'required|phone:PH',
             'receiver_address' => 'required|string|max:255',
             'receiver_city' => 'required|string|max:255',
-            'receiver_postal_code' => 'required|integer',
+            'receiver_postal_code' => 'required',
             'radioPackage' => 'required',
             'package_length' => 'required_if:radioPackage,Own Packaging',
             'package_width' => 'required_if:radioPackage,Own Packaging',
             'package_height' => 'required_if:radioPackage,Own Packaging',
             'actual_weight' => 'required_if:radioPackage,Own Packaging',
-            'item_amount' => 'required_with:,charge_to, on | regex:/^[1-9][0-9]+/ |not_in:0 |max:999999' ,
+            'item_amount' => 'required| regex:/^((?!-).)*$/ |not_in:0' ,
         ]
          , [
             'receiver_name.regex' => 'The :attribute field can only contain letters.',
@@ -126,7 +128,7 @@ class PickupController extends Controller
             'charge_to_sender' => !(request()->has('charge_to')),
             'tracking_number' => strtoupper('PB'.substr(md5(time()), 0, 7)),
             'additional_fee' => session('additional_fee'),
-            'item_amount' => is_null(request('item_amount'))?  0: request('item_amount'),
+            'item_amount' => (float) str_replace(',','',request('item_amount')), 
             
         ]);
 

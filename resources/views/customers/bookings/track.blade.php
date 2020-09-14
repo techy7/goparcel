@@ -137,7 +137,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="pull-right">
-                                                <h5 class="no-margin small"><strong>{{ $pickupOrder->priceFormatted($pickupOrder->item_amount + $pickupOrder->additional_fee + $pickupOrder->package->amount ) }}</strong></h5>
+                                                <h5 class="no-margin small"><strong>{{ $pickupOrder->priceFormatted($pickupOrder->package_amount ) }}</strong></h5>
                                                 </div>
                                             </div>
                                         </div>

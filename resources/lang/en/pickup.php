@@ -33,8 +33,8 @@ return [
     'height' => "Height (cm)",
     'actual_weight' => "Actual Weight (kg)",
     'package_type' => "Package Type",
-    'item_amount' => 'Item Amount',
-    'item_fee' => 'Item Fee',
+    'item_amount' => 'Declared Amount',
+    'item_fee' => 'Declared Amount',
 
     //Fees and Breakdown
     'fees_breakdown' => 'Fees and Breakdown',

@@ -151,7 +151,7 @@
                 <tr>
                     <td><i><strong>{{ __('pickup.total_amount')}}</strong></i></td>
                     <td><i>:</i></td>
-                    <td style="text-align: right"><strong>P{{ number_format($userPickup->item_amount + $userPickup->additional_fee + $userPickup->package->amount, 2, '.', ',')     }}</strong></td>
+                    <td style="text-align: right"><strong>P{{ number_format($userPickup->package_amount, 2, '.', ',')     }}</strong></td>
                 </tr>
             </table>
             
