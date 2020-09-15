@@ -72,6 +72,8 @@ class PickupController extends Controller
     public function store()
     {
         // dd(request()->all());
+        // dd(str_pad(1122112, 8, '0', STR_PAD_LEFT));
+
         $pickupData = request()->validate([
             'sender_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
             'sender_phone' => 'required|phone:PH',
@@ -126,7 +128,7 @@ class PickupController extends Controller
             'actual_weight' => request('actual_weight') ?? 0,
             'package_amount' => session('total_amount'),
             'charge_to_sender' => !(request()->has('charge_to')),
-            'tracking_number' => strtoupper('PB'.substr(md5(time()), 0, 7)),
+            //'tracking_number' => strtoupper('PB'.substr(md5(time()), 0, 7)),
             'additional_fee' => session('additional_fee'),
             'item_amount' => (float) str_replace(',','',request('item_amount')), 
             
@@ -134,7 +136,9 @@ class PickupController extends Controller
 
         $pickup->pickupActivities()->create();
         
-        // //dd($pickup->receiver_email);
+        $pickup->tracking_number = 'PB'.str_pad($pickup->id, 7, '0', STR_PAD_LEFT);
+        $pickup->save();
+        // dd($pickup);
         Mail::to($pickup->receiver_email)->send(new CustomerPickupDetails($pickup));
         
         return redirect()->route('customer.pickup',auth()->user()->username)->with('success', 'Pickup has been successfully added. Tracking Code: '.$pickup->tracking_number);

@@ -98,15 +98,15 @@
             <div class="body">
                 <table>
                     <tr>
-                        <td>{{__('general.name')}}:</td>
+                        <td width="70px">{{__('general.name')}}:</td>
                         <td>{{ $userPickup->sender_name }}</td>
                     </tr>
                     <tr>
-                        <td>{{__('general.phone')}}:</td>
+                        <td  width="70px">{{__('general.phone')}}:</td>
                         <td>{{ $userPickup->sender_phone }}</td>
                     </tr>
                     <tr>
-                        <td>{{__('general.address')}}:</td>
+                        <td  width="70px">{{__('general.address')}}:</td>
                         <td>{{ $userPickup->pickup_address }} {{ $userPickup->pickup_city }}, {{ $userPickup->pickup_state }}, {{ $userPickup->pickup_postal_code }}</td>
                     </tr>
                 </table>
@@ -118,15 +118,15 @@
             <div class="body">
                 <table>
                     <tr>
-                        <td>{{ __('general.name')}}:</td>
+                        <td  width="70px">{{ __('general.name')}}:</td>
                         <td>{{ $userPickup->receiver_name }}</td>
                     </tr>
                     <tr>
-                        <td>{{ __('general.phone')}}:</td>
+                        <td  width="70px">{{ __('general.phone')}}:</td>
                         <td>{{ $userPickup->receiver_phone }}</td>
                     </tr>
                     <tr>
-                        <td>{{ __('general.address')}}:</td>
+                        <td  width="70px">{{ __('general.address')}}:</td>
                         <td>{{ $userPickup->receiver_address }} <strong> {{ $userPickup->receiver_city }}, {{ $userPickup->receiver_state }}</strong>,  {{ $userPickup->receiver_postal_code }}</td>
                     </tr>
                 </table>
