@@ -102,7 +102,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="pull-right">
-                                                <h5 class="no-margin small"><strong>{{ $pickupOrder->priceFormatted($pickupOrder->package->amount) }}</strong></h5>
+                                                <h5 class="no-margin small"><strong>{{ $pickupOrder->priceFormatted($pickupOrder->service_fee) }}</strong></h5>
                                                 </div>
                                             </div>
                                         </div>

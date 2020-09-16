@@ -48,7 +48,8 @@ class PickupController extends Controller
         // $additional_fee = 0; //for default packaging
         // $service_fee = 0;
 
-        
+        session(['item_amount' => (float) str_replace(',','',request()->item)]);
+
         if(!is_null(request()->package)){
             $package = Package::where('name', request()->package)->first();
             $service_fee = $package->amount;
@@ -64,11 +65,9 @@ class PickupController extends Controller
            $additional_fee  = 0;
         }
         $total_amount =  $additional_fee + $service_fee + $item_amount; 
-    
        
         session(['total_amount' => $total_amount]); //set class variable 
         session(['additional_fee' => $additional_fee]);
-        session(['item_amount' => $item_amount]);
         session(['service_fee' => $service_fee]); 
          return response()->json(['service_fee' => $service_fee, 'additional_fee'=>$additional_fee, 'total_amount'=>$total_amount, 'item_amount'=>$item_amount]);
     }
