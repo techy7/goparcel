@@ -41,7 +41,8 @@ return [
     'service_fee' => 'Service Fee',
     'additional_fee' => 'Additional Weight Fee',
     'total_amount' => 'Total Amount',
-    'check_charge_to' => "Check this if you want to charge the amount to receiver",
+    'check_charge_to' => "Charge the amount to receiver",
+    "charge_to" => "Charge to",
     'book_now' => 'Book Now',
     'signature' => 'Signature',
 

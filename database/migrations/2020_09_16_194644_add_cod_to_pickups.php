@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddChargeToColumnToPickupsTable extends Migration
+class AddCodToPickups extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class AddChargeToColumnToPickupsTable extends Migration
     {
         Schema::table('pickups', function (Blueprint $table) {
             //
-            $table->boolean('charge_to_sender');
+            $table->boolean('cod')->default(false);
         });
     }
 
@@ -28,7 +28,7 @@ class AddChargeToColumnToPickupsTable extends Migration
     {
         Schema::table('pickups', function (Blueprint $table) {
             //
-            $table->dropColumn('charge_to_sender');
+            $table->dropColumn('cod');
         });
     }
 }

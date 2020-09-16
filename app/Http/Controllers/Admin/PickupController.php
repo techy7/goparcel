@@ -18,7 +18,7 @@ class PickupController extends Controller
 {
     public function index()
     {
-        $pickups = Pickup::orderBy('pickups.pickup_date','DESC')->get();
+        $pickups = Pickup::where('active',1)->orderBy('pickups.pickup_date','DESC')->get();
         //dd($pickups);
 
         $cities = DB::table('pickups')->distinct()->pluck('pickup_city');
@@ -136,6 +136,7 @@ class PickupController extends Controller
               $q->where('pickups.created_at','<=', $todateCreated);
             }
           })  
+          ->where('active',1)
           ->orderBy('pickups.pickup_date','DESC')    
           ->get();
           return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types', 'searches', 'deliveryStatus'));

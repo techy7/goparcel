@@ -80,14 +80,17 @@
             <div class="body">
                 <table>
                     <tr>
-                        <td colspan="2">{{__('general.order_created')}}:</td>
-                        <td colspan="2">{{ $userPickup->created_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</td>
+                        <td colspan="3">{{__('general.order_created')}}:</td>
+                        <td colspan="3">{{ $userPickup->created_at->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</td>
                     </tr>
                     <tr>            
                         <td>{{__('general.cod')}}:</td>
-                        <td><b> {{ $userPickup->charge_to_sender ? "No" : "Yes" }} </b></td>
+                        <td><b> {{ $userPickup->cod ? "Yes" : "No" }} </b></td>
+                        <td>{{__('pickup.charge_to')}}:</td>
+                        <td><b>{{ $userPickup->charge_to_sender  ? "Sender" : "Receiver"}}</b></td>    
                         <td>{{__('general.package_type')}}:</td>
-                        <td>{{ $userPickup->package->name }}</td>        
+                        <td>{{ $userPickup->package->name }}</td> 
+                             
                     </tr>
                 </table>
             </div>
@@ -136,7 +139,7 @@
                 <tr>
                     <td><i>{{__('pickup.service_fee')}}*</i></td>
                     <td><i>:</i></td>
-                    <td style="text-align: right">P{{ number_format($userPickup->package->amount, 2, '.', ',') }}</td>
+                    <td style="text-align: right">P{{ number_format($userPickup->service_fee, 2, '.', ',') }}</td>
                 </tr>
                 <tr>
                     <td><i>{{ __('pickup.additional_fee')}}*</i></td>

@@ -158,12 +158,19 @@
                 <hr class="my-4">
                 <div class="row">
                   <div class="col-md-6">
-                      <div class="form-check">
-                        <input class="form-check-input parameter" type="checkbox" value="0"  id="charge_to" name="charge_to">
-                        <label class="form-check-label" for="charge_to">
-                          {{ __('general.cash_on_delivery')}}
-                        </label>
-                      </div>
+                    <div class="form-check">
+                      <input class="form-check-input parameter" type="checkbox" value="0"  id="cod" name="cod">
+                      <label class="form-check-label" for="cod">
+                        {{ __('general.cash_on_delivery')}}
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input parameter" type="checkbox" value="0"  id="charge_to" name="charge_to">
+                      <label class="form-check-label" for="charge_to">
+                        {{ __('pickup.check_charge_to')}}
+                      </label>
+                    </div>
+                      
                   </div>
                   <div class="col-md-6">
                     <div class="form-group form-group-default text-right parameter"  @error('item_amount')  style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
@@ -341,12 +348,13 @@
       var w = $('#package_width').val(); //width
       var h = $('#package_height').val(); //height
       var aw = $('#actual_weight').val(); //height
-      var cod = $('#charge_to').is(":checked");
+      var cod = $('#cod').is(":checked");
+      var charge_to = $('#charge_to').is(":checked");
       var item = $('#item_amount').val();
       if(typeof chosenPackage === "undefined") {
         chosenPackage = null;
       }
-      $.get('computeTotal', {l:l, w:w, h:h,aw:aw,package:chosenPackage,cod:cod, item:item},function(data){
+      $.get('computeTotal', {l:l, w:w, h:h,aw:aw,package:chosenPackage,cod:cod,charge_to:charge_to, item:item},function(data){
         console.log(data);
        
         $("#service_fee").html(data['service_fee'].toFixed(2));

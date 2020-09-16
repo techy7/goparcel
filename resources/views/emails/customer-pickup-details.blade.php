@@ -33,20 +33,24 @@
 </div>
 <div class="body">
    <table>
-      <tr>
-            <td>{{__('general.tracking_code')}}:</td>
-            <td>
+        <tr>
+            <td colspan="3">{{__('general.tracking_code')}}:</td>
+            <td colspan="3">
                 <a href="https://app.weparcelbear.com/track-delivery/track?tracking_number={{$pickup->tracking_number}}">{{ $pickup->tracking_number }}</a>
             </td>
-      </tr>
-      <tr>
-          <td>{{__('general.package_type')}}:</td>
-          <td>{{ $pickup->package->name }}</td>
-      </tr>
-      <tr>
-          <td>{{__('general.cod')}}:</td>
-          <td><b> {{ $pickup->charge_to_sender ? "No" : "Yes" }} </b></td>
-      </tr> 
+        </tr>
+        <tr>            
+            <td>{{__('general.cod')}}:</td>
+            <td><b> {{ $pickup->cod ? "Yes" : "No" }} </b></td>                     
+        </tr>
+        <tr>
+            <td>{{__('pickup.charge_to')}}:</td>
+            <td><b>{{ $pickup->charge_to_sender  ? "Sender" : "Receiver"}}</b></td>    
+        </tr>
+        <tr>
+            <td>{{__('general.package_type')}}:</td>
+            <td>{{ $pickup->package->name }}</td>   
+        </tr>
    </table>
 </div>
 
@@ -90,7 +94,7 @@
         <tr>
             <td><i>{{__('pickup.service_fee')}}</i></td>
             <td><i>:</i></td>
-            <td style="text-align: right">P{{ number_format($pickup->package->amount, 2, '.', ',') }}</td>
+            <td style="text-align: right">P{{ number_format($pickup->service_fee, 2, '.', ',') }}</td>
         </tr>
         <tr>
             <td><i>{{ __('pickup.additional_fee')}}</i></td>

@@ -42,12 +42,14 @@
                   <th style="width:15%">{{ __('general.tracking_code') }}</th>
                   <th style="width:15%">{{ __('general.delivery_status') }}</th>
                   <th style="width:15%">{{ __('general.package_type') }}</th>
-                  <th style="width:15%">{{ __('general.amount') }}</th>
+                  <th style="width:10%">{{ __('general.amount') }}</th>
+                  <th style="width:10%">{{ __('general.cod') }}</th>
+                  <th style="width:10%">{{ __('pickup.charge_to') }}</th>
                   <th>{{ __('general.action') }}</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach (auth()->user()->pickups as $pickup)
+                @foreach (auth()->user()->pickups->where('active',1) as $pickup)
                 <tr>
                   <td class="v-align-middle semi-bold">
                     <p>{{ $pickup->pickup_date->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D)') }}</p>
@@ -74,6 +76,12 @@
                   </td>
                   <td class="v-align-middle semi-bold">
                     <p>{{ $pickup->priceFormatted($pickup->package_amount) }}</p>
+                  </td>
+                  <td class="v-align-middle semi-bold">
+                    <p> {{ $pickup->cod ? "Yes" : "No" }}</p>
+                  </td>
+                  <td class="v-align-middle semi-bold">
+                    <p> {{ $pickup->charge_to_sender  ? "Sender" : "Receiver"}}</p>
                   </td>
                   <td class="v-align-middle semi-bold">
                     <div class="btn-group">

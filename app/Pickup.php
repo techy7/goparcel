@@ -41,6 +41,8 @@ class Pickup extends Model
         'charge_to_sender',
         'item_amount',
         'additional_fee',
+        'cod',
+        'service_fee',
     ];
 
     public function priceFormatted($price)

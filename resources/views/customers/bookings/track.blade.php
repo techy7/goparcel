@@ -69,12 +69,10 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="pull-left">
-                                                    <p class="no-margin">{{ __('pickup.package_type')}}: {{ $pickupOrder->package->name }}<p>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="pull-right">
-                                                    <p><strong>₱{{ $pickupOrder->package->amount }}.00</strong></p>
+                                                    <p class="no-margin">{{ __('pickup.package_type')}}: {{ $pickupOrder->package->name }} <br>
+                                                        {{__('general.cod')}}: {{ $pickupOrder->cod ? "Yes" : "No" }} <br>
+                                                        {{ __('pickup.charge_to')}}: {{ $pickupOrder->charge_to_sender  ? "Sender" : "Receiver"}}
+                                                    <p>
                                                 </div>
                                             </div>
                                         </div>

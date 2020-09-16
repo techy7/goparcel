@@ -45,9 +45,9 @@ class PickupController extends Controller
    
    public function computeTotal(){
     if(request()->ajax()){
-        $additional_fee = 0; //for default packaging
-        $service_fee = 0;
-        $item_amount = 0;
+        // $additional_fee = 0; //for default packaging
+        // $service_fee = 0;
+
         
         if(!is_null(request()->package)){
             $package = Package::where('name', request()->package)->first();
@@ -56,15 +56,20 @@ class PickupController extends Controller
         $vol_weight =  ceil(((request()->l * request()->w * request()->h)/4000));
         $additional_fee = request()->aw > $vol_weight ? ((request()->aw-5) * 28) : (($vol_weight - 5) * 28);
         $additional_fee = ( $additional_fee < 0) ? 0 : $additional_fee;
-        $item_amount =  (float) str_replace(',','',request()->item) ;
+        //$item_amount =  (float) str_replace(',','',request()->item) ;
  
-       if(request()->cod=='true')  $total_amount =  $additional_fee + $service_fee + $item_amount; 
-       else $total_amount =  $additional_fee + $service_fee; 
+       $item_amount = request()->cod == 'true'? (float) str_replace(',','',request()->item): 0;
+        if(request()->charge_to != 'true'){
+           $service_fee = 0;
+           $additional_fee  = 0;
+        }
+        $total_amount =  $additional_fee + $service_fee + $item_amount; 
+    
        
         session(['total_amount' => $total_amount]); //set class variable 
         session(['additional_fee' => $additional_fee]);
-        // session(['service_fee' => $service_fee]); same as package amount
-
+        session(['item_amount' => $item_amount]);
+        session(['service_fee' => $service_fee]); 
          return response()->json(['service_fee' => $service_fee, 'additional_fee'=>$additional_fee, 'total_amount'=>$total_amount, 'item_amount'=>$item_amount]);
     }
    }
@@ -73,7 +78,7 @@ class PickupController extends Controller
     {
         // dd(request()->all());
         // dd(str_pad(1122112, 8, '0', STR_PAD_LEFT));
-
+        // dd(request()->has('cod'));
         $pickupData = request()->validate([
             'sender_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
             'sender_phone' => 'required|phone:PH',
@@ -128,9 +133,11 @@ class PickupController extends Controller
             'actual_weight' => request('actual_weight') ?? 0,
             'package_amount' => session('total_amount'),
             'charge_to_sender' => !(request()->has('charge_to')),
+            'cod' => request()->has('cod'),
             //'tracking_number' => strtoupper('PB'.substr(md5(time()), 0, 7)),
             'additional_fee' => session('additional_fee'),
-            'item_amount' => (float) str_replace(',','',request('item_amount')), 
+            'item_amount' => session('item_amount'),
+            'service_fee' => session('service_fee'),
             
         ]);
 
