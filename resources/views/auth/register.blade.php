@@ -78,7 +78,7 @@
                 <div class="col-md-12">
                   <div class="form-group form-group-default required @error('m_number') has-error @enderror">
                     <label>{{ __('auth.mobile_number') }}</label>
-                    <input type="text" pattern="\d*" maxlength="15" id="m_number" name="m_number" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.mobile_number'))]) }}" value="{{ old('m_number') }}" class="form-control" required>
+                    <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="15" id="m_number" name="m_number" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.mobile_number'))]) }}" value="{{ old('m_number') }}" class="form-control" required>
                   </div>
                   @error('m_number')
                   <label class="error" for="m_number">
@@ -104,7 +104,7 @@
                 <div class="col-md-6">
                   <div class="form-group form-group-default @error('postal_code') has-error @enderror">
                     <label>{{ __('auth.postal_code') }}</label>
-                    <input type="text" pattern="\d*" maxlength="4" id="postal_code" name="postal_code" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.postal_code'))]) }}" value="{{ old('postal_code') }}" class="form-control" required>
+                    <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" id="postal_code" name="postal_code" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.postal_code'))]) }}" value="{{ old('postal_code') }}" class="form-control" required>
                   </div>
                   @error('postal_code')
                   <label class="error" for="postal_code">
