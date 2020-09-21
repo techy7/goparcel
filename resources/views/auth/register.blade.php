@@ -156,8 +156,6 @@
 <script src="{{ asset('pages/assets/plugins/jquery-inputmask/jquery.inputmask.min.js') }}" type="text/javascript"></script>
 <script>
 $(function(){
-  $("#postal_code").mask("9999");
-  $("#m_number").mask("(9999) 999-9999");
   $('#form-register').validate();
 })
 </script>
