@@ -40,7 +40,7 @@
 
                   <div class="form-group form-group-default required @error('m_number') has-error @enderror">
                     <label>{{ __('account.mobile_number') }}</label>
-                    <input type="text" id="m_number" name="m_number" value="{{ old('m_number', $user->m_number) }}" placeholder="{{ __('account.enter_field', ['field' => strtolower(__('account.mobile_number'))]) }}" class="form-control" required>
+                    <input type="text" pattern="[0-9]*" inputmode="numeric" id="m_number" name="m_number" value="{{ old('m_number', $user->m_number) }}" placeholder="{{ __('account.enter_field', ['field' => strtolower(__('account.mobile_number'))]) }}" class="form-control" required>
                   </div>
                   @error('m_number')
                   <label class="error" for="m_number">{{ $message }}</label>
@@ -73,7 +73,7 @@
 
                   <div class="form-group form-group-default required @error('postal_code') has-error @enderror">
                     <label>{{ __('account.postal_code') }}</label>
-                    <input type="text" id="postal_code" name="postal_code" value="{{ old('postal_code', $user->postal_code) }}" placeholder="{{ __('account.enter_field', ['field' => strtolower(__('account.postal_code'))]) }}" class="form-control" required>
+                    <input type="text" pattern="[0-9]*" inputmode="numeric" id="postal_code" name="postal_code" value="{{ old('postal_code', $user->postal_code) }}" placeholder="{{ __('account.enter_field', ['field' => strtolower(__('account.postal_code'))]) }}" class="form-control" required>
                   </div>
                   @error('postal_code')
                   <label class="error" for="postal_code">{{ $message }}</label>
