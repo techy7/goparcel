@@ -4,7 +4,7 @@
         <div class="brand inline"><img src="{{ asset('pages/assets/img/152.png') }}" alt="logo" data-src="{{ asset('pages/assets/img/152.png') }}" data-src-retina="{{ asset('pages/assets/img/152.png') }}" width="38" height="38"></div>
     </div>
     <div class="d-flex align-items-center">
-        <div class="dropdown pull-right d-lg-block d-none">
+        <div class="dropdown pull-right d-lg-block">
             <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="profile dropdown">
                 <span class="thumbnail-wrapper d32 circular inline">
                     @if (auth()->user()->profile_picture)
