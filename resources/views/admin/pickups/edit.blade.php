@@ -82,7 +82,7 @@
                       <div class="col-12">
                         <div class="form-group form-group-default @error('pickup_postal_code') has-error @enderror">
                           <label>{{ __('pickup.pickup_postal')}}</label>
-                          <input type="text" id="pickup_postal_code" name="pickup_postal_code" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.postal_code'))]) }}" value="{{ old('pickup_postal_code', $pickup->pickup_postal_code) }}" class="form-control" />
+                          <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" id="pickup_postal_code" name="pickup_postal_code" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.postal_code'))]) }}" value="{{ old('pickup_postal_code', $pickup->pickup_postal_code) }}" class="form-control" />
                         </div>
                         @error('pickup_postal_code')
                         <label class="error" for="pickup_postal_code">{{ $message }}</label>
@@ -171,9 +171,6 @@
     });
 
     $(function(){
-      $("#pickup_postal_code").mask("9999");
-      $("#receiver_postal_code").mask("9999");
-      $("#m_number").mask("(9999) 999-9999");
       $('#form-register').validate();
     })
 

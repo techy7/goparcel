@@ -1,11 +1,11 @@
 @extends('layouts.pages.app')
- 
+
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css" media="screen">
 @endsection
- 
+
 @section('title', __('general.schedule_a_pickup'))
- 
+
 @section('content')
 <div class="content sm-gutter">
   <div class="container-fluid padding-25 sm-padding-10">
@@ -22,12 +22,12 @@
     <div class="page-content-wrapper p-l-0 p-3 m-b-45">
       <form action="{{ route('customer.pickup.store', auth()->user() ) }}" method="post"  data-parsley-validate autocomplete="off" class="d-print-none" >
         @csrf
-        
+
         <div class="row">
           <div class="col-md-6">
             <div id="senderInfo" class="container card mr-3 bg-white">
                 <div class="card-body">
-                  <h5 class="pull-left card-title">{{ __('pickup.sender_details')}} </h5> <button id="clear_data" type="button" class="btn btn-danger btn-link pull-right">{{ __('pickup.clear_sender_data')}} </button> 
+                  <h5 class="pull-left card-title">{{ __('pickup.sender_details')}} </h5> <button id="clear_data" type="button" class="btn btn-danger btn-link pull-right">{{ __('pickup.clear_sender_data')}} </button>
                   <div class="form-group form-group-default" @error('sender_name') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.sender_name')}} </label>
                     <input type="text" class="form-control" name="sender_name" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.sender_name'))]) }}" value="{{old('_token') !== null ? old('sender_name') : auth()->user()->name }}">
@@ -35,7 +35,7 @@
                   </div>
                   <div class="form-group form-group-default" @error('sender_phone') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.sender_phone')}}</label>
-                    <input type="text" maxlength="15" id="sender_phone_number" class="form-control phone_number"  name="sender_phone" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.sender_phone'))]) }}" value="{{ old('_token') !== null ? old('sender_phone') : auth()->user()->m_number }}">
+                    <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="15" id="sender_phone_number" class="form-control phone_number"  name="sender_phone" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.sender_phone'))]) }}" value="{{ old('_token') !== null ? old('sender_phone') : auth()->user()->m_number }}">
                   </div>
                   <div class="form-group form-group-default input-group" @error('pickup_date') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                       <div class="form-input-group">
@@ -63,10 +63,10 @@
                   </div>
                   <div class="form-group form-group-default" @error('pickup_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.pickup_postal')}}</label>
-                    <input type="text" maxlength="4" class="form-control postal" name="pickup_postal_code" value="{{ old('_token') !== null ? old('pickup_postal_code') : auth()->user()->postal_code  }}"  placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.pickup_postal'))]) }}">
+                    <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" class="form-control postal" name="pickup_postal_code" value="{{ old('_token') !== null ? old('pickup_postal_code') : auth()->user()->postal_code  }}"  placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.pickup_postal'))]) }}">
                   </div>
                 </div>
-              </div> 
+              </div>
           </div> {{-- End col 1--}}
           <div class="col-md-6">
             <div id="recipientInfo" class="container card mr-3 bg-white">
@@ -96,15 +96,15 @@
                       <optgroup label="{{ $state }}">
                         @foreach ($cities as $city)<option value="{{ $city }}" {{ old('receiver_city') == $city ? 'selected' : null }}>{{ $city }}</option>@endforeach
                       </optgroup>
-                      @endforeach 
+                      @endforeach
                     </select>
                   </div>
                   <div class="form-group form-group-default" @error('receiver_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.receiver_postal')}}</label>
-                    <input type="text" maxlength="4" class="form-control postal" name="receiver_postal_code" value="{{ old('receiver_postal_code') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_postal'))]) }}">
+                    <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" class="form-control postal" name="receiver_postal_code" value="{{ old('receiver_postal_code') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_postal'))]) }}">
                   </div>
                 </div>
-              </div> 
+              </div>
           </div>{{---End of Col 2--}}
         </div>{{---End of Row 1 --}}
 
@@ -115,8 +115,8 @@
                 <h5 class="card-title mb-0">{{ __('pickup.choose_package')}}</h5>
                 <p class="mt-0"><i>Shipping rates are VAT inclusive.</i></p>
                 <div class="row "> @error('radioPackage') <span class="alert alert-error w-100 text-center">{{$message}}</span> @enderror </div>
-                <div class="row"> 
-                  @foreach($packages as $package)                
+                <div class="row">
+                  @foreach($packages as $package)
                   <div class="col-md-4">
                     <div class="form-check container-radio text-center">
                       <input class="form-check-input d-none parameter" type="radio" name="radioPackage" id="{{$package->name}}" value="{{$package->name}}" >
@@ -128,31 +128,31 @@
                         <p class="package-description rate">{{ __('pickup.rate')}}</p>
                       </label>
                     </div>
-                  </div> 
+                  </div>
                 @endforeach
                 <div class="row" id="packageDimensions">
-                  <p class="btn-block"><em>If your item weight is beyond 5kg, kindly fill this out.</em></p> 
+                  <p class="btn-block"><em>If your item weight is beyond 5kg, kindly fill this out.</em></p>
                   <div class="col-md-3 p-2">
-                    <div class="form-group form-group-default parameter" @error('package_length') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.length')}}</label> 
+                    <div class="form-group form-group-default parameter" @error('package_length') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.length')}}</label>
                       <input id="package_length"  type="number" name="package_length" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                     </div>
-                  </div> 
+                  </div>
                   <div class="col-md-3 p-2">
-                    <div class="form-group form-group-default parameter" @error('package_width') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label class="fade">{{ __('pickup.width')}}</label> 
+                    <div class="form-group form-group-default parameter" @error('package_width') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label class="fade">{{ __('pickup.width')}}</label>
                     <input  id="package_width"  type="number" name="package_width" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                     </div>
-                  </div> 
+                  </div>
                   <div class="col-md-3 p-2">
-                    <div class="form-group form-group-default parameter" @error('package_height') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.height')}}</label> 
+                    <div class="form-group form-group-default parameter" @error('package_height') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.height')}}</label>
                       <input id="package_height"  type="number" name="package_height" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
                       </div>
                     </div>
 
                   <div class="col-md-3 p-2">
-                    <div class="form-group form-group-default parameter" @error('actual_weight') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.actual_weight')}}</label> 
+                    <div class="form-group form-group-default parameter" @error('actual_weight') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.actual_weight')}}</label>
                       <input id="actual_weight"  type="number" name="actual_weight" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
-                    </div>  
-                  </div>  
+                    </div>
+                  </div>
                   </div>
                 </div>
                 <hr class="my-4">
@@ -170,7 +170,7 @@
                         {{ __('pickup.check_charge_to')}}
                       </label>
                     </div>
-                      
+
                   </div>
                   <div class="col-md-6">
                     <div class="form-group form-group-default text-right parameter"  @error('item_amount')  style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
@@ -187,11 +187,11 @@
             <div id="fees" class="container card mr-3 bg-white">
               <div class="card-body">
                 <h5 class="card-title">{{ __('pickup.fees_breakdown')}}</h5>
-                  
+
                 <div class="row">
                     <div class="col-md-6">
                       <h5 class="no-margin details-title text-muted"><strong>{{ __('pickup.service_fee')}}</strong></h5>
-                    </div> 
+                    </div>
                     <div class="col-md-6">
                       <h5 class="pull-right no-margin"> <strong class="text-muted">{{ __('general.amount_peso', ['field' => '']) }}<span id="service_fee"> 0.00 </span></strong></h5>
                     </div>
@@ -199,7 +199,7 @@
                 <div class="row">
                   <div class="col-md-6">
                       <h5 class="no-margin details-title text-muted">{{ __('pickup.additional_fee')}}</h5>
-                  </div> 
+                  </div>
                   <div class="col-md-6">
                       <h5 class="no-margin pull-right"><strong class="text-muted">{{ __('general.amount_peso', ['field' => '']) }}<span id="additional_fee"> 0.00 </span></strong></h5>
                   </div>
@@ -207,7 +207,7 @@
                 <div class="row">
                   <div class="col-md-6">
                       <h5 class="no-margin details-title text-muted">{{ __('pickup.item_fee')}}</h5>
-                  </div> 
+                  </div>
                   <div class="col-md-6">
                       <h5 class="no-margin pull-right"><strong class="text-muted">{{ __('general.amount_peso', ['field' => '']) }}<span id="item_fee"> 0.00 </span></strong></h5>
                   </div>
@@ -216,7 +216,7 @@
                 <div class="row">
                   <div class="col-md-6">
                       <h5 class="no-margin details-title"><strong>{{ __('pickup.total_amount')}}</strong></h5>
-                  </div> 
+                  </div>
                   <div class="col-md-6">
                       <h5 class="no-margin pull-right"> <strong>{{ __('general.amount_peso', ['field' => '']) }} <span id="total_amount"> 0.00 </span></strong></h5>
                   </div>
@@ -236,7 +236,7 @@
   </div>
 </div>
 @endsection
-   
+
 @section('lower-links-extends')
     <script type="text/javascript" src="{{ asset('pages/assets/plugins/select2/js/select2.full.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('pages/assets/plugins/jquery-autonumeric/autoNumeric.js') }}"></script>
@@ -247,15 +247,15 @@
     <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
     <script src="{{ asset('pages/assets/plugins/jquery-inputmask/jquery.inputmask.min.js') }}" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js"></script>
-    
+
   <script>
 
 
     $( document ).ready(function(){
-      
+
 
       $(".amount").inputmask();
-      
+
       var currentDate = new Date();
       currentDate.setDate(currentDate.getDate());
       //alert(currentDate);
@@ -264,11 +264,11 @@
       var d = new Date().setHours(17,0,0,0);
       if(dt > d){
            dt.setDate(dt.getDate()+2);
-      } 
+      }
       else{
            dt.setDate(dt.getDate()+1);
       }
-      
+
       $('#datepicker-component2').datepicker({
         format: "yyyy-mm-dd",
         clearBtn: true,
@@ -285,10 +285,10 @@
       // }
       // else{
         $("#packageDimensions").hide();
-        // $("#item_amount").attr("disabled", "disabled"); 
+        // $("#item_amount").attr("disabled", "disabled");
       // }
 
-      
+
     });
 
     $(window).on('load', function() {
@@ -298,24 +298,19 @@
       var text = {!! json_encode(auth()->user()->city) !!};
       if(val == null){
         $("#pickup_city").val(text).change();
-      } 
+      }
     });
 
     $(function(){
-      $("#pickup_postal_code").mask("9999");
-      $("#receiver_postal_code").mask("9999");
-      $(".phone_number").mask("(9999) 999-9999");
-      $(".postal").mask("9999");
       $('#form-register').validate();
     });
 
     $('input:radio[name="radioPackage"]').change(function(){
-      
+
         if ($(this).is(':checked') && $(this).val() == "Own Packaging") {
-          $("#packageDimensions").show();  
+          $("#packageDimensions").show();
         }
         else{
-            
             $("#packageDimensions").hide();
         }
 
@@ -326,19 +321,19 @@
         $('#senderInfo input').val("");
         $('#pickup_city').find('option[selected]').removeAttr('selected');
       //$('#pickup_city').val("0");
-      
+
     });
 
     // $('#charge_to').change(function(){
     //   // /alert(this.checked);
     //   if(this.checked) {
-    //     $('#item_amount').removeAttr("disabled"); 
+    //     $('#item_amount').removeAttr("disabled");
     //   }
     //   else{
     //     $("#item_amount").attr("disabled", "disabled");
-    //     $("#item_amount").val(0); 
+    //     $("#item_amount").val(0);
     //   }
-  
+
     // });
 
 
@@ -356,7 +351,7 @@
       }
       $.get('computeTotal', {l:l, w:w, h:h,aw:aw,package:chosenPackage,cod:cod,charge_to:charge_to, item:item},function(data){
         console.log(data);
-       
+
         $("#service_fee").html(data['service_fee'].toFixed(2));
         $("#item_fee").html(data['item_amount'].toFixed(2));
         $("#additional_fee").html(data['additional_fee'].toFixed(2));

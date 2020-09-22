@@ -80,7 +80,7 @@
                 <div class="col-md-6">
                     <div class="form-group form-group-default required @error('m_number') has-error @enderror">
                         <label>{{ __('auth.mobile_number') }}</label>
-                        <input type="text" pattern="[0-9]*" inputmode="numeric" id="m_number" name="m_number" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.mobile_number'))]) }}" value="{{ old('m_number') ?? $userData->m_number ?? 'N/A' }}" class="form-control" >
+                        <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="15" id="m_number" name="m_number" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.mobile_number'))]) }}" value="{{ old('m_number') ?? $userData->m_number ?? 'N/A' }}" class="form-control" >
                     </div>
                     @error('m_number')
                         <label class="error" for="m_number">
@@ -104,7 +104,7 @@
                 <div class="col-md-4">
                     <div class="form-group form-group-default required @error('postal_code') has-error @enderror">
                         <label>{{ __('auth.postal_code') }}</label>
-                        <input type="text" pattern="[0-9]*" inputmode="numeric" id="postal_code" name="postal_code" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.postal_code'))]) }}" value="{{ old('postal_code') ?? $userData->postal_code ?? 'N/A' }}" class="form-control" >
+                        <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" id="postal_code" name="postal_code" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('auth.postal_code'))]) }}" value="{{ old('postal_code') ?? $userData->postal_code ?? 'N/A' }}" class="form-control" >
                     </div>
                     @error('postal_code')
                         <label class="error" for="postal_code">
@@ -182,8 +182,6 @@
     <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
   <script>
     $(function(){
-      $("#postal_code").mask("9999");
-      $("#m_number").mask("(9999) 999-9999");
       $('#form-register').validate();
     })
   </script>
