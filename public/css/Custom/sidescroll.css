@@ -1,0 +1,28 @@
+ /* The heart of the matter */
+          
+ .horizontal-scrollable { 
+    overflow-x: auto; 
+    white-space: nowrap; 
+} 
+  
+.horizontal-scrollable > .col-md-4 { 
+    display: inline-block; 
+    float: none; 
+
+} 
+
+/*
+.col-md-4 { 
+    color: white; 
+    font-size: 24px; 
+    padding-bottom: 20px; 
+    padding-top: 18px; 
+}  
+  
+ .col-md-4:nth-child(2n+1) { 
+    background: green; 
+} 
+  
+.col-md-4:nth-child(2n+2) { 
+    background: black; 
+}  */

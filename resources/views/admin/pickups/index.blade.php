@@ -8,6 +8,7 @@
   <link href="{{ asset('pages/assets/plugins/datatables-responsive/css/datatables.responsive.css') }}" rel="stylesheet" type="text/css" media="screen" />
   <link href="{{ asset('pages/assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css" media="screen">
   <link href="//cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" media="screen" />
+  
 @endsection
 
 @section('content')
@@ -316,14 +317,16 @@
 
 @section('lower-links-extends')
   <script src="{{ asset('pages/assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('pages/assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js') }}"></script>
   <script src="{{ asset('pages/assets/plugins/jquery-datatable/media/js/dataTables.bootstrap.js') }}"></script>
   <script src="{{ asset('pages/assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js') }}"></script>
+  <script src="{{ asset('pages/assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js') }}"></script>
+ 
+  
   <script src="{{ asset('pages/assets/plugins/datatables-responsive/js/datatables.responsive.js') }}"></script>
   <script src="{{ asset('pages/assets/plugins/datatables-responsive/js/lodash.min.js') }}"></script>
 
   {{-- Additional JS for datatables --}}
-  <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+  {{-- <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> --}}
 
   <script src="//cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
 
@@ -379,6 +382,7 @@
   $(document).ready(function(){
     let table = $('#pickup_table').dataTable({
       //dom: 'Brtip',
+      stateSave: true,
       responsive: false,
       buttons: [
         {

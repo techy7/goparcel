@@ -2,6 +2,8 @@
 
 @section('upper-links-extend')
     <link href="{{ asset('pages/assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css" media="screen">
+    <link href="{{ URL::asset('css/Custom/sidescroll.css') }}" rel="stylesheet" type="text/css" >
+
 @endsection
 
 @section('title', __('general.schedule_a_pickup'))
@@ -115,48 +117,24 @@
                 <h5 class="card-title mb-0">{{ __('pickup.choose_package')}}</h5>
                 <p class="mt-0"><i>Shipping rates are VAT inclusive.</i></p>
                 <div class="row "> @error('radioPackage') <span class="alert alert-error w-100 text-center">{{$message}}</span> @enderror </div>
-                <div class="row">
-                  @foreach($packages as $package)
-                  <div class="col-md-4">
-                    <div class="form-check container-radio text-center">
-                      <input class="form-check-input d-none parameter" type="radio" name="radioPackage" id="{{$package->name}}" value="{{$package->name}}" >
-                      <label class="form-check-label" for="{{$package->name}}">
-                        <img alt="Package Picture" width="70" height="70" src="/pages/assets/img/icon.png">
-                        <p class="package-title">{{$package->name}}</p>
-                        <p class="package-description">{{ __('pickup.max_weight')}} {{$package->max_weight}} kg</p>
-                        <p class="package-description price">{{ __('general.amount_peso', ['field' => number_format($package->amount,2)]) }}</p>
-                        <p class="package-description rate">{{ __('pickup.rate')}}</p>
-                      </label>
-                    </div>
-                  </div>
-                @endforeach
-                <div class="row" id="packageDimensions">
-                  <p class="btn-block"><em>If your item weight is beyond 5kg, kindly fill this out.</em></p>
-                  <div class="col-md-3 p-2">
-                    <div class="form-group form-group-default parameter" @error('package_length') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.length')}}</label>
-                      <input id="package_length"  type="number" name="package_length" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-md-3 p-2">
-                    <div class="form-group form-group-default parameter" @error('package_width') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label class="fade">{{ __('pickup.width')}}</label>
-                    <input  id="package_width"  type="number" name="package_width" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-md-3 p-2">
-                    <div class="form-group form-group-default parameter" @error('package_height') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.height')}}</label>
-                      <input id="package_height"  type="number" name="package_height" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
+                <div class="row my-2 mb-2 p-0">
+                  <div class="horizontal-scrollable row flex-row flex-nowrap w-100">
+                    @foreach($packages as $package)
+                    <div class="col-xs-2 col-sm-3 col-md-4" data-toggle="tooltip" data-placement="top" title="{{$package->description}}" >
+                      <div class="form-check text-center">
+                        <input class="form-check-input d-none parameter" type="radio" name="radioPackage" id="{{$package->name}}" value="{{$package->name}}" >
+                        <label class="form-check-label" for="{{$package->name}}">
+                          <img alt="Package Picture" width="70" height="70" src="/pages/assets/img/icon.png">
+                          <p class="package-title">{{$package->name}}</p>
+                          <p class="package-description">{{ __('pickup.max_weight')}} {{$package->max_weight}} kg</p>
+                          <p class="package-description price">{{ __('general.amount_peso', ['field' => number_format($package->amount,2)]) }}</p>
+                          <p class="package-description rate">{{ __('pickup.rate')}}</p>
+                        </label>
                       </div>
                     </div>
-
-                  <div class="col-md-3 p-2">
-                    <div class="form-group form-group-default parameter" @error('actual_weight') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.actual_weight')}}</label>
-                      <input id="actual_weight"  type="number" name="actual_weight" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
-                    </div>
-                  </div>
-                  </div>
-                </div>
-                <hr class="my-4">
-                <div class="row">
+                    @endforeach
+                  </div>              
+                <div class="row mt-4 w-100">
                   <div class="col-md-6">
                     <div class="form-check">
                       <input class="form-check-input parameter" type="checkbox" value="0"  id="cod" name="cod">
@@ -179,6 +157,49 @@
                     </div>
                   </div>
                 </div>
+                
+                <div class="row mt-2 w-100">
+                  <div class="form-group form-group-default parameter">
+                    <label>{{ __('pickup.additional_instruction')}}</label>
+                    <textarea class="form-control" id="additional_instruction" name="additional_instruction" maxlength="150" style="height: 60px;" onkeyup="countChar(this)"></textarea>
+                  </div>
+                  <div class="container-fluid p-0 w-100">
+                    <div class="float-right text-small text-muted">
+                      <small><span id="charNum">150</span> characters left.</small>
+                    </div>  
+                  </div>
+                </div>
+                
+
+                <div class="row mt-2 w-100" id="packageDimensions">
+                  <hr class="w-100 p-1 m-1">
+                  <p class="btn-block mt-2"><em>If your item weight is beyond 5kg, kindly fill this out.</em></p>
+                  <div class="col-md-3 p-2">
+                    <div class="form-group form-group-default parameter" @error('package_length') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.length')}}</label>
+                      <input id="package_length"  type="number" name="package_length" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-3 p-2">
+                    <div class="form-group form-group-default parameter" @error('package_width') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label class="fade">{{ __('pickup.width')}}</label>
+                    <input  id="package_width"  type="number" name="package_width" s150tep="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-3 p-2">
+                    <div class="form-group form-group-default parameter" @error('package_height') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.height')}}</label>
+                      <input id="package_height"  type="number" name="package_height" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
+                      </div>
+                    </div>
+
+                  <div class="col-md-3 p-2">
+                    <div class="form-group form-group-default parameter" @error('actual_weight') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror><label>{{ __('pickup.actual_weight')}}</label>
+                      <input id="actual_weight"  type="number" name="actual_weight" step="any" oninput="this.value = Math.abs(this.value)" onkeypress="if(this.value.length==6) return false;" class="form-control">
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+               
+
               </div>
             </div>
           </div> {{--End of Col 1--}}
@@ -358,6 +379,13 @@
         $("#total_amount").html(data['total_amount'].toFixed(2));
         });
     });
+
+    var max =  $('#additional_instruction').attr('maxLength')
+
+    function countChar(val) {
+      var len = val.value.length;
+        $('#charNum').text((max - len));
+    };
 
   </script>
 @endsection

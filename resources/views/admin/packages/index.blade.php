@@ -44,8 +44,8 @@
                         <th>{{ __('general.package_name')}}</th>
                         <th>{{ __('general.package_description')}}</th>
                         <th>{{ __('general.package_amount')}}</th>
-                        <th>{{ __('general.date_created')}}</th>
-                        <th>{{ __('general.date_modified')}}</th>
+                        {{-- <th>{{ __('general.date_created')}}</th>
+                        <th>{{ __('general.date_modified')}}</th> --}}
                         <th>{{ __('general.action')}}</th>
                     </tr>
                   </thead>
@@ -61,19 +61,19 @@
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $package->priceFormatted($package->amount) }}</p>
                             </td>
-                            <td class="v-align-middle semi-bold">
+                            {{-- <td class="v-align-middle semi-bold">
                                 <p>{{ $package->created_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $package->updated_at->setTimezone('Asia/Manila')->format('F d, Y (D) - g:i A') }}</p>
-                            </td>
+                            </td> --}}
                             <td class="v-align-middle semi-bold">
                                 <div class="btn-group">
                                     <a href="{{ route('admin.packages.edit', $package->id) }}" class="btn btn-outline-primary m-1">{{ __('general.edit')}}</a>
                                     <form style="margin-top: 4px; margin-left: 2px" action="{{ route('admin.packages.destroy', $package->id) }}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" onclick="return confirm('Are you sure you want to delete {{ $package->name }}?')" class="btn btn-outline-danger">{{ __('general.edit')}}</button>
+                                        <button type="submit" onclick="return confirm('Are you sure you want to delete {{ $package->name }}?')" class="btn btn-outline-danger">{{ __('general.delete')}}</button>
                                     </form>
                                 </div>
                             </td>

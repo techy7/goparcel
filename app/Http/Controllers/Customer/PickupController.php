@@ -97,6 +97,7 @@ class PickupController extends Controller
             'package_height' => 'required_if:radioPackage,Own Packaging',
             'actual_weight' => 'required_if:radioPackage,Own Packaging',
             'item_amount' => 'required| regex:/^((?!-).)*$/ |not_in:0' ,
+            'additional_instruction' => 'max:150',
         ]
          , [
             'receiver_name.regex' => 'The :attribute field can only contain letters.',
@@ -137,6 +138,7 @@ class PickupController extends Controller
             'additional_fee' => session('additional_fee'),
             'item_amount' => session('item_amount'),
             'service_fee' => session('service_fee'),
+            'additional_instruction' => request('additional_instruction'),
             
         ]);
 

@@ -23,11 +23,11 @@
       <li class="m-t-10">
         <a href="{{ route('admin.bookings') }}"><span class="title">{{ __('general.bookings') }}</span></a>
       </li>
+      @endhasanyrole
+      @hasanyrole('Super Admin|User')
       <li class="m-t-10">
         <a href="{{ route('admin.packages') }}"><span class="title">{{ __('general.packages') }}</span></a>
       </li>
-      @endhasanyrole
-      @hasanyrole('Super Admin|User')
       <li class="m-t-10">
         <a href="{{ route('admin.customers') }}"><span class="title">{{ __('general.customers') }}</span></a>
       </li>

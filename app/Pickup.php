@@ -43,6 +43,7 @@ class Pickup extends Model
         'additional_fee',
         'cod',
         'service_fee',
+        'additional_instruction'
     ];
 
     public function priceFormatted($price)

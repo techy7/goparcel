@@ -12,7 +12,8 @@
             padding: 0 5px;
             direction: ltr;
             font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
+            line-height: 1rem;
         }
 
         p {
@@ -40,7 +41,7 @@
             color: black !important;
             text-decoration: none;
             font-weight: bold;
-            font-size: large;
+            font-size: medium;
 
         }
         .header{
@@ -55,9 +56,10 @@
             margin: 0px;
             margin-bottom: 5px;
             border: 1px solid black;
-            padding: 5px;
+            padding: 2px 5px;
+            height: 80px;
         }
-        .tab { margin-left: 30px; }
+        .tab { margin-left: 65px; }
         td{
             vertical-align: top;
         }
@@ -67,7 +69,7 @@
     <body>
         <div id="container">
             {{-- <img src="data:image/png;base64,{{ $logo }}" alt="logo" width="180" height="75"> --}}
-            <img src="https://i.ibb.co/JRPgCpn/Logo-black.jpg" alt="PB Logo" width="180" height="75">
+            <img src="https://i.ibb.co/JRPgCpn/Logo-black.jpg" alt="PB Logo" width="120" height="50">
             <div style="float:right">
                 <i><small>{{__('general.tracking_code')}}</small></i>
                 <div id="track">
@@ -77,7 +79,7 @@
             <div class="header">
                <p> {{__('general.order_details')}} 
              </div>
-            <div class="body">
+            <div class="body" style="height: 35px">
                 <table>
                     <tr>
                         <td colspan="3">{{__('general.order_created')}}:</td>
@@ -159,12 +161,23 @@
             </table>
             
             {{-- <h4 style="margin: 0px; margin-top: 10px; float:right"><strong>{{ __('pickup.total_amount')}}:</strong> <small>P{{ number_format($userPickup->package_amount, 2, '.', ',') }}</small></h4> --}}
-            <br/>
+           
+            <i><u><span style="text-align: center; font-size: 0.6rem;">* Shipping rates are VAT inclusive. </span></u> </i> <br/><br>
             <table width="100%">
                 <tr>
-                    <td width="70%"><i>{{ __('general.comments')}}:
-                     <span style="text-align: center; font-size: 0.6rem"> <br><br>* Shipping rates are VAT inclusive. </span> </i></td>
-                    <td > <i>{{ __('general.delivery_attempts')}} <br> <span class="tab">1</span>  <span class="tab">2</span></td>
+                    <td colspan="2" width="100%"><b>{{ __('pickup.additional_instruction')}}: </b>
+                        <div style="border: 0.5px solid white; width: 100%; height: 40px; padding: 2px 15px;  text-align: center;">
+                          {{-- <i> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p </i>  --}}
+                        </div>  
+                    </td>
+                </tr>
+                <tr>
+                   
+                    <td width="100%"> 
+                        <br>
+                        <b>{{ __('general.delivery_attempts')}}: </b> <span class="tab">1</span>  <span class="tab">2</span> <br>
+                          
+                    </td>
                 </tr>
             </table>   
         </div>

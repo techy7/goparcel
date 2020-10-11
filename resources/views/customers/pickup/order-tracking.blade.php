@@ -46,7 +46,7 @@
                             <div class="alert alert-error" role="alert">
                                 {{ Session::get('message') }}
                             </div>
-                        @endif
+                        @endif 
                         <form action="{{ route('track-delivery.show' ) }}" method="get"  data-parsley-validate autocomplete="off" class="d-print-none mb-5" >
                             <div class="col-xs-12 col-sm-12 col-md-12 col-12 d-flex justify-content-center mt-4">
                                 <div class="form-group form-group-default w-50">

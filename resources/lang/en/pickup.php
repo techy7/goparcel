@@ -31,7 +31,7 @@ return [
     'length' => "Length (cm)",
     'width' => "Width (cm)",
     'height' => "Height (cm)",
-    'actual_weight' => "Actual Weight (kg)",
+    'actual_weight' => "Actual Wt (kg)",
     'package_type' => "Package Type",
     'item_amount' => 'Declared Amount',
     'item_fee' => 'Declared Amount',
@@ -44,6 +44,7 @@ return [
     'check_charge_to' => "Charge the amount to receiver",
     "charge_to" => "Charge to",
     'book_now' => 'Book Now',
+    'additional_instruction' => "Additional Instructions",
     'signature' => 'Signature',
 
     //Tracking

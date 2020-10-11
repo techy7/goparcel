@@ -83,7 +83,7 @@ class BookingController extends Controller
             Session::flash('message', 'Please enter the tracking number of your parcel!'); 
             else
             Session::flash('message', 'Tracking number for the parcel not found'); 
-            return redirect()->route('customer.bookings.searchTrack', auth()->ucusser()->username);
+            return redirect()->route('customer.bookings.searchTrack', auth()->user()->username);
         }
 
         $statuses = DeliveryStatus::all();
