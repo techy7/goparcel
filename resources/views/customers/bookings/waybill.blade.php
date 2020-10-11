@@ -165,13 +165,6 @@
             <i><u><span style="text-align: center; font-size: 0.6rem;">* Shipping rates are VAT inclusive. </span></u> </i> <br/><br>
             <table width="100%">
                 <tr>
-                    <td colspan="2" width="100%"><b>{{ __('pickup.additional_instruction')}}: </b>
-                        <div style="border: 0.5px solid white; width: 100%; height: 40px; padding: 2px 15px;  text-align: center;">
-                          {{-- <i> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p </i>  --}}
-                        </div>  
-                    </td>
-                </tr>
-                <tr>
                    
                     <td width="100%"> 
                         <br>
@@ -179,6 +172,15 @@
                           
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2" width="100%"><b>{{ __('pickup.additional_instruction')}}: </b>
+                        <div style="border: 0.5px solid white; width: 100%; height: 40px; padding: 2px 15px;  text-align: center;">
+                           <i> {{$userPickup->additional_instruction}}</i>
+                          {{-- <i> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p </i>  --}}
+                        </div>  
+                    </td>
+                </tr>
+               
             </table>   
         </div>
     </body>
