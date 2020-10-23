@@ -68,7 +68,7 @@
                     <label>{{ __('pickup.pickup_postal')}}</label>
                     <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" class="form-control postal" name="pickup_postal_code" value="{{ old('_token') !== null ? old('pickup_postal_code') : auth()->user()->postal_code  }}"  placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.pickup_postal'))]) }}">
                   </div>
-                </div>
+                </div> 
               </div>
           </div> {{-- End col 1--}}
           <div class="col-md-6">
