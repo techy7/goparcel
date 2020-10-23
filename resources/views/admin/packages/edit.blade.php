@@ -42,6 +42,15 @@
                             {{ $message }}
                         </label>
                     @enderror
+                    <div class="form-group form-group-default required @error('max_weight') has-error @enderror">
+                        <label>{{ __('general.max_weight')}}</label>
+                        <input type="number" name="max_weight" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('general.max_weight'))]) }}" value="{{ old('max_weight', $package->max_weight) }}" class="form-control" >
+                    </div>
+                    @error('max_weight')
+                        <label class="error" for="max_weight">
+                            {{ $message }}
+                        </label>
+                    @enderror
                     <div class="form-group form-group-default required @error('amount') has-error @enderror">
                         <label>{{ __('general.package_amount')}}</label>
                         <input type="number" name="amount" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('general.package_amount'))]) }}" value="{{ old('amount', $package->amount) }}" class="form-control" >

@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Package extends Model
 {
-    protected $fillable = ['name', 'description', 'amount'];
+    use SoftDeletes; //soft delete
+    protected $fillable = ['name', 'description', 'amount', 'max_weight', 'active'];
 
     public function pickups()
     {

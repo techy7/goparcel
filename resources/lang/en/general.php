@@ -131,6 +131,7 @@ return [
     'package_name' => 'Package Name',
     'package_description' => 'Package Description',
     'package_amount' => 'Package Amount',
+    'max_weight' => 'Maximum Weight',
     'edit_package' => 'Edit Package',
 
     //waybill

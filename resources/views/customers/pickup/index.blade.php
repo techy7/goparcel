@@ -63,6 +63,7 @@
                       @endforeach
                     </select>
                   </div>
+                  <input type="hidden" name="pickup_state" value="{{auth()->user()->state}}" id="pickup_state"> 
                   <div class="form-group form-group-default" @error('pickup_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.pickup_postal')}}</label>
                     <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" class="form-control postal" name="pickup_postal_code" value="{{ old('_token') !== null ? old('pickup_postal_code') : auth()->user()->postal_code  }}"  placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.pickup_postal'))]) }}">
@@ -92,7 +93,7 @@
                   </div>
                   <div class="form-group form-group-default form-group-default-select2" @error('receiver_city') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.receiver_city') }}</label>
-                    <select name="receiver_city" class="full-width" data-placeholder="{{ __('auth.select_field', ['field' => strtolower(__('pickup.receiver_city'))]) }}" data-init-plugin="select2">
+                    <select id="receiver_city" name="receiver_city" class="full-width" data-placeholder="{{ __('auth.select_field', ['field' => strtolower(__('pickup.receiver_city'))]) }}" data-init-plugin="select2">
                       <option value=""></option>
                       @foreach (config('location.PH_states_cities') as $state => $cities)
                       <optgroup label="{{ $state }}">
@@ -101,6 +102,7 @@
                       @endforeach
                     </select>
                   </div>
+                  <input type="hidden" name="receiver_state" id="receiver_state"> 
                   <div class="form-group form-group-default" @error('receiver_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.receiver_postal')}}</label>
                     <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" class="form-control postal" name="receiver_postal_code" value="{{ old('receiver_postal_code') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_postal'))]) }}">
@@ -269,8 +271,7 @@
     <script src="{{ asset('pages/assets/plugins/jquery-inputmask/jquery.inputmask.min.js') }}" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js"></script>
 
-  <script>
-
+<script>
 
     $( document ).ready(function(){
 
@@ -317,6 +318,7 @@
     //set pickup city  if old value is not present
       var val = {!! json_encode(old('pickup_city')) !!} ;
       var text = {!! json_encode(auth()->user()->city) !!};
+     
       if(val == null){
         $("#pickup_city").val(text).change();
       }
@@ -386,6 +388,20 @@
       var len = val.value.length;
         $('#charNum').text((max - len));
     };
+
+    
+    $('#receiver_city').change(function () {
+      var selectedOption = $('#receiver_city option:selected');
+      var label = selectedOption.closest('optgroup').attr('label');
+      $('#receiver_state').val(label);
+      console.log(label);
+    });
+    $('#pickup_city').change(function () {
+      var selectedOption = $('#pickup_city option:selected');
+      var label = selectedOption.closest('optgroup').attr('label');
+      $('#pickup_state').val(label);
+      console.log(label);
+    });
 
   </script>
 @endsection

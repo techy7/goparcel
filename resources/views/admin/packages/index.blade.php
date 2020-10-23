@@ -43,6 +43,7 @@
                     <tr>
                         <th>{{ __('general.package_name')}}</th>
                         <th>{{ __('general.package_description')}}</th>
+                        <th>{{ __('general.max_weight')}}</th>
                         <th>{{ __('general.package_amount')}}</th>
                         {{-- <th>{{ __('general.date_created')}}</th>
                         <th>{{ __('general.date_modified')}}</th> --}}
@@ -57,6 +58,9 @@
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $package->description }}</p>
+                            </td>
+                            <td class="v-align-middle semi-bold">
+                                <p>{{ $package->max_weight }}</p>
                             </td>
                             <td class="v-align-middle semi-bold">
                                 <p>{{ $package->priceFormatted($package->amount) }}</p>

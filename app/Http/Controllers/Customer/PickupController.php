@@ -77,19 +77,21 @@ class PickupController extends Controller
     {
         // dd(request()->all());
         // dd(str_pad(1122112, 8, '0', STR_PAD_LEFT));
-        // dd(request()->has('cod'));
+        // dd(request()->all());
         $pickupData = request()->validate([
             'sender_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
             'sender_phone' => 'required|phone:PH',
             'pickup_date' => 'required',
             'pickup_address' => 'required|string|max:255',
             'pickup_city' => 'required|string|max:255',
+            'pickup_state' => 'required|string|max:255',
             'pickup_postal_code' => 'required',
             'receiver_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
             'receiver_email' => 'required|email',
             'receiver_phone' => 'required|phone:PH',
             'receiver_address' => 'required|string|max:255',
             'receiver_city' => 'required|string|max:255',
+            'receiver_state' => 'required|string|max:255',
             'receiver_postal_code' => 'required',
             'radioPackage' => 'required',
             'package_length' => 'required_if:radioPackage,Own Packaging',
@@ -115,7 +117,7 @@ class PickupController extends Controller
             'pickup_date' => request('pickup_date')." 00:00:00",
             'pickup_address' => request('pickup_address'),
             'pickup_city' => request('pickup_city'),
-            'pickup_state' => config('location.PH_cities_states')[request('pickup_city')],
+            'pickup_state' =>  request('pickup_state'),
             'pickup_postal_code' => request('pickup_postal_code'),
             'pickup_country' => 'Philippines',
             'receiver_name' => request('receiver_name'),
@@ -123,7 +125,7 @@ class PickupController extends Controller
             'receiver_phone' => request('receiver_phone'),
             'receiver_address' => request('receiver_address'),
             'receiver_city' => request('receiver_city'),
-            'receiver_state' => config('location.PH_cities_states')[request('receiver_city')],
+            'receiver_state' => request('receiver_state'),
             'receiver_postal_code' => request('receiver_postal_code'),
             'receiver_country' => 'Philippines',
             'package_id' => Package::where('name', request('radioPackage'))->first()->id,
@@ -138,7 +140,7 @@ class PickupController extends Controller
             'additional_fee' => session('additional_fee'),
             'item_amount' => session('item_amount'),
             'service_fee' => session('service_fee'),
-            'additional_instruction' => request('additional_instruction'),
+            'additional_instruction' => is_null(request('additional_instruction')) ? '': request('additional_instruction') ,
             
         ]);
 

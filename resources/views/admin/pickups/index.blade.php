@@ -208,7 +208,7 @@
                   </thead>
                   <tbody id="container">
                     @foreach ($pickups as $pickup)
-                    <tr data-city="{{ $pickup->pickup_city }}" data-state="{{ $pickup->pickup_state }}" data-postal-code="{{ $pickup->pickup_postal_code }}" data-package-type="{{ $pickup->package->name }}" data-delivery-status="{{ $pickup->pickupActivities->first()->deliveryStatus->name }}">
+                    <tr>
                       <td class="v-align-middle">
                         <p>{{ $pickup->created_at->format('F d, Y h:m A') }}</p>
                       </td>
@@ -234,10 +234,10 @@
                         <p>{{ $pickup->pickup_postal_code }}</p>
                       </td>
                       <td class="v-align-middle">
-                        <p>{{ $pickup->package->name }}</p>
+                        <p>{{ $pickup->package->withTrashed()->first()->name }}</p>
                       </td>
                       <td class="v-align-middle">
-                        <p>{{ number_format($pickup->package->amount,'2') }}</p>
+                        <p>{{ number_format($pickup->package->withTrashed()->first()->amount,'2') }}</p>
                       </td>
                       <td class="v-align-middle">
                         <p>{{ $pickup->pickupActivities->first()->deliveryStatus->name }}</p>
