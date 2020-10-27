@@ -44,7 +44,7 @@ return [
     'check_charge_to' => "Charge the amount to receiver",
     "charge_to" => "Charge to",
     'book_now' => 'Book Now',
-    'additional_instruction' => "Additional Instructions",
+    'additional_instruction' => "Item Description",
     'signature' => 'Signature',
 
     //Tracking

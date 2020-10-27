@@ -12,7 +12,7 @@
             padding: 0 5px;
             direction: ltr;
             font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-            font-size: 0.65rem;
+            font-size: 0.66rem;
             line-height: 1rem;
         }
 
@@ -30,7 +30,7 @@
         #track{
             /* /text-align: center; */
             border: 1px solid black;
-            padding: 5px 10px 5px 10px;
+            padding: 10px 10px 5px 10px;
         }
         .details{
             margin: 10px 0px 10px 0px; 
@@ -41,7 +41,7 @@
             color: black !important;
             text-decoration: none;
             font-weight: bold;
-            font-size: medium;
+            font-size:large;
 
         }
         .header{
@@ -59,7 +59,7 @@
             padding: 2px 5px;
             height: 80px;
         }
-        .tab { margin-left: 65px; }
+        .tab { margin-left: 55px; }
         td{
             vertical-align: top;
         }
@@ -69,7 +69,7 @@
     <body>
         <div id="container">
             {{-- <img src="data:image/png;base64,{{ $logo }}" alt="logo" width="180" height="75"> --}}
-            <img src="https://i.ibb.co/JRPgCpn/Logo-black.jpg" alt="PB Logo" width="120" height="50">
+            <img src="https://i.ibb.co/JRPgCpn/Logo-black.jpg" alt="PB Logo" width="130" height="55">
             <div style="float:right">
                 <i><small>{{__('general.tracking_code')}}</small></i>
                 <div id="track">
@@ -139,12 +139,12 @@
             </div>
             <table width="100%">
                 <tr>
-                    <td><i>{{__('pickup.service_fee')}}*</i></td>
+                    <td><i>{{__('pickup.service_fee')}}</i></td>
                     <td><i>:</i></td>
                     <td style="text-align: right">P{{ number_format($userPickup->service_fee, 2, '.', ',') }}</td>
                 </tr>
                 <tr>
-                    <td><i>{{ __('pickup.additional_fee')}}*</i></td>
+                    <td><i>{{ __('pickup.additional_fee')}}</i></td>
                     <td><i>:</i></td>
                     <td style="text-align: right">P{{ number_format($userPickup->additional_fee, 2, '.', ',') }}</td>
                 </tr>
@@ -154,15 +154,14 @@
                     <td style="text-align: right">P{{ number_format($userPickup->item_amount, 2, '.', ',')     }}</td>
                 </tr>
                 <tr>
-                    <td><i><strong>{{ __('pickup.total_amount')}}</strong></i></td>
+                    <td><i>{{ __('pickup.total_amount')}}</i></td>
                     <td><i>:</i></td>
-                    <td style="text-align: right"><strong>P{{ number_format($userPickup->package_amount, 2, '.', ',')     }}</strong></td>
+                    <td style="text-align: right">P{{ number_format($userPickup->package_amount, 2, '.', ',')     }}</td>
                 </tr>
             </table>
             
             {{-- <h4 style="margin: 0px; margin-top: 10px; float:right"><strong>{{ __('pickup.total_amount')}}:</strong> <small>P{{ number_format($userPickup->package_amount, 2, '.', ',') }}</small></h4> --}}
            
-            <i><u><span style="text-align: center; font-size: 0.6rem;">* Shipping rates are VAT inclusive. </span></u> </i> <br/><br>
             <table width="100%">
                 <tr>
                    
@@ -174,7 +173,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" width="100%"><b>{{ __('pickup.additional_instruction')}}: </b>
-                        <div style="border: 0.5px solid white; width: 100%; height: 40px; padding: 2px 15px;  text-align: center;">
+                        <div style="border: 0.25px solid black; width: 100%; height: 40px; padding: 7px 15px;  text-align: center; margin-top: 5px;">
                            <i> {{$userPickup->additional_instruction}}</i>
                           {{-- <i> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis p </i>  --}}
                         </div>  

@@ -65,7 +65,7 @@
                   <span class="font-montserrat fs-11 all-caps">{{ __('general.packages_rate') }}</span>
                 </div>
               </div>
-              <div class="p-l-20 p-r-20">
+              <div class="p-3 overflow-auto ">
                 @foreach ($packages as $package)
                 <div class="row">
                   <div class="col-8">

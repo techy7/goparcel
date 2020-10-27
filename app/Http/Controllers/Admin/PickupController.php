@@ -136,7 +136,7 @@ class PickupController extends Controller
               $q->where('pickups.created_at','<=', $todateCreated);
             }
           })  
-          ->where('active',1)
+          ->where('pickups.active',1)
           ->orderBy('pickups.pickup_date','DESC')    
           ->get();
           return view('admin.pickups.index', compact('pickups', 'cities', 'states', 'postal_codes', 'package_types', 'searches', 'deliveryStatus'));
@@ -156,20 +156,33 @@ class PickupController extends Controller
 
     public function update(Pickup $pickup)
     {
+          //  dd(request()->all());
         $pickupData = request()->validate([
             'pickup_date' => 'required',
             'pickup_address' => 'required|string|max:255',
             'pickup_city' => 'required|string|max:255',
+            'pickup_state' => 'required|string|max:255',
             'pickup_postal_code' => 'required|integer',
+            'receiver_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
+            'receiver_address' => 'required|string|max:255',
+            'receiver_city' => 'required|string|max:255',
+            'receiver_state' => 'required|string|max:255',
+            'receiver_postal_code' => 'required|integer',
             
         ]);
         $pickup->update([
             'pickup_date' =>  $pickupData['pickup_date'],
-            'pickup_address' => request('pickup_address'),
+            'pickup_address' => $pickupData['pickup_address'],
             'pickup_city' => $pickupData['pickup_city'],
-            'pickup_state' => config('location.PH_cities_states')[$pickupData['pickup_city']],
-            'pickup_postal_code' => request('pickup_postal_code'),
+            'pickup_state' =>  $pickupData['pickup_state'],
+            'pickup_postal_code' => $pickupData['pickup_postal_code'],
             'pickup_country' => 'Philippines',
+            'receiver_name' => $pickupData['receiver_name'],
+            'receiver_address' => $pickupData['receiver_address'],
+            'receiver_city' => $pickupData['receiver_city'],
+            'receiver_state' =>  $pickupData['receiver_state'],
+            'receiver_postal_code' => $pickupData['receiver_postal_code'],
+
         ]);
 
         if(request('delivery_status_id') != null){
@@ -178,7 +191,7 @@ class PickupController extends Controller
             'delivery_status_id' => request('delivery_status_id'),
           ]);
         }
-        return redirect()->route('admin.pickups')->with('update', 'Pickup for ' . $pickup->user->name . ' has been successfully updated.');
+        return redirect()->route('admin.pickups')->with('update', 'Pickup with tracking number ' . $pickup->tracking_number . ' has been successfully updated.');
     }
 
     public function destroyConfirmation(Pickup $pickup)

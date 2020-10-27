@@ -12,7 +12,7 @@ class DashboardController extends Controller
     {
         $userNumberBookings = auth()->user()->pickups->count();
 
-        $packages = Package::all();
+        $packages = Package::where('active',1)->get();
 
         return view('customers.dashboard.index', compact('userNumberBookings', 'packages'));
     }

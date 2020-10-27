@@ -145,5 +145,5 @@ return [
     //email
     'order_is_being_shipped' => 'A package with a tracking code of  :field is now ready to be shipped to your address.
     Check the delivery details below.',
-
+    'edit_pickup' => 'Edit Pickup',
 ];

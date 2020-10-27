@@ -60,6 +60,7 @@
                                         <p class="mb-0">{{ $pickupOrder->pickup_date->format('F d, Y (D)') }}</p>
                                         <p class="mb-0">{{ $pickupOrder->pickup_address }}</p>
                                         <p class="mb-0">{{ $pickupOrder->pickup_city }}</p>
+                                        <p class="mb-0">{{ $pickupOrder->pickup_state }}</p>
                                         <p class="mb-0">{{ $pickupOrder->pickup_postal_code }}</p>
                                     </div>
                                 </div>
@@ -93,6 +94,7 @@
                                         <p class="mb-0">{{ $pickupOrder->receiver_email }}</p>
                                         <p class="mb-0">{{ $pickupOrder->receiver_address }}</p>
                                         <p class="mb-0" class="mb-0">{{ $pickupOrder->receiver_city }}</p>
+                                        <p class="mb-0" class="mb-0">{{ $pickupOrder->receiver_state }}</p>
                                         <p class="mb-0">{{ $pickupOrder->receiver_postal_code }}</p>
                                     </div>
                                 </div>
