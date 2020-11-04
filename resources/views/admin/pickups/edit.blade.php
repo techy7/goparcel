@@ -43,7 +43,15 @@
                           @enderror
                         </div>
                       </div>
-                     
+
+                      <div class="form-group form-group-default @error('sender_phone') haserror @enderror">
+                        <label>{{ __('pickup.sender_phone')}}</label>
+                        <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="15" id="sender_phone_number" class="form-control phone_number"  name="sender_phone" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.sender_phone'))]) }}"  value="{{ old('sender_phone', $pickup->sender_phone) }}">
+                      </div>
+                      @error('sender_phone')
+                      <label class="error" for="sender_phone">{{ $message }}</label>
+                      @enderror
+
                       <div class="row">
                         <div class="col-12">
                           <div class="form-group form-group-default @error('pickup_address') has-error @enderror">
@@ -127,6 +135,18 @@
                         <label class="error" for="receiver_name">{{ $message }}</label>
                         @enderror
                       </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group form-group-default  @error('receiver_phone')  has-error @enderror">
+                          <label>{{ __('pickup.receiver_phone')}}</label>
+                          <input type="text" maxlength="15" id="receiver_phone_number" class="form-control phone_number" name="receiver_phone"  placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_phone'))]) }}"  value="{{ old('receiver_phone', $pickup->receiver_phone) }}">
+                        </div>
+                      </div>
+                      @error('receiver_phone')
+                      <label class="error" for="receiver_phone">{{ $message }}</label>
+                      @enderror
                     </div>
 
                       <div class="row">

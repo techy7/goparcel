@@ -55,8 +55,8 @@
                                 <div class="card card-default" style="border: 1px solid #ccc">
                                     <div class="card-body p-3" >
                                         <h5 class="address-title text-muted">{{ __('pickup.pickup_address')}}</h5>
-                                        <p><strong>{{ $pickupOrder->user->name }}</strong></p>
-                                        <p class="mb-0">{{ $pickupOrder->user->m_number }}</p>
+                                        <p><strong>{{ $pickupOrder->sender_name }}</strong></p>
+                                        <p class="mb-0">{{ $pickupOrder->sender_phone }}</p>
                                         <p class="mb-0">{{ $pickupOrder->pickup_date->format('F d, Y (D)') }}</p>
                                         <p class="mb-0">{{ $pickupOrder->pickup_address }}</p>
                                         <p class="mb-0">{{ $pickupOrder->pickup_city }}</p>

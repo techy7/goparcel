@@ -1,8 +1,11 @@
 @extends('layouts.pages.app')
 
 @section('upper-links-extend')
+{{-- <link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" > --}}
     <link href="{{ asset('pages/assets/plugins/bootstrap-datepicker/css/datepicker3.css') }}" rel="stylesheet" type="text/css" media="screen">
     <link href="{{ URL::asset('css/Custom/sidescroll.css') }}" rel="stylesheet" type="text/css" >
+    
+    
 
 @endsection
 
@@ -21,6 +24,9 @@
     @endif
     <h3 class="page-title">{{ __('general.schedule_a_pickup')}}</h3>
 
+    @if($errors->any())
+    {{ implode('', $errors->all('<div>:message</div>')) }}
+@endif
     <div class="page-content-wrapper p-l-0 p-3 m-b-45">
       <form action="{{ route('customer.pickup.store', auth()->user() ) }}" method="post"  data-parsley-validate autocomplete="off" class="d-print-none" >
         @csrf
@@ -33,7 +39,6 @@
                   <div class="form-group form-group-default" @error('sender_name') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.sender_name')}} </label>
                     <input type="text" class="form-control" name="sender_name" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.sender_name'))]) }}" value="{{old('_token') !== null ? old('sender_name') : auth()->user()->name }}">
-                    {{-- @error('sender_name') {{$message}} @enderror --}}
                   </div>
                   <div class="form-group form-group-default" @error('sender_phone') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.sender_phone')}}</label>
@@ -63,7 +68,7 @@
                       @endforeach
                     </select>
                   </div>
-                  <input type="hidden" name="pickup_state" value="{{auth()->user()->state}}" id="pickup_state"> 
+                  <input type="hidden" name="pickup_state" value="{{auth()->user()->state}}" id="pickup_state"  value="{{ old('pickup_state') }}"> 
                   <div class="form-group form-group-default" @error('pickup_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.pickup_postal')}}</label>
                     <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" class="form-control postal" name="pickup_postal_code" value="{{ old('_token') !== null ? old('pickup_postal_code') : auth()->user()->postal_code  }}"  placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.pickup_postal'))]) }}">
@@ -102,7 +107,7 @@
                       @endforeach
                     </select>
                   </div>
-                  <input type="hidden" name="receiver_state" id="receiver_state"> 
+                  <input type="hidden " name="receiver_state" id="receiver_state"  value="{{ old('receiver_state') }}"> 
                   <div class="form-group form-group-default" @error('receiver_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.receiver_postal')}}</label>
                     <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" class="form-control postal" name="receiver_postal_code" value="{{ old('receiver_postal_code') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_postal'))]) }}">
@@ -161,7 +166,7 @@
                 </div>
                 
                 <div class="row mt-2 w-100">
-                  <div class="form-group form-group-default parameter">
+                  <div class="form-group form-group-default parameter" @error('additional_instruction')  style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.additional_instruction')}}</label>
                     <textarea class="form-control" id="additional_instruction" name="additional_instruction" maxlength="150" style="height: 60px;" onkeyup="countChar(this)"></textarea>
                   </div>
@@ -270,7 +275,7 @@
     <script src="{{ asset('pages/assets/plugins/handlebars/handlebars-v4.0.5.js') }}"></script>
     <script src="{{ asset('pages/assets/plugins/jquery-inputmask/jquery.inputmask.min.js') }}" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js"></script>
-
+    {{-- <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script> --}}
 <script>
 
     $( document ).ready(function(){
@@ -291,7 +296,14 @@
            dt.setDate(dt.getDate()+1);
       }
 
+      function noSundays(date) {
+        return [date.getDay() != 0, ''];
+      }
       $('#datepicker-component2').datepicker({
+        beforeShowDay: function(date) {
+          var day = date.getDay();
+          return [(day != 0), ''];
+        },
         format: "yyyy-mm-dd",
         clearBtn: true,
         todayHighlight: true,

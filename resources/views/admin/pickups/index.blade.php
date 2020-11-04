@@ -234,10 +234,10 @@
                         <p>{{ $pickup->pickup_postal_code }}</p>
                       </td>
                       <td class="v-align-middle">
-                        <p>{{ $pickup->package->withTrashed()->first()->name }}</p>
+                        <p>{{ $pickup->package->name }}</p>
                       </td>
                       <td class="v-align-middle">
-                        <p>{{ number_format($pickup->package->withTrashed()->first()->amount,'2') }}</p>
+                        <p>{{ $pickup->priceFormatted($pickup->package_amount ) }}</p>
                       </td>
                       <td class="v-align-middle">
                         <p>{{ $pickup->pickupActivities->first()->deliveryStatus->name }}</p>

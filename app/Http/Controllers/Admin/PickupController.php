@@ -159,25 +159,37 @@ class PickupController extends Controller
           //  dd(request()->all());
         $pickupData = request()->validate([
             'pickup_date' => 'required',
+            'sender_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
+            'sender_phone' => 'required|phone:PH',
             'pickup_address' => 'required|string|max:255',
             'pickup_city' => 'required|string|max:255',
             'pickup_state' => 'required|string|max:255',
             'pickup_postal_code' => 'required|integer',
             'receiver_name' => 'required|max:100|regex:/^[a-zA-Z ]+$/',
+            'receiver_phone' => 'required|phone:PH',
             'receiver_address' => 'required|string|max:255',
             'receiver_city' => 'required|string|max:255',
             'receiver_state' => 'required|string|max:255',
             'receiver_postal_code' => 'required|integer',
             
-        ]);
+        ],
+        [
+           'sender_phone.phone' => 'The sender contact number field contains an invalid number.',
+           'receiver_phone.phone' => 'The receiver contact number field contains an invalid number.',
+           'radioPackage.required' => 'Please select a package.',
+           ]
+        );
         $pickup->update([
             'pickup_date' =>  $pickupData['pickup_date'],
+            'sender_name' => $pickupData['sender_name'],
+            'sender_phone' => $pickupData['sender_phone'],
             'pickup_address' => $pickupData['pickup_address'],
             'pickup_city' => $pickupData['pickup_city'],
             'pickup_state' =>  $pickupData['pickup_state'],
             'pickup_postal_code' => $pickupData['pickup_postal_code'],
             'pickup_country' => 'Philippines',
             'receiver_name' => $pickupData['receiver_name'],
+            'receiver_phone' => $pickupData['receiver_phone'],
             'receiver_address' => $pickupData['receiver_address'],
             'receiver_city' => $pickupData['receiver_city'],
             'receiver_state' =>  $pickupData['receiver_state'],

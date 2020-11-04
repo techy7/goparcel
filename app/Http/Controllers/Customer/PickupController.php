@@ -110,7 +110,7 @@ class PickupController extends Controller
              ]
         );
 
-        
+
         $pickup = auth()->user()->pickups()->create([
             'sender_name' => request('sender_name'),
             'sender_phone' => request('sender_phone'),
