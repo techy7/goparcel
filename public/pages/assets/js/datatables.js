@@ -19,6 +19,7 @@
         var table = $('#tableWithSearch');
 
         var settings = {
+            "aaSorting": [],
             "sDom": "<t><'row'<p i>>",
             "destroy": true,
             "scrollCollapse": true,

@@ -24,9 +24,6 @@
     @endif
     <h3 class="page-title">{{ __('general.schedule_a_pickup')}}</h3>
 
-    @if($errors->any())
-    {{ implode('', $errors->all('<div>:message</div>')) }}
-@endif
     <div class="page-content-wrapper p-l-0 p-3 m-b-45">
       <form action="{{ route('customer.pickup.store', auth()->user() ) }}" method="post"  data-parsley-validate autocomplete="off" class="d-print-none" >
         @csrf
@@ -107,7 +104,7 @@
                       @endforeach
                     </select>
                   </div>
-                  <input type="hidden " name="receiver_state" id="receiver_state"  value="{{ old('receiver_state') }}"> 
+                  <input type="hidden" name="receiver_state" id="receiver_state"  value="{{ old('receiver_state') }}"> 
                   <div class="form-group form-group-default" @error('receiver_postal_code') style="border-color: red" data-toggle="tooltip" data-placement="top" title="{{$message}}" @enderror>
                     <label>{{ __('pickup.receiver_postal')}}</label>
                     <input type="text" pattern="[0-9]*" inputmode="numeric" maxlength="4" class="form-control postal" name="receiver_postal_code" value="{{ old('receiver_postal_code') }}" placeholder="{{ __('auth.enter_field', ['field' => strtolower(__('pickup.receiver_postal'))]) }}">
@@ -385,7 +382,7 @@
         chosenPackage = null;
       }
       $.get('computeTotal', {l:l, w:w, h:h,aw:aw,package:chosenPackage,cod:cod,charge_to:charge_to, item:item},function(data){
-        console.log(data);
+     
 
         $("#service_fee").html(data['service_fee'].toFixed(2));
         $("#item_fee").html(data['item_amount'].toFixed(2));
@@ -406,13 +403,13 @@
       var selectedOption = $('#receiver_city option:selected');
       var label = selectedOption.closest('optgroup').attr('label');
       $('#receiver_state').val(label);
-      console.log(label);
+    
     });
     $('#pickup_city').change(function () {
       var selectedOption = $('#pickup_city option:selected');
       var label = selectedOption.closest('optgroup').attr('label');
       $('#pickup_state').val(label);
-      console.log(label);
+   
     });
 
   </script>

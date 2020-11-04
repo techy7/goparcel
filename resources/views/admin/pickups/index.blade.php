@@ -237,7 +237,7 @@
                         <p>{{ $pickup->package->name }}</p>
                       </td>
                       <td class="v-align-middle">
-                        <p>{{ $pickup->priceFormatted($pickup->package_amount ) }}</p>
+                        <p>{{ $pickup->priceFormatted($pickup->additional_fee + $pickup->service_fee) }}</p>
                       </td>
                       <td class="v-align-middle">
                         <p>{{ $pickup->pickupActivities->first()->deliveryStatus->name }}</p>

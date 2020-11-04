@@ -72,7 +72,7 @@
                                                 <div class="pull-left">
                                                     <p class="no-margin">{{ __('pickup.package_type')}}: {{ $pickupOrder->package->name }} <br>
                                                         {{__('general.cod')}}: {{ $pickupOrder->cod ? "Yes" : "No" }} <br>
-                                                        {{ __('pickup.charge_to')}} {{ __('pickup.charge_to')}}: {{ $pickupOrder->charge_to_sender  ? "Sender" : "Receiver"}}
+                                                        {{ __('pickup.charge_to')}}: {{ $pickupOrder->charge_to_sender  ? "Sender" : "Receiver"}}
                                                     <p>
                                                 </div>
                                             </div>

@@ -75,7 +75,7 @@
                     <p>{{ $pickup->package->name }}</p>
                   </td>
                   <td class="v-align-middle semi-bold">
-                    <p>{{ $pickup->priceFormatted($pickup->package_amount) }}</p>
+                    <p>{{ $pickup->priceFormatted($pickup->additional_fee + $pickup->service_fee) }}</p>
                   </td>
                   <td class="v-align-middle semi-bold">
                     <p> {{ $pickup->cod ? "Yes" : "No" }}</p>
@@ -111,4 +111,5 @@
 @endsection
 @section('lower-links-extends-page')
   <script src="{{ asset('pages/assets/js/datatables.js') }}" type="text/javascript"></script>
-@endsection
+
+ @endsection

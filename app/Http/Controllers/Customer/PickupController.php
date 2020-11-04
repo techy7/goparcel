@@ -45,31 +45,38 @@ class PickupController extends Controller
    
    public function computeTotal(){
     if(request()->ajax()){
-        // $additional_fee = 0; //for default packaging
-        // $service_fee = 0;
+         $additional_fee = 0;
+         $service_fee = 0;
 
-        session(['item_amount' => (float) str_replace(',','',request()->item)]);
-
+        
         if(!is_null(request()->package)){
             $package = Package::where('name', request()->package)->first();
             $service_fee = $package->amount;
+            if($package->name == "Own Packaging"){
+                $vol_weight =  ceil(((request()->l * request()->w * request()->h)/4000));
+                $additional_fee = request()->aw > $vol_weight ? ((request()->aw-5) * 28) : (($vol_weight - 5) * 28);
+                $additional_fee = ( $additional_fee < 0) ? 0 : $additional_fee;
+            }
+            else{
+                $additional_fee = 0;
+            }
         }
-        $vol_weight =  ceil(((request()->l * request()->w * request()->h)/4000));
-        $additional_fee = request()->aw > $vol_weight ? ((request()->aw-5) * 28) : (($vol_weight - 5) * 28);
-        $additional_fee = ( $additional_fee < 0) ? 0 : $additional_fee;
-        //$item_amount =  (float) str_replace(',','',request()->item) ;
- 
-       $item_amount = request()->cod == 'true'? (float) str_replace(',','',request()->item): 0;
+
+        $item_amount = (float) str_replace(',','',request()->item);
+        $item_amount2 = request()->cod == 'true'? (float) str_replace(',','',request()->item): 0;
         if(request()->charge_to != 'true'){
-           $service_fee = 0;
-           $additional_fee  = 0;
+        
+           $total_amount =   $item_amount2; 
         }
-        $total_amount =  $additional_fee + $service_fee + $item_amount; 
+        else{
+            $total_amount =  $additional_fee + $service_fee + $item_amount2; 
+        }
        
-        session(['total_amount' => $total_amount]); //set class variable 
+        session(['item_amount' => $item_amount]);
+        session(['total_amount' => $total_amount]); 
         session(['additional_fee' => $additional_fee]);
         session(['service_fee' => $service_fee]); 
-         return response()->json(['service_fee' => $service_fee, 'additional_fee'=>$additional_fee, 'total_amount'=>$total_amount, 'item_amount'=>$item_amount]);
+        return response()->json(['service_fee' => $service_fee, 'additional_fee'=>$additional_fee, 'total_amount'=>$total_amount, 'item_amount'=>$item_amount]);
     }
    }
 
