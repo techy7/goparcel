@@ -49,7 +49,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach (auth()->user()->pickups->where('active',1) as $pickup)
+                @foreach ($pickups as $pickup)
                 <tr>
                   <td class="v-align-middle semi-bold">
                     <p>{{ $pickup->pickup_date->setTimezone('Asia/Manila')->setTimezone('Asia/Manila')->format('F d, Y (D)') }}</p>
@@ -111,5 +111,4 @@
 @endsection
 @section('lower-links-extends-page')
   <script src="{{ asset('pages/assets/js/datatables.js') }}" type="text/javascript"></script>
-
- @endsection
+@endsection

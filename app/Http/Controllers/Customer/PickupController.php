@@ -113,8 +113,11 @@ class PickupController extends Controller
              'sender_phone.phone' => 'The sender contact number field contains an invalid number.',
              'receiver_phone.phone' => 'The receiver contact number field contains an invalid number.',
              'radioPackage.required' => 'Please select a package.',
-             'item_amount.required_with' => "The item amount field is required on COD.",
-             ]
+             'package_length.required_if' => 'Length is required',
+             'package_width.required_if' => 'Width is required.',
+             'package_height.required_if' => 'Height is required.',
+             'actual_weight.required_if' => 'Actual Weight is required.',
+            ]
         );
 
 

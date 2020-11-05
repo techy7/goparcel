@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
@@ -22,8 +23,14 @@ class BookingController extends Controller
         $nonCustomers = $userBackends->reject(function ($user, $key) {
             return $user->hasRole('Customer');
         });
-
-        return view('customers.bookings.index', compact('nonCustomers'));
+        $id = Auth::user()->id;
+        // dd($id);
+        $pickups = Pickup::where('active',1)
+        ->where('user_id', $id)
+        ->orderBy('pickups.created_at','DESC')
+        ->get();
+        //  dd($pickups);
+        return view('customers.bookings.index', compact('nonCustomers', 'pickups'));
     }
 
     public function searchTrack()
