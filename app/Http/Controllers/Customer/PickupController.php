@@ -29,7 +29,7 @@ class PickupController extends Controller
         
         $cities = config('location.PH_states_cities');
 
-        $packages = Package::all();
+        $packages = Package::where('active',1)->get();
 
         $packageFiltered = $packages->reject(function ($pack, $key) {
             return $pack->name == '[aca] Packaging';
