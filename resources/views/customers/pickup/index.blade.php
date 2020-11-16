@@ -151,7 +151,6 @@
             <div id="packageInfro" class="container card mr-3 bg-white">
               <div class="card-body">
                 <h5 class="card-title mb-0">{{ __('pickup.choose_package')}}</h5>
-                <p class="mt-0"><i>Shipping rates are VAT inclusive.</i></p>
                 <div class="row "> @error('radioPackage') <span class="alert alert-error w-100 text-center">{{$message}}</span> @enderror </div>
                 <div class="row my-2 mb-2 p-0">
                   <div class="horizontal-scrollable row flex-row flex-nowrap w-100">
